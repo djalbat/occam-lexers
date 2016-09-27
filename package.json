@@ -9,6 +9,10 @@
     "type": "git",
     "url": "https://github.com/occam-proof-assistant/Lexers"
   },
+  "dependencies": {
+    "easyui": "^3.6.0",
+    "easyui-layout": "^0.2.9"
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.7.5",
