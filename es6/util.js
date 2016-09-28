@@ -1,6 +1,19 @@
 'use strict';
 
 class util {
+  static minBarMinusOne() {
+    var values = Array.prototype.slice.call(arguments),
+        minBarMinusOne = undefined;
+
+    values.forEach(function(value) {
+      if (value > -1) {
+        minBarMinusOne = ( minBarMinusOne === undefined ) ? value : Math.min(minBarMinusOne, value);
+      }
+    });
+
+    return minBarMinusOne;
+  }
+
   static spliceArray(array, start, deleteCount, itemsArray) {
     var args = [start, deleteCount].concat(itemsArray);
   

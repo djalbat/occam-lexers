@@ -44,8 +44,6 @@ textarea {
 
 textarea#tokens {
   font-size: 0.75rem;
-  white-space: pre;
-  overflow-wrap: normal;
 }
 
 #leftColumn {

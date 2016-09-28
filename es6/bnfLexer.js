@@ -1,12 +1,12 @@
 'use strict';
 
-var Line = require('./bnfLexer/line');
+var BNFLine = require('./bnf/line');
 
 class BNFLexer {
   static linesFromGrammar(grammar) {
     var contents = contentsFromGrammar(grammar),
         lines = contents.map(function(content) {
-      var line = Line.fromContent(content);
+      var line = BNFLine.fromContent(content);
       
       return line;
     });
@@ -21,7 +21,7 @@ function contentsFromGrammar(grammar) {
   var contents = grammar.split('\n').reduce(function (contents, content) {
     var matches;
 
-    matches = content.match(Line.nameExpressionRegExp);
+    matches = content.match(BNFLine.nameExpressionRegExp);
 
     if (matches !== null) {
       contents.push(content);
@@ -29,7 +29,7 @@ function contentsFromGrammar(grammar) {
       return contents;
     }
 
-      matches = content.match(Line.continuedExpressionRegExp);
+      matches = content.match(BNFLine.continuedExpressionRegExp);
 
     if (matches !== null) {
       var previousContent = contents.pop(),

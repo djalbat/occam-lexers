@@ -1,12 +1,12 @@
 'use strict';
 
-var FlorenceLexerLine = require('./florenceLexer/line');
+var FlorenceLine = require('./florence/line');
 
-class FlorenceLexer extends CommonLexer {
-  updateLines(content, previousLineIsInMultiLineComment) {
-    var lastLineIsInMultiLineComment = super.updateLines(content, previousLineIsInMultiLineComment, FlorenceLexerLine);
+class FlorenceLexer {
+  static linesFromContent(content, context) {
+    var lines = CommonLexer.linesFromContent(content, context, FlorenceLine);
     
-    return lastLineIsInMultiLineComment;
+    return lines;
   }
 }
 
