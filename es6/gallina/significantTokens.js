@@ -1,16 +1,15 @@
 'use strict';
 
-var Rules = require('./rules'),
-    ErrorToken = require('../common/token/error'),
+var ErrorToken = require('../common/token/error'),
     SignificantContentToken = require('../common/token/significantContent');
 
 class SignificantTokens {
-  static pass(tokens, line) {
+  static pass(tokens, line, rules) {
     tokens = tokens.reduce(function(tokens, token) {
       if (token instanceof SignificantContentToken) {
         var significantContentToken = token,  ///
             content = significantContentToken.getContent(),
-            significantTokens = significantTokensFromContent(content, line);
+            significantTokens = significantTokensFromContent(content, line, rules);
 
         tokens = tokens.concat(significantTokens);
       } else {
@@ -26,11 +25,11 @@ class SignificantTokens {
 
 module.exports = SignificantTokens;
 
-function significantTokensFromContent(content, line) {
+function significantTokensFromContent(content, line, rules) {
   var significantTokens = [];
 
   while (content !== '') {
-    var significantToken = Rules.significantTokenFromContent(content, line);
+    var significantToken = rules.significantTokenFromContent(content, line);
     
     if (significantToken === null) {
       var errorToken = ErrorToken.fromContent(content);

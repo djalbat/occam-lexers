@@ -1,6 +1,10 @@
 'use strict';
 
-var Line = require('./line');
+var Line = require('./line'),
+    grammar = require('./grammar'),
+    Rules = require('../common/rules');
+
+var rules = Rules.fromGrammar(grammar);
 
 class Lexer {
   static tokensFromContent(content, context) {
@@ -22,7 +26,7 @@ module.exports = Lexer;
 function linesFromContent(content, context) {
   var contents = content.split(/\n/),
       lines = contents.map(function(content) {
-        var line = Line.fromContent(content, context);
+        var line = Line.fromContent(content, context, rules);
 
         return line;
       });
