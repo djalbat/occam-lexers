@@ -1,6 +1,6 @@
 'use strict';
 
-var CommentToken = require('../comment');
+var CommentToken = require('../../common/token/comment');
 
 class StartOfCommentToken extends CommentToken {
   static position(content) {
@@ -17,10 +17,9 @@ class StartOfCommentToken extends CommentToken {
       var firstMatch = first(matches),
           str = firstMatch; ///
 
-      startOfCommentToken = new StartOfCommentToken(str, line);
+      startOfCommentToken = new CommentToken(str, line);  ///
     }
-
-
+    
     return startOfCommentToken;
   }
 }

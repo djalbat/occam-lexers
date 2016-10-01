@@ -1,9 +1,9 @@
 'use strict';
 
 var util = require('../util'),
-    EndOfCommentToken = require('./token/comment/endOf'),
-    StartOfCommentToken = require('./token/comment/startOf'),
-    MiddleOfCommentToken = require('./token/comment/middleOf'),
+    EndOfCommentToken = require('./token/endOfComment'),
+    StartOfCommentToken = require('./token/startOfComment'),
+    MiddleOfCommentToken = require('./token/middleOfComment'),
     SignificantContentToken = require('../common/token/significantContent'),
     WhitespaceToken = require('../common/token/whitespace');
 

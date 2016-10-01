@@ -1,13 +1,13 @@
 'use strict';
 
-var CommentToken = require('../comment');
+var CommentToken = require('../../common/token/comment');
 
 class MiddleOfCommentToken extends CommentToken {
   static fromContent(content, line) {
     var str = content, ///
-        middleOf = new MiddleOfCommentToken(str, line);
+        middleOfCommentToken = new CommentToken(str, line); ///
 
-    return middleOf;
+    return middleOfCommentToken;
   }
 }
 
