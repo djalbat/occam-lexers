@@ -29,7 +29,7 @@ function contentsFromGrammar(grammar) {
       return contents;
     }
 
-      matches = content.match(Line.continuedExpressionRegExp);
+    matches = content.match(Line.continuedExpressionRegExp);
 
     if (matches !== null) {
       var previousContent = contents.pop(),

@@ -6,25 +6,44 @@ var Rules = require('./rules'),
 
 class SignificantTokens {
   static pass(tokens, line) {
-    tokens = tokens.map(function(token) {
+    tokens = tokens.reduce(function(tokens, token) {
       if (token instanceof SignificantContentToken) {
-        var significantContentToken = token, ///
+        var significantContentToken = token,  ///
             content = significantContentToken.getContent(),
-            significantToken = Rules.significantTokenFromContent(content, line);
+            significantTokens = significantTokensFromContent(content, line);
 
-        if (significantToken !== null) {
-          token = significantToken; ///
-        } else {
-          var errorToken = ErrorToken.fromContent(content, line);
-
-          token = errorToken; ///
-        }
+        tokens = tokens.concat(significantTokens);
+      } else {
+        tokens.push(token);
       }
-      
-      return token;
-    });
+
+      return tokens;
+    }, []);
 
     return tokens;
-  }}
+  }
+}
 
 module.exports = SignificantTokens;
+
+function significantTokensFromContent(content, line) {
+  var significantTokens = [];
+
+  while (content !== '') {
+    var significantToken = Rules.significantTokenFromContent(content, line);
+    
+    if (significantToken === null) {
+      var errorToken = ErrorToken.fromContent(content);
+      
+      significantToken = errorToken;  ///
+    }
+
+    var significantTokenLength = significantToken.getLength();
+
+    significantTokens.push(significantToken);
+
+    content = content.substring(significantTokenLength);
+  }
+
+  return significantTokens;
+}
