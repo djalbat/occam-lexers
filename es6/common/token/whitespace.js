@@ -4,9 +4,10 @@ var Token = require('../token');
 
 class WhitespaceToken extends Token {
   clone() {
-    var str = this.getString();
+    var str = this.getString(),
+        line = this.getLine();
 
-    return new WhitespaceToken(str);
+    return new WhitespaceToken(str, line);
   }
 
   getHTML() {
@@ -14,6 +15,12 @@ class WhitespaceToken extends Token {
         html = str; ///
 
     return html;
+  }
+
+  static position(content) {
+    var position = content.search(/[\t ]+/);
+
+    return position;
   }
 
   static fromContent(content) {
@@ -28,12 +35,6 @@ class WhitespaceToken extends Token {
         whitespaceToken = new WhitespaceToken(str);
 
     return whitespaceToken;
-  }
-
-  static positionInContent(content) {
-    var position = content.search(/[\t ]+/);
-
-    return position;
   }
 }
 

@@ -1,20 +1,17 @@
 'use strict';
 
-var SpecialToken = require('../common/token/special'),
-    ParseableToken = require('../common/token/parseable');
-
-var specialTokenRegExp = /(!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.\(|\.\.|\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|\|)/;
+var SpecialToken = require('./token/special'),
+    SignificantContentToken = require('../common/token/significantContent');
 
 class SpecialTokens {
-  static pass(line) {
-    var tokens = line.getTokens();
-    
+  static pass(tokens, line) {
     tokens = tokens.reduce(function(tokens, token) {
-      if (token instanceof ParseableToken) {
-        var content = token.getContent(),
-            contentTokens = tokensFromContent(content, line);
+      if (token instanceof SignificantContentToken) {
+        var significantContentToken = token,  ///
+            content = significantContentToken.getContent(),
+            significantTokens = significantTokensFromContent(content, line);
 
-        tokens = tokens.concat(contentTokens);
+        tokens = tokens.concat(significantTokens);
       } else {
         tokens.push(token);
       }
@@ -22,31 +19,35 @@ class SpecialTokens {
       return tokens;
     }, []);
 
-    line.setTokens(tokens);
+    return tokens;
   }
 }
 
 module.exports = SpecialTokens;
 
-function tokensFromContent(content, line) {
-  var contents = content.split(specialTokenRegExp),
-      tokens = contents.reduce(function(tokens, content) {
+function significantTokensFromContent(content, line) {
+  var contents = content.split(SpecialToken.regExp),
+      significantTokens = contents.reduce(function(significantTokens, content) {
+        var significantToken;
+        
         if (content !== '') {
-          var contentIsSpecial = (content.search(specialTokenRegExp) == 0);
+          var specialTokenPosition = SpecialToken.position(content);
 
-          if (contentIsSpecial) {
-            var significantToken = new SpecialToken(content, line);
-
-            tokens.push(significantToken);
+          if (specialTokenPosition === 0) {
+            var specialToken = SpecialToken.fromContent(content, line);
+            
+            significantToken = specialToken;
           } else {
-            var parseableToken = new ParseableToken(content);
+            var significantContentToken = SignificantContentToken.fromContent(content);
 
-            tokens.push(parseableToken);
+            significantToken = significantContentToken;
           }
+
+          significantTokens.push(significantToken);
         }
 
-        return tokens;
+        return significantTokens;
       }, []);
 
-  return tokens;
+  return significantTokens;
 }

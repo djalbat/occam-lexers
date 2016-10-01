@@ -13,6 +13,20 @@ class EndOfMultiLineCommentToken extends CommentToken {
     return new EndOfMultiLineCommentToken(str);
   }
 
+  static position(content) {
+    var position = -1,
+        matches = content.match(/(.*?)\*\)/);
+
+    if (matches) {
+      var firstMatch = first(matches),
+          str = firstMatch;
+
+      position = str.length;  ///
+    }
+
+    return position;
+  }
+
   static fromContent(content) {
     var endOfMultiLineCommentToken = null,
         matches = content.match(/^(\*\))/);
@@ -20,25 +34,11 @@ class EndOfMultiLineCommentToken extends CommentToken {
     if (matches) {
       var firstMatch = first(matches),
           str = firstMatch; ///
-      
+
       endOfMultiLineCommentToken = new EndOfMultiLineCommentToken(str);
     }
 
     return endOfMultiLineCommentToken;
-  }
-
-  static positionInContent(content) {
-    var matches = content.match(/(.*?)\*\)/);
-
-    if (!matches) {
-      return -1;
-    }
-
-    var firstMatch = first(matches),
-        str = firstMatch, ///
-        position = str.length;  ///
-
-    return position;
   }
 }
 

@@ -5,53 +5,21 @@ var CommonLine = require('../common/line'),
     SignificantTokens = require('./significantTokens'),
     NonSignificantTokens = require('./nonSignificantTokens');
 
-class GallinaLine extends CommonLine {
-  constructor(content, multiLineCommentDepth) {
-    super(content);
+class Line extends CommonLine {
+  static fromContent(content, context) {
+    var line = new Line(),
+        tokens;
     
-    this.multiLineCommentDepth = multiLineCommentDepth;
-  }
-
-  getMultiLineCommentDepth() {
-    return this.multiLineCommentDepth;
-  }
-
-  increaseMultiLineCommentDepth() {
-    this.multiLineCommentDepth++;
-  }
-
-  decreaseMultiLineCommentDepth() {
-    this.multiLineCommentDepth--;
-  }
-
-  getContentSubstring(length) {
-    var content = this.getContent(),
-        contentSubString = content.substring(0, length);
+    tokens = NonSignificantTokens.pass(content, context, line);
     
-    return contentSubString;
-  }
+    tokens = SpecialTokens.pass(tokens, line);
 
-  chopContent(length) {
-    var content = this.getContent();
+    tokens = SignificantTokens.pass(tokens, line);
     
-    content = content.substring(length);
-    
-    this.setContent(content);
-  }
-
-  static fromContent(content, multiLineCommentDepth) {
-    var line = new GallinaLine(content, multiLineCommentDepth);
-
-    NonSignificantTokens.pass(line);
-
-    SpecialTokens.pass(line);
-    
-    SignificantTokens.pass(line);
-    
-    line.setContent(content); ///
+    line.setTokens(tokens);
     
     return line;
   }
 }
 
-module.exports = GallinaLine;
+module.exports = Line;

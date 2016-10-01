@@ -1,113 +1,114 @@
 'use strict';
 
 var util = require('../util'),
-    ParseableToken = require('../common/token/parseable'),
     WhitespaceToken = require('../common/token/whitespace'),
+    SignificantContentToken = require('../common/token/significantContent'),
     EndOfMultiLineCommentToken = require('./token/comment/endOfMultiLine'),
     StartOfMultiLineCommentToken = require('./token/comment/startOfMultiLine'),
     MiddleOfMultiLineCommentToken = require('./token/comment/middleOfMultiLine');
 
 class NonSignificantTokens {
-  static pass(line) {
-    var content = line.getContent(),
-        multiLineCommentDepth = line.getMultiLineCommentDepth();
+  static pass(content, context, line) {
+    var tokens = [],
+        remainingContent,
+        tokenLength,
+        token;
     
     while (content !== '') {
-      var startOfMultiLineCommentTokenPosition = startOfMultiLineCommentToken(line);
+      var startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.position(content);
 
-      if (startOfMultiLineCommentTokenPosition !== 0) {
-        multiLineCommentDepth = line.getMultiLineCommentDepth();
+      if (startOfMultiLineCommentTokenPosition === 0) {
+        var startOfMultiLineCommentToken = StartOfMultiLineCommentToken.fromContent(content, line);
 
-        if (multiLineCommentDepth > 0) {
-          var endOfMultiLineCommentTokenPosition = endOfMultiLineToken(line);
+        token = startOfMultiLineCommentToken; ///
 
-          if (endOfMultiLineCommentTokenPosition !== 0) {
-            middleOfMultiLineToken(line, startOfMultiLineCommentTokenPosition, endOfMultiLineCommentTokenPosition);
-          }
-        } else {
-          var whitespaceTokenPosition = whitespaceToken(line);
+        tokenLength = token.getLength();
 
-          if (whitespaceTokenPosition !== 0) {
-            parseableToken(line, startOfMultiLineCommentTokenPosition, whitespaceTokenPosition);
-          }
-        }
+        content = content.substring(tokenLength);
+
+        context.increaseMultiLineCommentDepth();
+
+        tokens.push(token);
+
+        continue;
       }
 
-      content = line.getContent();
+      var contentLength = content.length,
+          multiLineCommentDepth = context.getMultiLineCommentDepth();
+
+      if (multiLineCommentDepth > 0) {
+        var endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.position(content);
+
+        if (endOfMultiLineCommentTokenPosition === 0) {
+          var endOfMultiLineCommentToken = EndOfMultiLineCommentToken.fromContent(content, line);
+
+          token = endOfMultiLineCommentToken; ///
+
+          tokenLength = token.getLength();
+
+          context.decreaseMultiLineCommentDepth();
+
+          content = content.substring(tokenLength);
+
+          tokens.push(token);
+
+          continue;
+        }
+
+        tokenLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, endOfMultiLineCommentTokenPosition, contentLength);
+
+        remainingContent = content.substring(tokenLength);
+        
+        content = content.substring(0, tokenLength);
+        
+        var middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content, line);
+
+        token = middleOfMultiLineCommentToken; ///
+        
+        tokenLength = token.getLength();
+        
+        content = remainingContent;
+
+        tokens.push(token);
+
+        continue;
+      }
+
+      var whitespaceTokenPosition = WhitespaceToken.position(content);
+
+      if (whitespaceTokenPosition === 0) {
+        var whitespaceToken = WhitespaceToken.fromContent(content, line);
+
+        token = whitespaceToken; ///
+        
+        tokenLength = token.getLength();
+        
+        content = content.substring(tokenLength);
+
+        tokens.push(token);
+
+        continue;
+      }
+      
+      tokenLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, whitespaceTokenPosition, contentLength);
+      
+      remainingContent = content.substring(tokenLength);
+      
+      content = content.substring(0, tokenLength);
+      
+      var significantContentToken = SignificantContentToken.fromContent(content);
+      
+      token = significantContentToken;  ///
+      
+      content = remainingContent;
+
+      tokens.push(token);
+
+      continue;
     }
+    
+    return tokens;
   }
 }
 
 module.exports = NonSignificantTokens;
-
-function startOfMultiLineCommentToken(line) {
-  var content = line.getContent(),
-      startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.positionInContent(content);
-
-  if (startOfMultiLineCommentTokenPosition === 0) {
-    var startOfMultiLineCommentToken = StartOfMultiLineCommentToken.fromContent(content),
-        startOfMultiLineCommentTokenLength = startOfMultiLineCommentToken.getLength();
-
-    line.pushToken(startOfMultiLineCommentToken);
-    line.chopContent(startOfMultiLineCommentTokenLength);
-    line.increaseMultiLineCommentDepth();
-  }
-
-  return startOfMultiLineCommentTokenPosition;
-}
-
-function endOfMultiLineToken(line) {
-  var content = line.getContent(),
-      endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionInContent(content);
-
-  if (endOfMultiLineCommentTokenPosition === 0) {
-    var endOfMultiLineCommentToken = EndOfMultiLineCommentToken.fromContent(content),
-        endOfMultiLineCommentTokenLength = endOfMultiLineCommentToken.getLength();
-
-    line.pushToken(endOfMultiLineCommentToken);
-    line.chopContent(endOfMultiLineCommentTokenLength);
-    line.decreaseMultiLineCommentDepth();
-  }
-
-  return endOfMultiLineCommentTokenPosition;
-}
-
-function middleOfMultiLineToken(line, startOfMultiLineCommentTokenPosition, endOfMultiLineCommentTokenPosition) {
-  var contentLength = line.getContentLength(),
-      commentedContentLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, endOfMultiLineCommentTokenPosition, contentLength),
-      commentedContent = line.getContentSubstring(commentedContentLength),
-      middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(commentedContent),
-      middleOfMultiLineCommentTokenLength = middleOfMultiLineCommentToken.getLength();
-
-  line.pushToken(middleOfMultiLineCommentToken);
-  line.chopContent(middleOfMultiLineCommentTokenLength);
-}
-
-function whitespaceToken(line) {
-  var content = line.getContent(),
-      whitespaceTokenPosition = WhitespaceToken.positionInContent(content);
-
-  if (whitespaceTokenPosition === 0) {
-    var whitespaceToken = WhitespaceToken.fromContent(content),
-        whitespaceTokenLength = whitespaceToken.getLength();
-
-    line.pushToken(whitespaceToken);
-    line.chopContent(whitespaceTokenLength);
-  }
-
-  return whitespaceTokenPosition;
-}
-
-function parseableToken(line, startOfMultiLineCommentTokenPosition, whitespaceTokenPosition){
-  var content = line.getContent(),
-      contentLength = content.length,
-      parseableTokenContentLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, whitespaceTokenPosition, contentLength),
-      parseableTokenContent = line.getContentSubstring(parseableTokenContentLength);
-
-  content = parseableTokenContent;  ///
-
-  var parseableToken = new ParseableToken(content);
-
-  line.pushToken(parseableToken);
-  line.chopContent(parseableTokenContentLength);
-}

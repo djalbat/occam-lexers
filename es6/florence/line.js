@@ -5,7 +5,7 @@ var Context = require('./context'),
     SignificantTokens = require('./significantTokens'),
     NonSignificantTokens = require('./nonSignificantTokens');
 
-class FlorenceLine extends CommonLine {
+class Line extends CommonLine {
   constructor(tokens, inMultiLineComment) {
     super(tokens);
 
@@ -32,10 +32,10 @@ class FlorenceLine extends CommonLine {
     inMultiLineComment = context.isInMultiLineComment();
 
     var tokens = context.getTokens(),
-        line = new FlorenceLine(tokens, inMultiLineComment);
+        line = new Line(tokens, inMultiLineComment);
 
     return line;
   }
 }
 
-module.exports = FlorenceLine;
+module.exports = Line;

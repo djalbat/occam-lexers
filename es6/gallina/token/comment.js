@@ -9,12 +9,6 @@ class CommentToken extends Token {
 
     return html;
   }
-
-  clone() {
-    var str = this.getStr();
-
-    return new CommentToken(str);
-  }
 }
 
 module.exports = CommentToken;

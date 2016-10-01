@@ -58,7 +58,7 @@ module.exports = NonSignificantTokens;
 
 function endOfMultiLineCommentToken(context) {
   var content = context.getContent(),
-      endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionInContent(content);
+      endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.position(content);
 
   if (endOfMultiLineCommentTokenPosition === 0) {
     var endOfMultiLineCommentToken = EndOfMultiLineCommentToken.fromContent(content),
@@ -85,7 +85,7 @@ function middleOfMultiLineCommentToken(context, endOfMultiLineCommentTokenPositi
 
 function startOfMultiLineCommentToken(context) {
   var content = context.getContent(),
-      startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.positionInContent(content);
+      startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.position(content);
 
   if (startOfMultiLineCommentTokenPosition === 0) {
     var startOfMultiLineCommentToken = StartOfMultiLineCommentToken.fromContent(content),
@@ -99,7 +99,7 @@ function startOfMultiLineCommentToken(context) {
 
 function singleLineCommentToken(context) {
   var content = context.getContent(),
-      singleLineCommentTokenPosition = SingleLineCommentToken.positionInContent(content);
+      singleLineCommentTokenPosition = SingleLineCommentToken.position(content);
 
   if (singleLineCommentTokenPosition === 0) {
     var singleLineCommentToken = SingleLineCommentToken.fromContent(content);
@@ -113,7 +113,7 @@ function singleLineCommentToken(context) {
 
 function whitespaceToken(context) {
   var content = context.getContent(),
-      whitespaceTokenPosition = WhitespaceToken.positionInContent(content);
+      whitespaceTokenPosition = WhitespaceToken.position(content);
 
   if (whitespaceTokenPosition === 0) {
     var whitespaceToken = WhitespaceToken.fromContent(content),

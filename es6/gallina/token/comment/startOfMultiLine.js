@@ -3,32 +3,13 @@
 var CommentToken = require('../comment');
 
 class StartOfMultiLineCommentToken extends CommentToken {
-  constructor(str) {
-    super(str);
-  }
-
   clone() {
     var str = this.getStr();
 
     return new StartOfMultiLineCommentToken(str);
   }
 
-  static fromContent(content) {
-    var startOfMultiLineCommentToken = null,
-        matches = content.match(/^(\(\*)/);
-
-    if (matches) {
-      var firstMatch = first(matches),
-          str = firstMatch; ///
-
-      startOfMultiLineCommentToken = new StartOfMultiLineCommentToken(str);
-    }
-
-
-    return startOfMultiLineCommentToken;
-  }
-
-  static positionInContent(content) {
+  static position(content) {
     var position = -1,
         matches = content.match(/(.*?)\(\*/);
 
@@ -40,6 +21,21 @@ class StartOfMultiLineCommentToken extends CommentToken {
     }
 
     return position;
+  }
+
+  static fromContent(content, line) {
+    var startOfMultiLineCommentToken = null,
+        matches = content.match(/^(\(\*)/);
+
+    if (matches) {
+      var firstMatch = first(matches),
+          str = firstMatch; ///
+
+      startOfMultiLineCommentToken = new StartOfMultiLineCommentToken(str, line);
+    }
+
+
+    return startOfMultiLineCommentToken;
   }
 }
 

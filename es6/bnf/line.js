@@ -2,7 +2,7 @@
 
 var SymbolSequence = require('./symbolSequence');
 
-class BNFLine {
+class Line {
   constructor(name, symbolSequences) {
     this.name = name;
     this.symbolSequences = symbolSequences;
@@ -17,29 +17,29 @@ class BNFLine {
   }
   
   static fromContent(content) {
-    var matches = content.match(BNFLine.nameExpressionRegExp),
+    var matches = content.match(Line.nameExpressionRegExp),
         secondMatch = second(matches),
         thirdMatch = third(matches),
         name = secondMatch, ///
         expression = thirdMatch, ///
-        choices = expression.split(BNFLine.choiceDelimiterRegExp),
+        choices = expression.split(Line.choiceDelimiterRegExp),
         symbolSequences = choices.map(function(choice) {
           var symbolSequence = SymbolSequence.fromChoice(choice);
           
           return symbolSequence;
         });
     
-    var line = new BNFLine(name, symbolSequences);
+    var line = new Line(name, symbolSequences);
     
     return line;
   }
 }
 
-BNFLine.choiceDelimiterRegExp = /\s+\|\s+/;
-BNFLine.nameExpressionRegExp = /^\s*(.*?)\s+::=\s+(.*?)\s*$/;
-BNFLine.continuedExpressionRegExp = /^\s*(\|\s+.*?)\s*$/;
+Line.choiceDelimiterRegExp = /\s+\|\s+/;
+Line.nameExpressionRegExp = /^\s*(.*?)\s+::=\s+(.*?)\s*$/;
+Line.continuedExpressionRegExp = /^\s*(\|\s+.*?)\s*$/;
 
-module.exports = BNFLine;
+module.exports = Line;
 
 function second(array) { return array[1]; }
 function third(array) { return array[2]; }

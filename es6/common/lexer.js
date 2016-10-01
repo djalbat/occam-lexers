@@ -1,6 +1,6 @@
 'use strict';
 
-class CommonLexer {
+class Lexer {
   static linesFromContent(content, context, Line) {
     var previousLineIsInMultiLineComment = context.isPreviousLineInMultiLineComment();
     
@@ -24,4 +24,4 @@ class CommonLexer {
   }
 }
 
-module.exports = CommonLexer;
+module.exports = Lexer;

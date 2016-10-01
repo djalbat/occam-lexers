@@ -16,7 +16,8 @@ var leftColumnSelector = '#leftColumn',
 
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
-var GallinaLexer = require('../../es6/gallinaLexer');
+var GallinaLexer = require('../../es6/gallina/lexer'),
+    GallinaContext = require('../../es6/gallina/context');
 
 class GallinaLexerExample {
   static run() {
@@ -29,14 +30,10 @@ class GallinaLexerExample {
 function updateTokens() {
   var contentTextAreaValue = contentTextArea.getValue(),
       content = contentTextAreaValue,  ///
-      lines = GallinaLexer.linesFromContent(content),
-      tokens = lines.reduce(function(tokens, line, index) {
-        var lineTokens = line.getTokens();
-
-        tokens = tokens.concat(lineTokens);
-
-        return tokens;
-      }, []),
+      multilineCommentDepth = 0,
+      gallinaContext = new GallinaContext(multilineCommentDepth),
+      context = gallinaContext, ///
+      tokens = GallinaLexer.tokensFromContent(content, context),
       tokensHTML = tokens.reduce(function(tokensHTML, token) {
         var tokenHTML = token.getHTML();
         

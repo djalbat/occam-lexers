@@ -1,47 +1,30 @@
 'use strict';
 
-var Rule = require('./rule'),
-    grammar = require('./grammar'),
-    ParseableToken = require('../common/token/parseable');
-
-var tokenTypes = Object.keys(grammar),  ///
-    rules = tokenTypes.reduce(function(rules, tokenType) {
-      var regExp = grammar[tokenType],
-          rule = new Rule(tokenType, regExp);
-
-      rules.push(rule);
-
-      return rules;
-    }, []);
+var Rules = require('./rules'),
+    ErrorToken = require('../common/token/error'),
+    SignificantContentToken = require('../common/token/significantContent');
 
 class SignificantTokens {
-  static pass(line) {
-    var tokens = line.getTokens();
-    
+  static pass(tokens, line) {
     tokens = tokens.map(function(token) {
-      if (token instanceof ParseableToken) {
-        var parseableToken = token,
-            content = parseableToken.getContent(),
-            significantToken = undefined;
+      if (token instanceof SignificantContentToken) {
+        var significantContentToken = token, ///
+            content = significantContentToken.getContent(),
+            significantToken = Rules.significantTokenFromContent(content, line);
 
-        rules.some(function(rule) {
-          significantToken = rule.significantTokenFromContent(content, line);
+        if (significantToken !== null) {
+          token = significantToken; ///
+        } else {
+          var errorToken = ErrorToken.fromContent(content, line);
 
-          if (significantToken !== null) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-
-        return significantToken;
-      } else {
-        return token;
+          token = errorToken; ///
+        }
       }
+      
+      return token;
     });
 
-    line.setTokens(tokens);
-  }
-}
+    return tokens;
+  }}
 
 module.exports = SignificantTokens;

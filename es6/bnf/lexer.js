@@ -1,12 +1,12 @@
 'use strict';
 
-var BNFLine = require('./bnf/line');
+var Line = require('./line');
 
-class BNFLexer {
+class Lexer {
   static linesFromGrammar(grammar) {
     var contents = contentsFromGrammar(grammar),
         lines = contents.map(function(content) {
-      var line = BNFLine.fromContent(content);
+      var line = Line.fromContent(content);
       
       return line;
     });
@@ -15,13 +15,13 @@ class BNFLexer {
   }
 }
 
-module.exports = BNFLexer;
+module.exports = Lexer;
 
 function contentsFromGrammar(grammar) {
   var contents = grammar.split('\n').reduce(function (contents, content) {
     var matches;
 
-    matches = content.match(BNFLine.nameExpressionRegExp);
+    matches = content.match(Line.nameExpressionRegExp);
 
     if (matches !== null) {
       contents.push(content);
@@ -29,7 +29,7 @@ function contentsFromGrammar(grammar) {
       return contents;
     }
 
-      matches = content.match(BNFLine.continuedExpressionRegExp);
+      matches = content.match(Line.continuedExpressionRegExp);
 
     if (matches !== null) {
       var previousContent = contents.pop(),

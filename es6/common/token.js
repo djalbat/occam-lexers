@@ -1,12 +1,17 @@
 'use strict';
 
 class Token {
-  constructor(str) {
+  constructor(str, line) {
     this.str = str;
+    this.line = line;
   }
 
   getString() {
     return this.str;
+  }
+  
+  getLine() {
+    return this.line;
   }
   
   getSubstring(start, end) {

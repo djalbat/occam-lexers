@@ -12,6 +12,14 @@ class Context {
   setMultiLineCommentDepth(multiLineCommentDepth) {
     this.multiLineCommentDepth = multiLineCommentDepth;
   }
+
+  increaseMultiLineCommentDepth() {
+    this.multiLineCommentDepth++;
+  }
+
+  decreaseMultiLineCommentDepth() {
+    this.multiLineCommentDepth--;
+  }
 }
 
 module.exports = Context;

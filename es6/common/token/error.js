@@ -4,9 +4,10 @@ var Token = require('../token');
 
 class ErrorToken extends Token {
   clone() {
-    var str = this.getString();
+    var str = this.getString(),
+        line = this.getLine();
 
-    return new ErrorToken(str);
+    return new ErrorToken(str, line);
   }
 
   getHTML() {
@@ -16,9 +17,9 @@ class ErrorToken extends Token {
     return html;
   }
 
-  static fromContent(content) {
+  static fromContent(content, line) {
     var str = content,  ///
-        errorToken = new ErrorToken(str);
+        errorToken = new ErrorToken(str, line);
 
     return errorToken;
   }
