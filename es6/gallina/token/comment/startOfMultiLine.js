@@ -10,15 +10,7 @@ class StartOfMultiLineCommentToken extends CommentToken {
   }
 
   static position(content) {
-    var position = -1,
-        matches = content.match(/(.*?)\(\*/);
-
-    if (matches) {
-      var firstMatch = first(matches),
-          str = firstMatch;
-      
-      position = str.length;  ///
-    }
+    var position = content.search(/\(\*/);
 
     return position;
   }
