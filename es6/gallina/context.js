@@ -1,24 +1,20 @@
 'use strict';
 
 class Context {
-  constructor(multiLineCommentDepth) {
-    this.multiLineCommentDepth = multiLineCommentDepth;
+  constructor(commentDepth) {
+    this.commentDepth = commentDepth;
   }
   
-  getMultiLineCommentDepth() {
-    return this.multiLineCommentDepth;
+  getCommentDepth() {
+    return this.commentDepth;
   }
   
-  setMultiLineCommentDepth(multiLineCommentDepth) {
-    this.multiLineCommentDepth = multiLineCommentDepth;
+  increaseCommentDepth() {
+    this.commentDepth++;
   }
 
-  increaseMultiLineCommentDepth() {
-    this.multiLineCommentDepth++;
-  }
-
-  decreaseMultiLineCommentDepth() {
-    this.multiLineCommentDepth--;
+  decreaseCommentDepth() {
+    this.commentDepth--;
   }
 }
 

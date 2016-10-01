@@ -30,17 +30,18 @@ class GallinaLexerExample {
 function updateTokens() {
   var contentTextAreaValue = contentTextArea.getValue(),
       content = contentTextAreaValue,  ///
-      multilineCommentDepth = 0,
-      gallinaContext = new GallinaContext(multilineCommentDepth),
+      commentDepth = 0,
+      gallinaContext = new GallinaContext(commentDepth),
       context = gallinaContext, ///
-      tokens = GallinaLexer.tokensFromContent(content, context),
-      tokensHTML = tokens.reduce(function(tokensHTML, token) {
-        var tokenHTML = token.getHTML();
-        
-        tokensHTML += tokenHTML;
-        
-        return tokensHTML;
+      lines = GallinaLexer.linesFromContent(content, context),
+      linesHTML = lines.reduce(function(linesHTML, line) {
+        var lineHTML = line.getHTML();
+
+        linesHTML += lineHTML;
+
+        return linesHTML;
       }, ''),
+      tokensHTML = linesHTML, ///
       tokensTextAreaHTML = tokensHTML;  ///
 
   tokensTextArea.html(tokensTextAreaHTML);

@@ -11,6 +11,20 @@ class Line {
     return this.tokens;
   }
 
+  getHTML() {
+    var html = this.tokens.reduce(function(html, token) {
+      var tokenHTML = token.getHTML();
+      
+      html += tokenHTML;
+      
+      return html;
+    }, '');
+    
+    html += '\n';
+    
+    return html;
+  }
+
   setTokens(tokens) {
     this.tokens = tokens;
   }

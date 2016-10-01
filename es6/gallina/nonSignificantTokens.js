@@ -1,75 +1,79 @@
 'use strict';
 
 var util = require('../util'),
-    WhitespaceToken = require('../common/token/whitespace'),
+    EndOfCommentToken = require('./token/comment/endOf'),
+    StartOfCommentToken = require('./token/comment/startOf'),
+    MiddleOfCommentToken = require('./token/comment/middleOf'),
     SignificantContentToken = require('../common/token/significantContent'),
-    EndOfMultiLineCommentToken = require('./token/comment/endOfMultiLine'),
-    StartOfMultiLineCommentToken = require('./token/comment/startOfMultiLine'),
-    MiddleOfMultiLineCommentToken = require('./token/comment/middleOfMultiLine');
+    WhitespaceToken = require('../common/token/whitespace');
 
 class NonSignificantTokens {
   static pass(content, context, line) {
     var tokens = [],
         remainingContent,
-        tokenLength,
-        token;
+        commentToken,
+        commentTokenLength;
     
     while (content !== '') {
-      var startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.position(content);
-
-      if (startOfMultiLineCommentTokenPosition === 0) {
-        var startOfMultiLineCommentToken = StartOfMultiLineCommentToken.fromContent(content, line);
-
-        token = startOfMultiLineCommentToken; ///
-
-        tokenLength = token.getLength();
-
-        content = content.substring(tokenLength);
-
-        context.increaseMultiLineCommentDepth();
-
-        tokens.push(token);
-
-        continue;
-      }
-
       var contentLength = content.length,
-          multiLineCommentDepth = context.getMultiLineCommentDepth();
+          commentDepth = context.getCommentDepth();
 
-      if (multiLineCommentDepth > 0) {
-        var endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.position(content);
+      var startOfCommentTokenPosition = StartOfCommentToken.position(content),
+          endOfCommentTokenPosition = EndOfCommentToken.position(content);
 
-        if (endOfMultiLineCommentTokenPosition === 0) {
-          var endOfMultiLineCommentToken = EndOfMultiLineCommentToken.fromContent(content, line);
+      if (commentDepth === 0) {
+        if (startOfCommentTokenPosition === 0) {
+          context.increaseCommentDepth();
 
-          token = endOfMultiLineCommentToken; ///
+          commentToken = StartOfCommentToken.fromContent(content, line);
 
-          tokenLength = token.getLength();
+          commentTokenLength = commentToken.getLength();
 
-          context.decreaseMultiLineCommentDepth();
+          remainingContent = content.substring(commentTokenLength);
 
-          content = content.substring(tokenLength);
+          content = remainingContent;
 
-          tokens.push(token);
+          tokens.push(commentToken);
 
           continue;
         }
+      } else {
+        var previousCommentToken = tokens.pop(),
+            middleOfCommentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, endOfCommentTokenPosition, contentLength);
 
-        tokenLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, endOfMultiLineCommentTokenPosition, contentLength);
+        if (false) {
 
-        remainingContent = content.substring(tokenLength);
-        
-        content = content.substring(0, tokenLength);
-        
-        var middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content, line);
+        } else if (startOfCommentTokenPosition === 0) {
+          context.increaseCommentDepth();
 
-        token = middleOfMultiLineCommentToken; ///
-        
-        tokenLength = token.getLength();
-        
+          commentToken = StartOfCommentToken.fromContent(content, line);
+
+          commentTokenLength = commentToken.getLength();
+
+          remainingContent = content.substring(commentTokenLength);
+        } else if (endOfCommentTokenPosition === 0) {
+          context.decreaseCommentDepth();
+
+          commentToken = EndOfCommentToken.fromContent(content, line);
+
+          commentTokenLength = commentToken.getLength();
+
+          remainingContent = content.substring(commentTokenLength);
+        } else {
+          remainingContent = content.substring(middleOfCommentTokenLength);
+
+          content = content.substring(0, middleOfCommentTokenLength);
+
+          commentToken = MiddleOfCommentToken.fromContent(content, line);
+        }
+
+        commentToken = (previousCommentToken === undefined) ?
+                         commentToken :
+                           previousCommentToken.merge(commentToken);
+
         content = remainingContent;
 
-        tokens.push(token);
+        tokens.push(commentToken);
 
         continue;
       }
@@ -77,32 +81,27 @@ class NonSignificantTokens {
       var whitespaceTokenPosition = WhitespaceToken.position(content);
 
       if (whitespaceTokenPosition === 0) {
-        var whitespaceToken = WhitespaceToken.fromContent(content, line);
+        var whitespaceToken = WhitespaceToken.fromContent(content, line),
+            whitespaceTokenLength = whitespaceToken.getLength();
 
-        token = whitespaceToken; ///
-        
-        tokenLength = token.getLength();
-        
-        content = content.substring(tokenLength);
+        content = content.substring(whitespaceTokenLength);
 
-        tokens.push(token);
+        tokens.push(whitespaceToken);
 
         continue;
       }
       
-      tokenLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, whitespaceTokenPosition, contentLength);
+      var significantContentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, whitespaceTokenPosition, contentLength);
       
-      remainingContent = content.substring(tokenLength);
+      remainingContent = content.substring(significantContentTokenLength);
       
-      content = content.substring(0, tokenLength);
+      content = content.substring(0, significantContentTokenLength);
       
       var significantContentToken = SignificantContentToken.fromContent(content);
       
-      token = significantContentToken;  ///
-      
       content = remainingContent;
 
-      tokens.push(token);
+      tokens.push(significantContentToken);
 
       continue;
     }

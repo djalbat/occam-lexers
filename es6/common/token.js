@@ -21,6 +21,10 @@ class Token {
   getLength() {
     return this.str.length; ///
   }
+  
+  setString(str) {
+    this.str = str;
+  }
 
   trimFromStart(start) {
     this.str = this.str.substring(start);

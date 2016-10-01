@@ -7,8 +7,19 @@ var Line = require('./line'),
 var rules = Rules.fromGrammar(grammar);
 
 class Lexer {
+  static linesFromContent(content, context) {
+    var contents = content.split(/\n/),
+        lines = contents.map(function(content) {
+          var line = Line.fromContent(content, context, rules);
+  
+          return line;
+        });
+  
+    return lines;
+  }
+  
   static tokensFromContent(content, context) {
-    var lines = linesFromContent(content, context),
+    var lines = Lexer.linesFromContent(content, context),
         tokens = lines.reduce(function(tokens, line) {
           var lineTokens = line.getTokens();
 
@@ -23,13 +34,3 @@ class Lexer {
 
 module.exports = Lexer;
 
-function linesFromContent(content, context) {
-  var contents = content.split(/\n/),
-      lines = contents.map(function(content) {
-        var line = Line.fromContent(content, context, rules);
-
-        return line;
-      });
-
-  return lines;
-}

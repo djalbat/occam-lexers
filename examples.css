@@ -27,6 +27,7 @@ ul {
 
 textarea {
   resize: vertical;
+  height: 20rem;
 }
 
 input,

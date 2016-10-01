@@ -9,6 +9,17 @@ class CommentToken extends Token {
 
     return html;
   }
+
+  merge(commentToken) {
+    var str = this.getString(),
+        commentTokenStr = commentToken.getString();
+
+    str += commentTokenStr;
+    
+    this.setString(str);
+
+    return this;
+  }
 }
 
 module.exports = CommentToken;
