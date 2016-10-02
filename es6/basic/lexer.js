@@ -32,12 +32,7 @@ class Lexer {
     return tokens;    
   }
 
-  static fromTerminalSymbolsRegExpPattern(terminalSymbolsRegExpPattern) {
-    var terminalSymbolsRegExp = new RegExp('^(' + terminalSymbolsRegExpPattern + ')'),
-        grammar = [
-          { terminal : terminalSymbolsRegExp }
-        ];
-
+  static fromGrammar(grammar) {
     var rules = Rules.fromGrammar(grammar),
         lexer = new Lexer(rules);
 
