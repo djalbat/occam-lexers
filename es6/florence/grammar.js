@@ -4,9 +4,11 @@ var grammar = {
 
   string        : /^("[^"]*")/,
 
-  keyword       : /^(theorem|lemma|proof)/,
+  directive     : /^(include)/,
 
-  special       : /^(=|:)/
+  keyword       : /^(Rule|Premise|Premises|Conclusion|Theorem|Lemma|Proof|Suppose|Then|Hence|by)/,
+
+  special       : /^(=|:|,|;)/
 
 };
 
