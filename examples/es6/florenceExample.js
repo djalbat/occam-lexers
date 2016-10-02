@@ -16,10 +16,10 @@ var leftColumnSelector = '#leftColumn',
 
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
-class FlorenceLexerExample {
+class FlorenceExample {
   static run() {
 
   }
 }
 
-module.exports = FlorenceLexerExample;
+module.exports = FlorenceExample;

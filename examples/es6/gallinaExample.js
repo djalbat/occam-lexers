@@ -19,7 +19,7 @@ new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 var GallinaLexer = require('../../es6/gallina/lexer'),
     GallinaContext = require('../../es6/gallina/context');
 
-class GallinaLexerExample {
+class GallinaExample {
   static run() {
     contentTextArea.onChange(function() {
       updateTokens();
@@ -47,4 +47,4 @@ function updateTokens() {
   tokensTextArea.html(tokensTextAreaHTML);
 }
 
-module.exports = GallinaLexerExample;
+module.exports = GallinaExample;
