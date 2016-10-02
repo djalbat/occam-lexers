@@ -5,18 +5,20 @@ var unicode_letter = `\\u{c0}-\\u{ff}\\u{180}-\\u{24f}\\u{391}-\\u{3ff}\\u{400}-
     first_letter = `[a-zA-Z_${unicode_letter}]`,
     subsequent_letter = `[a-zA-Z_0-9_’${unicode_letter}${unicode_id_part}]`;
 
-var grammar = {
+'use strict';
 
-  string        : /^("[^"]*")/,
+var grammar = [
 
-  keyword       : /^(_|as|at|cofix|else|end|exists|exists2|fix|for|forall|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with)/,
+  { string    : /^("[^"]*")/ },
 
-  special       : /^(!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.\(|\.\.|\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|\|)/,
+  { keyword   : /^(_|as|at|cofix|else|end|exists|exists2|fix|for|forall|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with)/ },
 
-  ident         : new RegExp(`^(${first_letter}${subsequent_letter}*)`, 'u'),
+  { special   : /^(!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.\(|\.\.|\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|\|)/ },
 
-  num           : /^([0-9]+)/
+  { ident     : new RegExp(`^(${first_letter}${subsequent_letter}*)`, 'u') },
 
-};
+  { num       : /^([0-9]+)/ }
+
+];
 
 module.exports = grammar;

@@ -8,7 +8,7 @@ var Line = require('./line'),
 var rules = Rules.fromGrammar(grammar);
 
 class Lexer {
-  static linesFromContent(content, context) {
+  linesFromContent(content, context) {
     context = context || new Context(0);  ///
     
     var contents = content.split(/\n/),
@@ -21,8 +21,8 @@ class Lexer {
     return lines;
   }
   
-  static tokensFromContent(content, context) {
-    var lines = Lexer.linesFromContent(content, context),
+  tokensFromContent(content, context) {
+    var lines = this.linesFromContent(content, context),
         tokens = lines.reduce(function(tokens, line) {
           var lineTokens = line.getTokens();
 

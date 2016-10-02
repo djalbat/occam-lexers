@@ -1,15 +1,15 @@
 'use strict';
 
-var grammar = {
+var grammar = [
 
-  string        : /^("[^"]*")/,
+  { string    : /^("[^"]*")/ },
 
-  directive     : /^(include)/,
+  { directive : /^(include)/ },
 
-  keyword       : /^(Rule|Premise|Premises|Conclusion|Theorem|Lemma|Proof|Suppose|Then|Hence|by)/,
+  { keyword   : /^(Rule|Premise|Premises|Conclusion|Theorem|Lemma|Proof|Suppose|Then|Hence|by)/ },
 
-  special       : /^(=|:|,|;)/
-
-};
+  { special   : /^(=|:|,|;)/ }
+    
+];
 
 module.exports = grammar;

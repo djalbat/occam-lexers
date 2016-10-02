@@ -24,9 +24,9 @@ class Rules {
   }
 
   static fromGrammar(grammar) {
-    var types = Object.keys(grammar),  ///
-        array = types.map(function(type) {
-          var regExp = grammar[type],
+    var array = grammar.map(function(object) {
+          var type = Object.keys(object),
+              regExp = object[type],
               rule = new Rule(type, regExp);
 
           return rule;
