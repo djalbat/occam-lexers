@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('../util'),
-    NewlineToken = require('./token/newline'),
+    EndOfLineToken = require('./token/endOfLine'),
     EndOfCommentToken = require('./token/endOfComment'),
     StartOfCommentToken = require('./token/startOfComment'),
     MiddleOfCommentToken = require('./token/middleOfComment'),
@@ -98,6 +98,10 @@ class NonSignificantTokens {
 
       continue;
     }
+    
+    var endOfLineToken = EndOfLineToken.fromNothing(line);
+    
+    tokens.push(endOfLineToken);
 
     return tokens;
   }
