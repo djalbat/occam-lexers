@@ -1,38 +1,19 @@
 'use strict';
 
-var Context = require('./context'),
-    CommonLine = require('../common/line'),
-    SignificantTokens = require('./significantTokens'),
+var CommonLine = require('../common/line'),
+    SignificantTokens = require('../common/significantTokens'),
     NonSignificantTokens = require('./nonSignificantTokens');
 
 class Line extends CommonLine {
-  constructor(tokens, inMultiLineComment) {
-    super(tokens);
+  static fromContent(content, context, rules) {
+    var line = new Line(),
+        tokens;
 
-    this.inMultiLineComment = inMultiLineComment;
-    
-    this.update();
-  }
+    tokens = NonSignificantTokens.pass(content, context, line);
 
-  isInMultiLineComment() { 
-    return this.inMultiLineComment; 
-  }
-  
-  hasEndOfMultiLineCommentToken() { return NonSignificantTokens.hasEndOfMultiLineCommentToken(this.tokens); }
-  hasStartOfMultiLineCommentToken() { return NonSignificantTokens.hasStartOfMultiLineCommentToken(this.tokens); }
+    tokens = SignificantTokens.pass(tokens, line, rules);
 
-  static fromContent(content, previousLineIsInMultiLineComment, parser) {
-    var inMultiLineComment = previousLineIsInMultiLineComment,
-        context = new Context(content, inMultiLineComment);
-
-    NonSignificantTokens.pass(context);
-    
-    SignificantTokens.pass(context, parser);
-
-    inMultiLineComment = context.isInMultiLineComment();
-
-    var tokens = context.getTokens(),
-        line = new Line(tokens, inMultiLineComment);
+    line.setTokens(tokens);
 
     return line;
   }

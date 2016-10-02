@@ -1,138 +1,106 @@
 'use strict';
 
-var util = require('../../util'),
-    ParseableToken = require('../common/token/parseable'),
-    WhitespaceToken = require('../common/token/whitespace'),
-    SingleLineCommentToken = require('./token/comment/singleLine'),
-    EndOfMultiLineCommentToken = require('./token/comment/endOfMultiLine'),
-    StartOfMultiLineCommentToken = require('./token/comment/startOfMultiLine'),
-    MiddleOfMultiLineCommentToken = require('./token/comment/middleOfMultiLine');
+var util = require('../util'),
+    NewlineToken = require('./token/newline'),
+    EndOfCommentToken = require('./token/endOfComment'),
+    StartOfCommentToken = require('./token/startOfComment'),
+    MiddleOfCommentToken = require('./token/middleOfComment'),
+    SignificantContentToken = require('../common/token/significantContent'),
+    WhitespaceToken = require('../common/token/whitespace');
 
 class NonSignificantTokens {
-  static hasEndOfMultiLineCommentToken(tokens) {
-    return tokens.some(function(token) {
-      return token instanceof EndOfMultiLineCommentToken;
-    });
-  }
-
-  static hasStartOfMultiLineCommentToken(tokens) {
-    return tokens.some(function(token) {
-      return token instanceof StartOfMultiLineCommentToken;
-    });
-  }
-
-  static pass(context) {
-    var content = context.getContent(),
-        inMultiLineComment = context.isInMultiLineComment();
+  static pass(content, context, line) {
+    var tokens = [],
+        remainingContent,
+        commentToken,
+        commentTokenLength;
 
     while (content !== '') {
-      if (inMultiLineComment) {
-        var endOfMultiLineCommentTokenPosition = endOfMultiLineCommentToken(context);
+      var contentLength = content.length,
+          inComment = context.isInComment();
 
-        if (endOfMultiLineCommentTokenPosition !== 0) {
-          middleOfMultiLineCommentToken(context, endOfMultiLineCommentTokenPosition);
+      var startOfCommentTokenPosition = StartOfCommentToken.position(content),
+          endOfCommentTokenPosition = EndOfCommentToken.position(content);
+
+      if (!inComment) {
+        if (startOfCommentTokenPosition === 0) {
+          context.setInComment(true);
+
+          commentToken = StartOfCommentToken.fromContent(content, line);
+
+          commentTokenLength = commentToken.getLength();
+
+          remainingContent = content.substring(commentTokenLength);
+
+          content = remainingContent;
+
+          tokens.push(commentToken);
+
+          continue;
         }
       } else {
-        var startOfMultiLineCommentTokenPosition = startOfMultiLineCommentToken(context);
+        var previousCommentToken = tokens.pop(),
+            middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPosition, contentLength);
 
-        if (startOfMultiLineCommentTokenPosition !== 0) {
-          var singleLineCommentTokenPosition = singleLineCommentToken(context);
+        if (false) {
 
-          if (singleLineCommentTokenPosition !== 0) {
-            var whitespaceTokenPosition = whitespaceToken(context);
+        } else if (endOfCommentTokenPosition === 0) {
+          context.setInComment(false);
 
-            if (whitespaceTokenPosition !== 0) {
-              parseableToken(context, startOfMultiLineCommentTokenPosition, singleLineCommentTokenPosition, whitespaceTokenPosition);
-            }
-          }
+          commentToken = EndOfCommentToken.fromContent(content, line);
+
+          commentTokenLength = commentToken.getLength();
+
+          remainingContent = content.substring(commentTokenLength);
+        } else {
+          remainingContent = content.substring(middleOfCommentTokenLength);
+
+          content = content.substring(0, middleOfCommentTokenLength);
+
+          commentToken = MiddleOfCommentToken.fromContent(content, line);
         }
+
+        commentToken = (previousCommentToken === undefined) ?
+                         commentToken :
+                           previousCommentToken.merge(commentToken);
+
+        content = remainingContent;
+
+        tokens.push(commentToken);
+
+        continue;
       }
 
-      content = context.getContent();      
-      inMultiLineComment = context.isInMultiLineComment();
+      var whitespaceTokenPosition = WhitespaceToken.position(content);
+
+      if (whitespaceTokenPosition === 0) {
+        var whitespaceToken = WhitespaceToken.fromContent(content, line),
+            whitespaceTokenLength = whitespaceToken.getLength();
+
+        content = content.substring(whitespaceTokenLength);
+
+        tokens.push(whitespaceToken);
+
+        continue;
+      }
+
+      var significantContentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, whitespaceTokenPosition, contentLength);
+
+      remainingContent = content.substring(significantContentTokenLength);
+
+      content = content.substring(0, significantContentTokenLength);
+
+      var significantContentToken = SignificantContentToken.fromContent(content);
+
+      content = remainingContent;
+
+      tokens.push(significantContentToken);
+
+      continue;
     }
+
+    return tokens;
   }
 }
 
 module.exports = NonSignificantTokens;
-
-function endOfMultiLineCommentToken(context) {
-  var content = context.getContent(),
-      endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.position(content);
-
-  if (endOfMultiLineCommentTokenPosition === 0) {
-    var endOfMultiLineCommentToken = EndOfMultiLineCommentToken.fromContent(content),
-        endOfMultiLineCommentTokenLength = endOfMultiLineCommentToken.getLength();
-
-    context.pushToken(endOfMultiLineCommentToken);
-    context.chopContent(endOfMultiLineCommentTokenLength);
-    context.setInMultiLineComment(false);
-  }
-
-  return endOfMultiLineCommentTokenPosition;
-}
-
-function middleOfMultiLineCommentToken(context, endOfMultiLineCommentTokenPosition) {
-  var content = context.getContent(),
-      commentedContent = endOfMultiLineCommentTokenPosition === -1 ? content : content.substring(0, endOfMultiLineCommentTokenPosition);
-
-  var middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(commentedContent),
-      middleOfMultiLineCommentTokenLength = middleOfMultiLineCommentToken.getLength();
-
-  context.pushToken(middleOfMultiLineCommentToken);
-  context.chopContent(middleOfMultiLineCommentTokenLength);
-}
-
-function startOfMultiLineCommentToken(context) {
-  var content = context.getContent(),
-      startOfMultiLineCommentTokenPosition = StartOfMultiLineCommentToken.position(content);
-
-  if (startOfMultiLineCommentTokenPosition === 0) {
-    var startOfMultiLineCommentToken = StartOfMultiLineCommentToken.fromContent(content),
-        startOfMultiLineCommentTokenLength = startOfMultiLineCommentToken.getLength();
-
-    context.pushToken(startOfMultiLineCommentToken);
-    context.chopContent(startOfMultiLineCommentTokenLength);
-    context.setInMultiLineComment(true);
-  }
-}
-
-function singleLineCommentToken(context) {
-  var content = context.getContent(),
-      singleLineCommentTokenPosition = SingleLineCommentToken.position(content);
-
-  if (singleLineCommentTokenPosition === 0) {
-    var singleLineCommentToken = SingleLineCommentToken.fromContent(content);
-
-    context.pushToken(singleLineCommentToken);
-    context.setContent('');
-  }
-
-  return singleLineCommentTokenPosition;
-}
-
-function whitespaceToken(context) {
-  var content = context.getContent(),
-      whitespaceTokenPosition = WhitespaceToken.position(content);
-
-  if (whitespaceTokenPosition === 0) {
-    var whitespaceToken = WhitespaceToken.fromContent(content),
-        whitespaceTokenLength = whitespaceToken.getLength();
-
-    context.pushToken(whitespaceToken);
-    context.chopContent(whitespaceTokenLength);
-  }
-
-  return whitespaceTokenPosition;
-}
-
-function parseableToken(context, startOfMultiLineCommentTokenPosition, singleLineCommentTokenPosition, whitespaceTokenPosition) {
-  var contentLength = context.getContentLength(),
-      parseableContentLength = util.minBarMinusOne(startOfMultiLineCommentTokenPosition, singleLineCommentTokenPosition, whitespaceTokenPosition, contentLength),
-      parseableContent = context.getContentSubstring(parseableContentLength),
-      content = parseableContent, ///
-      parseableContentToken = new ParseableToken(content);
-
-  context.pushToken(parseableContentToken);
-  context.chopContent(parseableContentLength);
-}

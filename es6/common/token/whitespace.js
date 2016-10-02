@@ -3,13 +3,6 @@
 var Token = require('../token');
 
 class WhitespaceToken extends Token {
-  clone() {
-    var str = this.getString(),
-        line = this.getLine();
-
-    return new WhitespaceToken(str, line);
-  }
-
   getHTML() {
     var str = this.getString(),
         html = str; ///

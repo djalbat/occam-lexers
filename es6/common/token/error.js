@@ -3,13 +3,6 @@
 var Token = require('../token');
 
 class ErrorToken extends Token {
-  clone() {
-    var str = this.getString(),
-        line = this.getLine();
-
-    return new ErrorToken(str, line);
-  }
-
   getHTML() {
     var str = this.getString(),
         html = '<span class="error">' + str + '</span>';

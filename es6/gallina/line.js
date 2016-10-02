@@ -1,7 +1,7 @@
 'use strict';
 
 var CommonLine = require('../common/line'),
-    SignificantTokens = require('./significantTokens'),
+    SignificantTokens = require('../common/significantTokens'),
     NonSignificantTokens = require('./nonSignificantTokens');
 
 class Line extends CommonLine {
