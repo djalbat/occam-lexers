@@ -13,4 +13,4 @@ class BasicLexer extends CommonLexer {
   }
 }
 
-module.exports = Lexer;
+module.exports = BasicLexer;

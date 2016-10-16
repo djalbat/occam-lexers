@@ -2,7 +2,7 @@
 
 var Line = require('./line');
 
-class Lexer {
+class CommonLexer {
   constructor(rules, Line) {
     this.rules = rules;
     this.Line = Line;
@@ -33,4 +33,4 @@ class Lexer {
   }
 }
 
-module.exports = Lexer;
+module.exports = CommonLexer;
