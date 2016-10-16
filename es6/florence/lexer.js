@@ -3,36 +3,26 @@
 var Line = require('./line'),
     Context = require('./context'),
     grammar = require('./grammar'),
-    Rules = require('../common/rules');
+    Rules = require('../common/rules'),
+    CommonLexer = require('../common/lexer');
 
 var rules = Rules.fromGrammar(grammar);
 
-class Lexer {
+class FlorenceLexer extends CommonLexer {
   linesFromContent(content, context) {
     context = context || new Context(false);  ///
 
-    var contents = content.split(/\n/),
-        lines = contents.map(function(content) {
-          var line = Line.fromContent(content, context, rules);
-
-          return line;
-        });
+    var lines = super.linesFromContent(content, context);
 
     return lines;
   }
 
-  tokensFromContent(content, context) {
-    var lines = this.linesFromContent(content, context),
-        tokens = lines.reduce(function(tokens, line) {
-          var lineTokens = line.getTokens();
+  static fromNothing() {
+    var gallinaLexer = new FlorenceLexer(rules, Line);
 
-          tokens = tokens.concat(lineTokens);
-
-          return tokens;
-        }, []);
-
-    return tokens;
+    return gallinaLexer;
   }
+
 }
 
-module.exports = Lexer;
+module.exports = FlorenceLexer;

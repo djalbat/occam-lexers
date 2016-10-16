@@ -17,9 +17,9 @@ var leftColumnSelector = '#leftColumn',
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
 class Example {
-  static updateTokens(contentTextAreaValue, Lexer) {
+  static updateTokens(contentTextAreaValue, lexer) {
     var content = contentTextAreaValue,  ///
-        lines = Lexer.linesFromContent(content),
+        lines = lexer.linesFromContent(content),
         linesHTML = lines.reduce(function(linesHTML, line) {
           var lineHTML = line.getHTML();
 

@@ -1,42 +1,15 @@
 'use strict';
 
 var Line = require('./line'),
-    Rules = require('../common/rules');
+    Rules = require('../common/rules'),
+    CommonLexer = require('../common/lexer');
 
-class Lexer {
-  constructor(rules) {
-    this.rules = rules;
-  }
-
-  linesFromContent(content) {
-    var contents = content.split(/\n/),
-        lines = contents.map(function(content) {
-          var line = Line.fromContent(content, this.rules);
-  
-          return line;
-        }.bind(this));
-  
-    return lines;
-  }
-  
-  tokensFromContent(content) {
-    var lines = this.linesFromContent(content),
-        tokens = lines.reduce(function(tokens, line) {
-          var lineTokens = line.getTokens();
-
-          tokens = tokens.concat(lineTokens);
-
-          return tokens;
-        }, []);
-    
-    return tokens;    
-  }
-
+class BasicLexer extends CommonLexer {
   static fromGrammar(grammar) {
     var rules = Rules.fromGrammar(grammar),
-        lexer = new Lexer(rules);
+        basicLexer = new BasicLexer(rules, Line);
 
-    return lexer;
+    return basicLexer;
   }
 }
 
