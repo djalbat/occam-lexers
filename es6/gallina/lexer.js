@@ -19,11 +19,11 @@ class GallinaLexer extends CommonLexer {
   }
 
   terminalSymbolsRegExpPattern() {
-    var keywordSymbolsRexExp = grammar['keyword'],
-        specialSymbolsRexExp = grammar['special'],
-        keywordSymbolsRexExpPattern = util.regExpPattern(keywordSymbolsRexExp),
-        specialSymbolsRexExpPattern = util.regExpPattern(specialSymbolsRexExp),
-        terminalSymbolsRegExpPattern = `${keywordSymbolsRexExpPattern}|${specialSymbolsRexExpPattern}`;
+    var keywordSymbolsRegExp = grammar.findRegExp('keyword'),
+        specialSymbolsRegExp = grammar.findRegExp('special'),
+        keywordSymbolsRegExpPattern = util.regExpPattern(keywordSymbolsRegExp),
+        specialSymbolsRegExpPattern = util.regExpPattern(specialSymbolsRegExp),
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
 
     return terminalSymbolsRegExpPattern;
   }

@@ -25,9 +25,9 @@ class Rules {
   }
 
   static fromGrammar(grammar) {
-    var array = grammar.map(function(object) {
-          var type = Object.keys(object),
-              regExp = object[type],
+    var array = grammar.map(function(entry) {
+          var type = grammar.type(entry),
+              regExp = entry[type],
               regExpPattern = util.regExpPattern(regExp);
 
           regExp = new RegExp(`^(${regExpPattern})`, 'u'); ///

@@ -21,4 +21,21 @@ var grammar = [
 
 ];
 
+grammar.type = function(entry) {
+  var type = Object.keys(entry)[0];  ///
+
+  return type;
+};
+
+grammar.findRegExp = function(type) {
+  var regExp = grammar.find(function(entry) {
+    var grammarType = grammar.type(entry),
+        found = (grammarType === type);
+
+    return found;
+  });
+
+  return regExp;
+};
+
 module.exports = grammar;
