@@ -30,7 +30,7 @@ class util {
 
   static regExpPattern(regExp) {
     var regExpStr = regExp.toString(),
-        regExpPattern = regExpStr.replace(/^\//,'').replace(/\/(?:[^\/]*?)$/,''); ///
+        regExpPattern = regExpStr.replace(/^\//,'').replace(/\/(?:[^\/]*?)$/,'').replace(/\\/g,'\\\\'); ///
     
     return regExpPattern;
   }
