@@ -28,10 +28,11 @@ class GallinaLexer extends CommonLexer {
 
   terminalTypes() {
     var terminalTypes = [
-          'string',
-          'ident',
-          'num'
-        ];
+      'string',
+      'access_ident',
+      'ident',
+      'num'
+    ];
 
     return terminalTypes;
   }
