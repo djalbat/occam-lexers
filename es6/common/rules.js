@@ -27,10 +27,10 @@ class Rules {
   static fromGrammar(grammar) {
     var array = grammar.map(function(entry) {
           var type = util.typeFromEntry(entry),
-              regExp = entry[type],
+              regExp = util.regExpFromEntry(entry),
               regExpPattern = util.regExpPattern(regExp);
 
-          regExp = new RegExp(`^(${regExpPattern})`, 'u'); ///
+          regExp = new RegExp('^(' + regExpPattern + ')', 'u'); ///
 
           var rule = new Rule(type, regExp);
 
