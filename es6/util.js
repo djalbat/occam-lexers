@@ -43,7 +43,7 @@ class util {
 
   static findRegExpFromType(grammar, type) {
     var regExp = grammar.find(function(entry) {
-      var grammarType = grammar.type(entry),
+      var grammarType = util.typeFromEntry(entry),
           found = (grammarType === type);
 
       return found;
