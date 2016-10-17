@@ -1,13 +1,18 @@
 'use strict';
 
 class Token {
-  constructor(str, line) {
+  constructor(str, type, line) {
     this.str = str;
+    this.type = type;
     this.line = line;
   }
 
   getString() {
     return this.str;
+  }
+  
+  getType() {
+    return this.type;
   }
   
   getLine() {
@@ -25,13 +30,21 @@ class Token {
   setString(str) {
     this.str = str;
   }
-
+  
   trimFromStart(start) {
     this.str = this.str.substring(start);
   }
 
   trimToEnd(end) {
     this.str = this.str.substring(0, end);
+  }
+
+  getHTML() {
+    var innerHTML = this.str, ///
+        className = this.type,  ///
+        html = `<span class="${className}">${innerHTML}</span>`;
+
+    return html;
   }
 }
 

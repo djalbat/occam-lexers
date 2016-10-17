@@ -3,6 +3,13 @@
 var Token = require('../token');
 
 class WhitespaceToken extends Token {
+  constructor(str) {
+    var type = "comment",
+        line = null;
+
+    super(str, type, line);
+  }
+  
   getHTML() {
     var str = this.getString(),
         html = str; ///

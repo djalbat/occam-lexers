@@ -3,13 +3,13 @@
 var Token = require('../../common/token');
 
 class CommentToken extends Token {
-  getHTML() {
-    var str = this.getString(),
-        html = '<span class="comment">' + str + '</span>';
-
-    return html;
+  constructor(str) {
+    var type = "comment",
+        line = null;
+    
+    super(str, type, line);
   }
-
+  
   merge(commentToken) {
     var str = this.getString(),
         commentTokenStr = commentToken.getString();
