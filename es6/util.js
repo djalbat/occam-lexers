@@ -34,6 +34,23 @@ class util {
     
     return regExpPattern;
   }
+
+  static typeFromEntry(entry) {
+    var type = Object.keys(entry)[0];  ///
+
+    return type;
+  };
+
+  static findRegExpFromType(grammar, type) {
+    var regExp = grammar.find(function(entry) {
+      var grammarType = grammar.type(entry),
+          found = (grammarType === type);
+
+      return found;
+    });
+
+    return regExp;
+  };
 }
 
 module.exports = util;
