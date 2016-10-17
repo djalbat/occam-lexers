@@ -21,7 +21,7 @@ class GallinaLexer extends CommonLexer {
         specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
         keywordSymbolsRegExpPattern = util.regExpPattern(keywordSymbolsRegExp),
         specialSymbolsRegExpPattern = util.regExpPattern(specialSymbolsRegExp),
-        terminalSymbolsRegExpPattern = keywordSymbolsRegExpPattern + '|' + specialSymbolsRegExpPattern;
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
 
     return terminalSymbolsRegExpPattern;
   }

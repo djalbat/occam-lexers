@@ -28,9 +28,11 @@ class Rules {
     var array = grammar.map(function(entry) {
           var type = util.typeFromEntry(entry),
               regExp = util.regExpFromEntry(entry),
-              regExpPattern = util.regExpPattern(regExp);
+              regExpPattern = regExp.source,  ///
+              regExpIsUnicode = regExp.unicode,
+              regExpFlags = regExpIsUnicode ? 'u' : '';
 
-          regExp = new RegExp('^(' + regExpPattern + ')', 'u'); ///
+          regExp = new RegExp(`^(${regExpPattern})`, regExpFlags); ///
 
           var rule = new Rule(type, regExp);
 
