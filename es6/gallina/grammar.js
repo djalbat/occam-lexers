@@ -9,15 +9,15 @@ var unicode_letter = `\\u{c0}-\\u{ff}\\u{180}-\\u{24f}\\u{391}-\\u{3ff}\\u{400}-
 
 var grammar = [
 
-  { string    : /^("[^"]*")/ },
+  { string    : /"[^"]*"/ },
 
-  { keyword   : /^(_|as|at|cofix|else|end|exists|exists2|fix|for|forall|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with)/ },
+  { keyword   : /_|as|at|cofix|else|end|exists|exists2|fix|for|forall|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with/ },
 
-  { special   : /^(!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.\(|\.\.|\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|\|)/ },
+  { special   : /!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.\(|\.\.|\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|\|/ },
 
-  { ident     : new RegExp(`^(${first_letter}${subsequent_letter}*)`, 'u') },
+  { ident     : new RegExp(`${first_letter}${subsequent_letter}*`, 'u') },
 
-  { num       : /^([0-9]+)/ }
+  { num       : /[0-9]+/ }
 
 ];
 

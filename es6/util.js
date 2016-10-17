@@ -27,6 +27,13 @@ class util {
       }
     }
   }
+
+  static regExpPattern(regExp) {
+    var regExpStr = regExp.toString(),
+        regExpPattern = regExpStr.replace(/^\//,'').replace(/\/(?:[^\/]*?)$/,''); ///
+    
+    return regExpPattern;
+  }
 }
 
 module.exports = util;

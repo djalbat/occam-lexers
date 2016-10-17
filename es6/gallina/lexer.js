@@ -1,6 +1,7 @@
 'use strict';
 
 var Line = require('./line'),
+    util = require('../util'),
     Context = require('./context'),
     grammar = require('./grammar'),
     Rules = require('../common/rules'),
@@ -16,13 +17,22 @@ class GallinaLexer extends CommonLexer {
     
     return lines;
   }
+
+  terminalSymbolsRegExpPattern() {
+    var keywordSymbolsRexExp = grammar['keyword'],
+        specialSymbolsRexExp = grammar['special'],
+        keywordSymbolsRexExpPattern = util.regExpPattern(keywordSymbolsRexExp),
+        specialSymbolsRexExpPattern = util.regExpPattern(specialSymbolsRexExp),
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRexExpPattern}|${specialSymbolsRexExpPattern}`;
+
+    return terminalSymbolsRegExpPattern;
+  }
   
   static fromNothing() {
     var gallinaLexer = new GallinaLexer(rules, Line);
     
     return gallinaLexer;
-  }
-  
+  }  
 }
 
 module.exports = GallinaLexer;

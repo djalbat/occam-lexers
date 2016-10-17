@@ -1,6 +1,7 @@
 'use strict';
 
-var Rule = require('./rule');
+var Rule = require('./rule'),
+    util = require('../util');
 
 class Rules {
   constructor(array) {
@@ -27,7 +28,11 @@ class Rules {
     var array = grammar.map(function(object) {
           var type = Object.keys(object),
               regExp = object[type],
-              rule = new Rule(type, regExp);
+              regExpPattern = util.regExpPattern(regExp);
+
+          regExp = new RegExp(`^(${regExpPattern})`, 'u'); ///
+
+          var rule = new Rule(type, regExp);
 
           return rule;
         }),
