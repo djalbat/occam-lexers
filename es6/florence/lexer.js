@@ -6,8 +6,6 @@ var Line = require('./line'),
     Rules = require('../common/rules'),
     CommonLexer = require('../common/lexer');
 
-var rules = Rules.fromGrammar(grammar);
-
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, context) {
     context = context || new Context(false);  ///
@@ -18,7 +16,8 @@ class FlorenceLexer extends CommonLexer {
   }
 
   static fromNothing() {
-    var gallinaLexer = new FlorenceLexer(rules, Line);
+    var rules = Rules.fromGrammar(grammar),
+        gallinaLexer = new FlorenceLexer(rules, Line);
 
     return gallinaLexer;
   }

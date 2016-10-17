@@ -7,8 +7,6 @@ var Line = require('./line'),
     Rules = require('../common/rules'),
     CommonLexer = require('../common/lexer');
 
-var rules = Rules.fromGrammar(grammar);
-
 class GallinaLexer extends CommonLexer {
   linesFromContent(content, context) {
     context = context || new Context(0);  ///
@@ -29,7 +27,8 @@ class GallinaLexer extends CommonLexer {
   }
   
   static fromNothing() {
-    var gallinaLexer = new GallinaLexer(rules, Line);
+    var rules = Rules.fromGrammar(grammar),
+        gallinaLexer = new GallinaLexer(rules, Line);
     
     return gallinaLexer;
   }  
