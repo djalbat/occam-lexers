@@ -41,13 +41,21 @@ class util {
     return type;
   };
 
-  static findRegExpFromType(grammar, type) {
-    var regExp = grammar.find(function(entry) {
-      var grammarType = util.typeFromEntry(entry),
-          found = (grammarType === type);
+  static regExpFromEntry(entry) {
+    var type = util.typeFromEntry(entry),
+        regExp = entry[type];
 
-      return found;
-    });
+    return regExp;
+  };
+
+  static findRegExpFromType(grammar, type) {
+    var entry = grammar.find(function(entry) {
+          var grammarType = util.typeFromEntry(entry),
+              found = (grammarType === type);
+
+          return found;
+        }),
+        regExp = util.regExpFromEntry(entry);
 
     return regExp;
   };
