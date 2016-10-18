@@ -1,7 +1,6 @@
 'use strict';
 
 var util = require('../util'),
-    SignificantContentToken = require('../common/token/significantContent'),
     WhitespaceToken = require('../common/token/whitespace');
 
 class NonSignificantTokens {
