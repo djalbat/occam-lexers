@@ -9,8 +9,8 @@ class SymbolSequence {
     return this.symbols.map(cb);
   }
   
-  reduceSymbols(cb) {
-    return this.symbols.reduce(cb);
+  reduceSymbols(cb, initialValue) {
+    return this.symbols.reduce(cb, initialValue);
   }
   
   static fromChoice(choice) {
