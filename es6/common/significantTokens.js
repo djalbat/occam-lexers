@@ -1,19 +1,19 @@
 'use strict';
 
-var ErrorToken = require('../common/token/error'),
-    SignificantContentToken = require('../common/token/significantContent');
+var ErrorToken = require('../common/token/error');
 
 class SignificantTokens {
-  static pass(tokens, line, rules) {
-    tokens = tokens.reduce(function(tokens, token) {
-      if (token instanceof SignificantContentToken) {
-        var significantContentToken = token,  ///
-            content = significantContentToken.getContent(),
+  static pass(nonSignificantTokensOrSignificantContent, line, rules) {
+    var tokens = nonSignificantTokensOrSignificantContent.reduce(function(tokens, nonSignificantTokenOrSignificantContent) {
+      if (typeof nonSignificantTokenOrSignificantContent === "string") {
+        var content = nonSignificantTokenOrSignificantContent,  ///
             significantTokens = significantTokensFromContent(content, line, rules);
 
         tokens = tokens.concat(significantTokens);
       } else {
-        tokens.push(token);
+        var nonSignificantToken = nonSignificantTokenOrSignificantContent;  ///
+        
+        tokens.push(nonSignificantToken);
       }
 
       return tokens;

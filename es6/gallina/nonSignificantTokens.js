@@ -1,15 +1,14 @@
 'use strict';
 
 var util = require('../util'),
+    WhitespaceToken = require('../common/token/whitespace'),
     EndOfCommentToken = require('./token/endOfComment'),
     StartOfCommentToken = require('./token/startOfComment'),
-    MiddleOfCommentToken = require('./token/middleOfComment'),
-    SignificantContentToken = require('../common/token/significantContent'),
-    WhitespaceToken = require('../common/token/whitespace');
+    MiddleOfCommentToken = require('./token/middleOfComment');
 
 class NonSignificantTokens {
   static pass(content, context, line) {
-    var tokens = [],
+    var nonSignificantTokensOrSignificantContent = [],
         remainingContent,
         commentToken,
         commentTokenLength;
@@ -33,12 +32,12 @@ class NonSignificantTokens {
 
           content = remainingContent;
 
-          tokens.push(commentToken);
+          nonSignificantTokensOrSignificantContent.push(commentToken);
 
           continue;
         }
       } else {
-        var previousCommentToken = tokens.pop(),
+        var previousCommentToken = nonSignificantTokensOrSignificantContent.pop(),
             middleOfCommentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, endOfCommentTokenPosition, contentLength);
 
         if (false) {
@@ -73,7 +72,7 @@ class NonSignificantTokens {
 
         content = remainingContent;
 
-        tokens.push(commentToken);
+        nonSignificantTokensOrSignificantContent.push(commentToken);
 
         continue;
       }
@@ -84,29 +83,28 @@ class NonSignificantTokens {
         var whitespaceToken = WhitespaceToken.fromContent(content, line),
             whitespaceTokenLength = whitespaceToken.getLength();
 
-        content = content.substring(whitespaceTokenLength);
+        remainingContent = content.substring(whitespaceTokenLength);
 
-        tokens.push(whitespaceToken);
+        content = remainingContent;
+
+        nonSignificantTokensOrSignificantContent.push(whitespaceToken);
 
         continue;
       }
       
-      var significantContentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, whitespaceTokenPosition, contentLength);
-      
-      remainingContent = content.substring(significantContentTokenLength);
-      
-      content = content.substring(0, significantContentTokenLength);
-      
-      var significantContentToken = SignificantContentToken.fromContent(content);
-      
+      var significantContentLength = util.minBarMinusOne(startOfCommentTokenPosition, whitespaceTokenPosition, contentLength),
+          significantContent = content.substring(0, significantContentLength);
+
+      remainingContent = content.substring(significantContentLength);
+
       content = remainingContent;
 
-      tokens.push(significantContentToken);
+      nonSignificantTokensOrSignificantContent.push(significantContent);
 
       continue;
     }
     
-    return tokens;
+    return nonSignificantTokensOrSignificantContent;
   }
 }
 
