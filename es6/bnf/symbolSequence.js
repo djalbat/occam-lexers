@@ -9,6 +9,10 @@ class SymbolSequence {
     return this.symbols.map(cb);
   }
   
+  reduceSymbols(cb) {
+    return this.symbols.reduce(cb);
+  }
+  
   static fromChoice(choice) {
     var symbols = choice.split(/\s+|(<NO_WHITESPACE>)|(<END_OF_LINE>)/).reduce(function(symbols, symbol) {
           if (symbol !== undefined) {
