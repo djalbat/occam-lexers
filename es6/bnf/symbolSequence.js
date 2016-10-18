@@ -10,7 +10,7 @@ class SymbolSequence {
   }
   
   static fromChoice(choice) {
-    var symbols = choice.split(/\s+|(<NO_WHITESPACE>)|(<END_OF_LINE>)/).reduce(function(symbol, symbols) {
+    var symbols = choice.split(/\s+|(<NO_WHITESPACE>)|(<END_OF_LINE>)/).reduce(function(symbols, symbol) {
           if (symbol !== undefined) {
             symbols.push(symbols);
           }
