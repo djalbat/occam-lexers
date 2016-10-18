@@ -1,8 +1,14 @@
 'use strict';
 
-var Token = require('../token');
+var SignificantToken = require('../token/significant');
 
-class WhitespaceToken extends Token {
+class WhitespaceToken extends SignificantToken {
+  constructor(str, line) {
+    var type = WhitespaceToken.type;
+    
+    super(str, line, type);
+  }
+  
   getHTML() {
     var str = this.getString(),
         html = str; ///
@@ -16,7 +22,7 @@ class WhitespaceToken extends Token {
     return position;
   }
 
-  static fromContent(content) {
+  static fromContent(content, line) {
     var matches = content.match(/^([\t ]+)/);
 
     if (!matches) {
@@ -25,11 +31,13 @@ class WhitespaceToken extends Token {
 
     var firstMatch = first(matches),
         str = firstMatch, ///
-        whitespaceToken = new WhitespaceToken(str);
+        whitespaceToken = new WhitespaceToken(str, line);
 
     return whitespaceToken;
   }
 }
+
+WhitespaceToken.type = "whitespace";
 
 module.exports = WhitespaceToken;
 
