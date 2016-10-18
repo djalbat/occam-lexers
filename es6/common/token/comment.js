@@ -3,13 +3,6 @@
 var Token = require('../../common/token');
 
 class CommentToken extends Token {
-  constructor(str) {
-    var type = "comment",
-        line = null;
-    
-    super(str, type, line);
-  }
-  
   merge(commentToken) {
     var str = this.getString(),
         commentTokenStr = commentToken.getString();
@@ -19,6 +12,13 @@ class CommentToken extends Token {
     this.setString(str);
 
     return this;
+  }
+
+  getHTML() {
+    var innerHTML = this.getString(), ///
+        html = `<span class="comment">${innerHTML}</span>`;
+
+    return html;
   }
 }
 

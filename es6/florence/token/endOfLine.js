@@ -1,12 +1,12 @@
 'use strict';
 
-var Token = require('../../common/token');
+var SignificantToken = require('../../common/token/significant');
 
-class EndOfLineToken extends Token {
+class EndOfLineToken extends SignificantToken {
   static fromNothing(line) {
     var str = '',
         type = 'EOL',
-        endOfLineToken = new EndOfLineToken(str, type, line);
+        endOfLineToken = new EndOfLineToken(str, line, type);
     
     return endOfLineToken;
   }

@@ -9,7 +9,7 @@ class EndOfCommentToken extends CommentToken {
     return position;
   }
 
-  static fromContent(content) {
+  static fromContent(content, line) {
     var endOfCommentToken = null,
         matches = content.match(/^(\*\))/);
 
@@ -17,7 +17,7 @@ class EndOfCommentToken extends CommentToken {
       var firstMatch = first(matches),
           str = firstMatch; ///
 
-      endOfCommentToken = new CommentToken(str);  ///
+      endOfCommentToken = new EndOfCommentToken(str, line);
     }
 
     return endOfCommentToken;

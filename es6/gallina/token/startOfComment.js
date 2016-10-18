@@ -17,7 +17,7 @@ class StartOfCommentToken extends CommentToken {
       var firstMatch = first(matches),
           str = firstMatch; ///
 
-      startOfCommentToken = new CommentToken(str, line);  ///
+      startOfCommentToken = new StartOfCommentToken(str, line);
     }
     
     return startOfCommentToken;

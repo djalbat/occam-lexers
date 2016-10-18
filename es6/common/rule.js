@@ -16,7 +16,7 @@ class Rule {
       var firstMatch = first(matches),
           str = firstMatch; ///
       
-      significantToken = new SignificantToken(str, this.type, line);
+      significantToken = new SignificantToken(str, line, this.type);
     }
     
     return significantToken;

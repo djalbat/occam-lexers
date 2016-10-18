@@ -6,7 +6,7 @@ var util = require('../util'),
 
 class NonSignificantTokens {
   static pass(content, context, line) {
-    var tokens = [],
+    var nonSignficantTokensOrSignificantContent = [],
         remainingContent;
     
     while (content !== '') {
@@ -20,27 +20,22 @@ class NonSignificantTokens {
 
         content = content.substring(whitespaceTokenLength);
 
-        tokens.push(whitespaceToken);
+        nonSignficantTokensOrSignificantContent.push(whitespaceToken);
+
+        continue;
+      } else {
+        var significantContentLength = util.minBarMinusOne(whitespaceTokenPosition, contentLength),
+            significantContent = content.substring(0, significantContentLength);
+
+        content = content.substring(significantContentLength);
+
+        nonSignficantTokensOrSignificantContent.push(significantContent);
 
         continue;
       }
-
-      var significantContentTokenLength = util.minBarMinusOne(whitespaceTokenPosition, contentLength);
-
-      remainingContent = content.substring(significantContentTokenLength);
-
-      content = content.substring(0, significantContentTokenLength);
-
-      var significantContentToken = SignificantContentToken.fromContent(content);
-
-      content = remainingContent;
-
-      tokens.push(significantContentToken);
-
-      continue;
     }
     
-    return tokens;
+    return nonSignficantTokensOrSignificantContent;
   }
 }
 
