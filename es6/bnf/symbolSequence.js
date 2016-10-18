@@ -14,7 +14,7 @@ class SymbolSequence {
   }
   
   static fromChoice(choice) {
-    var symbols = choice.split(/\s+|(<NO_WHITESPACE>)|(<END_OF_LINE>)/).reduce(function(symbols, symbol) {
+    var symbols = choice.split(symbolDelimiterRegExp).reduce(function(symbols, symbol) {
           if (symbol !== undefined) {
             symbols.push(symbol);
           }
@@ -25,5 +25,12 @@ class SymbolSequence {
     return expression;
   }
 }
+
+var END_OF_LINE = '<END_OF_LINE>',
+    NO_WHITESPACE = '<NO_WHITESPACE>',
+    symbolDelimiterRegExp = new RegExp(`\\s+|(${END_OF_LINE})|(${NO_WHITESPACE})`);
+
+SymbolSequence.END_OF_LINE = END_OF_LINE;
+SymbolSequence.NO_WHITESPACE = NO_WHITESPACE;
 
 module.exports = SymbolSequence;

@@ -5,7 +5,8 @@ var lexers = {
   'BasicLexer': require('./lib/basic/lexer'),
   'GallinaLexer': require('./lib/gallina/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
-  'WhitespaceToken': require('./lib/common/token/whitespace')
+  'WhitespaceToken': require('./lib/common/token/whitespace'),
+  'SymbolSequence': require('./lib/bnf/symbolSequence')
 };
 
 module.exports = lexers;
