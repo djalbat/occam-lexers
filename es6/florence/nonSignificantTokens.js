@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('../util'),
-    EndOfLineToken = require('./token/endOfLine'),
+    EndOfLineToken = require('../common/token/endOfLine'),
     WhitespaceToken = require('../common/token/whitespace'),
     EndOfCommentToken = require('./token/endOfComment'),
     StartOfCommentToken = require('./token/startOfComment'),
