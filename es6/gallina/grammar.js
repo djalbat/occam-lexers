@@ -12,7 +12,7 @@ var grammar = [
 
   { string        : /"[^"]*"/ },
 
-  { keyword       : /_|as|at|cofix|else|end|exists|exists2|fix|forall|for|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with|Axiom|Conjecture|Parameter|Parameters|Variable|Variables|Hypothesis|Hypotheses|Local|Definition|Let|Inductive|CoInductive|Fixpoint|CoFixpoint|Theorem|Lemma|Remark|Fact|Corollary|Proposition|Definition|Example/ },
+  { keyword       : /_|as|at|cofix|else|end|exists|exists2|fix|forall|for|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with|Axiom|Conjecture|Parameter|Parameters|Variables|Variable|Hypothesis|Hypotheses|Local|Definition|Let|Inductive|CoInductive|Fixpoint|CoFixpoint|Theorem|Lemma|Remark|Fact|Corollary|Proposition|Definition|Example/ },
 
   { ident         : new RegExp(`${ident}`, 'u') },
 
