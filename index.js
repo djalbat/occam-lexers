@@ -6,7 +6,7 @@ var lexers = {
   'GallinaLexer': require('./lib/gallina/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
   'SignificantToken': require('./lib/common/token/significant'),
-  'symbolTypes': require('./lib/bnf/symbolTypes')
+  'symbolTypes': require('./lib/symbolTypes')
 };
 
 module.exports = lexers;
