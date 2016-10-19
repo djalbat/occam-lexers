@@ -4,7 +4,7 @@ var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
   constructor(str, line) {
-    var type = WhitespaceToken.type;
+    var type = SignificantToken.types.WHITESPACE;
     
     super(str, line, type);
   }
@@ -36,8 +36,6 @@ class WhitespaceToken extends SignificantToken {
     return whitespaceToken;
   }
 }
-
-WhitespaceToken.type = "whitespace";
 
 module.exports = WhitespaceToken;
 

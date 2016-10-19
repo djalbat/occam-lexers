@@ -1,11 +1,11 @@
 'use strict';
 
-var SignficantToken = require('./significant');
+var SignificantToken = require('./significant');
 
-class ErrorToken extends SignficantToken {
+class ErrorToken extends SignificantToken {
   static fromContent(content, line) {
     var str = content,  ///
-        type = 'error',
+        type = SignificantToken.types.ERROR,
         errorToken = new ErrorToken(str, line, type);
 
     return errorToken;

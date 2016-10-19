@@ -1,5 +1,7 @@
 'use strict';
 
+var symbolTypes = require('../symbolTypes');
+
 class SymbolSequence {
   constructor(symbols) {
     this.symbols = symbols;
@@ -26,11 +28,6 @@ class SymbolSequence {
   }
 }
 
-var END_OF_LINE = '<END_OF_LINE>',
-    NO_WHITESPACE = '<NO_WHITESPACE>',
-    symbolDelimiterRegExp = new RegExp(`\\s+|(${END_OF_LINE})|(${NO_WHITESPACE})`);
-
-SymbolSequence.END_OF_LINE = END_OF_LINE;
-SymbolSequence.NO_WHITESPACE = NO_WHITESPACE;
+var symbolDelimiterRegExp = new RegExp(`\\s+|(${symbolTypes.END_OF_LINE})|(${symbolTypes.NO_WHITESPACE})`);
 
 module.exports = SymbolSequence;

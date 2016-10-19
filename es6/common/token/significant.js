@@ -30,4 +30,10 @@ class SignificantToken extends Token {
   }
 }
 
+SignificantToken.types = {
+  ERROR : 'ERROR',
+  WHITESPACE : 'WHITESPACE',
+  END_OF_LINE : 'END_OF_LINE'
+};
+
 module.exports = SignificantToken;
