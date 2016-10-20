@@ -1,7 +1,6 @@
 'use strict';
 
 var Line = require('./line'),
-    util = require('../util'),
     Context = require('./context'),
     grammar = require('./grammar'),
     Rules = require('../common/rules'),
