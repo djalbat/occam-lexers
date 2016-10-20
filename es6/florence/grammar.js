@@ -2,14 +2,14 @@
 
 var grammar = [
 
-  { string    : /"[^"]*"/ },
+  { string              : /"[^"]*"/ },
 
-  { include   : /include/ },
+  { keyword             : /Rule|Premises|Premise|Conclusion|Proof|Suppose|Then|Hence|by/ },
 
-  { keyword   : /Rule|Premises|Premise|Conclusion|Proof|Suppose|Then|Hence|by/ },
-
-  { special   : /=/ }
+  { special             : /=/ }
     
 ];
 
 module.exports = grammar;
+
+

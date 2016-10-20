@@ -11,7 +11,7 @@ class StartOfCommentToken extends CommentToken {
 
   static fromContent(content, line) {
     var startOfCommentToken = null,
-        matches = content.match(/^(\(\*)/);
+        matches = content.match(/^\(\*/);
 
     if (matches) {
       var firstMatch = first(matches),
