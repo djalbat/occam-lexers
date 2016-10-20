@@ -4,11 +4,11 @@ var grammar = [
 
   { string    : /"[^"]*"/ },
 
-  { directive : /include/ },
+  { include   : /include/ },
 
-  { keyword   : /Rule|Premise|Premises|Conclusion|Theorem|Lemma|Proof|Suppose|Then|Hence|by/ },
+  { keyword   : /Rule|Premises|Premise|Conclusion|Proof|Suppose|Then|Hence|by/ },
 
-  { special   : /=|:|,|;/ }
+  { special   : /=/ }
     
 ];
 
