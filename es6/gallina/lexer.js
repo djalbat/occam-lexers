@@ -17,11 +17,7 @@ class GallinaLexer extends CommonLexer {
   }
 
   terminalSymbolsRegExpPattern() {
-    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
-        specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
-        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
-        specialSymbolsRegExpPattern = specialSymbolsRegExp.source,  ///
-        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`; ///
+    var terminalSymbolsRegExpPattern = super.terminalSymbolsRegExpPattern(grammar);
 
     return terminalSymbolsRegExpPattern;
   }

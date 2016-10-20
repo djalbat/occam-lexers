@@ -31,6 +31,17 @@ class CommonLexer {
     
     return tokens;    
   }
+
+  terminalSymbolsRegExpPattern(grammar) {
+    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
+        specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
+        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
+        specialSymbolsRegExpPattern = specialSymbolsRegExp.source,  ///
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`; ///
+
+    return terminalSymbolsRegExpPattern;
+  }
+
 }
 
 module.exports = CommonLexer;

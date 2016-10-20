@@ -15,6 +15,21 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
+  terminalSymbolsRegExpPattern() {
+    var terminalSymbolsRegExpPattern = super.terminalSymbolsRegExpPattern(grammar);
+
+    return terminalSymbolsRegExpPattern;
+  }
+
+  terminalTypes() {
+    var terminalTypes = [
+      'string',
+      'include'
+    ];
+
+    return terminalTypes;
+  }
+
   static fromNothing() {
     var rules = Rules.fromGrammar(grammar),
         gallinaLexer = new FlorenceLexer(rules, Line);
