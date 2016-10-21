@@ -3,6 +3,7 @@
 var Line = require('./line'),
     Context = require('./context'),
     grammar = require('./grammar'),
+    util = require('../util'),
     Rules = require('../common/rules'),
     CommonLexer = require('../common/lexer');
 
@@ -16,7 +17,11 @@ class GallinaLexer extends CommonLexer {
   }
 
   terminalSymbolsRegExpPattern() {
-    var terminalSymbolsRegExpPattern = super.terminalSymbolsRegExpPattern(grammar);
+    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
+        specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
+        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
+        specialSymbolsRegExpPattern = specialSymbolsRegExp.source,  ///
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
 
     return terminalSymbolsRegExpPattern;
   }
