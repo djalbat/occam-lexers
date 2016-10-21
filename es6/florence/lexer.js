@@ -26,7 +26,8 @@ class FlorenceLexer extends CommonLexer {
 
   significantTokenTypes() {
     var significantTokenTypes = [
-      'string'
+      'string',
+      'undefined'
     ];
 
     return significantTokenTypes;
