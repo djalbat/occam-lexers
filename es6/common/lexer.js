@@ -33,7 +33,7 @@ class CommonLexer {
     return tokens;    
   }
 
-  terminalSymbolsRegExpPattern() {
+  terminalSymbolsRegExpPattern(grammar) {
     var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
         specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
         keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
