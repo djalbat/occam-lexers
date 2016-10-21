@@ -26,15 +26,15 @@ class GallinaLexer extends CommonLexer {
     return terminalSymbolsRegExpPattern;
   }
 
-  terminalTypes() {
-    var terminalTypes = [
+  significantTokenTypes() {
+    var significantTokenTypes = [
       'string',
       'access_ident',
       'ident',
       'num'
     ];
 
-    return terminalTypes;
+    return significantTokenTypes;
   }
   
   static fromNothing() {

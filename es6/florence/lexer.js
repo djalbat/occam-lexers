@@ -24,13 +24,12 @@ class FlorenceLexer extends CommonLexer {
     return terminalSymbolsRegExpPattern;
   }
 
-  terminalTypes() {
-    var terminalTypes = [
-      'includeDirective',
+  significantTokenTypes() {
+    var significantTokenTypes = [
       'string'
     ];
 
-    return terminalTypes;
+    return significantTokenTypes;
   }
 
   static fromNothing() {
