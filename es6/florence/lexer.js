@@ -26,8 +26,8 @@ class FlorenceLexer extends CommonLexer {
 
   terminalTypes() {
     var terminalTypes = [
-      'string',
-      'include'
+      'includeDirective',
+      'string'
     ];
 
     return terminalTypes;
