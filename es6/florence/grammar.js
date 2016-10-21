@@ -6,7 +6,9 @@ var grammar = [
 
   { keyword             : /Rule|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Suppose|Then|Hence|by/ },
 
-  { undefined           : /.+/ }
+  { special             : /\,|\:|\;|\=/ },
+
+  { unassigned          : /.+/ }
     
 ];
 

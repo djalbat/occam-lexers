@@ -1,6 +1,7 @@
 'use strict';
 
-var Line = require('./line');
+var Line = require('./line'),
+    util = require('../util');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -30,6 +31,16 @@ class CommonLexer {
         }, []);
     
     return tokens;    
+  }
+
+  terminalSymbolsRegExpPattern() {
+    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
+        specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
+        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
+        specialSymbolsRegExpPattern = specialSymbolsRegExp.source,  ///
+        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
+
+    return terminalSymbolsRegExpPattern;
   }
 }
 

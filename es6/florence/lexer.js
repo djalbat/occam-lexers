@@ -3,7 +3,6 @@
 var Line = require('./line'),
     Context = require('./context'),
     grammar = require('./grammar'),
-    util = require('../util'),
     Rules = require('../common/rules'),
     CommonLexer = require('../common/lexer');
 
@@ -16,18 +15,10 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  terminalSymbolsRegExpPattern() {
-    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
-        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
-        terminalSymbolsRegExpPattern = keywordSymbolsRegExpPattern; ///
-
-    return terminalSymbolsRegExpPattern;
-  }
-
   significantTokenTypes() {
     var significantTokenTypes = [
       'string',
-      'undefined'
+      'unassigned'
     ];
 
     return significantTokenTypes;
