@@ -1,6 +1,6 @@
 'use strict';
 
-var Token = require('../../common/token');
+var Token = require('../token');
 
 class IncludeDirectiveToken extends Token {
   constructor(str, line, filePath) {

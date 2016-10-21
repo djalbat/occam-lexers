@@ -3,10 +3,10 @@
 var util = require('../util'),
     EndOfLineToken = require('../common/token/endOfLine'),
     WhitespaceToken = require('../common/token/whitespace'),
+    IncludeDirectiveToken = require('../common/token/includeDirective'),
     EndOfCommentToken = require('./token/endOfComment'),
     StartOfCommentToken = require('./token/startOfComment'),
-    MiddleOfCommentToken = require('./token/middleOfComment'),
-    IncludeDirectiveToken = require('./token/includeDirective');
+    MiddleOfCommentToken = require('./token/middleOfComment');
 
 class NonSignificantTokens {
   static pass(content, context, line) {
