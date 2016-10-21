@@ -1,11 +1,7 @@
 'use strict';
 
-var Token = require('../token');
-
-class IncludeDirectiveToken extends Token {
-  constructor(str, line, filePath) {
-    super(str, line);
-
+class IncludeDirectiveToken {
+  constructor(filePath) {    
     this.filePath = filePath;
   }
 
@@ -29,14 +25,14 @@ class IncludeDirectiveToken extends Token {
           str = firstMatch, ///
           filePath = secondMatch; ///
 
-      includeDirectiveToken = new IncludeDirectiveToken(str, line, filePath);
+      includeDirectiveToken = new IncludeDirectiveToken(filePath);
     }
     
     return includeDirectiveToken;
   }
 
   getHTML() {
-    var html = this.str;  ///
+    var html = this.filePath;  ///
 
     return html;
   }
