@@ -17,9 +17,13 @@ class SymbolSequence {
   
   static fromChoice(choice) {
     var symbols = choice.split(symbolDelimiterRegExp).reduce(function(symbols, symbol) {
-          if (symbol !== undefined) {
+          if (  (symbol === '')
+             || (symbol === undefined)  ) {
+
+          } else {
             symbols.push(symbol);
           }
+      
           return symbols;
         }, []),
         expression = new SymbolSequence(symbols);
