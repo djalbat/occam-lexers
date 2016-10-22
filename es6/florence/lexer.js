@@ -24,6 +24,7 @@ class FlorenceLexer extends CommonLexer {
   significantTokenTypes() {
     var significantTokenTypes = [
       'string',
+      'keyword',
       'unassigned'
     ];
 
