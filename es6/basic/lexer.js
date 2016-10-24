@@ -11,6 +11,12 @@ class BasicLexer extends CommonLexer {
 
     return basicLexer;
   }
+
+  static significantTokenTypes() {
+    var significantTokenTypes = [];
+
+    return significantTokenTypes;
+  }
 }
 
 module.exports = BasicLexer;

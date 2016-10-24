@@ -2,6 +2,7 @@
 
 var Line = require('./line'),
     Context = require('./context'),
+    grammar = require('./grammar'),
     CommonLexer = require('../common/lexer');
 
 class GallinaLexer extends CommonLexer {
@@ -11,6 +12,12 @@ class GallinaLexer extends CommonLexer {
     var lines = super.linesFromContent(content, context);
     
     return lines;
+  }
+
+  static terminalSymbolsRegExpPattern() {
+    var terminalSymbolsRegExpPattern = CommonLexer.terminalSymbolsRegExpPattern(grammar);
+
+    return terminalSymbolsRegExpPattern;
   }
 
   static significantTokenTypes() {
