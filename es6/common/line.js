@@ -1,6 +1,7 @@
 'use strict';
 
-var util = require('../util');
+var util = require('../util'),
+    SignificantTokens = require('./significantTokens');
 
 class Line {
   constructor() {
@@ -34,6 +35,13 @@ class Line {
         newTokens = [newToken];
 
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
+  }
+  
+  static tokensFromContent(content, context, line, rules, NonSignificantTokens) {
+    var nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
+        tokens = SignificantTokens.pass(nonSignificantTokenOrSignificantContents, line, rules);
+
+    return tokens;
   }
 }
 
