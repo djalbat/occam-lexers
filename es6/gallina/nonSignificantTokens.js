@@ -8,7 +8,7 @@ var util = require('../util'),
 
 class NonSignificantTokens {
   static pass(content, context, line) {
-    var nonSignificantTokensOrSignificantContent = [],
+    var nonSignificantTokenOrSignificantContents = [],
         remainingContent,
         commentToken,
         commentTokenLength;
@@ -32,12 +32,12 @@ class NonSignificantTokens {
 
           content = remainingContent;
 
-          nonSignificantTokensOrSignificantContent.push(commentToken);
+          nonSignificantTokenOrSignificantContents.push(commentToken);
 
           continue;
         }
       } else {
-        var previousCommentToken = nonSignificantTokensOrSignificantContent.pop(),
+        var previousCommentToken = nonSignificantTokenOrSignificantContents.pop(),
             middleOfCommentTokenLength = util.minBarMinusOne(startOfCommentTokenPosition, endOfCommentTokenPosition, contentLength);
 
         if (false) {
@@ -72,7 +72,7 @@ class NonSignificantTokens {
 
         content = remainingContent;
 
-        nonSignificantTokensOrSignificantContent.push(commentToken);
+        nonSignificantTokenOrSignificantContents.push(commentToken);
 
         continue;
       }
@@ -87,7 +87,7 @@ class NonSignificantTokens {
 
         content = remainingContent;
 
-        nonSignificantTokensOrSignificantContent.push(whitespaceToken);
+        nonSignificantTokenOrSignificantContents.push(whitespaceToken);
 
         continue;
       }
@@ -99,12 +99,12 @@ class NonSignificantTokens {
 
       content = remainingContent;
 
-      nonSignificantTokensOrSignificantContent.push(significantContent);
+      nonSignificantTokenOrSignificantContents.push(significantContent);
 
       continue;
     }
     
-    return nonSignificantTokensOrSignificantContent;
+    return nonSignificantTokenOrSignificantContents;
   }
 }
 

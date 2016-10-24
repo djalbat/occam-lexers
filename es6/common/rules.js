@@ -7,6 +7,12 @@ class Rules {
   constructor(array) {
     this.array = array;
   }
+
+  getRule(depth) {
+    var rule = this.array[depth];
+
+    return rule;
+  }
   
   significantTokenFromContent(content, line) {
     var significantToken = null;
@@ -28,13 +34,7 @@ class Rules {
     var array = grammar.map(function(entry) {
           var type = util.typeFromEntry(entry),
               regExp = util.regExpFromEntry(entry),
-              regExpPattern = regExp.source,  ///
-              regExpIsUnicode = regExp.unicode,
-              regExpFlags = regExpIsUnicode ? 'u' : '';
-
-          regExp = new RegExp(`^(${regExpPattern})`, regExpFlags); ///
-
-          var rule = new Rule(type, regExp);
+              rule = new Rule(type, regExp);
 
           return rule;
         }),

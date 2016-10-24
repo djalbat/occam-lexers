@@ -10,7 +10,7 @@ var util = require('../util'),
 
 class NonSignificantTokens {
   static pass(content, context, line) {
-    var nonSignificantTokensOrSignificantContent = [],
+    var nonSignificantTokenOrSignificantContents = [],
         remainingContent,
         commentToken,
         commentTokenLength;
@@ -34,12 +34,12 @@ class NonSignificantTokens {
 
           content = remainingContent;
 
-          nonSignificantTokensOrSignificantContent.push(commentToken);
+          nonSignificantTokenOrSignificantContents.push(commentToken);
 
           continue;
         }
       } else {
-        var previousCommentToken = nonSignificantTokensOrSignificantContent.pop(),
+        var previousCommentToken = nonSignificantTokenOrSignificantContents.pop(),
             middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPosition, contentLength);
 
         if (false) {
@@ -66,7 +66,7 @@ class NonSignificantTokens {
 
         content = remainingContent;
 
-        nonSignificantTokensOrSignificantContent.push(commentToken);
+        nonSignificantTokenOrSignificantContents.push(commentToken);
 
         continue;
       }
@@ -79,7 +79,7 @@ class NonSignificantTokens {
 
         content = content.substring(includeDirectiveTokenLength);
 
-        nonSignificantTokensOrSignificantContent.push(includeDirectiveToken);
+        nonSignificantTokenOrSignificantContents.push(includeDirectiveToken);
 
         continue;
       }
@@ -92,7 +92,7 @@ class NonSignificantTokens {
 
         content = content.substring(whitespaceTokenLength);
 
-        nonSignificantTokensOrSignificantContent.push(whitespaceToken);
+        nonSignificantTokenOrSignificantContents.push(whitespaceToken);
 
         continue;
       }
@@ -104,16 +104,16 @@ class NonSignificantTokens {
 
       content = remainingContent;
 
-      nonSignificantTokensOrSignificantContent.push(significantContent);
+      nonSignificantTokenOrSignificantContents.push(significantContent);
 
       continue;
     }
     
     var endOfLineToken = EndOfLineToken.fromNothing(line);
     
-    nonSignificantTokensOrSignificantContent.push(endOfLineToken);
+    nonSignificantTokenOrSignificantContents.push(endOfLineToken);
 
-    return nonSignificantTokensOrSignificantContent;
+    return nonSignificantTokenOrSignificantContents;
   }
 }
 

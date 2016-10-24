@@ -12,15 +12,13 @@ var grammar = [
 
   { string        : /"[^"]*"/ },
 
-  { keyword       : /_|as|at|cofix|else|end|exists|exists2|fix|forall|for|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with|Axiom|Conjecture|Parameter|Parameters|Variables|Variable|Hypothesis|Hypotheses|Local|Definition|Let|Inductive|CoInductive|Fixpoint|CoFixpoint|Theorem|Lemma|Remark|Fact|Corollary|Proposition|Definition|Example/ },
-
-  { ident         : new RegExp(`${ident}`, 'u') },
-
-  { access_ident  : new RegExp(`\\.${ident}`, 'u') },
-
   { special       : /!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.|\.\(|\.\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|'/ },
 
-  { num           : /[0-9]+/ }
+  { keyword       : /^(?:_|as|at|cofix|else|end|exists|exists2|fix|forall|for|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with|Axiom|Conjecture|Parameter|Parameters|Variables|Variable|Hypothesis|Hypotheses|Local|Definition|Let|Inductive|CoInductive|Fixpoint|CoFixpoint|Theorem|Lemma|Remark|Fact|Corollary|Proposition|Definition|Example)$/ },
+
+  { ident         : new RegExp(`^${ident}$`, 'u') },
+
+  { num           : /^[0-9]+$/ }
 
 ];
 

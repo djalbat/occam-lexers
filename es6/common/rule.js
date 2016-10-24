@@ -7,6 +7,12 @@ class Rule {
     this.type = type;
     this.regExp = regExp;
   }
+  
+  significantTokenPosition(content) {
+    var significantTokenPosition = content.search(this.regExp);
+
+    return significantTokenPosition;
+  }
 
   significantTokenFromContent(content, line) {
     var significantToken = null,

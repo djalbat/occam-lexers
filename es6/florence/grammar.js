@@ -1,6 +1,6 @@
 'use strict';
 
-var c0_controls_and_basic_latin = `!#$%&*+-.\\/0-9<>?@A-Z\\\\^_a-z~`,
+var basic_latin = `\\u{21}-\\u{7E}`,
     latin1_supplement = `\\u{A1}-\\u{FF}`,
     mathematical_operators = `\\u{2200}-\\u{22FF}`,
     supplemental_mathematical_operators = `\\u{2A00}-\\u{2AFF}`,
@@ -9,7 +9,7 @@ var c0_controls_and_basic_latin = `!#$%&*+-.\\/0-9<>?@A-Z\\\\^_a-z~`,
     unicode_character =
 
 `
-${c0_controls_and_basic_latin}
+${basic_latin}
 ${latin1_supplement}
 ${mathematical_operators}
 ${supplemental_mathematical_operators}
@@ -25,11 +25,11 @@ var grammar = [
 
   { string              : /"[^"]*"/ },
 
-  { keyword             : /Rule|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|by/ },
+  { special             : /,|;|\{|\}|=|:|\(|\)/ },
 
-  { special             : /\,|\;|\{|\}|=|\:|\(|\)/ },
+  { keyword             : /^(?:Rule|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|by)$/ },
 
-  { unassigned          : new RegExp(`${unassigned}`, 'u') }
+  { unassigned          : new RegExp(`^${unassigned}$`, 'u') }
     
 ];
 

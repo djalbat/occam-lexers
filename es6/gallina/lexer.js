@@ -24,7 +24,6 @@ class GallinaLexer extends CommonLexer {
   significantTokenTypes() {
     var significantTokenTypes = [
       'string',
-      'access_ident',
       'ident',
       'num'
     ];

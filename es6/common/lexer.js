@@ -37,7 +37,7 @@ class CommonLexer {
     var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
         specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
         keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
-        specialSymbolsRegExpPattern = specialSymbolsRegExp.source,  ///
+        specialSymbolsRegExpPattern = specialSymbolsRegExp.source.replace(/^(?:\^\(\?:)/, '').replace(/(?:\)\$)$/, ''),  ///
         terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
 
     return terminalSymbolsRegExpPattern;

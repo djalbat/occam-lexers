@@ -7,8 +7,8 @@ var CommonLine = require('../common/line'),
 class Line extends CommonLine {
   static fromContent(content, context, rules) {
     var line = new Line(),
-        nonSignificantTokensOrSignificantContent = NonSignificantTokens.pass(content, context, line),
-        tokens = SignificantTokens.pass(nonSignificantTokensOrSignificantContent, line, rules);
+        nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
+        tokens = SignificantTokens.pass(nonSignificantTokenOrSignificantContents, line, rules);
 
     line.setTokens(tokens);
 
