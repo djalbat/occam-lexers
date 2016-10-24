@@ -1,9 +1,10 @@
 'use strict';
 
 var Example = require('./example'),
+    grammar = require('../../es6/florence/grammar'),
     FlorenceLexer = require('../../es6/florence/lexer');
 
-var florenceLexer = FlorenceLexer.fromNothing();
+var florenceLexer = FlorenceLexer.fromGrammar(grammar);
 
 class FlorenceExample extends Example {
   static run() {

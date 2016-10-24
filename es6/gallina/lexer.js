@@ -2,8 +2,6 @@
 
 var Line = require('./line'),
     Context = require('./context'),
-    grammar = require('./grammar'),
-    Rules = require('../common/rules'),
     CommonLexer = require('../common/lexer');
 
 class GallinaLexer extends CommonLexer {
@@ -15,13 +13,7 @@ class GallinaLexer extends CommonLexer {
     return lines;
   }
 
-  terminalSymbolsRegExpPattern() {
-    var terminalSymbolsRegExpPattern = super.terminalSymbolsRegExpPattern(grammar);
-
-    return terminalSymbolsRegExpPattern;
-  }
-
-  significantTokenTypes() {
+  static significantTokenTypes() {
     var significantTokenTypes = [
       'string',
       'ident',
@@ -31,12 +23,12 @@ class GallinaLexer extends CommonLexer {
     return significantTokenTypes;
   }
   
-  static fromNothing() {
-    var rules = Rules.fromGrammar(grammar),
+  static fromGrammar(grammar) {
+    var rules = CommonLexer.rulesFromGrammar(grammar),
         gallinaLexer = new GallinaLexer(rules, Line);
-    
+
     return gallinaLexer;
-  }  
+  }
 }
 
 module.exports = GallinaLexer;
