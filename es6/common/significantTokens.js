@@ -2,6 +2,8 @@
 
 var ErrorToken = require('../common/token/error');
 
+const MAXIMUM_DEPTH = 10;
+
 class SignificantTokens {
   static pass(nonSignificantTokenOrSignificantContents, line, rules) {
     var tokens = nonSignificantTokenOrSignificantContents.reduce(function(tokens, nonSignificantTokenOrSignificantContent) {
@@ -29,11 +31,13 @@ module.exports = SignificantTokens;
 
 function significantTokensFromContent(content, line, rules, depth) {
   var significantTokens,
-      rule = rules.getRule(depth);
+      rule = rules.getRule(depth),
+      tooDeep = (depth > MAXIMUM_DEPTH),
+      ruleIsUndefined = (rule === undefined);
 
   if (content === '') {
     significantTokens = [];
-  } else if (rule === undefined) {
+  } else if (tooDeep || ruleIsUndefined) {
     var errorToken = ErrorToken.fromContent(content);
 
     significantTokens = [errorToken]; ///

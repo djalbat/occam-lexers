@@ -9,22 +9,26 @@ class Rule {
   }
   
   significantTokenPosition(content) {
-    var significantTokenPosition = content.search(this.regExp);
+    var significantTokenPosition = -1,
+        matches = content.match(this.regExp);
+    
+    if (matches !== null) {
+      var firstMatch = first(matches);
+      
+      if (firstMatch !== '') {
+        significantTokenPosition = matches.index; ///
+      }
+    }
 
     return significantTokenPosition;
   }
 
   significantTokenFromContent(content, line) {
-    var significantToken = null,
-        matches = content.match(this.regExp);
+    var matches = content.match(this.regExp),
+        firstMatch = first(matches),
+        str = firstMatch,
+        significantToken = new SignificantToken(str, line, this.type);
 
-    if (matches !== null) {
-      var firstMatch = first(matches),
-          str = firstMatch; ///
-      
-      significantToken = new SignificantToken(str, line, this.type);
-    }
-    
     return significantToken;
   }
 }
