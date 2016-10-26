@@ -30,7 +30,7 @@ class FlorenceLexer extends CommonLexer {
     return significantTokenTypes;
   }
 
-  static fromGrammar(grammar) {
+  static fromNothing() {
     var rules = CommonLexer.rulesFromGrammar(grammar),
         florenceLexer = new FlorenceLexer(rules, Line);
 

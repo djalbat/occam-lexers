@@ -30,7 +30,7 @@ class GallinaLexer extends CommonLexer {
     return significantTokenTypes;
   }
   
-  static fromGrammar(grammar) {
+  static fromNothing() {
     var rules = CommonLexer.rulesFromGrammar(grammar),
         gallinaLexer = new GallinaLexer(rules, Line);
 
