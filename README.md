@@ -47,15 +47,29 @@ The recursive descent argument will guard against content being unmatchable, you
 
     \+|\-|\*|\/|\(|\)|
 
-Neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and rebuilding. For instructions on how to do so, see the section on compiling from source immediately after this one:
+Neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and re-compiling. For instructions on how to do so, see the section on compiling from source immediately after this one:
 
 ### The Florence example
 
-***TODO***
+The first pass of the Florence lexer picks out include directives of the following form...
+
+    include("...")
+
+...and comments of the following form:
+
+    /* ... */
+
+It does not currently support single line comments.
+
+It will add end of line tokens.
 
 ### The Gallina example
 
-***TODO***
+The Gallina lexer treats comments differently, with a slightly different syntax...
+
+   (* ... *)
+
+...and allows comments to be nested. It will not add end of line tokens nor look for include directives. Also, it cannot at this stage be considered a faithful rendering of the Gallina specification. There is more work to do.
 
 ## Compiling from source
 
