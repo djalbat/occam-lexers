@@ -1,8 +1,17 @@
 # Lexers
 
-The Occam proof assistant's lexers.
+### Contents
 
-There are four:
+- [Introduction](#Introduction)
+- [Installation](#Installation)
+- [Examples](#Examples)
+- [Building](#Building)
+- [Resources](#Resources)
+- [Contact](#Contact)
+
+## Introduction
+
+There are four lexers in all:
 
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
@@ -47,7 +56,7 @@ The recursive descent argument will guard against content being unmatchable, you
 
     \+|\-|\*|\/|\(|\)|
 
-Neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and re-compiling. For instructions on how to do so, see the section on compiling from source immediately after this one:
+Neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and rebuilding. For instructions on how to do so, see the section on building immediately after this one:
 
 ### The Florence example
 
@@ -71,14 +80,14 @@ The Gallina lexer treats comments differently, with a slightly different syntax.
 
 ...and for allows comments to be nested. It will not add end of line tokens nor look for include directives. It cannot at this stage be considered a faithful rendering of the Gallina specification. There is more work to do.
 
-## Compiling from source
+## Building
 
 Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
 
     npm run build-debug
     npm run watch-debug
 
-The Florence and Gallina grammars are defined in the `grammar.js` files found in the `es6/florence` and `es6/gallina` directories, respecitively.
+The Florence and Gallina grammars are defined in the `grammar.js` files found in the `es6/florence` and `es6/gallina` directories, respectively.
 
 ## Resources
 
