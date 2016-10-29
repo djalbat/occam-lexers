@@ -35,7 +35,9 @@ These are not very edifying, you are advised to have a look at Occam's [Parser](
 
 ### The basic example
 
-The first pass of the basic lexer will only pick out whitespace. In this example, at least, the second pass only has one rule, called the `terminalSymbols` rule, the regular expression pattern for which can be changed dynamically. The resulting tokens are shown in their HTML form on the right, corresponding to content given on the left. This is the same for all the examples, in fact. If the terminal symbols pattern does not result in a valid regular expression, for example the following...
+The first pass of the basic lexer will only pick out whitespace. In this example, at least, the second pass only has one rule, called the `terminalSymbols` rule, the regular expression pattern for which can be changed dynamically. The resulting tokens are shown in their HTML form on the right, corresponding to content given on the left. This is the same for all the examples, in fact.
+
+If the terminal symbols pattern does not result in a valid regular expression, for example the following...
 
     \+|\-|\*|\/|\(|\)|\
 
@@ -44,6 +46,25 @@ The first pass of the basic lexer will only pick out whitespace. In this example
 The recursive descent argument will guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
 
     \+|\-|\*|\/|\(|\)|
+
+Neither of the two remaining examples allow the grammar to be changed dynamically however this is easily done by editing the `grammar.js` files in the corresponding directories and rebuilding. For instructions on how to do so, see the section on compiling from source immediately after this one:
+
+### The Florence example
+
+***TODO***
+
+### The Gallina example
+
+***TODO***
+
+## Compiling from source
+
+Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
+
+    npm run build-debug
+    npm run watch-debug
+
+The Florence and Gallina grammars are defined in the `grammar.js` files found in the `es6/florence` and `es6/gallina` directories, respecitively.
 
 ## Resources
 
