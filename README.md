@@ -18,7 +18,7 @@ There are four lexers in all:
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
 * A lexer for the [Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html).
-* A lexer for [lexical part of Occam's own specification language](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), called Florence.
+* A lexer for [lexical part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language called Florence.
 
 The last three of these lexers share common patterns and will each take two passes to process textual content. The first pass will pick out the non-significant tokens, specifically comments and whitespace. The second pass will pick out the significant and error tokens.
 
