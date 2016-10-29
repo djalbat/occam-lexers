@@ -1,14 +1,14 @@
 'use strict';
 
 var lexers = {
-  'SignificantToken': require('./lib/common/token/significant'),
-  'specialSymbols': require('./lib/specialSymbols'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
   'GallinaLexer': require('./lib/gallina/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
   'ErrorToken': require('./lib/common/token/error'),
-  'IncludeDirectiveToken': require('./lib/florence/token/includeDirective')
+  'SignificantToken': require('./lib/common/token/significant'),
+  'IncludeDirectiveToken': require('./lib/florence/token/includeDirective'),
+  'specialSymbols': require('./lib/specialSymbols')
 };
 
 module.exports = lexers;
