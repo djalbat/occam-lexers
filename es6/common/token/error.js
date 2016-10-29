@@ -1,17 +1,17 @@
 'use strict';
 
-var SignificantToken = require('./significant');
+var Token = require('../token');
 
-class ErrorToken extends SignificantToken {
-  constructor(str, line, type, message) {
-    super(str, line, type, message);
+class ErrorToken extends Token {
+  constructor(str, line, message) {
+    super(str, line, message);
 
     this.message = message;
   }
 
   getHTML() {
     var innerHTML = this.getString(), ///
-        className = this.getType(),  ///
+        className = 'error',  ///
         dataMessage = this.message,
         html = `<span class="${className}" data-message="${dataMessage}">${innerHTML}</span>`;
 
@@ -20,8 +20,7 @@ class ErrorToken extends SignificantToken {
 
   static fromContent(content, line, message) {
     var str = content,  ///
-        type = SignificantToken.types.ERROR,
-        errorToken = new ErrorToken(str, line, type, message);
+        errorToken = new ErrorToken(str, line, message);
 
     return errorToken;
   }

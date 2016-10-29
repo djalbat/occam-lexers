@@ -9,9 +9,9 @@ class SignificantTokens {
         var significantContent = nonSignificantTokenOrSignificantContent,  ///
             content = significantContent, ///
             depth = 0,
-            significantTokens = significantTokensFromContent(content, line, rules, depth);
+            significantOrErrorTokens = significantOrErrorTokensFromContent(content, line, rules, depth);
 
-        tokens = tokens.concat(significantTokens);
+        tokens = tokens.concat(significantOrErrorTokens);
       } else {
         var nonSignificantToken = nonSignificantTokenOrSignificantContent;  ///
         
@@ -29,23 +29,24 @@ module.exports = SignificantTokens;
 
 const RULE_IS_UNDEFINED_MESSAGE = 'There are no rules to parse this content.';
 
-function significantTokensFromContent(content, line, rules, depth) {
-  var significantTokens,
+function significantOrErrorTokensFromContent(content, line, rules, depth) {
+  var significantOrErrorTokens,
       rule = rules.getRule(depth),
       ruleIsUndefined = (rule === undefined);
 
   if (content === '') {
-    significantTokens = [];
+    significantOrErrorTokens = [];
   } else if (ruleIsUndefined) {
-    var errorToken = ErrorToken.fromContent(content, line, RULE_IS_UNDEFINED_MESSAGE);
+    var errorToken = ErrorToken.fromContent(content, line, RULE_IS_UNDEFINED_MESSAGE),
+        errorTokens = [errorToken];
 
-    significantTokens = [errorToken]; ///
+    significantOrErrorTokens = errorTokens;
   } else {
     var nextDepth = depth + 1,
         significantTokenPosition = rule.significantTokenPosition(content);
 
     if (significantTokenPosition === -1) {
-      significantTokens = significantTokensFromContent(content, line, rules, nextDepth);
+      significantOrErrorTokens = significantOrErrorTokensFromContent(content, line, rules, nextDepth);
     } else {
       var significantToken = rule.significantTokenFromContent(content, line),
           significantTokenLength = significantToken.getLength(),
@@ -53,12 +54,13 @@ function significantTokensFromContent(content, line, rules, depth) {
           right = significantTokenPosition + significantTokenLength,  ///
           leftContent = content.substr(0, left),
           rightContent = content.substr(right),
-          leftSignificantTokens = significantTokensFromContent(leftContent, line, rules, nextDepth),
-          rightSignificantTokens = significantTokensFromContent(rightContent, line, rules, depth);
+          leftSignificantTokens = significantOrErrorTokensFromContent(leftContent, line, rules, nextDepth),
+          rightSignificantTokens = significantOrErrorTokensFromContent(rightContent, line, rules, depth),
+          significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
 
-      significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
+      significantOrErrorTokens = significantTokens;
     }
   }
 
-  return significantTokens;
+  return significantOrErrorTokens;
 }
