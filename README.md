@@ -67,9 +67,9 @@ It will add end of line tokens.
 
 The Gallina lexer treats comments differently, with a slightly different syntax...
 
-   (* ... *)
+    (* ... *)
 
-...and allows comments to be nested. It will not add end of line tokens nor look for include directives. Also, it cannot at this stage be considered a faithful rendering of the Gallina specification. There is more work to do.
+...and for allows comments to be nested. It will not add end of line tokens nor look for include directives. It cannot at this stage be considered a faithful rendering of the Gallina specification. There is more work to do.
 
 ## Compiling from source
 
