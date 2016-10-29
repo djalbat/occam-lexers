@@ -27,6 +27,8 @@ class SignificantTokens {
 
 module.exports = SignificantTokens;
 
+const RULE_IS_UNDEFINED_MESSAGE = 'There are no rules to parse this content.';
+
 function significantTokensFromContent(content, line, rules, depth) {
   var significantTokens,
       rule = rules.getRule(depth),
@@ -35,7 +37,7 @@ function significantTokensFromContent(content, line, rules, depth) {
   if (content === '') {
     significantTokens = [];
   } else if (ruleIsUndefined) {
-    var errorToken = ErrorToken.fromContent(content);
+    var errorToken = ErrorToken.fromContent(content, line, RULE_IS_UNDEFINED_MESSAGE);
 
     significantTokens = [errorToken]; ///
   } else {
