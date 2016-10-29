@@ -2,12 +2,12 @@
 
 ### Contents
 
-- [Introduction](#Introduction)
-- [Installation](#Installation)
-- [Examples](#Examples)
-- [Building](#Building)
-- [Resources](#Resources)
-- [Contact](#Contact)
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Examples](#examples)
+- [Building](#building)
+- [Resources](#resources)
+- [Contact](#contact)
 
 ## Introduction
 
