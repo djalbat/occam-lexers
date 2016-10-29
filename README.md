@@ -46,7 +46,7 @@ These are not very edifying, you are encouraged to have a look at Occam's [Parse
 
 ### The basic example
 
-The first pass of the basic lexer will only pick out whitespace. And in this example at least, the second pass only has one rule, called the `terminalSymbols` rule, the regular expression pattern for which can be changed dynamically. The HTML for the resulting tokens is shown on the right, corresponding to content given on the left. This is the same for all the examples, in fact.
+The first pass of the basic lexer will only pick out whitespace. And in this example at least, the second pass only has one rule, called the `terminalSymbols` rule, the regular expression pattern for which can be changed dynamically. The HTML for the resulting tokens is shown on the right, corresponding to content given on the left. This is the same for all the examples.
 
 If the terminal symbols pattern does not result in a valid regular expression, for example the following...
 
