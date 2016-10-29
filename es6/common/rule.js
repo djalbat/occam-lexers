@@ -26,8 +26,8 @@ class Rule {
   significantTokenFromContent(content, line) {
     var matches = content.match(this.regExp),
         firstMatch = first(matches),
-        str = firstMatch,
-        significantToken = new SignificantToken(str, line, this.type);
+        string = firstMatch,
+        significantToken = new SignificantToken(string, line, this.type);
 
     return significantToken;
   }
