@@ -7,6 +7,7 @@ var lexers = {
   'BasicLexer': require('./lib/basic/lexer'),
   'GallinaLexer': require('./lib/gallina/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
+  'ErrorToken': require('./lib/common/token/error'),
   'IncludeDirectiveToken': require('./lib/florence/token/includeDirective')
 };
 

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
-  GallinaExample: require('./lib/gallinaExample'),
-  FlorenceExample: require('./lib/florenceExample')
+  BasicExample: require('./lib/example/basic'),
+  GallinaExample: require('./lib/example/gallina'),
+  FlorenceExample: require('./lib/example/florence')
 };

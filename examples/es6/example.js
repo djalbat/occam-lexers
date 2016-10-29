@@ -17,8 +17,13 @@ var leftColumnSelector = '#leftColumn',
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
 class Example {
-  static updateTokens(contentTextAreaValue, lexer) {
-    var content = contentTextAreaValue,  ///
+  static contentTextAreaOnChange(handler) {
+    contentTextArea.onChange(handler);
+  }
+
+  static updateTokens(lexer) {
+    var contentTextAreaValue = contentTextArea.getValue(),
+        content = contentTextAreaValue,  ///
         lines = lexer.linesFromContent(content),
         linesHTML = lines.reduce(function(linesHTML, line) {
           var lineHTML = line.getHTML();
@@ -31,8 +36,12 @@ class Example {
 
     tokensTextArea.html(tokensTextAreaHTML);
   }
-}
 
-Example.contentTextArea = contentTextArea;  ///
+  static clearTokens() {
+    var tokensTextAreaHTML = '';
+
+    tokensTextArea.html(tokensTextAreaHTML);
+  }
+}
 
 module.exports = Example;
