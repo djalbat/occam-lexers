@@ -1,5 +1,7 @@
 # Lexers
 
+The Occam proof assistant's lexers.
+
 ### Contents
 
 - [Introduction](#introduction)
