@@ -3,8 +3,8 @@
 var Token = require('../token');
 
 class ErrorToken extends Token {
-  constructor(str, line, message) {
-    super(str, line, message);
+  constructor(string, line, message) {
+    super(string, line, message);
 
     this.message = message;
   }
@@ -19,8 +19,8 @@ class ErrorToken extends Token {
   }
 
   static fromContent(content, line, message) {
-    var str = content,  ///
-        errorToken = new ErrorToken(str, line, message);
+    var string = content,  ///
+        errorToken = new ErrorToken(string, line, message);
 
     return errorToken;
   }

@@ -15,9 +15,9 @@ class EndOfCommentToken extends CommentToken {
 
     if (matches) {
       var firstMatch = first(matches),
-          str = firstMatch; ///
+          string = firstMatch; ///
 
-      endOfCommentToken = new EndOfCommentToken(str, line);
+      endOfCommentToken = new EndOfCommentToken(string, line);
     }
 
     return endOfCommentToken;

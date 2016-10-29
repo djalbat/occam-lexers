@@ -1,13 +1,13 @@
 'use strict';
 
 class Token {
-  constructor(str, line) {
-    this.str = str;
+  constructor(string, line) {
+    this.string = string;
     this.line = line;
   }
 
   getString() {
-    return this.str;
+    return this.string;
   }
   
   getLine() {
@@ -15,23 +15,23 @@ class Token {
   }
   
   getSubstring(start, end) {
-    return this.str.substring(start, end);
+    return this.string.substring(start, end);
   }
 
   getLength() {
-    return this.str.length; ///
+    return this.string.length; ///
   }
   
-  setString(str) {
-    this.str = str;
+  setString(string) {
+    this.string = string;
   }
   
   trimFromStart(start) {
-    this.str = this.str.substring(start);
+    this.string = this.string.substring(start);
   }
 
   trimToEnd(end) {
-    this.str = this.str.substring(0, end);
+    this.string = this.string.substring(0, end);
   }
 }
 

@@ -3,8 +3,8 @@
 var Token = require('../../common/token');
 
 class IncludeDirectiveToken extends Token {
-  constructor(str, line, filePath) {
-    super(str, line);
+  constructor(string, line, filePath) {
+    super(string, line);
 
     this.filePath = filePath;
   }
@@ -26,10 +26,10 @@ class IncludeDirectiveToken extends Token {
     if (matches) {
       var firstMatch = first(matches),
           secondMatch = second(matches),
-          str = firstMatch, ///
+          string = firstMatch, ///
           filePath = secondMatch; ///
 
-      includeDirectiveToken = new IncludeDirectiveToken(str, line, filePath);
+      includeDirectiveToken = new IncludeDirectiveToken(string, line, filePath);
     }
     
     return includeDirectiveToken;
