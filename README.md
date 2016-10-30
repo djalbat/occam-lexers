@@ -18,11 +18,11 @@ There are four lexers in all:
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
 * A lexer for the [Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html).
-* A lexer for [lexical part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language called Florence.
+* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language, called Florence.
 
 The last three of these lexers share common code and patterns and will each take two passes to process content. The first pass will pick out non-significant tokens, specifically comments and whitespace. The second pass will pick out significant and error tokens.
 
-This second pass uses a recursive descent algorithm, see the [significantTokens](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/common/significantTokens.js) class. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+This second pass uses a recursive descent algorithm, to put it one way, see the [significantTokens](https://github.com/occam-proof-assistant/Lexers/blob/master/es6/common/significantTokens.js) class. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
@@ -30,7 +30,7 @@ With [npm](https://www.npmjs.com/):
 
     npm install occam-lexers
 
-You can also clone the repository with [git](https://git-scm.com/)...
+You can also clone the repository with [Git](https://git-scm.com/)...
 
     git clone git@github.com:occam-proof-assistant/Lexers.git
 
@@ -42,7 +42,7 @@ You will need to do this if you want to look at the examples.
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [Parser](https://github.com/occam-proof-assistant/Parser) examples instead. However if you must, see the `examples.html` file in the project's root directory, and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [Parser](https://github.com/occam-proof-assistant/Parser) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
 
 ### The basic example
 
@@ -54,19 +54,19 @@ If the terminal symbols pattern does not result in a valid regular expression, f
 
 ..., the border of the text area will turn red and no tokens will be shown.
 
-The recursive descent argument will guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
+There is a guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
 
     \+|\-|\*|\/|\(|\)|
 
-Neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and rebuilding. For instructions on how to do so, see the section on building immediately after this one:
+By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this is easily done by editing the `grammar.js` files in the corresponding directories and rebuilding.
 
 ### The Florence example
 
-The first pass of the Florence lexer picks out include directives of the following form...
+The first pass of the Florence lexer picks out include directives with the following syntax...
 
     include("...")
 
-...and comments of the following form:
+...and comments like the following:
 
     /* ... */
 
@@ -76,11 +76,15 @@ It will add end of line tokens.
 
 ### The Gallina example
 
-The Gallina lexer treats comments differently, with a slightly different syntax...
+The Gallina lexer picks out commments with a slightly different syntax...
 
     (* ... *)
 
-...and allows comments to be nested. It will not add end of line tokens nor look for include directives. It cannot at this stage be considered a faithful rendering of the Gallina specification. There is more work to do.
+...and allows comments to be nested. For example:
+
+    (* ... (* ... *) *)
+
+It is not entirely faithful to the Gallina specification at this stage. There is more work to do.
 
 ## Building
 
