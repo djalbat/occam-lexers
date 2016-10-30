@@ -18,11 +18,11 @@ There are four lexers in all:
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
 * A lexer for the [Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html).
-* A lexer for the [lexical part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language, called Florence.
+* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language, called Florence.
 
 The last three of these lexers share common code and patterns and will each take two passes to process content. The first pass will pick out non-significant tokens, specifically comments and whitespace. The second pass will pick out significant and error tokens.
 
-This second pass uses a recursive descent algorithm, to put it one way, see the [significantTokens](https://github.com/occam-proof-assistant/Lexers/blob/master/es6/common/significantTokens.js) class. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+This second pass uses a recursive descent algorithm, to put it one way, see the [significantTokens](https://github.com/occam-proof-assistant/Lexers/blob/master/es6/common/significantTokens.js) class. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
