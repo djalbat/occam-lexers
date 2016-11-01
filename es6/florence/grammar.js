@@ -25,7 +25,7 @@ var grammar = [
 
   { string              : /"[^"]*"/ },
 
-  { special             : /,|;|\{|\}|=|:|\(|\)/ },
+  { special             : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
 
   { keyword             : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|from|by)$/ },
 
