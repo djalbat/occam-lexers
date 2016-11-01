@@ -14,21 +14,9 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static terminalSymbolsRegExpPattern() {
-    var terminalSymbolsRegExpPattern = CommonLexer.terminalSymbolsRegExpPattern(grammar);
+  static terminalSymbolsRegExpPattern() { return CommonLexer.terminalSymbolsRegExpPattern(grammar); }
 
-    return terminalSymbolsRegExpPattern;
-  }
-
-  static significantTokenTypes() {
-    var significantTokenTypes = [
-      'string',
-      'keyword',
-      'unassigned'
-    ];
-
-    return significantTokenTypes;
-  }
+  static significantTokenTypes() { return CommonLexer.significantTokenTypes(grammar); }
 
   static fromNothing() {
     var rules = CommonLexer.rulesFromGrammar(grammar),

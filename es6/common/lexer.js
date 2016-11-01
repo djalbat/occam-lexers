@@ -34,11 +34,7 @@ class CommonLexer {
     return tokens;    
   }
   
-  static rulesFromGrammar(grammar) {
-    var rules = Rules.fromGrammar(grammar);
-
-    return rules;
-  }
+  static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
   static terminalSymbolsRegExpPattern(grammar) {
     var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
@@ -48,6 +44,17 @@ class CommonLexer {
         terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
 
     return terminalSymbolsRegExpPattern;
+  }
+
+  static significantTokenTypes(grammar) {
+    var significantTokenTypes = grammar.map(function(entry) {
+      var type = util.typeFromEntry(entry),
+          significantTokenType = type;  ///
+
+      return significantTokenType;
+    });
+
+    return significantTokenTypes;
   }
 }
 
