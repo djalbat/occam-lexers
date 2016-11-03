@@ -9,6 +9,15 @@ class WhitespaceToken extends SignificantToken {
     super(string, line, type);
   }
   
+  clone() {
+    var string = this.getString(),
+        line = this.getLine(),
+        type = this.getType(),
+        whitespaceToken = new WhitespaceToken(string, line,  type);
+    
+    return whitespaceToken;
+  }
+  
   getHTML() {
     var string = this.getString(),
         html = string; ///

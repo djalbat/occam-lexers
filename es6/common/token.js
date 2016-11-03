@@ -33,6 +33,34 @@ class Token {
   trimToEnd(end) {
     this.string = this.string.substring(0, end);
   }
+
+  static withStartTrimmed(token, start) {
+    var length = token.getLength();
+
+    if (start === length) {
+      return null;
+    }
+
+    var clonedToken = token.clone(),
+        tokenWithStartTrimmed = clonedToken;  ///
+
+    tokenWithStartTrimmed.trimFromStart(start);
+
+    return tokenWithStartTrimmed;
+  }
+
+  static withEndTrimmed(token, end) {
+    if (end === 0) {
+      return null;
+    }
+
+    var clonedToken = token.clone(),
+        tokenWithEndTrimmed = clonedToken;  ///
+
+    tokenWithEndTrimmed.trimToEnd(end);
+
+    return tokenWithEndTrimmed;
+  }
 }
 
 module.exports = Token;

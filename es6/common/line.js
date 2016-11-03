@@ -4,8 +4,14 @@ var util = require('../util'),
     SignificantTokens = require('./significantTokens');
 
 class Line {
-  constructor() {
-    this.tokens = undefined;  ///
+  constructor(content) {
+    this.content = content;
+
+    this.tokens = undefined;
+  }
+
+  getContent() {
+    return this.content;
   }
 
   getTokens() {

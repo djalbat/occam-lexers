@@ -8,6 +8,19 @@ class ErrorToken extends Token {
 
     this.message = message;
   }
+  
+  clone() {
+    var string = this.getString(),
+        line = this.getLine(),
+        message = this.getMessage(),
+        errorToken = new ErrorToken(string, line, message);
+    
+    return errorToken;
+  }
+  
+  getMessage() {
+    return this.message;
+  }
 
   getHTML() {
     var innerHTML = this.getString(), ///

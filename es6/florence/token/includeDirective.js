@@ -9,6 +9,15 @@ class IncludeDirectiveToken extends Token {
     this.filePath = filePath;
   }
 
+  clone() {
+    var string = this.getString(),
+        line = this.getLine(),
+        filePath = this.getFilePath(),
+        IncludeDirectiveToken = new IncludeDirectiveToken(string, line, filePath);
+
+    return IncludeDirectiveToken;
+  }
+
   getFilePath() {
     return this.filePath;
   }

@@ -8,11 +8,7 @@ class SignificantToken extends Token {
     
     this.type = type;
   }
-  
-  getType() {
-    return this.type;
-  }
-  
+
   clone() {
     var string = this.getString(),
         line = this.getLine(),
@@ -21,6 +17,10 @@ class SignificantToken extends Token {
     return new SignificantToken(string, line, type);
   }
 
+  getType() {
+    return this.type;
+  }
+  
   getHTML() {
     var innerHTML = this.string, ///
         className = this.type,  ///

@@ -5,7 +5,7 @@ var CommonLine = require('../common/line'),
 
 class Line extends CommonLine {
   static fromContent(content, context, rules) {
-    var line = new Line(),
+    var line = new Line(content),
         tokens = super.tokensFromContent(content, context, line, rules, NonSignificantTokens);
 
     line.setTokens(tokens);
