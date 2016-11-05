@@ -26,28 +26,28 @@ class Token {
     this.content = content;
   }
   
-  trimFromStartPosition(startPosition) {
-    this.content = this.content.substr(startPosition);
+  trimFromEndPosition(endPosition) {
+    this.content = this.content.substr(endPosition);
   }
 
-  trimToEndPosition(endPosition) {
-    this.content = this.content.substr(0, endPosition);
+  trimToStartPosition(startPosition) {
+    this.content = this.content.substr(0, startPosition);
   }
 
-  static withStartTrimmed(token, startPosition) {
+  static trimmedFromEndPosition(token, endPosition) {
     var clonedToken = token.clone(),
         tokenWithStartTrimmed = clonedToken;  ///
 
-    tokenWithStartTrimmed.trimFromStartPosition(startPosition);
+    tokenWithStartTrimmed.trimFromEndPosition(endPosition);
 
     return tokenWithStartTrimmed;
   }
 
-  static withEndTrimmed(token, endPosition) {
+  static trimmedToStartPosition(token, startPosition) {
     var clonedToken = token.clone(),
         tokenWithEndTrimmed = clonedToken;  ///
 
-    tokenWithEndTrimmed.trimToEndPosition(endPosition);
+    tokenWithEndTrimmed.trimToStartPosition(startPosition);
 
     return tokenWithEndTrimmed;
   }
