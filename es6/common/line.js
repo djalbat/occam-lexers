@@ -44,7 +44,7 @@ class Line {
   }
 
   static fromContent(content, context, rules, Line, NonSignificantTokens) {
-    var line = new Line(),
+    var line = new Line(content),
         nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
         tokens = SignificantTokens.pass(nonSignificantTokenOrSignificantContents, line, rules);
 
