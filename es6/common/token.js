@@ -9,7 +9,7 @@ class Token {
   getContent(startPosition, endPosition) {
     var content = ((startPosition === undefined) || (endPosition === undefined)) ?
           this.content :
-            this.content.substr(startPosition, endPosition);
+            this.content.substring(startPosition, endPosition);
 
     return content;
   }
@@ -38,7 +38,7 @@ class Token {
     if (endPosition === this.length) {
       return null;
     }
-    
+
     var clonedToken = token.clone(),
         tokenWithStartTrimmed = clonedToken;  ///
 
