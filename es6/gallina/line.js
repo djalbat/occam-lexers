@@ -4,14 +4,7 @@ var CommonLine = require('../common/line'),
     NonSignificantTokens = require('./nonSignificantTokens');
 
 class Line extends CommonLine {
-  static fromContent(content, context, rules) {
-    var line = new Line(content),
-        tokens = super.tokensFromContent(content, context, line, rules, NonSignificantTokens);
-
-    line.setTokens(tokens);
-
-    return line;
-  }
+  static fromContent(content, context, rules) { return super.fromContent(content, context, rules, Line, NonSignificantTokens); }
 }
 
 module.exports = Line;

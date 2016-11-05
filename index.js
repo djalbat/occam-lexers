@@ -5,6 +5,7 @@ var lexers = {
   'BasicLexer': require('./lib/basic/lexer'),
   'GallinaLexer': require('./lib/gallina/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
+  'Line': require('./lib/common/line'),
   'Token': require('./lib/common/token'),
   'ErrorToken': require('./lib/common/token/error'),
   'SelectedToken': require('./lib/common/token/selected'),

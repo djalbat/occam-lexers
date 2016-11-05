@@ -4,7 +4,7 @@ var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
   constructor(content, line) {
-    var type = SignificantToken.types.WHITESPACE;
+    var type = SignificantToken.types.whitespace;
     
     super(content, line, type);
   }

@@ -42,12 +42,15 @@ class Line {
 
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
   }
-  
-  static tokensFromContent(content, context, line, rules, NonSignificantTokens) {
-    var nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
+
+  static fromContent(content, context, rules, Line, NonSignificantTokens) {
+    var line = new Line(),
+        nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
         tokens = SignificantTokens.pass(nonSignificantTokenOrSignificantContents, line, rules);
 
-    return tokens;
+    line.setTokens(tokens);
+
+    return line;
   }
 }
 

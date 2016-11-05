@@ -33,8 +33,8 @@ class SignificantToken extends Token {
 }
 
 SignificantToken.types = {
-  WHITESPACE : 'WHITESPACE',
-  END_OF_LINE : 'END_OF_LINE'
+  whitespace : 'whitespace',
+  endOfLine : 'endOfLine'
 };
 
 module.exports = SignificantToken;
