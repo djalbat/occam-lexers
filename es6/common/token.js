@@ -6,10 +6,10 @@ class Token {
     this.line = line;
   }
 
-  getContent(start, end) {
-    var content = ((start === undefined) || (end === undefined)) ?
+  getContent(startPosition, endPosition) {
+    var content = ((startPosition === undefined) || (endPosition === undefined)) ?
           this.content :
-            this.content.substr(start, end);
+            this.content.substr(startPosition, endPosition);
 
     return content;
   }
@@ -26,29 +26,28 @@ class Token {
     this.content = content;
   }
   
-  trimFromStart(start) {
-
-    this.content = this.content.substr(start);
+  trimFromStartPosition(startPosition) {
+    this.content = this.content.substr(startPosition);
   }
 
-  trimToEnd(end) {
-    this.content = this.content.substr(0, end);
+  trimToEndPosition(endPosition) {
+    this.content = this.content.substr(0, endPosition);
   }
 
-  static withStartTrimmed(token, start) {
+  static withStartTrimmed(token, startPosition) {
     var clonedToken = token.clone(),
         tokenWithStartTrimmed = clonedToken;  ///
 
-    tokenWithStartTrimmed.trimFromStart(start);
+    tokenWithStartTrimmed.trimFromStartPosition(startPosition);
 
     return tokenWithStartTrimmed;
   }
 
-  static withEndTrimmed(token, end) {
+  static withEndTrimmed(token, endPosition) {
     var clonedToken = token.clone(),
         tokenWithEndTrimmed = clonedToken;  ///
 
-    tokenWithEndTrimmed.trimToEnd(end);
+    tokenWithEndTrimmed.trimToEndPosition(endPosition);
 
     return tokenWithEndTrimmed;
   }
