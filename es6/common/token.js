@@ -35,6 +35,10 @@ class Token {
   }
 
   static trimmedFromEndPosition(token, endPosition) {
+    if (endPosition === this.length) {
+      return null;
+    }
+    
     var clonedToken = token.clone(),
         tokenWithStartTrimmed = clonedToken;  ///
 
@@ -44,6 +48,10 @@ class Token {
   }
 
   static trimmedToStartPosition(token, startPosition) {
+    if (startPosition === 0) {
+      return null;
+    }
+
     var clonedToken = token.clone(),
         tokenWithEndTrimmed = clonedToken;  ///
 
