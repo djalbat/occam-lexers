@@ -35,7 +35,9 @@ class Token {
   }
 
   static trimmedFromEndPosition(token, endPosition) {
-    if (endPosition === this.content.length) {
+    var tokenLength = token.getLength();
+
+    if (endPosition === tokenLength) {
       return null;
     }
 
