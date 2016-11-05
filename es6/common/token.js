@@ -6,8 +6,12 @@ class Token {
     this.line = line;
   }
 
-  getContent() {
-    return this.content;
+  getContent(start, end) {
+    var content = ((start === undefined) || (end === undefined)) ?
+          this.content :
+            this.content.substr(start, end);
+
+    return content;
   }
   
   getLine() {
@@ -23,6 +27,7 @@ class Token {
   }
   
   trimFromStart(start) {
+
     this.content = this.content.substr(start);
   }
 
