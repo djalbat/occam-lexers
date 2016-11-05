@@ -1,46 +1,36 @@
 'use strict';
 
 class Token {
-  constructor(string, line) {
-    this.string = string;
+  constructor(content, line) {
+    this.content = content;
     this.line = line;
   }
 
-  getString() {
-    return this.string;
+  getContent() {
+    return this.content;
   }
   
   getLine() {
     return this.line;
   }
   
-  getSubstring(start, end) {
-    return this.string.substring(start, end);
-  }
-
   getLength() {
-    return this.string.length; ///
+    return this.content.length; ///
   }
   
-  setString(string) {
-    this.string = string;
+  setContent(content) {
+    this.content = content;
   }
   
   trimFromStart(start) {
-    this.string = this.string.substring(start);
+    this.content = this.content.substr(start);
   }
 
   trimToEnd(end) {
-    this.string = this.string.substring(0, end);
+    this.content = this.content.substr(0, end);
   }
 
   static withStartTrimmed(token, start) {
-    var length = token.getLength();
-
-    if (start === length) {
-      return null;
-    }
-
     var clonedToken = token.clone(),
         tokenWithStartTrimmed = clonedToken;  ///
 
@@ -50,10 +40,6 @@ class Token {
   }
 
   static withEndTrimmed(token, end) {
-    if (end === 0) {
-      return null;
-    }
-
     var clonedToken = token.clone(),
         tokenWithEndTrimmed = clonedToken;  ///
 

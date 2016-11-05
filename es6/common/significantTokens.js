@@ -37,7 +37,7 @@ function significantOrErrorTokensFromContent(content, line, rules, depth) {
   if (content === '') {
     significantOrErrorTokens = [];
   } else if (ruleIsUndefined) {
-    var errorToken = ErrorToken.fromContent(content, line, RULE_IS_UNDEFINED_MESSAGE),
+    var errorToken = new ErrorToken(content, line, RULE_IS_UNDEFINED_MESSAGE),
         errorTokens = [errorToken];
 
     significantOrErrorTokens = errorTokens;

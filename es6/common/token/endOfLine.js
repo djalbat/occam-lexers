@@ -4,9 +4,9 @@ var SignificantToken = require('./significant');
 
 class EndOfLineToken extends SignificantToken {
   static fromNothing(line) {
-    var string = '',  ///
+    var content = '',  ///
         type = SignificantToken.types.END_OF_LINE,
-        endOfLineToken = new EndOfLineToken(string, line, type);
+        endOfLineToken = new EndOfLineToken(content, line, type);
     
     return endOfLineToken;
   }

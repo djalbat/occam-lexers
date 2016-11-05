@@ -3,24 +3,24 @@
 var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
-  constructor(string, line) {
+  constructor(content, line) {
     var type = SignificantToken.types.WHITESPACE;
     
-    super(string, line, type);
+    super(content, line, type);
   }
   
   clone() {
-    var string = this.getString(),
+    var content = this.getContent(),
         line = this.getLine(),
         type = this.getType(),
-        whitespaceToken = new WhitespaceToken(string, line,  type);
+        whitespaceToken = new WhitespaceToken(content, line,  type);
     
     return whitespaceToken;
   }
   
   getHTML() {
-    var string = this.getString(),
-        html = string; ///
+    var content = this.getContent(),
+        html = content; ///
 
     return html;
   }
@@ -32,15 +32,17 @@ class WhitespaceToken extends SignificantToken {
   }
 
   static fromContent(content, line) {
-    var matches = content.match(/^([\t ]+)/);
+    var whitespaceToken = null,
+        matches = content.match(/^([\t ]+)/);
 
-    if (!matches) {
-      return null;
+    if (matches) {
+      var firstMatch = first(matches);
+      
+      content = firstMatch; ///
+
+      whitespaceToken = new WhitespaceToken(content, line);
     }
 
-    var firstMatch = first(matches),
-        string = firstMatch, ///
-        whitespaceToken = new WhitespaceToken(string, line);
 
     return whitespaceToken;
   }

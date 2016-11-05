@@ -51,7 +51,7 @@ function updateLexer() {
   if (terminalSymbolsRegExpPatternIsValid) {
     var terminalSymbolsRegExp = new RegExp(terminalSymbolsRegExpPattern),
         grammar = [
-          { terminalSymbols : terminalSymbolsRegExp }
+          { terminalSymbol : terminalSymbolsRegExp }
         ];
 
     lexer = BasicLexer.fromGrammar(grammar);

@@ -3,17 +3,17 @@
 var Token = require('../../common/token');
 
 class IncludeDirectiveToken extends Token {
-  constructor(string, line, filePath) {
-    super(string, line);
+  constructor(content, line, filePath) {
+    super(content, line);
 
     this.filePath = filePath;
   }
 
   clone() {
-    var string = this.getString(),
+    var content = this.getContent(),
         line = this.getLine(),
         filePath = this.getFilePath(),
-        IncludeDirectiveToken = new IncludeDirectiveToken(string, line, filePath);
+        IncludeDirectiveToken = new IncludeDirectiveToken(content, line, filePath);
 
     return IncludeDirectiveToken;
   }
@@ -35,10 +35,11 @@ class IncludeDirectiveToken extends Token {
     if (matches) {
       var firstMatch = first(matches),
           secondMatch = second(matches),
-          string = firstMatch, ///
           filePath = secondMatch; ///
 
-      includeDirectiveToken = new IncludeDirectiveToken(string, line, filePath);
+      content = firstMatch; ///
+
+      includeDirectiveToken = new IncludeDirectiveToken(content, line, filePath);
     }
     
     return includeDirectiveToken;

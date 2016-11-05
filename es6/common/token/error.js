@@ -3,17 +3,17 @@
 var Token = require('../token');
 
 class ErrorToken extends Token {
-  constructor(string, line, message) {
-    super(string, line, message);
+  constructor(content, line, message) {
+    super(content, line, message);
 
     this.message = message;
   }
   
   clone() {
-    var string = this.getString(),
+    var content = this.getContent(),
         line = this.getLine(),
         message = this.getMessage(),
-        errorToken = new ErrorToken(string, line, message);
+        errorToken = new ErrorToken(content, line, message);
     
     return errorToken;
   }
@@ -23,19 +23,13 @@ class ErrorToken extends Token {
   }
 
   getHTML() {
-    var innerHTML = this.getString(), ///
+    var content = this.getContent(),
+        innerHTML = content, ///
         className = 'error',  ///
-        dataMessage = this.message,
-        html = `<span class="${className}" data-message="${dataMessage}">${innerHTML}</span>`;
+        message = this.message,
+        html = `<span class="${className}" data-message="${message}">${innerHTML}</span>`;
 
     return html;
-  }
-
-  static fromContent(content, line, message) {
-    var string = content,  ///
-        errorToken = new ErrorToken(string, line, message);
-
-    return errorToken;
   }
 }
 

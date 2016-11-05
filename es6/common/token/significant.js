@@ -3,18 +3,18 @@
 var Token = require('../token');
 
 class SignificantToken extends Token {
-  constructor(string, line, type) {
-    super(string, line);
+  constructor(content, line, type) {
+    super(content, line);
     
     this.type = type;
   }
 
   clone() {
-    var string = this.getString(),
+    var content = this.getContent(),
         line = this.getLine(),
         type = this.getType();
 
-    return new SignificantToken(string, line, type);
+    return new SignificantToken(content, line, type);
   }
 
   getType() {
@@ -22,8 +22,10 @@ class SignificantToken extends Token {
   }
   
   getHTML() {
-    var innerHTML = this.string, ///
-        className = this.type,  ///
+    var content = this.getContent(),
+        type = this.getType(),
+        innerHTML = content, ///
+        className = type,  ///
         html = `<span class="${className}">${innerHTML}</span>`;
 
     return html;

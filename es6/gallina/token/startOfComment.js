@@ -4,9 +4,9 @@ var CommentToken = require('../../common/token/comment');
 
 class StartOfCommentToken extends CommentToken {
   clone() {
-    var string = this.getString(),
+    var content = this.getContent(),
         line = this.getLine(),
-        startOfCommentToken = new StartOfCommentToken(string, line);
+        startOfCommentToken = new StartOfCommentToken(content, line);
 
     return startOfCommentToken;
   }
@@ -22,10 +22,11 @@ class StartOfCommentToken extends CommentToken {
         matches = content.match(/^\(\*/);
 
     if (matches) {
-      var firstMatch = first(matches),
-          string = firstMatch; ///
+      var firstMatch = first(matches);
+      
+      content = firstMatch; ///
 
-      startOfCommentToken = new StartOfCommentToken(string, line);
+      startOfCommentToken = new StartOfCommentToken(content, line);
     }
     
     return startOfCommentToken;

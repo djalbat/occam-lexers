@@ -4,18 +4,19 @@ var Token = require('../../common/token');
 
 class CommentToken extends Token {
   merge(commentToken) {
-    var string = this.getString(),
-        commentTokenString = commentToken.getString();
+    var content = this.getContent(),
+        commentTokenContent = commentToken.getContent();
 
-    string += commentTokenString;
+    content += commentTokenContent;
     
-    this.setString(string);
+    this.setContent(content);
 
     return this;
   }
 
   getHTML() {
-    var innerHTML = this.getString(), ///
+    var content = this.getContent(),
+        innerHTML = content, ///
         html = `<span class="comment">${innerHTML}</span>`;
 
     return html;
