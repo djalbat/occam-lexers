@@ -1,7 +1,8 @@
 'use strict';
 
 var Line = require('./line'),
-    Rules = require('./rules');
+    Rules = require('./rules'),
+    util = require('../util');
 
 class CommonLexer {
   constructor(rules, Line) {
