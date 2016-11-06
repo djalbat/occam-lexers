@@ -10,7 +10,6 @@ var lexers = {
   'ErrorToken': require('./lib/common/token/error'),
   'SelectedToken': require('./lib/common/token/selected'),
   'SignificantToken': require('./lib/common/token/significant'),
-  'IncludeDirectiveToken': require('./lib/florence/token/includeDirective'),
   'specialSymbols': require('./lib/specialSymbols')
 };
 
