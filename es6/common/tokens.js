@@ -15,7 +15,7 @@ class Tokens {
 
         util.spliceArray(tokensOrContents, start, 1, tokensOrRemainingContent);
 
-        offset += tokensOrRemainingContentLength;
+        offset += tokensOrRemainingContentLength - 1;
       }
     });
   }
