@@ -1,9 +1,11 @@
 'use strict';
 
-var Line = require('./line'),
+var util = require('../util'),
+    Line = require('./line'),
     Context = require('./context'),
-    grammar = require('./grammar'),
-    CommonLexer = require('../common/lexer');
+    grammar = require('../grammar/gallina'),
+    CommonLexer = require('../common/lexer'),
+    RegExpPattern = require('../regExpPattern');
 
 class GallinaLexer extends CommonLexer {
   linesFromContent(content, context) {
@@ -14,8 +16,16 @@ class GallinaLexer extends CommonLexer {
     return lines;
   }
 
-  static terminalSymbolsRegExpPattern() { return CommonLexer.terminalSymbolsRegExpPattern(grammar); }
+  static terminalSymbolsRegExpPattern(grammar) {
+    var specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
+        keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
+        specialSymbolsRegExpPatternString = RegExpPattern.fromRegExp(specialSymbolsRegExp).toString(),
+        keywordSymbolsRegExpPatternString = RegExpPattern.fromRegExp(keywordSymbolsRegExp).removeAnchors().removeNonCapturingGroup().toString(),
+        terminalSymbolsRegExpPattern = `${specialSymbolsRegExpPatternString}|${keywordSymbolsRegExpPatternString}`;
 
+    return terminalSymbolsRegExpPattern;
+  }
+  
   static significantTokenTypes() { return CommonLexer.significantTokenTypes(grammar); }
   
   static fromNothing() {

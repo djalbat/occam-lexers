@@ -20,12 +20,13 @@ ${mathematical_alphanumeric_symbols}
     unicode_characters = `[${unicode_character}]+`,
     unassigned = unicode_characters;  ///
 
-
 var grammar = [
 
   { string              : /"[^"]*"/ },
 
   { special             : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
+
+  { include             : /^include$/ },
 
   { keyword             : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|from|by)$/ },
 

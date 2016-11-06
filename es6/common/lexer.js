@@ -1,8 +1,7 @@
 'use strict';
 
 var Line = require('./line'),
-    Rules = require('./rules'),
-    util = require('../util');
+    Rules = require('./rules');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -35,16 +34,6 @@ class CommonLexer {
   }
   
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
-
-  static terminalSymbolsRegExpPattern(grammar) {
-    var keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
-        specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
-        keywordSymbolsRegExpPattern = keywordSymbolsRegExp.source,  ///
-        specialSymbolsRegExpPattern = specialSymbolsRegExp.source.replace(/^(?:\^\(\?:)/, '').replace(/(?:\)\$)$/, ''),  ///
-        terminalSymbolsRegExpPattern = `${keywordSymbolsRegExpPattern}|${specialSymbolsRegExpPattern}`;
-
-    return terminalSymbolsRegExpPattern;
-  }
 
   static significantTokenTypes(grammar) {
     var significantTokenTypes = grammar.map(function(entry) {

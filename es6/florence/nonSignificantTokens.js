@@ -5,8 +5,7 @@ var util = require('../util'),
     WhitespaceToken = require('../common/token/whitespace'),
     EndOfCommentToken = require('./token/endOfComment'),
     StartOfCommentToken = require('./token/startOfComment'),
-    MiddleOfCommentToken = require('./token/middleOfComment'),
-    IncludeDirectiveToken = require('./token/includeDirective');
+    MiddleOfCommentToken = require('./token/middleOfComment');
 
 class NonSignificantTokens {
   static pass(content, context, line) {
@@ -67,19 +66,6 @@ class NonSignificantTokens {
         content = remainingContent;
 
         nonSignificantTokenOrSignificantContents.push(commentToken);
-
-        continue;
-      }
-
-      var includeDirectiveTokenPosition = IncludeDirectiveToken.position(content);
-
-      if (includeDirectiveTokenPosition === 0) {
-        var includeDirectiveToken = IncludeDirectiveToken.fromContent(content, line),
-            includeDirectiveTokenLength = includeDirectiveToken.getLength();
-
-        content = content.substring(includeDirectiveTokenLength);
-
-        nonSignificantTokenOrSignificantContents.push(includeDirectiveToken);
 
         continue;
       }

@@ -1,9 +1,11 @@
 'use strict';
 
-var Line = require('./line'),
+var util = require('../util'),
+    Line = require('./line'),
     Context = require('./context'),
-    grammar = require('./grammar'),
-    CommonLexer = require('../common/lexer');
+    grammar = require('../grammar/florence'),
+    CommonLexer = require('../common/lexer'),
+    RegExpPattern = require('../regExpPattern');
 
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, context) {
@@ -14,8 +16,18 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static terminalSymbolsRegExpPattern() { return CommonLexer.terminalSymbolsRegExpPattern(grammar); }
+  static terminalSymbolsRegExpPattern(grammar) {
+    var specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
+        includeSymbolsRegExp = util.findRegExpFromType(grammar, 'include'),
+        keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
+        specialSymbolsRegExpPatternString = RegExpPattern.fromRegExp(specialSymbolsRegExp).toString(),
+        includeSymbolsRegExpPatternString = RegExpPattern.fromRegExp(includeSymbolsRegExp).removeAnchors().toString(),
+        keywordSymbolsRegExpPatternString = RegExpPattern.fromRegExp(keywordSymbolsRegExp).removeAnchors().removeNonCapturingGroup().toString(),
+        terminalSymbolsRegExpPattern = `${specialSymbolsRegExpPatternString}|${includeSymbolsRegExpPatternString}|${keywordSymbolsRegExpPatternString}`;
 
+    return terminalSymbolsRegExpPattern;
+  }
+  
   static significantTokenTypes() { return CommonLexer.significantTokenTypes(grammar); }
 
   static fromNothing() {
