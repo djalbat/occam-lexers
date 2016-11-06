@@ -47,7 +47,7 @@ class Line {
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
   }
 
-  static fromContent(content, context, rules, Line, CommentTokens, StringTokens, WhitespaceTokens) {
+  static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
     var line = new Line(content),
         tokens = [];
 

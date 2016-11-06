@@ -8,7 +8,7 @@ var CommonLine = require('../common/line'),
 
 class Line extends CommonLine {
   static fromContent(content, context, rules) { 
-    var line = super.fromContent(content, context, rules, Line, CommentTokens, StringTokens, WhitespaceTokens),
+    var line = super.fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens),
         endOfLineToken = EndOfLineToken.fromNothing(line);
     
     line.pushToken(endOfLineToken);
