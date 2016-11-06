@@ -36,6 +36,10 @@ class Line {
     this.tokens = tokens;
   }
   
+  pushToken(token) {
+    this.tokens.push(token);
+  }
+  
   replaceToken(oldToken, newToken) {
     var oldTokenIndex = util.indexOf(this.tokens, oldToken),
         newTokens = [newToken];
@@ -43,10 +47,19 @@ class Line {
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
   }
 
-  static fromContent(content, context, rules, Line, NonSignificantTokens) {
+  static fromContent(content, context, rules, Line, CommentTokens, StringTokens, WhitespaceTokens) {
     var line = new Line(content),
-        nonSignificantTokenOrSignificantContents = NonSignificantTokens.pass(content, context, line),
-        tokens = SignificantTokens.pass(nonSignificantTokenOrSignificantContents, line, rules);
+        tokens = [];
+
+    if (content !== '') {
+      var tokensOrContents = [content];
+
+      CommentTokens.pass(tokensOrContents, line, context);
+      StringTokens.pass(tokensOrContents, line);
+      WhitespaceTokens.pass(tokensOrContents, line);
+
+      tokens = SignificantTokens.pass(tokensOrContents, line, rules);
+    }
 
     line.setTokens(tokens);
 

@@ -3,17 +3,16 @@
 var ErrorToken = require('../common/token/error');
 
 class SignificantTokens {
-  static pass(nonSignificantTokenOrSignificantContents, line, rules) {
-    var tokens = nonSignificantTokenOrSignificantContents.reduce(function(tokens, nonSignificantTokenOrSignificantContent) {
-      if (typeof nonSignificantTokenOrSignificantContent === 'string') {
-        var significantContent = nonSignificantTokenOrSignificantContent,  ///
-            content = significantContent, ///
+  static pass(tokensOrContents, line, rules) {
+    var tokens = tokensOrContents.reduce(function(tokens, tokenOrRemainingContent) {
+      if (typeof tokenOrRemainingContent === 'string') {
+        var content = tokenOrRemainingContent,  ///
             depth = 0,
-            significantOrErrorTokens = significantOrErrorTokensFromContent(content, line, rules, depth);
+            significantTokens = significantTokensFromContent(content, line, rules, depth);
 
-        tokens = tokens.concat(significantOrErrorTokens);
+        tokens = tokens.concat(significantTokens);
       } else {
-        var nonSignificantToken = nonSignificantTokenOrSignificantContent;  ///
+        var nonSignificantToken = tokenOrRemainingContent;  ///
         
         tokens.push(nonSignificantToken);
       }
@@ -29,24 +28,24 @@ module.exports = SignificantTokens;
 
 const RULE_IS_UNDEFINED_MESSAGE = 'There are no rules to parse this content.';
 
-function significantOrErrorTokensFromContent(content, line, rules, depth) {
-  var significantOrErrorTokens,
+function significantTokensFromContent(content, line, rules, depth) {
+  var significantTokens,
       rule = rules.getRule(depth),
       ruleIsUndefined = (rule === undefined);
 
   if (content === '') {
-    significantOrErrorTokens = [];
+    significantTokens = [];
   } else if (ruleIsUndefined) {
     var errorToken = new ErrorToken(content, line, RULE_IS_UNDEFINED_MESSAGE),
         errorTokens = [errorToken];
 
-    significantOrErrorTokens = errorTokens;
+    significantTokens = errorTokens;  ///
   } else {
     var nextDepth = depth + 1,
         significantTokenPosition = rule.significantTokenPosition(content);
 
     if (significantTokenPosition === -1) {
-      significantOrErrorTokens = significantOrErrorTokensFromContent(content, line, rules, nextDepth);
+      significantTokens = significantTokensFromContent(content, line, rules, nextDepth);
     } else {
       var significantToken = rule.significantTokenFromContent(content, line),
           significantTokenLength = significantToken.getLength(),
@@ -54,13 +53,12 @@ function significantOrErrorTokensFromContent(content, line, rules, depth) {
           right = significantTokenPosition + significantTokenLength,  ///
           leftContent = content.substr(0, left),
           rightContent = content.substr(right),
-          leftSignificantTokens = significantOrErrorTokensFromContent(leftContent, line, rules, nextDepth),
-          rightSignificantTokens = significantOrErrorTokensFromContent(rightContent, line, rules, depth),
-          significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
+          leftSignificantTokens = significantTokensFromContent(leftContent, line, rules, nextDepth),
+          rightSignificantTokens = significantTokensFromContent(rightContent, line, rules, depth);
 
-      significantOrErrorTokens = significantTokens;
+      significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
     }
   }
 
-  return significantOrErrorTokens;
+  return significantTokens;
 }

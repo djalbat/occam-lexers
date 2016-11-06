@@ -3,15 +3,13 @@
 var CommentToken = require('../../common/token/comment');
 
 class MiddleOfCommentToken extends CommentToken {
-  clone() {
-    var content = this.getContent(),
-        line = this.getLine(),
-        middleOfCommentToken = new MiddleOfCommentToken(content, line);
+  clone() { return super.clone(MiddleOfCommentToken); }
 
-    return middleOfCommentToken;
-  }
+  static fromContent(content, line, middleOfCommentTokenLength) {
+    var middleOfCommentTokenContent = content.substring(middleOfCommentTokenLength);
 
-  static fromContent(content, line) {
+    content = middleOfCommentTokenContent;  ///
+
     var middleOfCommentToken = new MiddleOfCommentToken(content, line);
 
     return middleOfCommentToken;
@@ -19,4 +17,3 @@ class MiddleOfCommentToken extends CommentToken {
 }
 
 module.exports = MiddleOfCommentToken;
-

@@ -3,6 +3,8 @@
 var SignificantToken = require('./significant');
 
 class EndOfLineToken extends SignificantToken {
+  clone () { return super.clone(EndOfLineToken); }
+  
   static fromNothing(line) {
     var content = '',  ///
         type = SignificantToken.types.endOfLine,

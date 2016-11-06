@@ -3,13 +3,7 @@
 var CommentToken = require('../../common/token/comment');
 
 class EndOfCommentToken extends CommentToken {
-  clone() {
-    var content = this.getContent(),
-        line = this.getLine(),
-        endOfCommentToken = new EndOfCommentToken(content, line);
-
-    return endOfCommentToken;
-  }
+  clone() { return super.clone(EndOfCommentToken); }
 
   static position(content) {
     var position = content.search(/\*\//);

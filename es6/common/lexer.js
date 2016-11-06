@@ -44,6 +44,8 @@ class CommonLexer {
       return significantTokenType;
     });
 
+    significantTokenTypes.unshift('string');  ///
+
     return significantTokenTypes;
   }
 }

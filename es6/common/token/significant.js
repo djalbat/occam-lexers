@@ -9,12 +9,15 @@ class SignificantToken extends Token {
     this.type = type;
   }
 
-  clone() {
+  clone(Class) {
+    Class = Class || SignificantToken;
+    
     var content = this.getContent(),
         line = this.getLine(),
-        type = this.getType();
-
-    return new SignificantToken(content, line, type);
+        type = this.getType(),
+        significantToken = new Class(content, line, type);
+    
+    return significantToken;
   }
 
   getType() {
@@ -33,8 +36,9 @@ class SignificantToken extends Token {
 }
 
 SignificantToken.types = {
-  whitespace : 'whitespace',
-  endOfLine : 'endOfLine'
+  string : 'string',
+  endOfLine : 'endOfLine',
+  whitespace : 'whitespace'
 };
 
 module.exports = SignificantToken;

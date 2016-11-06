@@ -22,8 +22,6 @@ ${mathematical_alphanumeric_symbols}
 
 var grammar = [
 
-  { string              : /"[^"]*"/ },
-
   { special             : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
 
   { include             : /^include$/ },

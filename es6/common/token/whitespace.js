@@ -8,16 +8,9 @@ class WhitespaceToken extends SignificantToken {
     
     super(content, line, type);
   }
-  
-  clone() {
-    var content = this.getContent(),
-        line = this.getLine(),
-        type = this.getType(),
-        whitespaceToken = new WhitespaceToken(content, line,  type);
-    
-    return whitespaceToken;
-  }
-  
+
+  clone () { return super.clone(WhitespaceToken); }
+
   getHTML() {
     var content = this.getContent(),
         html = content; ///
@@ -33,7 +26,7 @@ class WhitespaceToken extends SignificantToken {
 
   static fromContent(content, line) {
     var whitespaceToken = null,
-        matches = content.match(/^([\t ]+)/);
+        matches = content.match(/([\t ]+)/);
 
     if (matches) {
       var firstMatch = first(matches);

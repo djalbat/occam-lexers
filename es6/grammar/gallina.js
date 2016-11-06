@@ -10,8 +10,6 @@ var unicode_letter = `\\u{c0}-\\u{ff}\\u{180}-\\u{24f}\\u{391}-\\u{3ff}\\u{400}-
 
 var grammar = [
 
-  { string        : /"[^"]*"/ },
-
   { special       : /!|%|&&|&|@|~|\(\)|\(|\)|\*|\+\+|\+|,|\.|\.\(|\.\.|\\\/|\/\\|\/|::|:<|:=|:>|:|;|<->|>->|<-|->|-|<:|<=|<>|<|=>|=_D|=|>=|>|\?|\?=|\[|\]|\^|\{|\}|\|\||\|-|'/ },
 
   { keyword       : /^(?:_|as|at|cofix|else|end|exists|exists2|fix|forall|for|fun|if|IF|in|let|match|mod|Prop|return|Set|then|Type|using|where|with|Axiom|Conjecture|Parameter|Parameters|Variables|Variable|Hypothesis|Hypotheses|Local|Definition|Let|Inductive|CoInductive|Fixpoint|CoFixpoint|Theorem|Lemma|Remark|Fact|Corollary|Proposition|Definition|Example)$/ },
