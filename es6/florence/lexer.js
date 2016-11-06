@@ -16,7 +16,7 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static terminalSymbolsRegExpPattern(grammar) {
+  static terminalSymbolsRegExpPattern() {
     var specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
         includeSymbolsRegExp = util.findRegExpFromType(grammar, 'include'),
         keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
