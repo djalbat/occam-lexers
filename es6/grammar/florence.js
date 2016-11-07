@@ -22,13 +22,13 @@ ${mathematical_alphanumeric_symbols}
 
 var grammar = [
 
-  { special             : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
+  { special    : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
 
-  { include             : /^include$/ },
+  { include    : /^include$/ },
 
-  { keyword             : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|from|by)$/ },
+  { keyword    : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|Type|Definition|from|by|let)$/ },
 
-  { unassigned          : new RegExp(`^${unassigned}$`, 'u') }
+  { unassigned : new RegExp(`^${unassigned}$`, 'u') }
     
 ];
 
