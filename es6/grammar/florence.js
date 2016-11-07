@@ -26,7 +26,7 @@ var grammar = [
 
   { include    : /^include$/ },
 
-  { keyword    : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|Type|Definition|from|by|let)$/ },
+  { keyword    : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Constructors|Constructor|Type|Object|Definition|from|by|let|is|not|in|free|defined|undefined)$/ },
 
   { unassigned : new RegExp(`^${unassigned}$`, 'u') }
     
