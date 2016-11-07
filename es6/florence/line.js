@@ -1,10 +1,10 @@
 'use strict';
 
-var CommonLine = require('../common/line'),
-    CommentTokens = require('./commentTokens'),
+var CommentTokens = require('./commentTokens'),
+    CommonLine = require('../common/line'),
     StringTokens = require('../common/stringTokens'),
-    WhitespaceTokens = require('./whitespaceTokens'),
-    EndOfLineToken = require('../common/token/endOfLine');
+    EndOfLineToken = require('../common/token/endOfLine'),
+    WhitespaceTokens = require('../common/whitespaceTokens');
 
 class Line extends CommonLine {
   static fromContent(content, context, rules) { 

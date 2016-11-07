@@ -1,7 +1,7 @@
 'use strict';
 
-var CommonLine = require('../common/line'),
-    CommentTokens = require('./commentTokens'),
+var CommentTokens = require('./commentTokens'),
+    CommonLine = require('../common/line'),
     StringTokens = require('../common/stringTokens'),
     WhitespaceTokens = require('../common/whitespaceTokens');
 
