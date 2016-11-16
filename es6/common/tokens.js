@@ -4,20 +4,24 @@ var util = require('../util');
 
 class Tokens {
   static pass(tokensOrContents, line, Token) {
-    var offset = 0;
+    var offset = 0,
+        tokensOrContentsLength = tokensOrContents.length;
 
-    tokensOrContents.forEach(function(tokenOrContent, index) {
+    for (var index = 0; index < tokensOrContentsLength; index++) {
+      var offsetIndex = index + offset,
+          tokenOrContent = tokensOrContents[offsetIndex];
+
       if (typeof tokenOrContent === 'string') {
         var content = tokenOrContent,  ///
             tokensOrRemainingContent = tokensOrRemainingContentFromContent(content, line, Token),
             tokensOrRemainingContentLength = tokensOrRemainingContent.length,
-            start = index + offset;
+            start = offsetIndex;
 
         util.spliceArray(tokensOrContents, start, 1, tokensOrRemainingContent);
 
         offset += tokensOrRemainingContentLength - 1;
       }
-    });
+    }
   }
 }
 
