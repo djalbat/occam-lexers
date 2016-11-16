@@ -6,7 +6,7 @@ class MiddleOfCommentToken extends CommentToken {
   clone() { return super.clone(MiddleOfCommentToken); }
   
   static fromContent(content, line, middleOfCommentTokenLength) {
-    var middleOfCommentTokenContent = content.substring(middleOfCommentTokenLength);
+    var middleOfCommentTokenContent = content.substring(0, middleOfCommentTokenLength);
 
     content = middleOfCommentTokenContent;  ///
 

@@ -15,29 +15,10 @@ class CommentTokens {
       var contentLength = content.length,
           inComment = context.isInComment();
 
-      var startOfCommentTokenPosition = StartOfCommentToken.position(content),
-          endOfCommentTokenPosition = EndOfCommentToken.position(content);
+      if (inComment) {
+        var endOfCommentTokenPosition = EndOfCommentToken.position(content);
 
-      if (!inComment) {
-        if (startOfCommentTokenPosition === 0) {
-          context.setInComment(true);
-
-          commentToken = StartOfCommentToken.fromContent(content, line);
-
-          commentTokenLength = commentToken.getLength();
-
-          tokensOrContents.push(commentToken);
-
-          content = content.substring(commentTokenLength);
-
-          continue;
-        }
-      } else {
-        var previousCommentToken = tokensOrContents.pop();
-
-        if (false) {
-
-        } else if (endOfCommentTokenPosition === 0) {
+        if (endOfCommentTokenPosition === 0) {
           context.setInComment(false);
 
           commentToken = EndOfCommentToken.fromContent(content, line);
@@ -51,28 +32,40 @@ class CommentTokens {
           commentTokenLength = middleOfCommentTokenLength;
         }
 
+        var previousCommentToken = tokensOrContents.pop();
+
         commentToken = (previousCommentToken === undefined) ?
-                         commentToken :
-                           previousCommentToken.merge(commentToken);
+                          commentToken :
+                            previousCommentToken.merge(commentToken);
 
         tokensOrContents.push(commentToken);
 
         content = content.substring(commentTokenLength);
+      } else {
+        var startOfCommentTokenPosition = StartOfCommentToken.position(content);
 
-        continue;
+        if (startOfCommentTokenPosition === 0) {
+          context.setInComment(true);
+
+          commentToken = StartOfCommentToken.fromContent(content, line);
+
+          commentTokenLength = commentToken.getLength();
+
+          tokensOrContents.push(commentToken);
+
+          content = content.substring(commentTokenLength);
+        } else {
+          contentLength = util.minBarMinusOne(startOfCommentTokenPosition, contentLength);
+
+          var remainingContent = content.substring(contentLength);
+
+          content = content.substring(0, contentLength);
+
+          tokensOrContents.push(content);
+
+          content = remainingContent;
+        }
       }
-
-      contentLength = util.minBarMinusOne(startOfCommentTokenPosition, contentLength);
-      
-      var remainingContent = content.substring(contentLength);
-
-      content = content.substring(0, contentLength);
-
-      tokensOrContents.push(content);
-
-      content = remainingContent;
-
-      continue;
     }
   }
 }
