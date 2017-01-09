@@ -42,7 +42,7 @@ You will need to do this if you want to look at the examples.
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [Parser](https://github.com/occam-proof-assistant/Parser) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
 
 ### The basic example
 
@@ -52,13 +52,13 @@ If the terminal symbols pattern does not result in a valid regular expression, f
 
     \+|\-|\*|\/|\(|\)|\
 
-...will result in the border of the text area turning red and no tokens being shown.
+...is not valid, the border of the text area will turn red and no tokens will be shown.
 
 There is a guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
 
     \+|\-|\*|\/|\(|\)|
 
-By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this can be done by editing the `grammar.js` files in the requisite directory and rebuilding.
+By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this can be done by editing the `grammar.js` files in the requisite directories and rebuilding.
 
 ### The Florence example
 
