@@ -18,11 +18,11 @@ There are four lexers in all:
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
 * A lexer for the [Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html).
-* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/grammar/florence.js) of Occam's specification language, called Florence.
+* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language, called Florence.
 
 The last three of these lexers share common code and patterns and each take four passes to process content. The first three passes match comments, strings and whitespace in that order. The last pass will match  significant and error tokens.
 
-The final pass uses a recursive descent algorithm. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/grammar/florence.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+The final pass uses a recursive descent algorithm. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of the Florence specification language, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
@@ -52,13 +52,13 @@ If the terminal symbols pattern does not result in a valid regular expression, f
 
     \+|\-|\*|\/|\(|\)|\
 
-..., the border of the text area will turn red and no tokens will be shown.
+...will result in the border of the text area turning red and no tokens being shown.
 
 There is a guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
 
     \+|\-|\*|\/|\(|\)|
 
-By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this can be done by editing the requisite files in the `es6/grammar/` directory and rebuilding.
+By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this can be done by editing the `grammar.js` files in the requisite directory and rebuilding.
 
 ### The Florence example
 
@@ -76,7 +76,7 @@ It will add end of line tokens.
 
 ### The Gallina example
 
-The Gallina lexer picks out commments with a slightly different syntax...
+The Gallina lexer picks out comments with a slightly different syntax...
 
     (* ... *)
 

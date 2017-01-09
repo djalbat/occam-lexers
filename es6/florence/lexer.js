@@ -3,7 +3,7 @@
 var util = require('../util'),
     Line = require('./line'),
     Context = require('./context'),
-    grammar = require('../grammar/florence'),
+    grammar = require('./grammar'),
     CommonLexer = require('../common/lexer'),
     RegExpPattern = require('../regExpPattern');
 
