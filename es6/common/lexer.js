@@ -23,23 +23,11 @@ class CommonLexer {
   
   tokensFromContent(content) {
     var lines = this.linesFromContent(content),
-        tokens = CommonLexer.tokensFromLines(lines);
+        tokens = tokensFromLines(lines);
     
     return tokens;    
   }
 
-  static tokensFromLines(lines) {
-    var tokens = lines.reduce(function(tokens, line) {
-      var lineTokens = line.getTokens();
-
-      tokens = tokens.concat(lineTokens);
-
-      return tokens;
-    }, []);
-
-    return tokens;
-  }
-  
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
   static significantTokenTypes(grammar) {
@@ -57,3 +45,15 @@ class CommonLexer {
 }
 
 module.exports = CommonLexer;
+
+function tokensFromLines(lines) {
+  var tokens = lines.reduce(function(tokens, line) {
+    var lineTokens = line.getTokens();
+
+    tokens = tokens.concat(lineTokens);
+
+    return tokens;
+  }, []);
+
+  return tokens;
+}

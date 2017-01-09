@@ -16,8 +16,6 @@ class GallinaLexer extends CommonLexer {
     return lines;
   }
 
-  static tokensFromLines(lines) { return CommonLexer.tokensFromLines(lines); }
-
   static terminalSymbolsRegExpPattern() {
     var specialSymbolsRegExp = util.findRegExpFromType(grammar, 'special'),
         keywordSymbolsRegExp = util.findRegExpFromType(grammar, 'keyword'),
