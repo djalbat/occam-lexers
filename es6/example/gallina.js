@@ -1,7 +1,7 @@
 'use strict';
 
 var Example = require('../example'),
-    GallinaLexer = require('../../../es6/gallina/lexer');
+    GallinaLexer = require('../gallina/lexer');
 
 var gallinaLexer = GallinaLexer.fromNothing();
 

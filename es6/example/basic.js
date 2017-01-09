@@ -4,7 +4,7 @@ var easyui = require('easyui'),
     TextArea = easyui.TextArea;
 
 var Example = require('../example'),
-    BasicLexer = require('../../../es6/basic/lexer');
+    BasicLexer = require('../basic/lexer');
 
 var terminalSymbolsRegExpPatternTextAreaSelector = 'textarea#terminalSymbolsRegExpPattern',
     terminalSymbolsRegExpPatternTextArea = new TextArea(terminalSymbolsRegExpPatternTextAreaSelector);
