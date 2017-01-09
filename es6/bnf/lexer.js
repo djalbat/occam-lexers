@@ -2,7 +2,7 @@
 
 var Line = require('./line');
 
-class Lexer {
+class BNFLexer {
   static linesFromGrammar(grammar) {
     var contents = contentsFromGrammar(grammar),
         lines = contents.map(function(content) {
@@ -15,7 +15,7 @@ class Lexer {
   }
 }
 
-module.exports = Lexer;
+module.exports = BNFLexer;
 
 function contentsFromGrammar(grammar) {
   var contents = grammar.split('\n').reduce(function (contents, content) {

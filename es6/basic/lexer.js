@@ -12,6 +12,8 @@ class BasicLexer extends CommonLexer {
     return basicLexer;
   }
 
+  static tokensFromLines(lines) { return CommonLexer.tokensFromLines(lines); }
+
   static significantTokenTypes() {
     var significantTokenTypes = [];
 

@@ -23,15 +23,21 @@ class CommonLexer {
   
   tokensFromContent(content) {
     var lines = this.linesFromContent(content),
-        tokens = lines.reduce(function(tokens, line) {
-          var lineTokens = line.getTokens();
-
-          tokens = tokens.concat(lineTokens);
-
-          return tokens;
-        }, []);
+        tokens = CommonLexer.tokensFromLines(lines);
     
     return tokens;    
+  }
+
+  static tokensFromLines(lines) {
+    var tokens = lines.reduce(function(tokens, line) {
+      var lineTokens = line.getTokens();
+
+      tokens = tokens.concat(lineTokens);
+
+      return tokens;
+    }, []);
+
+    return tokens;
   }
   
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
