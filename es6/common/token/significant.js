@@ -23,6 +23,10 @@ class SignificantToken extends Token {
   getType() {
     return this.type;
   }
+
+  setType(type) {
+    this.type = type;
+  }
   
   getHTML() {
     var content = this.getContent(),
