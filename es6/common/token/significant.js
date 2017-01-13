@@ -1,6 +1,7 @@
 'use strict';
 
-var Token = require('../token');
+var util = require('../../util'),
+    Token = require('../token');
 
 class SignificantToken extends Token {
   constructor(content, line, type) {
@@ -33,7 +34,8 @@ class SignificantToken extends Token {
         type = this.getType(),
         innerHTML = content, ///
         className = type,  ///
-        html = `<span class="${className}">${innerHTML}</span>`;
+        sanitisedInnerHTML = util.sanitise(innerHTML),
+        html = `<span class="${className}">${sanitisedInnerHTML}</span>`;
 
     return html;
   }
