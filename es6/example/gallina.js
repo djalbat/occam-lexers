@@ -10,6 +10,8 @@ class GallinaExample {
     Example.contentTextAreaOnChange(function(contextTextAreaValue) {
       Example.updateTokens(gallinaLexer);
     });
+
+    Example.updateTokens(gallinaLexer);
   }
 }
 

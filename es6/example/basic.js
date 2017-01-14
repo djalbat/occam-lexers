@@ -19,8 +19,6 @@ class BasicExample {
 
     terminalSymbolsRegExpPatternTextArea.setValue(terminalSymbolsRegExpPatternTextAreaValue);
 
-    update();
-
     terminalSymbolsRegExpPatternTextArea.onChange(function() {
       update();
     });
@@ -28,6 +26,8 @@ class BasicExample {
     Example.contentTextAreaOnChange(function(contextTextAreaValue) {
       update();
     });
+
+    update();
   }
 }
 

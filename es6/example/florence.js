@@ -10,6 +10,8 @@ class FlorenceExample {
     Example.contentTextAreaOnChange(function(contextTextAreaValue) {
       Example.updateTokens(florenceLexer);
     });
+
+    Example.updateTokens(florenceLexer);
   }
 }
 
