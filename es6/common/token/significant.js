@@ -31,7 +31,7 @@ class SignificantToken extends Token {
   
   getHTML() {
     var content = this.getContent(),
-        type = this.getType(),
+        type = this.type,
         innerHTML = content, ///
         className = type,  ///
         sanitisedInnerHTML = util.sanitise(innerHTML),
