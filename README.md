@@ -17,8 +17,7 @@ There are four lexers in all:
 
 * A very simple lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
-* A lexer for the [Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html).
-* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's specification language, called Florence.
+* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's vernacular, called Florence.
 
 The last three of these lexers share common code and patterns and each take four passes to process content. The first three passes match comments, strings and whitespace in that order. The last pass will match  significant and error tokens.
 
@@ -74,18 +73,6 @@ It does not currently support single line comments.
 
 It will add end of line tokens.
 
-### The Gallina example
-
-The Gallina lexer picks out comments with a slightly different syntax...
-
-    (* ... *)
-
-...and allows comments to be nested. For example:
-
-    (* ... (* ... *) *)
-
-It is not entirely faithful to the Gallina specification at this stage. There is more work to do.
-
 ## Building
 
 Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
@@ -93,11 +80,7 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
     npm run build-debug
     npm run watch-debug
 
-The Florence and Gallina grammars are defined respectively in the `florence.js` and `grammar.js` files in the `es6/grammar` directory.
-
-## Resources
-
-* [The Gallina specification language](https://coq.inria.fr/refman/Reference-Manual003.html)
+The Florence grammar can be found in the `grammar.js` file in the `es6/florence` directory.
 
 ## Contact
 
