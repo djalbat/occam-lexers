@@ -12,7 +12,7 @@ class BasicLexer extends CommonLexer {
     return basicLexer;
   }
 
-  static significantTokenTypes() {
+  static getSignificantTokenTypes() {
     var significantTokenTypes = [];
 
     return significantTokenTypes;

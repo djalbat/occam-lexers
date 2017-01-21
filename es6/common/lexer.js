@@ -30,15 +30,13 @@ class CommonLexer {
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
-  static significantTokenTypes(grammar) {
+  static getSignificantTokenTypes(grammar) {
     var significantTokenTypes = grammar.map(function(entry) {
       var type = util.typeFromEntry(entry),
           significantTokenType = type;  ///
 
       return significantTokenType;
     });
-
-    significantTokenTypes.unshift('string');  ///
 
     return significantTokenTypes;
   }
