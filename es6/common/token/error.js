@@ -27,9 +27,8 @@ class ErrorToken extends Token {
     var content = this.getContent(),
         innerHTML = content, ///
         className = 'error',  ///
-        message = this.message,
         sanitisedInnerHTML = util.sanitise(innerHTML),
-        html = `<span class="${className}" data-message="${message}">${sanitisedInnerHTML}</span>`;
+        html = `<span class="${className}"">${sanitisedInnerHTML}</span>`;
 
     return html;
   }
