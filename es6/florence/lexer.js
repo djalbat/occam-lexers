@@ -7,7 +7,9 @@ var Line = require('./line'),
 
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, context) {
-    context = context || new Context(false);  ///
+    var inComment = false;
+
+    context = context || new Context(inComment);  ///
 
     var lines = super.linesFromContent(content, context);
 
