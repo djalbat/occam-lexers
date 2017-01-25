@@ -52,12 +52,6 @@ class util {
 
     return regExp;
   };
-
-  static sanitise(html) {
-    var sanitisedHTML = html.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
-
-    return sanitisedHTML;
-  }
 }
 
 module.exports = util;

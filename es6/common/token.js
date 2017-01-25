@@ -6,12 +6,8 @@ class Token {
     this.line = line;
   }
 
-  getContent(startPosition, endPosition) {
-    var content = ((startPosition === undefined) || (endPosition === undefined)) ?
-          this.content :
-            this.content.substring(startPosition, endPosition);
-
-    return content;
+  getContent() {
+    return this.content;
   }
   
   getLine() {
@@ -21,45 +17,63 @@ class Token {
   getLength() {
     return this.content.length; ///
   }
-  
+
+  getTrimmedContent(startPosition, endPosition) {
+    var trimmedContent = this.content.substring(startPosition, endPosition);
+
+    return trimmedContent;
+  }
+
   setContent(content) {
     this.content = content;
   }
   
-  trimFromEndPosition(endPosition) {
-    this.content = this.content.substr(endPosition);
+  trimContentToPosition(position) {
+    this.content = this.content.substr(0, position);
   }
 
-  trimToStartPosition(startPosition) {
-    this.content = this.content.substr(0, startPosition);
+  trimContentFromPosition(position) {
+    this.content = this.content.substr(position);
   }
 
-  static trimmedFromEndPosition(token, endPosition) {
-    var tokenLength = token.getLength();
+  replaceWith(token) {
+    var tokens = this.line.getTokens(),
+        index = tokens.indexOf(this);
 
-    if (endPosition === tokenLength) {
-      return null;
-    }
-
-    var clonedToken = token.clone(),
-        tokenWithStartTrimmed = clonedToken;  ///
-
-    tokenWithStartTrimmed.trimFromEndPosition(endPosition);
-
-    return tokenWithStartTrimmed;
+    tokens.splice(index, 1, token);
   }
 
-  static trimmedToStartPosition(token, startPosition) {
-    if (startPosition === 0) {
+  static trimmedToPosition(token, position) {
+    if (position === 0) {
       return null;
     }
 
     var clonedToken = token.clone(),
         tokenWithEndTrimmed = clonedToken;  ///
 
-    tokenWithEndTrimmed.trimToStartPosition(startPosition);
+    tokenWithEndTrimmed.trimContentToPosition(position);
 
     return tokenWithEndTrimmed;
+  }
+  static trimmedFromPosition(token, position) {
+    var tokenLength = token.getLength();
+
+    if (position === tokenLength) {
+      return null;
+    }
+
+    var clonedToken = token.clone(),
+        tokenWithStartTrimmed = clonedToken;  ///
+
+    tokenWithStartTrimmed.trimContentFromPosition(position);
+
+    return tokenWithStartTrimmed;
+  }
+
+  static sanitiseHTML(html) {
+    var sanitisedHTML = html.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
+
+    return sanitisedHTML;
   }
 }
 

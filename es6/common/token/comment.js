@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('../../util'),
-    Token = require('../../common/token');
+var Token = require('../../common/token');
 
 class CommentToken extends Token {
   clone(Class) {
@@ -26,7 +25,7 @@ class CommentToken extends Token {
   getHTML() {
     var content = this.getContent(),
         innerHTML = content, ///
-        sanitisedInnerHTML = util.sanitise(innerHTML),
+        sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
         html = `<span class="comment">${sanitisedInnerHTML}</span>`;
 
     return html;

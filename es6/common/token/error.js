@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('../../util'),
-    Token = require('../token');
+var Token = require('../token');
 
 class ErrorToken extends Token {
   constructor(content, line, message) {
@@ -27,7 +26,7 @@ class ErrorToken extends Token {
     var content = this.getContent(),
         innerHTML = content, ///
         className = 'error',  ///
-        sanitisedInnerHTML = util.sanitise(innerHTML),
+        sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
         html = `<span class="${className}"">${sanitisedInnerHTML}</span>`;
 
     return html;
