@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "license": "MIT",
   "homepage": "https://github.com/occam-proof-assistant/Lexers",
   "description": "The Occam proof assistant's lexers.",
@@ -17,7 +17,7 @@
     "browserify": "^13.0.0",
     "chokidar-cli": "^1.2.0",
     "easyui": "^5.1.1",
-    "easyui-layout": "^1.0.14"
+    "easyui-layout": "^1.0.15"
   },
   "scripts": {
     "clean": "rm -rf ./lib",
