@@ -7,12 +7,12 @@ class SymbolSequence {
     this.symbols = symbols;
   }
 
-  mapSymbols(cb) {
-    return this.symbols.map(cb);
+  mapSymbols(callback) {
+    return this.symbols.map(callback);
   }
   
-  reduceSymbols(cb, initialValue) {
-    return this.symbols.reduce(cb, initialValue);
+  reduceSymbols(callback, initialValue) {
+    return this.symbols.reduce(callback, initialValue);
   }
   
   static fromChoice(choice) {

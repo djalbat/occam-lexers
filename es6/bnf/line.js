@@ -12,8 +12,8 @@ class Line {
     return this.name;
   }
   
-  mapSymbolSequences(cb) {
-    return this.symbolSequences.map(cb);
+  mapSymbolSequences(callback) {
+    return this.symbolSequences.map(callback);
   }
   
   static fromContent(content) {
