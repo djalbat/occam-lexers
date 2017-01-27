@@ -1,9 +1,15 @@
 'use strict';
 
 class Token {
-  constructor(content, line) {
+  constructor(content, line, updateHTML = true) {
     this.content = content;
     this.line = line;
+
+    this.html = undefined;  ///
+
+    if (updateHTML) {
+      this.updateHTML();
+    }
   }
 
   getContent() {
@@ -13,9 +19,27 @@ class Token {
   getLine() {
     return this.line;
   }
+
+  getHTML() {
+    return this.html;
+  }
   
   getLength() {
     return this.content.length; ///
+  }
+
+  setContent(content) {
+    this.content = content;
+
+    this.updateHTML();
+  }
+
+  setLine(line) {
+    this.line = line;
+  }
+
+  setHTML(html) {
+    this.html = html;
   }
 
   getTrimmedContent(startPosition, endPosition) {
@@ -24,16 +48,16 @@ class Token {
     return trimmedContent;
   }
 
-  setContent(content) {
-    this.content = content;
-  }
-  
   trimContentToPosition(position) {
-    this.content = this.content.substr(0, position);
+    this.content = this.content.substr(position);
+
+    this.updateHTML();
   }
 
   trimContentFromPosition(position) {
-    this.content = this.content.substr(position);
+    this.content = this.content.substr(0, position);
+
+    this.updateHTML();
   }
 
   replaceWith(token) {
@@ -43,31 +67,31 @@ class Token {
     tokens.splice(index, 1, token);
   }
 
-  static trimmedToPosition(token, position) {
-    if (position === 0) {
-      return null;
-    }
+  updateHTML() {
+    var html = this.content;  ///
 
-    var clonedToken = token.clone(),
-        tokenWithEndTrimmed = clonedToken;  ///
-
-    tokenWithEndTrimmed.trimContentToPosition(position);
-
-    return tokenWithEndTrimmed;
+    this.html = Token.sanitiseHTML(html);
   }
-  static trimmedFromPosition(token, position) {
-    var tokenLength = token.getLength();
 
-    if (position === tokenLength) {
-      return null;
+  static trimmedToPosition(token, position) {
+    var tokenTrimmedToPosition = null;
+
+    if (position !== 0) {
+      tokenTrimmedToPosition = token.clone().trimContentToPosition(position); ///
     }
 
-    var clonedToken = token.clone(),
-        tokenWithStartTrimmed = clonedToken;  ///
+    return tokenTrimmedToPosition;
+  }
 
-    tokenWithStartTrimmed.trimContentFromPosition(position);
+  static trimmedFromPosition(token, position) {
+    var tokenTrimmedFromPosition = null,
+        tokenLength = token.getLength();
 
-    return tokenWithStartTrimmed;
+    if (position !== tokenLength) {
+      tokenTrimmedFromPosition = token.clone().trimContentFromPosition(position); ///
+    }
+
+    return tokenTrimmedFromPosition;
   }
 
   static sanitiseHTML(html) {

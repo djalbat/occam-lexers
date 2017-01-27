@@ -19,16 +19,16 @@ class CommentToken extends Token {
     
     this.setContent(content);
 
-    return this;
+    return this;  ///
   }
 
-  getHTML() {
+  updateHTML() {
     var content = this.getContent(),
         innerHTML = content, ///
         sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
         html = `<span class="comment">${sanitisedInnerHTML}</span>`;
 
-    return html;
+    this.setHTML(html);
   }
 }
 

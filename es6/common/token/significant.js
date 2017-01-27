@@ -4,9 +4,13 @@ var Token = require('../token');
 
 class SignificantToken extends Token {
   constructor(content, line, type) {
-    super(content, line);
+    var updateHTML = false;
+
+    super(content, line, updateHTML);
     
     this.type = type;
+
+    this.updateHTML();
   }
 
   clone(Class) {
@@ -28,7 +32,7 @@ class SignificantToken extends Token {
     this.type = type;
   }
   
-  getHTML() {
+  updateHTML() {
     var content = this.getContent(),
         type = this.type,
         innerHTML = content, ///
@@ -36,7 +40,7 @@ class SignificantToken extends Token {
         sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
         html = `<span class="${className}">${sanitisedInnerHTML}</span>`;
 
-    return html;
+    this.setHTML(html);
   }
 }
 

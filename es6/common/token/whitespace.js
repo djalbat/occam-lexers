@@ -11,13 +11,6 @@ class WhitespaceToken extends SignificantToken {
 
   clone () { return super.clone(WhitespaceToken); }
 
-  getHTML() {
-    var content = this.getContent(),
-        html = content; ///
-
-    return html;
-  }
-
   static position(content) {
     var position = content.search(/[\t ]+/);
 

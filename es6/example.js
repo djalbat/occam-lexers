@@ -17,8 +17,8 @@ var leftColumnSelector = '#leftColumn',
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
 class Example {
-  static contentTextAreaOnChange(handler) {
-    contentTextArea.onChange(handler);
+  static contentTextAreaOnKeyUp(handler) {
+    contentTextArea.on('keyup', handler);
   }
 
   static updateTokens(lexer) {

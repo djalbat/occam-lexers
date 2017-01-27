@@ -4,7 +4,7 @@ var Token = require('../token');
 
 class ErrorToken extends Token {
   constructor(content, line, message) {
-    super(content, line, message);
+    super(content, line);
 
     this.message = message;
   }
@@ -22,14 +22,14 @@ class ErrorToken extends Token {
     return this.message;
   }
 
-  getHTML() {
+  updateHTML() {
     var content = this.getContent(),
         innerHTML = content, ///
         className = 'error',  ///
         sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
         html = `<span class="${className}"">${sanitisedInnerHTML}</span>`;
 
-    return html;
+    this.setHTML(html);
   }
 }
 

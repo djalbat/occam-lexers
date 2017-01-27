@@ -7,7 +7,7 @@ var florenceLexer = FlorenceLexer.fromNothing();
 
 class FlorenceExample {
   static run() {
-    Example.contentTextAreaOnChange(function(contextTextAreaValue) {
+    Example.contentTextAreaOnKeyUp(function() {
       Example.updateTokens(florenceLexer);
     });
 

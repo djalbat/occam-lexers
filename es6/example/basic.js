@@ -6,15 +6,16 @@ var easyui = require('easyui'),
 var Example = require('../example'),
     BasicLexer = require('../basic/lexer');
 
-var terminalSymbolsRegExpPatternTextAreaSelector = 'textarea#terminalSymbolsRegExpPattern',
-    terminalSymbolsRegExpPatternTextArea = new TextArea(terminalSymbolsRegExpPatternTextAreaSelector);
-
-var terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
+var terminalSymbolsRegExpPatternTextArea,
+    terminalSymbolsRegExpPatternTextAreaSelector = 'textarea#terminalSymbolsRegExpPattern',
+    terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
 
 var lexer = null;
 
 class BasicExample {
   static run() {
+    terminalSymbolsRegExpPatternTextArea = new TextArea(terminalSymbolsRegExpPatternTextAreaSelector);
+
     var terminalSymbolsRegExpPatternTextAreaValue = terminalSymbolsRegExpPattern; ///
 
     terminalSymbolsRegExpPatternTextArea.setValue(terminalSymbolsRegExpPatternTextAreaValue);
@@ -23,7 +24,7 @@ class BasicExample {
       update();
     });
 
-    Example.contentTextAreaOnChange(function(contextTextAreaValue) {
+    Example.contentTextAreaOnKeyUp(function() {
       update();
     });
 
