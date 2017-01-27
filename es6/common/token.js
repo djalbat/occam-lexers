@@ -74,9 +74,10 @@ class Token {
   }
 
   static trimmedToPosition(token, position) {
-    var tokenTrimmedToPosition = null;
+    var tokenTrimmedToPosition = null,
+        tokenLength = token.getLength();
 
-    if (position !== 0) {
+    if (position !== tokenLength) {
       tokenTrimmedToPosition = token.clone().trimContentToPosition(position); ///
     }
 
@@ -84,10 +85,9 @@ class Token {
   }
 
   static trimmedFromPosition(token, position) {
-    var tokenTrimmedFromPosition = null,
-        tokenLength = token.getLength();
+    var tokenTrimmedFromPosition = null;
 
-    if (position !== tokenLength) {
+    if (position !== 0) {
       tokenTrimmedFromPosition = token.clone().trimContentFromPosition(position); ///
     }
 
