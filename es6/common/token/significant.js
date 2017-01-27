@@ -3,14 +3,14 @@
 var Token = require('../token');
 
 class SignificantToken extends Token {
-  constructor(content, line, type) {
-    var updateHTML = false;
-
-    super(content, line, updateHTML);
+  constructor(content, line, type, updateHTML = true) {
+    super(content, line, false);  ///
     
     this.type = type;
 
-    this.updateHTML();
+    if (updateHTML) {
+      this.updateHTML();
+    }
   }
 
   clone(Class) {
