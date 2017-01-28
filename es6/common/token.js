@@ -35,7 +35,22 @@ class Token {
   fromPosition(position) { return Token.fromPosition(this, position) }
 
   static toPosition(token, position, Class = Token) {
-    var tokenTrimmedToPosition = null,
+    var tokenToPosition = null;
+
+    if (position !== 0) {
+      var content = token.getContent(),
+          line = token.getLine();
+
+      content = content.substring(0, position);
+
+      tokenToPosition = Class.fromContentAndLine(content, line);
+    }
+
+    return tokenToPosition;
+  }
+
+  static fromPosition(token, position, Class = Token) {
+    var tokenFromPosition = null,
         tokenLength = token.getLength();
 
     if (position !== tokenLength) {
@@ -44,25 +59,10 @@ class Token {
 
       content = content.substring(position);
 
-      tokenTrimmedToPosition = Class.fromContentAndLine(content, line);
+      tokenFromPosition = Class.fromContentAndLine(content, line);
     }
 
-    return tokenTrimmedToPosition;
-  }
-
-  static fromPosition(token, position, Class = Token) {
-    var tokenTrimmedFromPosition = null;
-
-    if (position !== 0) {
-      var content = token.getContent(),
-          line = token.getLine();
-
-      content = content.substring(0, position);
-
-      tokenTrimmedFromPosition = Class.fromContentAndLine(content, line);
-    }
-
-    return tokenTrimmedFromPosition;
+    return tokenFromPosition;
   }
 
   static fromContentAndLine(content, line, Class = Token) {
