@@ -23,13 +23,13 @@ class Rule {
     return significantTokenPosition;
   }
 
-  significantTokenFromContent(content, line) {
+  significantTokenFromContentAndLine(content, line) {
     var matches = content.match(this.regExp),
         firstMatch = first(matches);
 
     content = firstMatch;
 
-    var significantToken = new SignificantToken(content, line, this.type);
+    var significantToken = SignificantToken.fromContentLineAndType(content, line, this.type);
 
     return significantToken;
   }

@@ -14,11 +14,11 @@ class Rules {
     return rule;
   }
   
-  significantTokenFromContent(content, line) {
+  significantTokenFromContentAndLine(content, line) {
     var significantToken = null;
 
     this.array.some(function(rule) {
-      significantToken = rule.significantTokenFromContent(content, line);
+      significantToken = rule.significantTokenFromContentAndLine(content, line);
 
       if (significantToken !== null) {
         return true;

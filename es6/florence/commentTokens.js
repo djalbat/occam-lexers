@@ -21,13 +21,13 @@ class CommentTokens {
         if (endOfCommentTokenPosition === 0) {
           context.setInComment(false);
 
-          commentToken = EndOfCommentToken.fromContent(content, line);
+          commentToken = EndOfCommentToken.fromContentAndLine(content, line);
 
           commentTokenLength = commentToken.getLength();
         } else {
           var middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPosition, contentLength);
 
-          commentToken = MiddleOfCommentToken.fromContent(content, line, middleOfCommentTokenLength);
+          commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
 
           commentTokenLength = middleOfCommentTokenLength;
         }
@@ -47,7 +47,7 @@ class CommentTokens {
         if (startOfCommentTokenPosition === 0) {
           context.setInComment(true);
 
-          commentToken = StartOfCommentToken.fromContent(content, line);
+          commentToken = StartOfCommentToken.fromContentAndLine(content, line);
 
           commentTokenLength = commentToken.getLength();
 

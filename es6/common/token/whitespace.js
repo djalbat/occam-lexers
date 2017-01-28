@@ -3,21 +3,13 @@
 var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
-  constructor(content, line) {
-    var type = SignificantToken.types.whitespace;
-    
-    super(content, line, type);
-  }
-
-  clone () { return super.clone(WhitespaceToken); }
-
   static position(content) {
     var position = content.search(/[\t ]+/);
 
     return position;
   }
 
-  static fromContent(content, line) {
+  static fromContentAndLine(content, line) {
     var whitespaceToken = null,
         matches = content.match(/([\t ]+)/);
 
@@ -26,13 +18,14 @@ class WhitespaceToken extends SignificantToken {
       
       content = firstMatch; ///
 
-      whitespaceToken = new WhitespaceToken(content, line);
+      whitespaceToken = SignificantToken.fromContentAndLine(content, line, WhitespaceToken);
     }
-
 
     return whitespaceToken;
   }
 }
+
+WhitespaceToken.type = 'whitespace';
 
 module.exports = WhitespaceToken;
 

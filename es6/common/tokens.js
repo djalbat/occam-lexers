@@ -39,7 +39,7 @@ function tokensOrRemainingContentFromContent(content, line, Token) {
       tokensOrRemainingContent.push(remainingContent);
     }
 
-    var token = Token.fromContent(content, line),
+    var token = Token.fromContentAndLine(content, line),
         tokenLength = token.getLength(),
         tokenOffset = tokenPosition + tokenLength;
     

@@ -3,33 +3,29 @@
 var Token = require('../../common/token');
 
 class CommentToken extends Token {
-  clone(Class) {
-    var content = this.getContent(),
-        line = this.getLine(),
-        commentToken = new Class(content, line);
-
-    return commentToken;
-  }
-  
   merge(commentToken) {
     var content = this.getContent(),
+        line = this.getLine(),
         commentTokenContent = commentToken.getContent();
 
     content += commentTokenContent;
-    
-    this.setContent(content);
 
-    return this;  ///
+    commentToken = CommentToken.fromContentAndLine(content, line);  ///
+
+    return commentToken;
   }
 
-  updateHTML() {
-    var content = this.getContent(),
-        innerHTML = content, ///
-        sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
-        html = `<span class="comment">${sanitisedInnerHTML}</span>`;
+  static htmlFromContent(content) {
+    var innerHTML = content;
 
-    this.setHTML(html);
+    innerHTML = Token.sanitiseHTML(innerHTML);  ///
+
+    var html = `<span class="comment">${innerHTML}</span>`;
+
+    return html;
   }
+
+  static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 }
 
 module.exports = CommentToken;

@@ -3,21 +3,13 @@
 var SignificantToken = require('../token/significant');
 
 class StringToken extends SignificantToken {
-  constructor(content, line) {
-    var type = SignificantToken.types.string;
-    
-    super(content, line, type);
-  }
-
-  clone () { return super.clone(StringToken); }
-
   static position(content) {
     var position = content.search(/"[^"]*"/);
 
     return position;
   }
 
-  static fromContent(content, line) {
+  static fromContentAndLine(content, line) {
     var stringToken = null,
         matches = content.match(/("[^"]*")/);
 
@@ -26,12 +18,14 @@ class StringToken extends SignificantToken {
       
       content = firstMatch; ///
 
-      stringToken = new StringToken(content, line);
+      stringToken = SignificantToken.fromContentAndLine(content, line, StringToken);
     }
     
     return stringToken;
   }
 }
+
+StringToken.type = 'string';
 
 module.exports = StringToken;
 

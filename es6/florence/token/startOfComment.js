@@ -3,15 +3,13 @@
 var CommentToken = require('../../common/token/comment');
 
 class StartOfCommentToken extends CommentToken {
-  clone() { return super.clone(StartOfCommentToken); }
-
   static position(content) {
     var position = content.search(/\/\*/);
 
     return position;
   }
 
-  static fromContent(content, line) {
+  static fromContentAndLine(content, line) {
     var startOfCommentToken = null,
         matches = content.match(/^\/\*/);
 
@@ -20,7 +18,7 @@ class StartOfCommentToken extends CommentToken {
 
       content = firstMatch; ///
 
-      startOfCommentToken = new StartOfCommentToken(content, line);
+      startOfCommentToken = CommentToken.fromContentAndLine(content, line, StartOfCommentToken);
     }
     
     return startOfCommentToken;

@@ -3,14 +3,12 @@
 var CommentToken = require('../../common/token/comment');
 
 class MiddleOfCommentToken extends CommentToken {
-  clone() { return super.clone(MiddleOfCommentToken); }
-  
-  static fromContent(content, line, middleOfCommentTokenLength) {
+  static fromContentAndLine(content, line, middleOfCommentTokenLength) {
     var middleOfCommentTokenContent = content.substring(0, middleOfCommentTokenLength);
 
     content = middleOfCommentTokenContent;  ///
 
-    var middleOfCommentToken = new MiddleOfCommentToken(content, line);
+    var middleOfCommentToken = CommentToken.fromContentAndLine(content, line, MiddleOfCommentToken);
 
     return middleOfCommentToken;
   }

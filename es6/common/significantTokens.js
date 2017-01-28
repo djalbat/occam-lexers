@@ -8,7 +8,7 @@ class SignificantTokens {
       if (typeof tokenOrRemainingContent === 'string') {
         var content = tokenOrRemainingContent,  ///
             depth = 0,
-            significantTokens = significantTokensFromContent(content, line, rules, depth);
+            significantTokens = significantTokensFromContentAndLine(content, line, rules, depth);
 
         tokens = tokens.concat(significantTokens);
       } else {
@@ -26,9 +26,7 @@ class SignificantTokens {
 
 module.exports = SignificantTokens;
 
-const RULE_IS_UNDEFINED_MESSAGE = 'There are no rules to parse this content.';
-
-function significantTokensFromContent(content, line, rules, depth) {
+function significantTokensFromContentAndLine(content, line, rules, depth) {
   var significantTokens,
       rule = rules.getRule(depth),
       ruleIsUndefined = (rule === undefined);
@@ -36,7 +34,7 @@ function significantTokensFromContent(content, line, rules, depth) {
   if (content === '') {
     significantTokens = [];
   } else if (ruleIsUndefined) {
-    var errorToken = new ErrorToken(content, line, RULE_IS_UNDEFINED_MESSAGE),
+    var errorToken = ErrorToken.fromContentAndLine(content, line),
         errorTokens = [errorToken];
 
     significantTokens = errorTokens;  ///
@@ -45,16 +43,16 @@ function significantTokensFromContent(content, line, rules, depth) {
         significantTokenPosition = rule.significantTokenPosition(content);
 
     if (significantTokenPosition === -1) {
-      significantTokens = significantTokensFromContent(content, line, rules, nextDepth);
+      significantTokens = significantTokensFromContentAndLine(content, line, rules, nextDepth);
     } else {
-      var significantToken = rule.significantTokenFromContent(content, line),
+      var significantToken = rule.significantTokenFromContentAndLine(content, line),
           significantTokenLength = significantToken.getLength(),
           left = significantTokenPosition,  ///
           right = significantTokenPosition + significantTokenLength,  ///
           leftContent = content.substr(0, left),
           rightContent = content.substr(right),
-          leftSignificantTokens = significantTokensFromContent(leftContent, line, rules, nextDepth),
-          rightSignificantTokens = significantTokensFromContent(rightContent, line, rules, depth);
+          leftSignificantTokens = significantTokensFromContentAndLine(leftContent, line, rules, nextDepth),
+          rightSignificantTokens = significantTokensFromContentAndLine(rightContent, line, rules, depth);
 
       significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
     }

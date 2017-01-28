@@ -3,34 +3,18 @@
 var Token = require('../token');
 
 class ErrorToken extends Token {
-  constructor(content, line, message) {
-    super(content, line);
+  static htmlFromContent(content) {
+    var innerHTML = content, ///
+        className = 'error'; ///
 
-    this.message = message;
-  }
-  
-  clone() {
-    var content = this.getContent(),
-        line = this.getLine(),
-        message = this.getMessage(),
-        errorToken = new ErrorToken(content, line, message);
-    
-    return errorToken;
-  }
-  
-  getMessage() {
-    return this.message;
+    innerHTML = Token.sanitiseHTML(innerHTML);
+
+    var html = `<span class="${className}">${innerHTML}</span>`;
+
+    return html;
   }
 
-  updateHTML() {
-    var content = this.getContent(),
-        innerHTML = content, ///
-        className = 'error',  ///
-        sanitisedInnerHTML = Token.sanitiseHTML(innerHTML),
-        html = `<span class="${className}"">${sanitisedInnerHTML}</span>`;
-
-    this.setHTML(html);
-  }
+  static fromContentAndLine(content, line) { return Token.fromContentAndLine(content, line, ErrorToken); }
 }
 
 module.exports = ErrorToken;

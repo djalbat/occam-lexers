@@ -13,7 +13,7 @@ class NonSignificantTokens {
       var whitespaceTokenPosition = WhitespaceToken.position(content);
 
       if (whitespaceTokenPosition === 0) {
-        var whitespaceToken = WhitespaceToken.fromContent(content, line),
+        var whitespaceToken = WhitespaceToken.fromContentAndLine(content, line),
             whitespaceTokenLength = whitespaceToken.getLength();
 
         content = content.substring(whitespaceTokenLength);

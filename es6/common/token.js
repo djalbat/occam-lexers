@@ -1,15 +1,10 @@
 'use strict';
 
 class Token {
-  constructor(content, line, updateHTML = true) {
+  constructor(content, line, html) {
     this.content = content;
     this.line = line;
-
-    this.html = undefined;  ///
-
-    if (updateHTML) {
-      this.updateHTML();
-    }
+    this.html = html;
   }
 
   getContent() {
@@ -28,38 +23,6 @@ class Token {
     return this.content.length; ///
   }
 
-  setContent(content) {
-    this.content = content;
-
-    this.updateHTML();
-  }
-
-  setLine(line) {
-    this.line = line;
-  }
-
-  setHTML(html) {
-    this.html = html;
-  }
-
-  getTrimmedContent(startPosition, endPosition) {
-    var trimmedContent = this.content.substring(startPosition, endPosition);
-
-    return trimmedContent;
-  }
-
-  trimContentToPosition(position) {
-    this.content = this.content.substr(position);
-
-    this.updateHTML();
-  }
-
-  trimContentFromPosition(position) {
-    this.content = this.content.substr(0, position);
-
-    this.updateHTML();
-  }
-
   replaceWith(token) {
     var tokens = this.line.getTokens(),
         index = tokens.indexOf(this);
@@ -67,35 +30,50 @@ class Token {
     tokens.splice(index, 1, token);
   }
 
-  updateHTML() {
-    var html = this.content;  ///
+  // static trimmedToPosition(token, position) {
+  //   var tokenTrimmedToPosition = null,
+  //       tokenLength = token.getLength();
+  //
+  //   if (position !== tokenLength) {
+  //     var content = token.getContent(),
+  //         line = token.getLine();
+  //
+  //     content = content.substring(position);
+  //
+  //     tokenTrimmedToPosition = Token.fromContentAndLine(content, line);
+  //   }
+  //
+  //   return tokenTrimmedToPosition;
+  // }
+  //
+  // static trimmedFromPosition(token, position) {
+  //   var tokenTrimmedFromPosition = null;
+  //
+  //   if (position !== 0) {
+  //     var content = token.getContent(),
+  //         line = token.getLine();
+  //
+  //     content = content.substring(0, position);
+  //
+  //     tokenTrimmedFromPosition.Token.fromContentAndLine(content, line);
+  //   }
+  //
+  //   return tokenTrimmedFromPosition;
+  // }
 
-    this.html = Token.sanitiseHTML(html);
+  static htmlFromContent(content) {
+    var html = content; ///
+
+    html = Token.sanitiseHTML(html);  ///
+
+    return html;
   }
 
-  static trimmedToPosition(token, position) {
-    var tokenTrimmedToPosition = null,
-        tokenLength = token.getLength();
+  static fromContentAndLine(content, line, Class = Token) {
+    var html = Class.htmlFromContent(content),
+        token = new Class(content, line, html);
 
-    if (position !== tokenLength) {
-      tokenTrimmedToPosition = token.clone(); ///
-
-      tokenTrimmedToPosition.trimContentToPosition(position);
-    }
-
-    return tokenTrimmedToPosition;
-  }
-
-  static trimmedFromPosition(token, position) {
-    var tokenTrimmedFromPosition = null;
-
-    if (position !== 0) {
-      tokenTrimmedFromPosition = token.clone(); ///
-
-      tokenTrimmedFromPosition.trimContentFromPosition(position); ///
-    }
-
-    return tokenTrimmedFromPosition;
+    return token;
   }
 
   static sanitiseHTML(html) {
