@@ -25,7 +25,7 @@ class WhitespaceToken extends SignificantToken {
   }
 }
 
-WhitespaceToken.type = 'whitespace';
+WhitespaceToken.type = SignificantToken.types.whitespace;
 
 module.exports = WhitespaceToken;
 

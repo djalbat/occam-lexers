@@ -1,9 +1,9 @@
 'use strict';
 
-var EndOfLineToken = require('./token/endOfLine'),
-    CommentTokens = require('./commentTokens'),
+var CommentTokens = require('./commentTokens'),
     CommonLine = require('../common/line'),
     StringTokens = require('../common/stringTokens'),
+    EndOfLineToken = require('../common/token/endOfLine'),
     WhitespaceTokens = require('../common/whitespaceTokens');
 
 class Line extends CommonLine {

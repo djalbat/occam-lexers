@@ -2,7 +2,8 @@
 
 var Line = require('./line'),
     util = require('../util'),
-    Rules = require('./rules');
+    Rules = require('./rules'),
+    SignificantToken = require('./token/significant');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -31,14 +32,15 @@ class CommonLexer {
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
   static getSignificantTokenTypes(grammar) {
-    var significantTokenTypes = grammar.map(function(entry) {
-      var type = util.typeFromEntry(entry),
-          significantTokenType = type;  ///
+    var significantTokenTypes = Object.keys(SignificantToken.types),
+        grammarTypes = grammar.map(function(grammarEntry) {
+          var type = util.typeFromGrammarEntry(grammarEntry),
+              grammarType = type;  ///
 
-      return significantTokenType;
-    });
+          return grammarType;
+        });
 
-    significantTokenTypes.unshift('string');  ///
+    significantTokenTypes = significantTokenTypes.concat(grammarTypes); ///
 
     return significantTokenTypes;
   }

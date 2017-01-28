@@ -25,7 +25,7 @@ class StringToken extends SignificantToken {
   }
 }
 
-StringToken.type = 'string';
+StringToken.type = SignificantToken.types.string;
 
 module.exports = StringToken;
 

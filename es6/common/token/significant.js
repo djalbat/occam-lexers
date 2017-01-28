@@ -42,4 +42,10 @@ class SignificantToken extends Token {
   static sanitiseHTML(html) { return Token.sanitiseHTML(html); }
 }
 
+SignificantToken.types = {
+  string: 'string',
+  endOfLine: 'endOfLine',
+  whitespace: 'whitespace'
+};
+
 module.exports = SignificantToken;

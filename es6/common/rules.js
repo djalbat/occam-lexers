@@ -31,9 +31,9 @@ class Rules {
   }
 
   static fromGrammar(grammar) {
-    var array = grammar.map(function(entry) {
-          var type = util.typeFromEntry(entry),
-              regExp = util.regExpFromEntry(entry),
+    var array = grammar.map(function(grammarEntry) {
+          var type = util.typeFromGrammarEntry(grammarEntry),
+              regExp = util.regExpFromGrammarEntry(grammarEntry),
               rule = new Rule(type, regExp);
 
           return rule;

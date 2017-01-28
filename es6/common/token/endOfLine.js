@@ -1,6 +1,6 @@
 'use strict';
 
-var SignificantToken = require('../../common/token/significant');
+var SignificantToken = require('./significant');
 
 class EndOfLineToken extends SignificantToken {
   static htmlFromContent(content) {
@@ -17,6 +17,6 @@ class EndOfLineToken extends SignificantToken {
   }
 }
 
-EndOfLineToken.type = 'endOfLine';
+EndOfLineToken.type = SignificantToken.types.endOfLine;
 
 module.exports = EndOfLineToken;
