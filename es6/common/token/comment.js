@@ -15,13 +15,9 @@ class CommentToken extends Token {
     return commentToken;
   }
 
-  toPosition(position) { return CommentToken.toPosition(this, position) }
+  clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, CommentToken); }
 
-  fromPosition(position) { return CommentToken.fromPosition(this, position) }
-
-  static toPosition(token, position, Class = CommentToken) { return Token.toPosition(token, position, Class) }
-
-  static fromPosition(token, position, Class = CommentToken) { return Token.fromPosition(token, position, Class) }
+  static clone(token, startPosition, endPosition, Class) { return Token.clone(token, startPosition, endPosition, Class); }
 
   static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 

@@ -8,7 +8,7 @@ class Rule {
     this.regExp = regExp;
   }
   
-  significantTokenPosition(content) {
+  significantTokenPositionWithinContent(content) {
     var significantTokenPosition = -1,
         matches = content.match(this.regExp);
     
@@ -23,7 +23,7 @@ class Rule {
     return significantTokenPosition;
   }
 
-  significantTokenFromContentAndLine(content, line) {
+  significantTokenFromWithinContentAndLine(content, line) {
     var matches = content.match(this.regExp),
         firstMatch = first(matches);
 

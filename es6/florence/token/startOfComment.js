@@ -3,11 +3,11 @@
 var CommentToken = require('../../common/token/comment');
 
 class StartOfCommentToken extends CommentToken {
-  toPosition(position) { return CommentToken.toPosition(this, position, StartOfCommentToken) }
+  clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, StartOfCommentToken); }
 
-  fromPosition(position) { return CommentToken.fromPosition(this, position, StartOfCommentToken) }
+  static fromContentAndLine(content, line) { return CommentToken.fromContentAndLine(content, line, StartOfCommentToken); }
 
-  static fromContentAndLine(content, line) {
+  static fromWithinContentAndLine(content, line) {
     var startOfCommentToken = null,
         matches = content.match(/^\/\*/);
 
@@ -16,13 +16,13 @@ class StartOfCommentToken extends CommentToken {
 
       content = firstMatch; ///
 
-      startOfCommentToken = CommentToken.fromContentAndLine(content, line, StartOfCommentToken);
+      startOfCommentToken = StartOfCommentToken.fromContentAndLine(content, line);
     }
     
     return startOfCommentToken;
   }
 
-  static position(content) {
+  static positionWithinContent(content) {
     var position = content.search(/\/\*/);
 
     return position;

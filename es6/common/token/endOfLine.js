@@ -3,9 +3,7 @@
 var SignificantToken = require('./significant');
 
 class EndOfLineToken extends SignificantToken {
-  toPosition(position) { return SignificantToken.toPosition(this, position, EndOfLineToken) }
-
-  fromPosition(position) { return SignificantToken.fromPosition(this, position, EndOfLineToken) }
+  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, EndOfLineToken); }
 
   static fromLine(line) {
     var content = '',

@@ -14,22 +14,6 @@ class Rules {
     return rule;
   }
   
-  significantTokenFromContentAndLine(content, line) {
-    var significantToken = null;
-
-    this.array.some(function(rule) {
-      significantToken = rule.significantTokenFromContentAndLine(content, line);
-
-      if (significantToken !== null) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    
-    return significantToken;
-  }
-
   static fromGrammar(grammar) {
     var array = grammar.map(function(grammarEntry) {
           var type = util.typeFromGrammarEntry(grammarEntry),

@@ -16,16 +16,16 @@ class CommentTokens {
           inComment = context.isInComment();
 
       if (inComment) {
-        var endOfCommentTokenPosition = EndOfCommentToken.position(content);
+        var endOfCommentTokenPositionWithinContent = EndOfCommentToken.positionWithinContent(content);
 
-        if (endOfCommentTokenPosition === 0) {
+        if (endOfCommentTokenPositionWithinContent === 0) {
           context.setInComment(false);
 
-          commentToken = EndOfCommentToken.fromContentAndLine(content, line);
+          commentToken = EndOfCommentToken.fromWithinContentAndLine(content, line);
 
           commentTokenLength = commentToken.getLength();
         } else {
-          var middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPosition, contentLength);
+          var middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
           commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
 
@@ -42,12 +42,12 @@ class CommentTokens {
 
         content = content.substring(commentTokenLength);
       } else {
-        var startOfCommentTokenPosition = StartOfCommentToken.position(content);
+        var startOfCommentTokenPositionWithinContent = StartOfCommentToken.positionWithinContent(content);
 
-        if (startOfCommentTokenPosition === 0) {
+        if (startOfCommentTokenPositionWithinContent === 0) {
           context.setInComment(true);
 
-          commentToken = StartOfCommentToken.fromContentAndLine(content, line);
+          commentToken = StartOfCommentToken.fromWithinContentAndLine(content, line);
 
           commentTokenLength = commentToken.getLength();
 
@@ -55,7 +55,7 @@ class CommentTokens {
 
           content = content.substring(commentTokenLength);
         } else {
-          contentLength = util.minBarMinusOne(startOfCommentTokenPosition, contentLength);
+          contentLength = util.minBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
 
           var remainingContent = content.substring(contentLength);
 

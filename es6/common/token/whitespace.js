@@ -3,11 +3,11 @@
 var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
-  toPosition(position) { return SignificantToken.toPosition(this, position, WhitespaceToken) }
+  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
 
-  fromPosition(position) { return SignificantToken.fromPosition(this, position, WhitespaceToken) }
+  static fromContentAndLine(content, line) { return SignificantToken.fromContentAndLine(content, line, WhitespaceToken); }
 
-  static fromContentAndLine(content, line) {
+  static fromWithinContentAndLine(content, line) {
     var whitespaceToken = null,
         matches = content.match(/([\t ]+)/);
 
@@ -16,13 +16,13 @@ class WhitespaceToken extends SignificantToken {
       
       content = firstMatch; ///
 
-      whitespaceToken = SignificantToken.fromContentAndLine(content, line, WhitespaceToken);
+      whitespaceToken = WhitespaceToken.fromContentAndLine(content, line);
     }
 
     return whitespaceToken;
   }
 
-  static position(content) {
+  static positionWithinContent(content) {
     var position = content.search(/[\t ]+/);
 
     return position;

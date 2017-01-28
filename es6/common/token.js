@@ -7,6 +7,8 @@ class Token {
     this.html = html;
   }
 
+  clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
+
   getContent() {
     return this.content;
   }
@@ -30,39 +32,19 @@ class Token {
     tokens.splice(index, 1, token);
   }
 
-  toPosition(position) { return Token.toPosition(this, position) }
+  static clone(token, startPosition = 0, endPosition = token.getLength(), Class) {
+    var clonedToken = null;
 
-  fromPosition(position) { return Token.fromPosition(this, position) }
-
-  static toPosition(token, position, Class = Token) {
-    var tokenToPosition = null;
-
-    if (position !== 0) {
+    if (startPosition !== endPosition) {
       var content = token.getContent(),
           line = token.getLine();
 
-      content = content.substring(0, position);
+      content = content.substring(startPosition, endPosition);
 
-      tokenToPosition = Class.fromContentAndLine(content, line);
+      clonedToken = Class.fromContentAndLine(content, line);
     }
 
-    return tokenToPosition;
-  }
-
-  static fromPosition(token, position, Class = Token) {
-    var tokenFromPosition = null,
-        tokenLength = token.getLength();
-
-    if (position !== tokenLength) {
-      var content = token.getContent(),
-          line = token.getLine();
-
-      content = content.substring(position);
-
-      tokenFromPosition = Class.fromContentAndLine(content, line);
-    }
-
-    return tokenFromPosition;
+    return clonedToken;
   }
 
   static fromContentAndLine(content, line, Class = Token) {

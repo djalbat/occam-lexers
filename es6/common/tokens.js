@@ -13,7 +13,7 @@ class Tokens {
 
       if (typeof tokenOrContent === 'string') {
         var content = tokenOrContent,  ///
-            tokensOrRemainingContent = tokensOrRemainingContentFromContent(content, line, Token),
+            tokensOrRemainingContent = tokensOrRemainingContentFromWithinContentAndLine(content, line, Token),
             tokensOrRemainingContentLength = tokensOrRemainingContent.length,
             start = offsetIndex;
 
@@ -27,27 +27,27 @@ class Tokens {
 
 module.exports = Tokens;
 
-function tokensOrRemainingContentFromContent(content, line, Token) {
+function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) {
   var tokensOrRemainingContent = [],
       remainingContent,
-      tokenPosition = Token.position(content);
+      tokenPositionWithinContent = Token.positionWithinContent(content);
   
-  while (tokenPosition !== -1) {
-    if (tokenPosition > 0) {
-      remainingContent = content.substring(0, tokenPosition);
+  while (tokenPositionWithinContent !== -1) {
+    if (tokenPositionWithinContent > 0) {
+      remainingContent = content.substring(0, tokenPositionWithinContent);
 
       tokensOrRemainingContent.push(remainingContent);
     }
 
-    var token = Token.fromContentAndLine(content, line),
+    var token = Token.fromWithinContentAndLine(content, line),
         tokenLength = token.getLength(),
-        tokenOffset = tokenPosition + tokenLength;
+        tokenOffset = tokenPositionWithinContent + tokenLength;
     
     tokensOrRemainingContent.push(token);
     
     content = content.substring(tokenOffset);
 
-    tokenPosition = Token.position(content);
+    tokenPositionWithinContent = Token.positionWithinContent(content);
   }
   
   if (content !== '') {
