@@ -13,16 +13,13 @@ class SignificantToken extends Token {
     return this.type;
   }
 
-  static htmlFromContentAndType(content, type) {
-    var innerHTML = content, ///
-        className = type; ///
+  toPosition(position) { return SignificantToken.toPosition(this, position) }
 
-    innerHTML = Token.sanitiseHTML(innerHTML);
+  fromPosition(position) { return SignificantToken.fromPosition(this, position) }
 
-    var html = `<span class="${className}">${innerHTML}</span>`;
+  static toPosition(position, Class = SignificantToken) { return Token.toPosition(this, position, Class) }
 
-    return html;
-  }
+  static fromPosition(position, Class = SignificantToken) { return Token.fromPosition(this, position, Class) }
 
   static fromContentAndLine(content, line, Class = SignificantToken) {
     var type = Class.type,
@@ -37,6 +34,17 @@ class SignificantToken extends Token {
         significantToken = new SignificantToken(content, line, html, type);
 
     return significantToken;
+  }
+
+  static htmlFromContentAndType(content, type) {
+    var innerHTML = content, ///
+        className = type; ///
+
+    innerHTML = Token.sanitiseHTML(innerHTML);
+
+    var html = `<span class="${className}">${innerHTML}</span>`;
+
+    return html;
   }
 
   static sanitiseHTML(html) { return Token.sanitiseHTML(html); }

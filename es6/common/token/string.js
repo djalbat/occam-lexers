@@ -3,11 +3,9 @@
 var SignificantToken = require('../token/significant');
 
 class StringToken extends SignificantToken {
-  static position(content) {
-    var position = content.search(/"[^"]*"/);
+  toPosition(position) { return SignificantToken.toPosition(this, position, StringToken) }
 
-    return position;
-  }
+  fromPosition(position) { return SignificantToken.fromPosition(this, position, StringToken) }
 
   static fromContentAndLine(content, line) {
     var stringToken = null,
@@ -22,6 +20,12 @@ class StringToken extends SignificantToken {
     }
     
     return stringToken;
+  }
+
+  static position(content) {
+    var position = content.search(/"[^"]*"/);
+
+    return position;
   }
 }
 

@@ -3,11 +3,9 @@
 var CommentToken = require('../../common/token/comment');
 
 class EndOfCommentToken extends CommentToken {
-  static position(content) {
-    var position = content.search(/\*\//);
+  toPosition(position) { return CommentToken.toPosition(this, position, EndOfCommentToken) }
 
-    return position;
-  }
+  fromPosition(position) { return CommentToken.fromPosition(this, position, EndOfCommentToken) }
 
   static fromContentAndLine(content, line) {
     var endOfCommentToken = null,
@@ -22,6 +20,12 @@ class EndOfCommentToken extends CommentToken {
     }
 
     return endOfCommentToken;
+  }
+
+  static position(content) {
+    var position = content.search(/\*\//);
+
+    return position;
   }
 }
 

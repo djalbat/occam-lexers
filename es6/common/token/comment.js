@@ -15,6 +15,16 @@ class CommentToken extends Token {
     return commentToken;
   }
 
+  toPosition(position) { return CommentToken.toPosition(this, position) }
+
+  fromPosition(position) { return CommentToken.fromPosition(this, position) }
+
+  static toPosition(position, Class = CommentToken) { return Token.toPosition(this, position, Class) }
+
+  static fromPosition(position, Class = CommentToken) { return Token.fromPosition(this, position, Class) }
+
+  static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
+
   static htmlFromContent(content) {
     var innerHTML = content;
 
@@ -24,8 +34,6 @@ class CommentToken extends Token {
 
     return html;
   }
-
-  static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 }
 
 module.exports = CommentToken;

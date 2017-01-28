@@ -3,17 +3,21 @@
 var SignificantToken = require('./significant');
 
 class EndOfLineToken extends SignificantToken {
-  static htmlFromContent(content) {
-    var html = '';
+  toPosition(position) { return SignificantToken.toPosition(this, position, EndOfLineToken) }
 
-    return html;
-  }
+  fromPosition(position) { return SignificantToken.fromPosition(this, position, EndOfLineToken) }
 
   static fromLine(line) {
     var content = '',
         endOfLineToken = SignificantToken.fromContentAndLine(content, line, EndOfLineToken);
     
     return endOfLineToken;
+  }
+
+  static htmlFromContent(content) {
+    var html = '';  ///
+
+    return html;
   }
 }
 

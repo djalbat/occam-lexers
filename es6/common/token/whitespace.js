@@ -3,11 +3,9 @@
 var SignificantToken = require('../token/significant');
 
 class WhitespaceToken extends SignificantToken {
-  static position(content) {
-    var position = content.search(/[\t ]+/);
+  toPosition(position) { return SignificantToken.toPosition(this, position, WhitespaceToken) }
 
-    return position;
-  }
+  fromPosition(position) { return SignificantToken.fromPosition(this, position, WhitespaceToken) }
 
   static fromContentAndLine(content, line) {
     var whitespaceToken = null,
@@ -22,6 +20,12 @@ class WhitespaceToken extends SignificantToken {
     }
 
     return whitespaceToken;
+  }
+
+  static position(content) {
+    var position = content.search(/[\t ]+/);
+
+    return position;
   }
 }
 

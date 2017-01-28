@@ -3,6 +3,12 @@
 var Token = require('../token');
 
 class ErrorToken extends Token {
+  toPosition(position) { return Token.toPosition(this, position, ErrorToken) }
+
+  fromPosition(position) { return Token.fromPosition(this, position, ErrorToken) }
+
+  static fromContentAndLine(content, line) { return Token.fromContentAndLine(content, line, ErrorToken); }
+
   static htmlFromContent(content) {
     var innerHTML = content, ///
         className = 'error'; ///
@@ -13,8 +19,6 @@ class ErrorToken extends Token {
 
     return html;
   }
-
-  static fromContentAndLine(content, line) { return Token.fromContentAndLine(content, line, ErrorToken); }
 }
 
 module.exports = ErrorToken;

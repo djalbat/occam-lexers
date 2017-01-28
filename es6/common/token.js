@@ -30,43 +30,39 @@ class Token {
     tokens.splice(index, 1, token);
   }
 
-  // static trimmedToPosition(token, position) {
-  //   var tokenTrimmedToPosition = null,
-  //       tokenLength = token.getLength();
-  //
-  //   if (position !== tokenLength) {
-  //     var content = token.getContent(),
-  //         line = token.getLine();
-  //
-  //     content = content.substring(position);
-  //
-  //     tokenTrimmedToPosition = Token.fromContentAndLine(content, line);
-  //   }
-  //
-  //   return tokenTrimmedToPosition;
-  // }
-  //
-  // static trimmedFromPosition(token, position) {
-  //   var tokenTrimmedFromPosition = null;
-  //
-  //   if (position !== 0) {
-  //     var content = token.getContent(),
-  //         line = token.getLine();
-  //
-  //     content = content.substring(0, position);
-  //
-  //     tokenTrimmedFromPosition.Token.fromContentAndLine(content, line);
-  //   }
-  //
-  //   return tokenTrimmedFromPosition;
-  // }
+  toPosition(position) { return Token.toPosition(this, position) }
 
-  static htmlFromContent(content) {
-    var html = content; ///
+  fromPosition(position) { return Token.fromPosition(this, position) }
 
-    html = Token.sanitiseHTML(html);  ///
+  static toPosition(token, position, Class = Token) {
+    var tokenTrimmedToPosition = null,
+        tokenLength = token.getLength();
 
-    return html;
+    if (position !== tokenLength) {
+      var content = token.getContent(),
+          line = token.getLine();
+
+      content = content.substring(position);
+
+      tokenTrimmedToPosition = Class.fromContentAndLine(content, line);
+    }
+
+    return tokenTrimmedToPosition;
+  }
+
+  static fromPosition(token, position, Class = Token) {
+    var tokenTrimmedFromPosition = null;
+
+    if (position !== 0) {
+      var content = token.getContent(),
+          line = token.getLine();
+
+      content = content.substring(0, position);
+
+      tokenTrimmedFromPosition = Class.fromContentAndLine(content, line);
+    }
+
+    return tokenTrimmedFromPosition;
   }
 
   static fromContentAndLine(content, line, Class = Token) {
@@ -74,6 +70,14 @@ class Token {
         token = new Class(content, line, html);
 
     return token;
+  }
+
+  static htmlFromContent(content) {
+    var html = content; ///
+
+    html = Token.sanitiseHTML(html);  ///
+
+    return html;
   }
 
   static sanitiseHTML(html) {
