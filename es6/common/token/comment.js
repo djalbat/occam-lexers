@@ -19,9 +19,9 @@ class CommentToken extends Token {
 
   fromPosition(position) { return CommentToken.fromPosition(this, position) }
 
-  static toPosition(position, Class = CommentToken) { return Token.toPosition(this, position, Class) }
+  static toPosition(token, position, Class = CommentToken) { return Token.toPosition(token, position, Class) }
 
-  static fromPosition(position, Class = CommentToken) { return Token.fromPosition(this, position, Class) }
+  static fromPosition(token, position, Class = CommentToken) { return Token.fromPosition(token, position, Class) }
 
   static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 

@@ -17,9 +17,9 @@ class SignificantToken extends Token {
 
   fromPosition(position) { return SignificantToken.fromPosition(this, position) }
 
-  static toPosition(position, Class = SignificantToken) { return Token.toPosition(this, position, Class) }
+  static toPosition(token, position, Class = SignificantToken) { return Token.toPosition(token, position, Class) }
 
-  static fromPosition(position, Class = SignificantToken) { return Token.fromPosition(this, position, Class) }
+  static fromPosition(token, position, Class = SignificantToken) { return Token.fromPosition(token, position, Class) }
 
   static fromContentAndLine(content, line, Class = SignificantToken) {
     var type = Class.type,
