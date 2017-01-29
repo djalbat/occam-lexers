@@ -9,11 +9,11 @@ class SignificantToken extends Token {
     this.type = type;
   }
 
-  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
-
   getType() {
     return this.type;
   }
+
+  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
 
   static clone(token, startPosition, endPosition, Class) { return Token.clone(token, startPosition, endPosition, Class) }
 
@@ -24,6 +24,8 @@ class SignificantToken extends Token {
 
     return significantToken;
   }
+
+  static fromToken(token) { return Token.fromToken(token, SignificantToken); }
 
   static fromContentLineAndType(content, line, type) {
     var html = SignificantToken.htmlFromContentAndType(content, type),

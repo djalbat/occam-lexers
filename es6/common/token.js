@@ -7,8 +7,6 @@ class Token {
     this.html = html;
   }
 
-  clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
-
   getContent() {
     return this.content;
   }
@@ -32,6 +30,8 @@ class Token {
     tokens.splice(index, 1, token);
   }
 
+  clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
+
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class) {
     var clonedToken = null;
 
@@ -52,6 +52,14 @@ class Token {
         token = new Class(content, line, html);
 
     return token;
+  }
+
+  static fromToken(token, Class = Token) {
+    var content = token.getContent(),
+        line = token.getLine(),
+        errorToken = Class.fromContentAndLine(content, line);
+    
+    return errorToken;
   }
 
   static htmlFromContent(content) {
