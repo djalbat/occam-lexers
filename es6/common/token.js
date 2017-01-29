@@ -41,7 +41,7 @@ class Token {
 
       content = content.substring(startPosition, endPosition);
 
-      clonedToken = Class.fromContentAndLine(content, line);
+      clonedToken = Class.fromContentAndLine(content, line, Class);
     }
 
     return clonedToken;
