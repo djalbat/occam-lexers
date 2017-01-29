@@ -13,12 +13,18 @@ class CommonLexer {
 
   linesFromContent(content, context) {
     var contents = content.split(/\n/),
-        lines = contents.map(function(content) {
-          var line = this.Line.fromContent(content, context, this.rules);
+        lines = this.linesFromContents(contents, context);
   
+    return lines;
+  }
+
+  linesFromContents(contents, context) {
+    var lines = contents.map(function(content) {
+          var line = this.Line.fromContent(content, context, this.rules);
+
           return line;
         }.bind(this));
-  
+
     return lines;
   }
   

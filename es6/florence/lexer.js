@@ -6,12 +6,12 @@ var Line = require('./line'),
     CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
-  linesFromContent(content, context) {
+  linesFromContents(contents, context) {
     var inComment = false;
 
     context = context || new Context(inComment);  ///
 
-    var lines = super.linesFromContent(content, context);
+    var lines = super.linesFromContents(contents, context);
 
     return lines;
   }
