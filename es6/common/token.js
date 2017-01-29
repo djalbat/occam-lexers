@@ -46,7 +46,7 @@ class Token {
 
     return clonedToken;
   }
-
+  
   static fromContentAndLine(content, line, Class = Token) {
     var html = Class.htmlFromContent(content),
         token = new Class(content, line, html);

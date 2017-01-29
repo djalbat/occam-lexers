@@ -7,6 +7,14 @@ class ErrorToken extends Token {
 
   static fromContentAndLine(content, line) { return Token.fromContentAndLine(content, line, ErrorToken); }
 
+  static fromToken(token) {
+    var content = token.getContent(),
+        line = token.getLine(),
+        errorToken = Token.fromContentAndLine(content, line, ErrorToken);
+
+    return errorToken;
+  }
+
   static htmlFromContent(content) {
     var innerHTML = content; ///
 
