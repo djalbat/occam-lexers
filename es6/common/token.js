@@ -56,10 +56,11 @@ class Token {
 
   static fromToken(token, Class = Token) {
     var content = token.getContent(),
-        line = token.getLine(),
-        errorToken = Class.fromContentAndLine(content, line);
+        line = token.getLine();
+
+    token = Class.fromContentAndLine(content, line, Class);
     
-    return errorToken;
+    return token;
   }
 
   static htmlFromContent(content) {
