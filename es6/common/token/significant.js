@@ -25,7 +25,7 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
-  static fromToken(token) { return Token.fromToken(token, SignificantToken); }
+  static fromToken(token, Class = SignificantToken) { return Token.fromToken(token, Class); }
 
   static fromContentLineAndType(content, line, type) {
     var html = SignificantToken.htmlFromContentAndType(content, type),
