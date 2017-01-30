@@ -6,7 +6,7 @@ var CommentTokens = require('./commentTokens'),
     WhitespaceTokens = require('../common/whitespaceTokens');
 
 class Line extends CommonLine {
-  static fromContent(content, context, rules) { return super.fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens); }
+  static fromContentAndNumber(content, number, context, rules) { return super.fromContentAndNumber(Line, content, number, context, rules, CommentTokens, StringTokens, WhitespaceTokens); }
 }
 
 module.exports = Line;

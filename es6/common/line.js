@@ -4,14 +4,19 @@ var util = require('../util'),
     SignificantTokens = require('./significantTokens');
 
 class Line {
-  constructor(content) {
+  constructor(content, number) {
     this.content = content;
+    this.number = number;
 
     this.tokens = undefined;
   }
 
   getContent() {
     return this.content;
+  }
+
+  getNumber() {
+    return this.number;
   }
 
   getTokens() {
@@ -32,6 +37,10 @@ class Line {
     return html;
   }
 
+  setNumber(number) {
+    this.number = number;
+  }
+
   setTokens(tokens) {
     this.tokens = tokens;
   }
@@ -47,8 +56,8 @@ class Line {
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
   }
 
-  static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
-    var line = new Line(content),
+  static fromContentAndNumber(Line, content, number, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
+    var line = new Line(content, number),
         tokens = [];
 
     if (content !== '') {

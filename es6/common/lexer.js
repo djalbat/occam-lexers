@@ -19,8 +19,9 @@ class CommonLexer {
   }
 
   linesFromContents(contents, context) {
-    var lines = contents.map(function(content) {
-          var line = this.Line.fromContent(content, context, this.rules);
+    var lines = contents.map(function(content, index) {
+          var number = index + 1,
+              line = this.Line.fromContentAndNumber(content, number, context, this.rules);
 
           return line;
         }.bind(this));
@@ -37,7 +38,7 @@ class CommonLexer {
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
-  static getSignificantTokenTypes(grammar) {
+  static significantTokenTypesFromGrammar(grammar) {
     var significantTokenTypes = Object.keys(SignificantToken.types),
         grammarTypes = grammar.map(function(grammarEntry) {
           var type = util.typeFromGrammarEntry(grammarEntry),

@@ -16,7 +16,11 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static getSignificantTokenTypes() { return CommonLexer.getSignificantTokenTypes(grammar); }
+  static getSignificantTokenTypes() {
+    var significantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar);
+
+    return significantTokenTypes;
+  }
 
   static fromNothing() {
     var rules = CommonLexer.rulesFromGrammar(grammar),
