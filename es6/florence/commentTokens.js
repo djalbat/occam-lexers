@@ -9,17 +9,18 @@ class CommentTokens {
   static pass(tokensOrContents, line, context) {
     var content = tokensOrContents.pop(),
         commentToken,
-        commentTokenLength;
+        commentTokenLength,
+        previousLineInComment = context.isPreviousLineInComment(),
+        inComment = (previousLineInComment === true);
 
     while (content !== '') {
-      var contentLength = content.length,
-          inComment = context.isInComment();
+      var contentLength = content.length;
 
       if (inComment) {
         var endOfCommentTokenPositionWithinContent = EndOfCommentToken.positionWithinContent(content);
 
         if (endOfCommentTokenPositionWithinContent === 0) {
-          context.setInComment(false);
+          inComment = false;
 
           commentToken = EndOfCommentToken.fromWithinContentAndLine(content, line);
 
@@ -45,7 +46,7 @@ class CommentTokens {
         var startOfCommentTokenPositionWithinContent = StartOfCommentToken.positionWithinContent(content);
 
         if (startOfCommentTokenPositionWithinContent === 0) {
-          context.setInComment(true);
+          inComment = true;
 
           commentToken = StartOfCommentToken.fromWithinContentAndLine(content, line);
 
@@ -67,6 +68,12 @@ class CommentTokens {
         }
       }
     }
+
+    previousLineInComment = inComment;  ///
+
+    context.setPreviousLineInComment(previousLineInComment);
+
+    return inComment;
   }
 }
 

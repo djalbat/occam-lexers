@@ -9,6 +9,7 @@ class Line {
     this.number = number;
 
     this.tokens = undefined;
+    this.inComment = undefined;
   }
 
   getContent() {
@@ -21,6 +22,10 @@ class Line {
 
   getTokens() {
     return this.tokens;
+  }
+
+  isInComment() {
+    return this.inComment;
   }
 
   getHTML() {
@@ -41,6 +46,10 @@ class Line {
     this.number = number;
   }
 
+  setInComment(inComment) {
+    this.inComment = inComment;
+  }
+
   setTokens(tokens) {
     this.tokens = tokens;
   }
@@ -56,14 +65,16 @@ class Line {
     util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
   }
 
-  static fromContentAndNumber(Line, content, number, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
-    var line = new Line(content, number),
+  static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
+    var lineNumber = context.getLineNumber(),
+        number = lineNumber,  ///
+        line = new Line(content, number),
         tokens = [];
 
     if (content !== '') {
-      var tokensOrContents = [content];
+      var tokensOrContents = [content],
+          inComment = CommentTokens.pass(tokensOrContents, line, context);
 
-      CommentTokens.pass(tokensOrContents, line, context);
       StringTokens.pass(tokensOrContents, line);
       WhitespaceTokens.pass(tokensOrContents, line);
 
@@ -71,6 +82,8 @@ class Line {
     }
 
     line.setTokens(tokens);
+
+    line.setInComment(inComment);
 
     return line;
   }

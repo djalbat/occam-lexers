@@ -21,18 +21,21 @@ class Example {
     contentTextArea.on('keyup', handler);
   }
 
-  static updateTokens(lexer) {
+  static updateTokens(lexer, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment) {
     var contentTextAreaValue = contentTextArea.getValue(),
         content = contentTextAreaValue,  ///
-        lines = lexer.linesFromContent(content),
-        linesHTML = lines.reduce(function(linesHTML, line) {
-          var lineHTML = line.getHTML();
+        contents = content.split(/\n/),
+        lines = lexer.linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
+        htmls = lines.reduce(function(htmls, line) {
+          var lineHTML = line.getHTML(),
+              lineNumber = line.getNumber(),
+              html = `${lineNumber}: ${lineHTML}`;
 
-          linesHTML += lineHTML;
+          htmls += html;
 
-          return linesHTML;
+          return htmls;
         }, ''),
-        tokensTextAreaHTML = linesHTML;  ///
+        tokensTextAreaHTML = htmls;  ///
 
     tokensTextArea.html(tokensTextAreaHTML);
   }

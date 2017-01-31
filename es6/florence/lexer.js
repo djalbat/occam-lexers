@@ -1,17 +1,14 @@
 'use strict';
 
 var Line = require('./line'),
-    Context = require('./context'),
     grammar = require('./grammar'),
+    Context = require('../common/context'),
     CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
-  linesFromContents(contents, context) {
-    var inComment = false;
-
-    context = context || new Context(inComment);  ///
-
-    var lines = super.linesFromContents(contents, context);
+  linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment) {
+    var context = new Context(lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
+        lines = super.linesFromContents(contents, context);
 
     return lines;
   }

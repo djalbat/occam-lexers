@@ -3,6 +3,7 @@
 var Line = require('./line'),
     util = require('../util'),
     Rules = require('./rules'),
+    Context = require('./context'),
     SignificantToken = require('./token/significant');
 
 class CommonLexer {
@@ -11,29 +12,33 @@ class CommonLexer {
     this.Line = Line;
   }
 
-  linesFromContent(content, context) {
-    var contents = content.split(/\n/),
-        lines = this.linesFromContents(contents, context);
-  
+  linesFromContents(contents, context = new Context()) {
+    var lines = [],
+        lineNumber = context.getLineNumber(),
+        index = lineNumber - 1,
+        content = contents[index],
+        firstLineNumber = lineNumber; ///
+
+    while (content !== undefined) {
+      var linesLength = lineNumber - firstLineNumber,
+          terminate = context.shouldTerminate(linesLength);
+
+      if (terminate) {
+        break;
+      }
+
+      var line = this.Line.fromContent(content, context, this.rules);
+
+      lines.push(line);
+
+      context.incrementLineNumber();
+
+      lineNumber = context.getLineNumber();
+      index = lineNumber - 1;
+      content = contents[index];
+    }
+
     return lines;
-  }
-
-  linesFromContents(contents, context) {
-    var lines = contents.map(function(content, index) {
-          var number = index + 1,
-              line = this.Line.fromContentAndNumber(content, number, context, this.rules);
-
-          return line;
-        }.bind(this));
-
-    return lines;
-  }
-  
-  tokensFromContent(content) {
-    var lines = this.linesFromContent(content),
-        tokens = tokensFromLines(lines);
-    
-    return tokens;    
   }
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
@@ -54,15 +59,3 @@ class CommonLexer {
 }
 
 module.exports = CommonLexer;
-
-function tokensFromLines(lines) {
-  var tokens = lines.reduce(function(tokens, line) {
-    var lineTokens = line.getTokens();
-
-    tokens = tokens.concat(lineTokens);
-
-    return tokens;
-  }, []);
-
-  return tokens;
-}

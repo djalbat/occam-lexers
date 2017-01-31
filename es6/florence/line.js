@@ -7,8 +7,8 @@ var CommentTokens = require('./commentTokens'),
     WhitespaceTokens = require('../common/whitespaceTokens');
 
 class Line extends CommonLine {
-  static fromContentAndNumber(content, number, context, rules) {
-    var line = super.fromContentAndNumber(Line, content, number, context, rules, CommentTokens, StringTokens, WhitespaceTokens),
+  static fromContent(content, context, rules) {
+    var line = super.fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens),
         endOfLineToken = EndOfLineToken.fromLine(line);
     
     line.pushToken(endOfLineToken);
