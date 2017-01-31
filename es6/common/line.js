@@ -69,17 +69,13 @@ class Line {
     var lineNumber = context.getLineNumber(),
         number = lineNumber,  ///
         line = new Line(content, number),
-        tokens = [];
+        tokensOrContents = [content],
+        inComment = CommentTokens.pass(tokensOrContents, line, context);
 
-    if (content !== '') {
-      var tokensOrContents = [content],
-          inComment = CommentTokens.pass(tokensOrContents, line, context);
+    StringTokens.pass(tokensOrContents, line);
+    WhitespaceTokens.pass(tokensOrContents, line);
 
-      StringTokens.pass(tokensOrContents, line);
-      WhitespaceTokens.pass(tokensOrContents, line);
-
-      tokens = SignificantTokens.pass(tokensOrContents, line, rules);
-    }
+    var tokens = SignificantTokens.pass(tokensOrContents, line, rules);
 
     line.setTokens(tokens);
 
