@@ -18,7 +18,7 @@ class Token {
   }
 
   getHTML() {
-    var html = (this.updateHTML !== null) ?
+    var html = (this.updatedHTML !== null) ?
                   this.updatedHTML :
                     this.html;
 
