@@ -5,6 +5,8 @@ class Token {
     this.content = content;
     this.line = line;
     this.html = html;
+
+    this.updatedHTML = null;
   }
 
   getContent() {
@@ -16,18 +18,23 @@ class Token {
   }
 
   getHTML() {
-    return this.html;
+    var html = (this.updateHTML !== null) ?
+                  this.updatedHTML :
+                    this.html;
+
+    return html;
   }
   
   getLength() {
     return this.content.length; ///
   }
 
-  replaceWith(token) {
-    var tokens = this.line.getTokens(),
-        index = tokens.indexOf(this);
+  updateHTML(updatedHTML) {
+    this.updatedHTML = updatedHTML;
+  }
 
-    tokens.splice(index, 1, token);
+  resetHTML() {
+    this.updatedHTML = null;
   }
 
   clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
