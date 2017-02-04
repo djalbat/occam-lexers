@@ -10,6 +10,9 @@ class Line {
 
     this.tokens = undefined;
     this.inComment = undefined;
+    this.previousNumber = undefined;
+
+    this.removed = false;
   }
 
   getContent() {
@@ -28,6 +31,10 @@ class Line {
     return this.inComment;
   }
 
+  getPreviousNumber() {
+    return this.previousNumber;
+  }
+
   getHTML() {
     var html = this.tokens.reduce(function(html, token) {
       var tokenHTML = token.getHTML();
@@ -42,35 +49,41 @@ class Line {
     return html;
   }
 
+  isRemoved() {
+    return this.removed;
+  }
+
+  remove() {
+    this.removed = true;
+  }
+
   setNumber(number) {
     this.number = number;
+  }
+
+  setTokens(tokens) {
+    this.tokens = tokens;
   }
 
   setInComment(inComment) {
     this.inComment = inComment;
   }
 
-  setTokens(tokens) {
-    this.tokens = tokens;
+  setPreviousNumber(previousNumber) {
+    this.previousNumber = previousNumber;
   }
-  
+
   pushToken(token) {
     this.tokens.push(token);
   }
   
-  replaceToken(oldToken, newToken) {
-    var oldTokenIndex = util.indexOf(this.tokens, oldToken),
-        newTokens = [newToken];
-
-    util.spliceArray(this.tokens, oldTokenIndex, 1, newTokens);
-  }
-
   static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
     var lineNumber = context.getLineNumber(),
         number = lineNumber,  ///
         line = new Line(content, number),
         tokensOrContents = [content],
-        inComment = CommentTokens.pass(tokensOrContents, line, context);
+        inComment = CommentTokens.pass(tokensOrContents, line, context),
+        previousNumber = null;
 
     StringTokens.pass(tokensOrContents, line);
     WhitespaceTokens.pass(tokensOrContents, line);
@@ -80,6 +93,8 @@ class Line {
     line.setTokens(tokens);
 
     line.setInComment(inComment);
+
+    line.setPreviousNumber(previousNumber);
 
     return line;
   }
