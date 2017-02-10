@@ -9,6 +9,7 @@ var lexers = {
   'Token': require('./lib/common/token'),
   'ErrorToken': require('./lib/common/token/error'),
   'StringToken': require('./lib/common/token/string'),
+  'WhitespaceToken': require('./lib/common/token/whitespace'),
   'SignificantToken': require('./lib/common/token/significant')
 };
 
