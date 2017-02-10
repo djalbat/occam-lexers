@@ -26,7 +26,7 @@ class CommentTokens {
 
           commentTokenLength = commentToken.getLength();
         } else {
-          var middleOfCommentTokenLength = util.minBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
+          var middleOfCommentTokenLength = util.minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
           commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
 
@@ -56,7 +56,7 @@ class CommentTokens {
 
           content = content.substring(commentTokenLength);
         } else {
-          contentLength = util.minBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
+          contentLength = util.minimumBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
 
           var remainingContent = content.substring(contentLength);
 

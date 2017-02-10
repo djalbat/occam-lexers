@@ -1,19 +1,19 @@
 'use strict';
 
 class util {
-  static minBarMinusOne() {
-    var minBarMinusOne = undefined, ///
-        values = Array.prototype.slice.call(arguments);
+  static minimumBarMinusOne() {
+    var values = Array.prototype.slice.call(arguments),
+        minimumBarMinusOne = values.reduce(function(minimumBarMinusOne, value) {
+          if (value > -1) {
+            minimumBarMinusOne = (minimumBarMinusOne !== null) ?
+                                    Math.min(minimumBarMinusOne, value) :
+                                      value;
+          }
 
-    values.forEach(function(value) {
-      if (value > -1) {
-        minBarMinusOne = (minBarMinusOne !== undefined) ?
-                            Math.min(minBarMinusOne, value) :
-                              value;
-      }
-    });
+          return minimumBarMinusOne;
+        }, null);
 
-    return minBarMinusOne;
+    return minimumBarMinusOne;
   }
 
   static spliceArray(array, start, deleteCount, itemsArray) {

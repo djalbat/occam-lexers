@@ -10,9 +10,8 @@ class Line {
 
     this.tokens = undefined;
     this.inComment = undefined;
-    this.previousNumber = undefined;
 
-    this.removed = false;
+    this.previousNumber = null;
   }
 
   getContent() {
@@ -47,14 +46,6 @@ class Line {
     html += '\n';
     
     return html;
-  }
-
-  isRemoved() {
-    return this.removed;
-  }
-
-  remove() {
-    this.removed = true;
   }
 
   setNumber(number) {

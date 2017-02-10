@@ -22,7 +22,7 @@ class NonSignificantTokens {
 
         continue;
       } else {
-        var significantContentLength = util.minBarMinusOne(whitespaceTokenPosition, contentLength),
+        var significantContentLength = util.minimumBarMinusOne(whitespaceTokenPosition, contentLength),
             significantContent = content.substring(0, significantContentLength);
 
         content = content.substring(significantContentLength);
