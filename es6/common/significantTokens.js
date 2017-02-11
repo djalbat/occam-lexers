@@ -1,7 +1,5 @@
 'use strict';
 
-var ErrorToken = require('../common/token/error');
-
 class SignificantTokens {
   static pass(tokensOrContents, line, rules) {
     var tokens = tokensOrContents.reduce(function(tokens, tokenOrRemainingContent) {
@@ -27,34 +25,31 @@ class SignificantTokens {
 module.exports = SignificantTokens;
 
 function significantTokensFromWithinContentAndLine(content, line, rules, depth) {
-  var significantTokens,
-      rule = rules.getRule(depth),
-      ruleIsUndefined = (rule === undefined);
+  var significantTokens = [];
 
-  if (content === '') {
-    significantTokens = [];
-  } else if (ruleIsUndefined) {
-    var errorToken = ErrorToken.fromContentAndLine(content, line),
-        errorTokens = [errorToken];
+  if (content !== '') {
+    var rule = rules.getRule(depth);
 
-    significantTokens = errorTokens;  ///
-  } else {
-    var nextDepth = depth + 1,
-        significantTokenPositionWithinContent = rule.significantTokenPositionWithinContent(content);
+    if (rule !== null) {
+      var nextDepth = depth + 1,
+          significantTokenPositionWithinContent = rule.significantTokenPositionWithinContent(content);
 
-    if (significantTokenPositionWithinContent === -1) {
-      significantTokens = significantTokensFromWithinContentAndLine(content, line, rules, nextDepth);
+      if (significantTokenPositionWithinContent === -1) {
+        significantTokens = significantTokensFromWithinContentAndLine(content, line, rules, nextDepth);
+      } else {
+        var significantToken = rule.significantTokenFromWithinContentAndLine(content, line),
+            significantTokenLength = significantToken.getLength(),
+            left = significantTokenPositionWithinContent,  ///
+            right = significantTokenPositionWithinContent + significantTokenLength,  ///
+            leftContent = content.substring(0, left),
+            rightContent = content.substring(right),
+            leftSignificantTokens = significantTokensFromWithinContentAndLine(leftContent, line, rules, nextDepth),
+            rightSignificantTokens = significantTokensFromWithinContentAndLine(rightContent, line, rules, depth);
+
+        significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
+      }
     } else {
-      var significantToken = rule.significantTokenFromWithinContentAndLine(content, line),
-          significantTokenLength = significantToken.getLength(),
-          left = significantTokenPositionWithinContent,  ///
-          right = significantTokenPositionWithinContent + significantTokenLength,  ///
-          leftContent = content.substring(0, left),
-          rightContent = content.substring(right),
-          leftSignificantTokens = significantTokensFromWithinContentAndLine(leftContent, line, rules, nextDepth),
-          rightSignificantTokens = significantTokensFromWithinContentAndLine(rightContent, line, rules, depth);
-
-      significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
+      throw new Error(`There is no rule to parse the content '${content}' on line ${line}`);
     }
   }
 

@@ -9,7 +9,7 @@ class Rules {
   }
 
   getRule(depth) {
-    var rule = this.array[depth];
+    var rule = this.array[depth] || null; ///
 
     return rule;
   }

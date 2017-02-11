@@ -1,6 +1,6 @@
 'use strict';
 
-var Token = require('../../common/token');
+var Token = require('../token');
 
 class CommentToken extends Token {
   merge(commentToken) {

@@ -68,7 +68,6 @@ textarea#tokens {
   font-size: 0.75rem;
 }
 
-
 textarea.error {
   border-color: red;
 }

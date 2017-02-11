@@ -1,6 +1,6 @@
 'use strict';
 
-var SignificantToken = require('../token/significant');
+var SignificantToken = require('../significant');
 
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }

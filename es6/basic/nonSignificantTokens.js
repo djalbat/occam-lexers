@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('../util'),
-    WhitespaceToken = require('../common/token/whitespace');
+    WhitespaceToken = require('../common/token/significant/whitespace');
 
 class NonSignificantTokens {
   static pass(content, context, line) {

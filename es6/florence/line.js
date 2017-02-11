@@ -3,8 +3,8 @@
 var CommentTokens = require('./commentTokens'),
     CommonLine = require('../common/line'),
     StringTokens = require('../common/stringTokens'),
-    EndOfLineToken = require('../common/token/endOfLine'),
-    WhitespaceTokens = require('../common/whitespaceTokens');
+    WhitespaceTokens = require('../common/whitespaceTokens'),
+    EndOfLineToken = require('../common/token/significant/endOfLine');
 
 class Line extends CommonLine {
   static fromContent(content, context, rules) {

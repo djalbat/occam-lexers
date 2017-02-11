@@ -22,22 +22,30 @@ class Example {
   }
 
   static updateTokens(lexer, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment) {
-    var contentTextAreaValue = contentTextArea.getValue(),
-        content = contentTextAreaValue,  ///
-        contents = content.split(/\n/),
-        lines = lexer.linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
-        htmls = lines.reduce(function(htmls, line) {
-          var lineHTML = line.getHTML(),
-              lineNumber = line.getNumber(),
-              html = `${lineNumber}: ${lineHTML}`;
+    try {
+      var contentTextAreaValue = contentTextArea.getValue(),
+          content = contentTextAreaValue,  ///
+          contents = content.split(/\n/),
+          lines = lexer.linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
+          htmls = lines.reduce(function(htmls, line) {
+            var lineHTML = line.getHTML(),
+                lineNumber = line.getNumber(),
+                html = `${lineNumber}: ${lineHTML}`;
 
-          htmls += html;
+            htmls += html;
 
-          return htmls;
-        }, ''),
-        tokensTextAreaHTML = htmls;  ///
+            return htmls;
+          }, ''),
+          tokensTextAreaHTML = htmls;  ///
 
-    tokensTextArea.html(tokensTextAreaHTML);
+      tokensTextArea.html(tokensTextAreaHTML);
+
+      contentTextArea.removeClass('error');
+    } catch (error) {
+      contentTextArea.addClass('error');
+
+      Example.clearTokens();
+    }
   }
 
   static clearTokens() {
