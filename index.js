@@ -7,10 +7,10 @@ var lexers = {
   'BasicLexer': require('./lib/basic/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
   'specialSymbols': require('./lib/specialSymbols'),
-  'StringToken': require('./lib/common/token/string'),
-  'EndOfLineToken': require('./lib/common/token/endOfLine'),
-  'WhitespaceToken': require('./lib/common/token/whitespace'),
-  'SignificantToken': require('./lib/common/token/significant')
+  'SignificantToken': require('./lib/common/token/significant'),
+  'StringToken': require('./lib/common/token/significant/string'),
+  'EndOfLineToken': require('./lib/common/token/significant/endOfLine'),
+  'WhitespaceToken': require('./lib/common/token/significant/whitespace')
 };
 
 module.exports = lexers;
