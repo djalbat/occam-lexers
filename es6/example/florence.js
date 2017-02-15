@@ -7,15 +7,16 @@ var florenceLexer = FlorenceLexer.fromNothing();
 
 class FlorenceExample {
   static run() {
-    Example.contentTextAreaOnKeyUp(function() {
-      var minimumLinesLength = 2,
-          previousLineInComment = false,
-          followingLineInComment = false;
+    var firstLineIndex = 0,
+        minimumLinesLength = 2,
+        previousLineInComment = false,
+        followingLineInComment = false;
 
-      Example.updateTokens(florenceLexer, minimumLinesLength, previousLineInComment, followingLineInComment);
+    Example.contentTextAreaOnKeyUp(function() {
+      Example.updateTokens(florenceLexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment);
     });
 
-    Example.updateTokens(florenceLexer);
+    Example.updateTokens(florenceLexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment);
   }
 }
 

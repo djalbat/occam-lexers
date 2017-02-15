@@ -21,12 +21,12 @@ class Example {
     contentTextArea.on('keyup', handler);
   }
 
-  static updateTokens(lexer, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment) {
+  static updateTokens(lexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
     try {
       var contentTextAreaValue = contentTextArea.getValue(),
           content = contentTextAreaValue,  ///
           contents = content.split(/\n/),
-          lines = lexer.linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
+          lines = lexer.linesFromContents(contents, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
           htmls = lines.reduce(function(htmls, line, index) {
             var lineHTML = line.getHTML(),
                 lineNumber = index + 1,

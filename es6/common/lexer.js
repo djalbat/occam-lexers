@@ -12,9 +12,9 @@ class CommonLexer {
     this.Line = Line;
   }
 
-  linesFromContents(contents, context = new Context()) {
+  linesFromContents(contents, firstLineIndex = 0, context = new Context()) {
     var lines = [],
-        index = 0,
+        index = firstLineIndex,
         content = contents[index];
 
     while (content !== undefined) {
