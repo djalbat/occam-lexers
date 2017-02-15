@@ -9,10 +9,14 @@ var CommentTokens = require('./commentTokens'),
 class Line extends CommonLine {
   static fromContent(content, context, rules) {
     var line = super.fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens),
-        endOfLineToken = EndOfLineToken.fromLine(line);
-    
-    line.pushToken(endOfLineToken);
-    
+        lineInComment = line.isInComment();
+
+    if (!lineInComment) {
+      var endOfLineToken = EndOfLineToken.fromLine(line);
+
+      line.pushToken(endOfLineToken);
+    }
+
     return line;
   }
 }

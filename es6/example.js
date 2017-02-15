@@ -27,9 +27,9 @@ class Example {
           content = contentTextAreaValue,  ///
           contents = content.split(/\n/),
           lines = lexer.linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
-          htmls = lines.reduce(function(htmls, line) {
+          htmls = lines.reduce(function(htmls, line, index) {
             var lineHTML = line.getHTML(),
-                lineNumber = line.getNumber(),
+                lineNumber = index + 1,
                 html = `${lineNumber}: ${lineHTML}`;
 
             htmls += html;

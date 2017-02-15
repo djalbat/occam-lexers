@@ -14,14 +14,11 @@ class CommonLexer {
 
   linesFromContents(contents, context = new Context()) {
     var lines = [],
-        lineNumber = context.getLineNumber(),
-        index = lineNumber - 1,
-        content = contents[index],
-        firstLineNumber = lineNumber; ///
+        index = 0,
+        content = contents[index];
 
     while (content !== undefined) {
-      var linesLength = lineNumber - firstLineNumber,
-          terminate = context.shouldTerminate(linesLength);
+      var terminate = context.shouldTerminate(index);
 
       if (terminate) {
         break;
@@ -31,11 +28,7 @@ class CommonLexer {
 
       lines.push(line);
 
-      context.incrementLineNumber();
-
-      lineNumber = context.getLineNumber();
-      index = lineNumber - 1;
-      content = contents[index];
+      content = contents[++index];
     }
 
     return lines;

@@ -1,15 +1,10 @@
 'use strict';
 
 class Context {
-  constructor(lineNumber = 1, minimumLinesLength = Number.POSITIVE_INFINITY, previousLineInComment = null, followingLineInComment = null) {
-    this.lineNumber = lineNumber;
+  constructor(minimumLinesLength = Number.POSITIVE_INFINITY, previousLineInComment = null, followingLineInComment = null) {
     this.minimumLinesLength = minimumLinesLength;
     this.previousLineInComment = previousLineInComment;
     this.followingLineInComment = followingLineInComment;
-  }
-
-  getLineNumber() {
-    return this.lineNumber;
   }
 
   getMinimumLinesLength() {
@@ -24,18 +19,14 @@ class Context {
     return this.followingLineInComment;
   }
 
-  incrementLineNumber() {
-    this.lineNumber++;
-  }
-
   setPreviousLineInComment(previousLineInComment) {
     this.previousLineInComment = previousLineInComment;
   }
 
-  shouldTerminate(linesLength) {
+  shouldTerminate(index) {
     var terminate = false;
 
-    if (this.minimumLinesLength <= linesLength) {
+    if (index >= this.minimumLinesLength) {
       if (this.followingLineInComment === null) {
         terminate = true;
       }

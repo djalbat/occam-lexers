@@ -4,22 +4,18 @@ var util = require('../util'),
     SignificantTokens = require('./significantTokens');
 
 class Line {
-  constructor(content, number) {
+  constructor(content) {
     this.content = content;
-    this.number = number;
 
     this.tokens = undefined;
     this.inComment = undefined;
-
-    this.previousNumber = null;
+    
+    this.number = undefined;
+    this.intermediateNumber = undefined;
   }
 
   getContent() {
     return this.content;
-  }
-
-  getNumber() {
-    return this.number;
   }
 
   getTokens() {
@@ -30,8 +26,12 @@ class Line {
     return this.inComment;
   }
 
-  getPreviousNumber() {
-    return this.previousNumber;
+  getNumber() {
+    return this.number;
+  }
+
+  getIntermediateNumber() {
+    return this.intermediateNumber;
   }
 
   getHTML() {
@@ -48,10 +48,6 @@ class Line {
     return html;
   }
 
-  setNumber(number) {
-    this.number = number;
-  }
-
   setTokens(tokens) {
     this.tokens = tokens;
   }
@@ -60,8 +56,12 @@ class Line {
     this.inComment = inComment;
   }
 
-  setPreviousNumber(previousNumber) {
-    this.previousNumber = previousNumber;
+  setNumber(number) {
+    this.number = number;
+  }
+
+  setIntermediateNumber(intermediateNumber) {
+    this.intermediateNumber = intermediateNumber;
   }
 
   pushToken(token) {
@@ -69,12 +69,9 @@ class Line {
   }
   
   static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
-    var lineNumber = context.getLineNumber(),
-        number = lineNumber,  ///
-        line = new Line(content, number),
+    var line = new Line(content),
         tokensOrContents = [content],
-        inComment = CommentTokens.pass(tokensOrContents, line, context),
-        previousNumber = null;
+        inComment = CommentTokens.pass(tokensOrContents, line, context);
 
     StringTokens.pass(tokensOrContents, line);
     WhitespaceTokens.pass(tokensOrContents, line);
@@ -84,8 +81,6 @@ class Line {
     line.setTokens(tokens);
 
     line.setInComment(inComment);
-
-    line.setPreviousNumber(previousNumber);
 
     return line;
   }

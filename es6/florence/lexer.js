@@ -6,8 +6,8 @@ var Line = require('./line'),
     CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
-  linesFromContents(contents, lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment) {
-    var context = new Context(lineNumber, minimumLinesLength, previousLineInComment, followingLineInComment),
+  linesFromContents(contents, minimumLinesLength, previousLineInComment, followingLineInComment) {
+    var context = new Context(minimumLinesLength, previousLineInComment, followingLineInComment),
         lines = super.linesFromContents(contents, context);
 
     return lines;
