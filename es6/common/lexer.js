@@ -18,7 +18,8 @@ class CommonLexer {
         content = contents[index];
 
     while (content !== undefined) {
-      var terminate = context.shouldTerminate(index);
+      var length = index - firstLineIndex,
+          terminate = context.shouldTerminate(length);
 
       if (terminate) {
         break;

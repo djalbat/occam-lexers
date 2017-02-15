@@ -23,10 +23,10 @@ class Context {
     this.previousLineInComment = previousLineInComment;
   }
 
-  shouldTerminate(index) {
+  shouldTerminate(length) {
     var terminate = false;
 
-    if (index >= this.minimumLinesLength) {
+    if (length >= this.minimumLinesLength) {
       if (this.followingLineInComment === null) {
         terminate = true;
       }
