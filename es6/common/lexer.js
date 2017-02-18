@@ -19,6 +19,7 @@ class CommonLexer {
 
     while (content !== undefined) {
       var length = index - firstLineIndex,
+          number = index + 1,
           terminate = context.shouldTerminate(length);
 
       if (terminate) {
@@ -26,6 +27,8 @@ class CommonLexer {
       }
 
       var line = this.Line.fromContent(content, context, this.rules);
+
+      line.setNumber(number);
 
       lines.push(line);
 

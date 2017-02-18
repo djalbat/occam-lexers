@@ -9,9 +9,9 @@ class Line {
 
     this.tokens = undefined;
     this.inComment = undefined;
-    
     this.number = undefined;
-    this.intermediateNumber = undefined;
+
+    this.intermediateNumber = null;
   }
 
   getContent() {
