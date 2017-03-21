@@ -3,6 +3,7 @@
 var easy = require('easy'),
     easylayout = require('easy-layout'),
     Textarea = easy.Textarea,
+    options = easylayout.options,
     SizeableElement = easylayout.SizeableElement,
     VerticalSplitter = easylayout.VerticalSplitter;
 
@@ -12,7 +13,7 @@ var leftColumnSelector = '#leftColumn',
     contentTextarea = new Textarea(contentTextareaSelector),
     tokensTextarea = new Textarea(tokensTextareaSelector),
     leftColumn = new SizeableElement(leftColumnSelector),
-    TO_THE_RIGHT_OF = VerticalSplitter.situated.TO_THE_RIGHT_OF;
+    TO_THE_RIGHT_OF = options.situated.TO_THE_RIGHT_OF;
 
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
