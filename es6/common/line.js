@@ -1,7 +1,7 @@
 'use strict';
 
-var util = require('../util'),
-    SignificantTokens = require('./significantTokens');
+const util = require('../util'),
+      SignificantTokens = require('./significantTokens');
 
 class Line {
   constructor(content) {
@@ -35,13 +35,13 @@ class Line {
   }
 
   getHTML() {
-    var html = this.tokens.reduce(function(html, token) {
-      var tokenHTML = token.getHTML();
-      
-      html += tokenHTML;
-      
-      return html;
-    }, '');
+    let html = this.tokens.reduce(function(html, token) {
+          const tokenHTML = token.getHTML();
+          
+          html += tokenHTML;
+          
+          return html;
+        }, '');
     
     html += '\n';
     
@@ -69,14 +69,14 @@ class Line {
   }
   
   static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
-    var line = new Line(content),
-        tokensOrContents = [content],
-        inComment = CommentTokens.pass(tokensOrContents, line, context);
+    const line = new Line(content),
+          tokensOrContents = [content],
+          inComment = CommentTokens.pass(tokensOrContents, line, context);
 
     StringTokens.pass(tokensOrContents, line);
     WhitespaceTokens.pass(tokensOrContents, line);
 
-    var tokens = SignificantTokens.pass(tokensOrContents, line, rules);
+    const tokens = SignificantTokens.pass(tokensOrContents, line, rules);
 
     line.setTokens(tokens);
 

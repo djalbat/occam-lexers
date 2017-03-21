@@ -18,9 +18,9 @@ class Token {
   }
 
   getHTML() {
-    var html = (this.updatedHTML !== null) ?
-                  this.updatedHTML :
-                    this.html;
+    const html = (this.updatedHTML !== null) ?
+                    this.updatedHTML :
+                      this.html;
 
     return html;
   }
@@ -40,12 +40,13 @@ class Token {
   clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class) {
-    var clonedToken = null;
+    let clonedToken = null;
 
     if (startPosition !== endPosition) {
-      var content = token.getContent(),
-          line = token.getLine();
+      const line = token.getLine();
 
+      let content = token.getContent();
+      
       content = content.substring(startPosition, endPosition);
 
       clonedToken = Class.fromContentAndLine(content, line, Class);
@@ -55,15 +56,15 @@ class Token {
   }
   
   static fromContentAndLine(content, line, Class = Token) {
-    var html = Class.htmlFromContent(content),
-        token = new Class(content, line, html);
+    const html = Class.htmlFromContent(content),
+          token = new Class(content, line, html);
 
     return token;
   }
 
   static fromToken(token, Class = Token) {
-    var content = token.getContent(),
-        line = token.getLine();
+    const content = token.getContent(),
+          line = token.getLine();
 
     token = Class.fromContentAndLine(content, line, Class);
     
@@ -71,7 +72,7 @@ class Token {
   }
 
   static htmlFromContent(content) {
-    var html = content; ///
+    let html = content; ///
 
     html = Token.sanitiseHTML(html);  ///
 
@@ -79,7 +80,7 @@ class Token {
   }
 
   static sanitiseHTML(html) {
-    var sanitisedHTML = html.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
+    const sanitisedHTML = html.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
 
     return sanitisedHTML;
   }

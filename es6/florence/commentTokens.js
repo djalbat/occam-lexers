@@ -1,23 +1,23 @@
 'use strict';
 
-var util = require('../util'),
-    EndOfCommentToken = require('./token/endOfComment'),
-    StartOfCommentToken = require('./token/startOfComment'),
-    MiddleOfCommentToken = require('./token/middleOfComment');
+const util = require('../util'),
+      EndOfCommentToken = require('./token/endOfComment'),
+      StartOfCommentToken = require('./token/startOfComment'),
+      MiddleOfCommentToken = require('./token/middleOfComment');
 
 class CommentTokens {
   static pass(tokensOrContents, line, context) {
-    var content = tokensOrContents.pop(),
+    let content = tokensOrContents.pop(),
         commentToken,
         commentTokenLength,
         previousLineInComment = context.isPreviousLineInComment(),
         inComment = (previousLineInComment === true);
 
     while (content !== '') {
-      var contentLength = content.length;
+      let contentLength = content.length;
 
       if (inComment) {
-        var endOfCommentTokenPositionWithinContent = EndOfCommentToken.positionWithinContent(content);
+        const endOfCommentTokenPositionWithinContent = EndOfCommentToken.positionWithinContent(content);
 
         if (endOfCommentTokenPositionWithinContent === 0) {
           inComment = false;
@@ -26,14 +26,14 @@ class CommentTokens {
 
           commentTokenLength = commentToken.getLength();
         } else {
-          var middleOfCommentTokenLength = util.minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
+          const middleOfCommentTokenLength = util.minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
           commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
 
           commentTokenLength = middleOfCommentTokenLength;
         }
 
-        var previousCommentToken = tokensOrContents.pop();
+        const previousCommentToken = tokensOrContents.pop();
 
         commentToken = (previousCommentToken === undefined) ?
                           commentToken :
@@ -43,7 +43,7 @@ class CommentTokens {
 
         content = content.substring(commentTokenLength);
       } else {
-        var startOfCommentTokenPositionWithinContent = StartOfCommentToken.positionWithinContent(content);
+        const startOfCommentTokenPositionWithinContent = StartOfCommentToken.positionWithinContent(content);
 
         if (startOfCommentTokenPositionWithinContent === 0) {
           inComment = true;
@@ -58,7 +58,7 @@ class CommentTokens {
         } else {
           contentLength = util.minimumBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
 
-          var remainingContent = content.substring(contentLength);
+          const remainingContent = content.substring(contentLength);
 
           content = content.substring(0, contentLength);
 

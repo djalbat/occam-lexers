@@ -1,19 +1,19 @@
 'use strict';
 
-var easy = require('easy'),
-    easylayout = require('easy-layout'),
-    Textarea = easy.Textarea,
-    options = easylayout.options,
-    SizeableElement = easylayout.SizeableElement,
-    VerticalSplitter = easylayout.VerticalSplitter;
+const easy = require('easy'),
+      easylayout = require('easy-layout'),
+      Textarea = easy.Textarea,
+      options = easylayout.options,
+      SizeableElement = easylayout.SizeableElement,
+      VerticalSplitter = easylayout.VerticalSplitter;
 
-var leftColumnSelector = '#leftColumn',
-    contentTextareaSelector = 'textArea#content',
-    tokensTextareaSelector = 'textArea#tokens',
-    contentTextarea = new Textarea(contentTextareaSelector),
-    tokensTextarea = new Textarea(tokensTextareaSelector),
-    leftColumn = new SizeableElement(leftColumnSelector),
-    TO_THE_RIGHT_OF = options.situated.TO_THE_RIGHT_OF;
+const leftColumnSelector = '#leftColumn',
+      contentTextareaSelector = 'textArea#content',
+      tokensTextareaSelector = 'textArea#tokens',
+      contentTextarea = new Textarea(contentTextareaSelector),
+      tokensTextarea = new Textarea(tokensTextareaSelector),
+      leftColumn = new SizeableElement(leftColumnSelector),
+      TO_THE_RIGHT_OF = options.situated.TO_THE_RIGHT_OF;
 
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
@@ -24,20 +24,20 @@ class Example {
 
   static updateTokens(lexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
     try {
-      var contentTextareaValue = contentTextarea.getValue(),
-          content = contentTextareaValue,  ///
-          contents = content.split(/\n/),
-          lines = lexer.linesFromContents(contents, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
-          htmls = lines.reduce(function(htmls, line, index) {
-            var lineHTML = line.getHTML(),
-                lineNumber = index + 1,
-                html = `${lineNumber}: ${lineHTML}`;
-
-            htmls += html;
-
-            return htmls;
-          }, ''),
-          tokensTextareaHTML = htmls;  ///
+      const contentTextareaValue = contentTextarea.getValue(),
+            content = contentTextareaValue,  ///
+            contents = content.split(/\n/),
+            lines = lexer.linesFromContents(contents, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
+            htmls = lines.reduce(function(htmls, line, index) {
+              const lineHTML = line.getHTML(),
+                    lineNumber = index + 1,
+                    html = `${lineNumber}: ${lineHTML}`;
+  
+              htmls += html;
+  
+              return htmls;
+            }, ''),
+            tokensTextareaHTML = htmls;  ///
 
       tokensTextarea.html(tokensTextareaHTML);
 
@@ -50,7 +50,7 @@ class Example {
   }
 
   static clearTokens() {
-    var tokensTextareaHTML = '';
+    const tokensTextareaHTML = '';
 
     tokensTextarea.html(tokensTextareaHTML);
   }

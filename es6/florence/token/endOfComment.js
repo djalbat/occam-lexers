@@ -1,6 +1,6 @@
 'use strict';
 
-var CommentToken = require('../../common/token/comment');
+const CommentToken = require('../../common/token/comment');
 
 class EndOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, EndOfCommentToken); }
@@ -8,11 +8,12 @@ class EndOfCommentToken extends CommentToken {
   static fromContentAndLine(content, line) { return CommentToken.fromContentAndLine(content, line, EndOfCommentToken); }
 
   static fromWithinContentAndLine(content, line) {
-    var endOfCommentToken = null,
-        matches = content.match(/^\*\//);
+    let endOfCommentToken = null;
+    
+    const matches = content.match(/^\*\//);
 
     if (matches) {
-      var firstMatch = first(matches);
+      const firstMatch = first(matches);
 
       content = firstMatch; ///
 
@@ -23,7 +24,7 @@ class EndOfCommentToken extends CommentToken {
   }
 
   static positionWithinContent(content) {
-    var position = content.search(/\*\//);
+    const position = content.search(/\*\//);
 
     return position;
   }

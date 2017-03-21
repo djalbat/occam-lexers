@@ -1,18 +1,19 @@
 'use strict';
 
-var util = require('../util');
+const util = require('../util');
 
 class Tokens {
   static pass(tokensOrContents, line, Token) {
-    var offset = 0,
-        tokensOrContentsLength = tokensOrContents.length;
+    let offset = 0;
+    
+    const tokensOrContentsLength = tokensOrContents.length;
 
-    for (var index = 0; index < tokensOrContentsLength; index++) {
-      var offsetIndex = index + offset,
+    for (let index = 0; index < tokensOrContentsLength; index++) {
+      const offsetIndex = index + offset,
           tokenOrContent = tokensOrContents[offsetIndex];
 
       if (typeof tokenOrContent === 'string') {
-        var content = tokenOrContent,  ///
+        const content = tokenOrContent,  ///
             tokensOrRemainingContent = tokensOrRemainingContentFromWithinContentAndLine(content, line, Token),
             tokensOrRemainingContentLength = tokensOrRemainingContent.length,
             start = offsetIndex;
@@ -28,8 +29,8 @@ class Tokens {
 module.exports = Tokens;
 
 function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) {
-  var tokensOrRemainingContent = [],
-      remainingContent,
+  let remainingContent,
+      tokensOrRemainingContent = [],       
       tokenPositionWithinContent = Token.positionWithinContent(content);
   
   while (tokenPositionWithinContent !== -1) {
@@ -39,7 +40,7 @@ function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) 
       tokensOrRemainingContent.push(remainingContent);
     }
 
-    var token = Token.fromWithinContentAndLine(content, line),
+    const token = Token.fromWithinContentAndLine(content, line),
         tokenLength = token.getLength(),
         tokenOffset = tokenPositionWithinContent + tokenLength;
     

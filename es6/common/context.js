@@ -24,7 +24,7 @@ class Context {
   }
 
   shouldTerminate(length) {
-    var terminate = false;
+    let terminate = false;
 
     if (length >= this.minimumLinesLength) {
       if (this.followingLineInComment === null) {

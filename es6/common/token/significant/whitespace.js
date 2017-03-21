@@ -1,6 +1,6 @@
 'use strict';
 
-var SignificantToken = require('../significant');
+const SignificantToken = require('../significant');
 
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
@@ -8,11 +8,12 @@ class WhitespaceToken extends SignificantToken {
   static fromContentAndLine(content, line) { return SignificantToken.fromContentAndLine(content, line, WhitespaceToken); }
 
   static fromWithinContentAndLine(content, line) {
-    var whitespaceToken = null,
-        matches = content.match(/([\t ]+)/);
+    let whitespaceToken = null;
+    
+    const matches = content.match(/([\t ]+)/);
 
     if (matches) {
-      var firstMatch = first(matches);
+      const firstMatch = first(matches);
       
       content = firstMatch; ///
 
@@ -23,7 +24,7 @@ class WhitespaceToken extends SignificantToken {
   }
 
   static positionWithinContent(content) {
-    var position = content.search(/[\t ]+/);
+    const position = content.search(/[\t ]+/);
 
     return position;
   }

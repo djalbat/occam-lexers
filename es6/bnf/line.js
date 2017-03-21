@@ -1,6 +1,6 @@
 'use strict';
 
-var SymbolSequence = require('./symbolSequence');
+const SymbolSequence = require('./symbolSequence');
 
 class Line {
   constructor(name, symbolSequences) {
@@ -17,19 +17,19 @@ class Line {
   }
   
   static fromContent(content) {
-    var matches = content.match(Line.nameExpressionRegExp),
-        secondMatch = second(matches),
-        thirdMatch = third(matches),
-        name = secondMatch, ///
-        expression = thirdMatch, ///
-        choices = expression.split(Line.choiceDelimiterRegExp),
-        symbolSequences = choices.map(function(choice) {
-          var symbolSequence = SymbolSequence.fromChoice(choice);
-          
-          return symbolSequence;
-        });
+    const matches = content.match(Line.nameExpressionRegExp),
+          secondMatch = second(matches),
+          thirdMatch = third(matches),
+          name = secondMatch, ///
+          expression = thirdMatch, ///
+          choices = expression.split(Line.choiceDelimiterRegExp),
+          symbolSequences = choices.map(function(choice) {
+            const symbolSequence = SymbolSequence.fromChoice(choice);
+            
+            return symbolSequence;
+          });
     
-    var line = new Line(name, symbolSequences);
+    const line = new Line(name, symbolSequences);
     
     return line;
   }

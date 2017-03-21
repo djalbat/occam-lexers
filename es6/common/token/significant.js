@@ -1,6 +1,6 @@
 'use strict';
 
-var Token = require('../token');
+const Token = require('../token');
 
 class SignificantToken extends Token {
   constructor(content, line, html, type) {
@@ -18,9 +18,9 @@ class SignificantToken extends Token {
   static clone(token, startPosition, endPosition, Class) { return Token.clone(token, startPosition, endPosition, Class) }
 
   static fromContentAndLine(content, line, Class = SignificantToken) {
-    var type = Class.type,
-        html = Class.htmlFromContentAndType(content, type),
-        significantToken = new Class(content, line, html, type);
+    const type = Class.type,
+          html = Class.htmlFromContentAndType(content, type),
+          significantToken = new Class(content, line, html, type);
 
     return significantToken;
   }
@@ -28,19 +28,20 @@ class SignificantToken extends Token {
   static fromToken(token, Class = SignificantToken) { return Token.fromToken(token, Class); }
 
   static fromContentLineAndType(content, line, type) {
-    var html = SignificantToken.htmlFromContentAndType(content, type),
-        significantToken = new SignificantToken(content, line, html, type);
+    const html = SignificantToken.htmlFromContentAndType(content, type),
+          significantToken = new SignificantToken(content, line, html, type);
 
     return significantToken;
   }
 
   static htmlFromContentAndType(content, type) {
-    var innerHTML = content, ///
-        className = type; ///
+    let innerHTML = content; ///
+    
+    const className = type; ///
 
     innerHTML = Token.sanitiseHTML(innerHTML);
 
-    var html = `<span class="${className}">${innerHTML}</span>`;
+    const html = `<span class="${className}">${innerHTML}</span>`;
 
     return html;
   }

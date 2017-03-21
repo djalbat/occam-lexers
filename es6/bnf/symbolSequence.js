@@ -1,6 +1,6 @@
 'use strict';
 
-var specialSymbols = require('../specialSymbols');
+const specialSymbols = require('../specialSymbols');
 
 class SymbolSequence {
   constructor(symbols) {
@@ -16,23 +16,22 @@ class SymbolSequence {
   }
   
   static fromChoice(choice) {
-    var symbols = choice.split(symbolDelimiterRegExp).reduce(function(symbols, symbol) {
-          if (  (symbol === '')
-             || (symbol === undefined)  ) {
-
-          } else {
-            symbols.push(symbol);
-          }
-      
-          return symbols;
-        }, []),
-        expression = new SymbolSequence(symbols);
+    const symbols = choice.split(symbolDelimiterRegExp).reduce(function(symbols, symbol) {
+            if (  (symbol === '')
+               || (symbol === undefined)  ) {
+  
+            } else {
+              symbols.push(symbol);
+            }
+        
+            return symbols;
+          }, []),
+          expression = new SymbolSequence(symbols);
     
     return expression;
   }
 }
 
-var symbolDelimiterRegExp = new RegExp(`\\s+|(${specialSymbols.END_OF_LINE}(?:\\?|\\+|\\*))|(${specialSymbols.NO_WHITESPACE})`);
+const symbolDelimiterRegExp = new RegExp(`\\s+|(${specialSymbols.END_OF_LINE}(?:\\?|\\+|\\*))|(${specialSymbols.NO_WHITESPACE})`);
 
 module.exports = SymbolSequence;
-

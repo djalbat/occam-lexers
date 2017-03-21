@@ -1,7 +1,7 @@
 'use strict';
 
-var Rule = require('./rule'),
-    util = require('../util');
+const Rule = require('./rule'),
+      util = require('../util');
 
 class Rules {
   constructor(array) {
@@ -9,20 +9,20 @@ class Rules {
   }
 
   getRule(depth) {
-    var rule = this.array[depth] || null; ///
+    const rule = this.array[depth] || null; ///
 
     return rule;
   }
   
   static fromGrammar(grammar) {
-    var array = grammar.map(function(grammarEntry) {
-          var type = util.typeFromGrammarEntry(grammarEntry),
-              regExp = util.regExpFromGrammarEntry(grammarEntry),
-              rule = new Rule(type, regExp);
-
-          return rule;
-        }),
-        rules = new Rules(array);
+    const array = grammar.map(function(grammarEntry) {
+            const type = util.typeFromGrammarEntry(grammarEntry),
+                  regExp = util.regExpFromGrammarEntry(grammarEntry),
+                  rule = new Rule(type, regExp);
+  
+            return rule;
+          }),
+          rules = new Rules(array);
     
     return rules;
   }

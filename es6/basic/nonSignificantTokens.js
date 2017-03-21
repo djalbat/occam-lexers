@@ -1,20 +1,20 @@
 'use strict';
 
-var util = require('../util'),
-    WhitespaceToken = require('../common/token/significant/whitespace');
+const util = require('../util'),
+      WhitespaceToken = require('../common/token/significant/whitespace');
 
 class NonSignificantTokens {
   static pass(content, context, line) {
-    var nonSignificantTokenOrSignificantContents = [];
+    const nonSignificantTokenOrSignificantContents = [];
     
     while (content !== '') {
-      var contentLength = content.length;
+      const contentLength = content.length;
 
-      var whitespaceTokenPosition = WhitespaceToken.position(content);
+      const whitespaceTokenPosition = WhitespaceToken.position(content);
 
       if (whitespaceTokenPosition === 0) {
-        var whitespaceToken = WhitespaceToken.fromContentAndLine(content, line),
-            whitespaceTokenLength = whitespaceToken.getLength();
+        const whitespaceToken = WhitespaceToken.fromContentAndLine(content, line),
+              whitespaceTokenLength = whitespaceToken.getLength();
 
         content = content.substring(whitespaceTokenLength);
 
@@ -22,8 +22,8 @@ class NonSignificantTokens {
 
         continue;
       } else {
-        var significantContentLength = util.minimumBarMinusOne(whitespaceTokenPosition, contentLength),
-            significantContent = content.substring(0, significantContentLength);
+        const significantContentLength = util.minimumBarMinusOne(whitespaceTokenPosition, contentLength),
+              significantContent = content.substring(0, significantContentLength);
 
         content = content.substring(significantContentLength);
 

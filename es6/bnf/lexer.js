@@ -1,15 +1,15 @@
 'use strict';
 
-var Line = require('./line');
+const Line = require('./line');
 
 class BNFLexer {
   static linesFromGrammar(grammar) {
-    var contents = contentsFromGrammar(grammar),
-        lines = contents.map(function(content) {
-      var line = Line.fromContent(content);
-      
-      return line;
-    });
+    const contents = contentsFromGrammar(grammar),
+          lines = contents.map(function(content) {
+            const line = Line.fromContent(content);
+            
+            return line;
+          });
 
     return lines;
   }
@@ -18,8 +18,8 @@ class BNFLexer {
 module.exports = BNFLexer;
 
 function contentsFromGrammar(grammar) {
-  var contents = grammar.split('\n').reduce(function (contents, content) {
-    var matches;
+  const contents = grammar.split('\n').reduce(function (contents, content) {
+    let matches;
 
     matches = content.match(Line.nameExpressionRegExp);
 
@@ -32,10 +32,10 @@ function contentsFromGrammar(grammar) {
     matches = content.match(Line.continuedExpressionRegExp);
 
     if (matches !== null) {
-      var previousContent = contents.pop(),
-          firstMatch = first(matches),
-          continuedExpression = firstMatch, ///
-          continuingContent = ' ' + continuedExpression;
+      const previousContent = contents.pop(),
+            firstMatch = first(matches),
+            continuedExpression = firstMatch, ///
+            continuingContent = ' ' + continuedExpression;
 
       content = previousContent + continuingContent;
 

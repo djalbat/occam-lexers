@@ -1,10 +1,10 @@
 'use strict';
 
-var util = require('../util');
+const util = require('../util');
 
 class CommentTokens {
   static pass(tokensOrRemainingContent, line, context) {
-    var inComment = false;  ///
+    const inComment = false;  ///
 
     return inComment;
   }

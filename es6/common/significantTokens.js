@@ -2,21 +2,21 @@
 
 class SignificantTokens {
   static pass(tokensOrContents, line, rules) {
-    var tokens = tokensOrContents.reduce(function(tokens, tokenOrRemainingContent) {
-      if (typeof tokenOrRemainingContent === 'string') {
-        var content = tokenOrRemainingContent,  ///
-            depth = 0,
-            significantTokens = significantTokensFromWithinContentAndLine(content, line, rules, depth);
-
-        tokens = tokens.concat(significantTokens);
-      } else {
-        var nonSignificantToken = tokenOrRemainingContent;  ///
-        
-        tokens.push(nonSignificantToken);
-      }
-
-      return tokens;
-    }, []);
+    const tokens = tokensOrContents.reduce(function(tokens, tokenOrRemainingContent) {
+            if (typeof tokenOrRemainingContent === 'string') {
+              const content = tokenOrRemainingContent,  ///
+                    depth = 0,
+                    significantTokens = significantTokensFromWithinContentAndLine(content, line, rules, depth);
+      
+              tokens = tokens.concat(significantTokens);
+            } else {
+              const nonSignificantToken = tokenOrRemainingContent;  ///
+              
+              tokens.push(nonSignificantToken);
+            }
+      
+            return tokens;
+          }, []);
 
     return tokens;
   }
@@ -25,26 +25,26 @@ class SignificantTokens {
 module.exports = SignificantTokens;
 
 function significantTokensFromWithinContentAndLine(content, line, rules, depth) {
-  var significantTokens = [];
+  let significantTokens = [];
 
   if (content !== '') {
-    var rule = rules.getRule(depth);
+    const rule = rules.getRule(depth);
 
     if (rule !== null) {
-      var nextDepth = depth + 1,
-          significantTokenPositionWithinContent = rule.significantTokenPositionWithinContent(content);
+      const nextDepth = depth + 1,
+            significantTokenPositionWithinContent = rule.significantTokenPositionWithinContent(content);
 
       if (significantTokenPositionWithinContent === -1) {
         significantTokens = significantTokensFromWithinContentAndLine(content, line, rules, nextDepth);
       } else {
-        var significantToken = rule.significantTokenFromWithinContentAndLine(content, line),
-            significantTokenLength = significantToken.getLength(),
-            left = significantTokenPositionWithinContent,  ///
-            right = significantTokenPositionWithinContent + significantTokenLength,  ///
-            leftContent = content.substring(0, left),
-            rightContent = content.substring(right),
-            leftSignificantTokens = significantTokensFromWithinContentAndLine(leftContent, line, rules, nextDepth),
-            rightSignificantTokens = significantTokensFromWithinContentAndLine(rightContent, line, rules, depth);
+        const significantToken = rule.significantTokenFromWithinContentAndLine(content, line),
+              significantTokenLength = significantToken.getLength(),
+              left = significantTokenPositionWithinContent,  ///
+              right = significantTokenPositionWithinContent + significantTokenLength,  ///
+              leftContent = content.substring(0, left),
+              rightContent = content.substring(right),
+              leftSignificantTokens = significantTokensFromWithinContentAndLine(leftContent, line, rules, nextDepth),
+              rightSignificantTokens = significantTokensFromWithinContentAndLine(rightContent, line, rules, depth);
 
         significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
       }

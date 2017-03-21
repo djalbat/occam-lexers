@@ -1,16 +1,16 @@
 'use strict';
 
-var Example = require('../example'),
+const Example = require('../example'),
     FlorenceLexer = require('../florence/lexer');
 
-var florenceLexer = FlorenceLexer.fromNothing();
+const florenceLexer = FlorenceLexer.fromNothing();
 
 class FlorenceExample {
   static run() {
-    var firstLineIndex = 0,
-        minimumLinesLength = 2,
-        previousLineInComment = false,
-        followingLineInComment = false;
+    const firstLineIndex = 0,
+          minimumLinesLength = 2,
+          previousLineInComment = false,
+          followingLineInComment = false;
 
     Example.contentTextareaOnKeyUp(function() {
       Example.updateTokens(florenceLexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment);

@@ -1,6 +1,6 @@
 'use strict';
 
-var CommentToken = require('../../common/token/comment');
+const CommentToken = require('../../common/token/comment');
 
 class MiddleOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, MiddleOfCommentToken); }
@@ -8,7 +8,7 @@ class MiddleOfCommentToken extends CommentToken {
   static fromContentAndLine(content, line, length) {
     content = content.substr(0, length);  ///
 
-    var middleOfCommentToken = CommentToken.fromContentAndLine(content, line, MiddleOfCommentToken);
+    const middleOfCommentToken = CommentToken.fromContentAndLine(content, line, MiddleOfCommentToken);
 
     return middleOfCommentToken;
   }

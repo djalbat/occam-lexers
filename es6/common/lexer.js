@@ -1,10 +1,10 @@
 'use strict';
 
-var Line = require('./line'),
-    util = require('../util'),
-    Rules = require('./rules'),
-    Context = require('./context'),
-    SignificantToken = require('./token/significant');
+const Line = require('./line'),
+      util = require('../util'),
+      Rules = require('./rules'),
+      Context = require('./context'),
+      SignificantToken = require('./token/significant');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -13,20 +13,21 @@ class CommonLexer {
   }
 
   linesFromContents(contents, firstLineIndex = 0, context = new Context()) {
-    var lines = [],
-        index = firstLineIndex,
+    const lines = [];
+    
+    let index = firstLineIndex,    
         content = contents[index];
 
     while (content !== undefined) {
-      var length = index - firstLineIndex,
-          number = index + 1,
-          terminate = context.shouldTerminate(length);
+      const length = index - firstLineIndex,
+            number = index + 1,
+            terminate = context.shouldTerminate(length);
 
       if (terminate) {
         break;
       }
 
-      var line = this.Line.fromContent(content, context, this.rules);
+      const line = this.Line.fromContent(content, context, this.rules);
 
       line.setNumber(number);
 
@@ -41,13 +42,14 @@ class CommonLexer {
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
   static significantTokenTypesFromGrammar(grammar) {
-    var significantTokenTypes = Object.keys(SignificantToken.types),
-        grammarTypes = grammar.map(function(grammarEntry) {
-          var type = util.typeFromGrammarEntry(grammarEntry),
-              grammarType = type;  ///
-
-          return grammarType;
-        });
+    let  significantTokenTypes = Object.keys(SignificantToken.types);
+    
+    const grammarTypes = grammar.map(function(grammarEntry) {
+            const type = util.typeFromGrammarEntry(grammarEntry),
+                grammarType = type;  ///
+  
+            return grammarType;
+          });
 
     significantTokenTypes = significantTokenTypes.concat(grammarTypes); ///
 

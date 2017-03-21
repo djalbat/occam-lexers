@@ -1,12 +1,13 @@
 'use strict';
 
-var Token = require('../token');
+const Token = require('../token');
 
 class CommentToken extends Token {
   merge(commentToken) {
-    var content = this.getContent(),
-        line = this.getLine(),
-        commentTokenContent = commentToken.getContent();
+    let content = this.getContent();
+    
+    const line = this.getLine(),
+          commentTokenContent = commentToken.getContent();
 
     content += commentTokenContent;
 
@@ -22,11 +23,11 @@ class CommentToken extends Token {
   static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 
   static htmlFromContent(content) {
-    var innerHTML = content;
+    let  innerHTML = content;
 
     innerHTML = Token.sanitiseHTML(innerHTML);  ///
 
-    var html = `<span class="comment">${innerHTML}</span>`;
+    const html = `<span class="comment">${innerHTML}</span>`;
 
     return html;
   }

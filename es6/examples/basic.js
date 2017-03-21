@@ -1,22 +1,22 @@
 'use strict';
 
-var easy = require('easy'),
-    Textarea = easy.Textarea;
+const easy = require('easy'),
+      Textarea = easy.Textarea;
 
-var Example = require('../example'),
-    BasicLexer = require('../basic/lexer');
+const Example = require('../example'),
+      BasicLexer = require('../basic/lexer');
 
-var terminalSymbolsRegExpPatternTextarea,
-    terminalSymbolsRegExpPatternTextareaSelector = 'textarea#terminalSymbolsRegExpPattern',
-    terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
+const terminalSymbolsRegExpPatternTextareaSelector = 'textarea#terminalSymbolsRegExpPattern',
+      terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
 
-var lexer = null;
+let terminalSymbolsRegExpPatternTextarea,
+    lexer = null;
 
 class BasicExample {
   static run() {
     terminalSymbolsRegExpPatternTextarea = new Textarea(terminalSymbolsRegExpPatternTextareaSelector);
 
-    var terminalSymbolsRegExpPatternTextareaValue = terminalSymbolsRegExpPattern; ///
+    const terminalSymbolsRegExpPatternTextareaValue = terminalSymbolsRegExpPattern; ///
 
     terminalSymbolsRegExpPatternTextarea.setValue(terminalSymbolsRegExpPatternTextareaValue);
 
@@ -45,12 +45,12 @@ function update() {
 }
 
 function updateLexer() {
-  var terminalSymbolsRegExpPatternInputValue = terminalSymbolsRegExpPatternTextarea.getValue(),
+  const terminalSymbolsRegExpPatternInputValue = terminalSymbolsRegExpPatternTextarea.getValue(),
       terminalSymbolsRegExpPattern = terminalSymbolsRegExpPatternInputValue,  ///
       terminalSymbolsRegExpPatternIsValid = regExpPatternIsValid(terminalSymbolsRegExpPattern);
 
   if (terminalSymbolsRegExpPatternIsValid) {
-    var terminalSymbolsRegExp = new RegExp(terminalSymbolsRegExpPattern),
+    const terminalSymbolsRegExp = new RegExp(terminalSymbolsRegExpPattern),
         grammar = [
           { terminalSymbol : terminalSymbolsRegExp }
         ];
@@ -66,7 +66,7 @@ function updateLexer() {
 }
 
 function regExpPatternIsValid(regExpPattern) {
-  var valid = true;
+  let valid = true;
 
   try {
     new RegExp(regExpPattern);

@@ -1,6 +1,6 @@
 'use strict';
 
-var SignificantToken = require('../common/token/significant');
+const SignificantToken = require('../common/token/significant');
 
 class Rule {
   constructor(type, regExp) {
@@ -9,11 +9,12 @@ class Rule {
   }
   
   significantTokenPositionWithinContent(content) {
-    var significantTokenPosition = -1,
-        matches = content.match(this.regExp);
+    let significantTokenPosition = -1;
+    
+    const matches = content.match(this.regExp);
     
     if (matches !== null) {
-      var firstMatch = first(matches);
+      const firstMatch = first(matches);
       
       if (firstMatch !== '') {
         significantTokenPosition = matches.index; ///
@@ -24,12 +25,12 @@ class Rule {
   }
 
   significantTokenFromWithinContentAndLine(content, line) {
-    var matches = content.match(this.regExp),
-        firstMatch = first(matches);
+    const matches = content.match(this.regExp),
+          firstMatch = first(matches);
 
     content = firstMatch;
 
-    var significantToken = SignificantToken.fromContentLineAndType(content, line, this.type);
+    const significantToken = SignificantToken.fromContentLineAndType(content, line, this.type);
 
     return significantToken;
   }
