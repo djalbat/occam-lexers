@@ -1,10 +1,10 @@
 'use strict';
 
-var easyui = require('easyui'),
-    easyuilayout = require('easyui-layout'),
-    TextArea = easyui.TextArea,
-    SizeableElement = easyuilayout.SizeableElement,
-    VerticalSplitter = easyuilayout.VerticalSplitter;
+var easy = require('easy'),
+    easylayout = require('easy-layout'),
+    TextArea = easy.TextArea,
+    SizeableElement = easylayout.SizeableElement,
+    VerticalSplitter = easylayout.VerticalSplitter;
 
 var leftColumnSelector = '#leftColumn',
     contentTextAreaSelector = 'textArea#content',

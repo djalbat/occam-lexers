@@ -1,7 +1,7 @@
 'use strict';
 
-var easyui = require('easyui'),
-    TextArea = easyui.TextArea;
+var easy = require('easy'),
+    TextArea = easy.TextArea;
 
 var Example = require('../example'),
     BasicLexer = require('../basic/lexer');
