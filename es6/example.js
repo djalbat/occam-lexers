@@ -2,29 +2,29 @@
 
 var easy = require('easy'),
     easylayout = require('easy-layout'),
-    TextArea = easy.TextArea,
+    Textarea = easy.Textarea,
     SizeableElement = easylayout.SizeableElement,
     VerticalSplitter = easylayout.VerticalSplitter;
 
 var leftColumnSelector = '#leftColumn',
-    contentTextAreaSelector = 'textArea#content',
-    tokensTextAreaSelector = 'textArea#tokens',
-    contentTextArea = new TextArea(contentTextAreaSelector),
-    tokensTextArea = new TextArea(tokensTextAreaSelector),
+    contentTextareaSelector = 'textArea#content',
+    tokensTextareaSelector = 'textArea#tokens',
+    contentTextarea = new Textarea(contentTextareaSelector),
+    tokensTextarea = new Textarea(tokensTextareaSelector),
     leftColumn = new SizeableElement(leftColumnSelector),
     TO_THE_RIGHT_OF = VerticalSplitter.situated.TO_THE_RIGHT_OF;
 
 new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
 
 class Example {
-  static contentTextAreaOnKeyUp(handler) {
-    contentTextArea.on('keyup', handler);
+  static contentTextareaOnKeyUp(handler) {
+    contentTextarea.on('keyup', handler);
   }
 
   static updateTokens(lexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
     try {
-      var contentTextAreaValue = contentTextArea.getValue(),
-          content = contentTextAreaValue,  ///
+      var contentTextareaValue = contentTextarea.getValue(),
+          content = contentTextareaValue,  ///
           contents = content.split(/\n/),
           lines = lexer.linesFromContents(contents, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
           htmls = lines.reduce(function(htmls, line, index) {
@@ -36,22 +36,22 @@ class Example {
 
             return htmls;
           }, ''),
-          tokensTextAreaHTML = htmls;  ///
+          tokensTextareaHTML = htmls;  ///
 
-      tokensTextArea.html(tokensTextAreaHTML);
+      tokensTextarea.html(tokensTextareaHTML);
 
-      contentTextArea.removeClass('error');
+      contentTextarea.removeClass('error');
     } catch (error) {
-      contentTextArea.addClass('error');
+      contentTextarea.addClass('error');
 
       Example.clearTokens();
     }
   }
 
   static clearTokens() {
-    var tokensTextAreaHTML = '';
+    var tokensTextareaHTML = '';
 
-    tokensTextArea.html(tokensTextAreaHTML);
+    tokensTextarea.html(tokensTextareaHTML);
   }
 }
 

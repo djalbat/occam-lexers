@@ -12,7 +12,7 @@ class FlorenceExample {
         previousLineInComment = false,
         followingLineInComment = false;
 
-    Example.contentTextAreaOnKeyUp(function() {
+    Example.contentTextareaOnKeyUp(function() {
       Example.updateTokens(florenceLexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment);
     });
 

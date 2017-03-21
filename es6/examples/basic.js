@@ -1,30 +1,30 @@
 'use strict';
 
 var easy = require('easy'),
-    TextArea = easy.TextArea;
+    Textarea = easy.Textarea;
 
 var Example = require('../example'),
     BasicLexer = require('../basic/lexer');
 
-var terminalSymbolsRegExpPatternTextArea,
-    terminalSymbolsRegExpPatternTextAreaSelector = 'textarea#terminalSymbolsRegExpPattern',
+var terminalSymbolsRegExpPatternTextarea,
+    terminalSymbolsRegExpPatternTextareaSelector = 'textarea#terminalSymbolsRegExpPattern',
     terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
 
 var lexer = null;
 
 class BasicExample {
   static run() {
-    terminalSymbolsRegExpPatternTextArea = new TextArea(terminalSymbolsRegExpPatternTextAreaSelector);
+    terminalSymbolsRegExpPatternTextarea = new Textarea(terminalSymbolsRegExpPatternTextareaSelector);
 
-    var terminalSymbolsRegExpPatternTextAreaValue = terminalSymbolsRegExpPattern; ///
+    var terminalSymbolsRegExpPatternTextareaValue = terminalSymbolsRegExpPattern; ///
 
-    terminalSymbolsRegExpPatternTextArea.setValue(terminalSymbolsRegExpPatternTextAreaValue);
+    terminalSymbolsRegExpPatternTextarea.setValue(terminalSymbolsRegExpPatternTextareaValue);
 
-    terminalSymbolsRegExpPatternTextArea.onChange(function() {
+    terminalSymbolsRegExpPatternTextarea.onChange(function() {
       update();
     });
 
-    Example.contentTextAreaOnKeyUp(function() {
+    Example.contentTextareaOnKeyUp(function() {
       update();
     });
 
@@ -45,7 +45,7 @@ function update() {
 }
 
 function updateLexer() {
-  var terminalSymbolsRegExpPatternInputValue = terminalSymbolsRegExpPatternTextArea.getValue(),
+  var terminalSymbolsRegExpPatternInputValue = terminalSymbolsRegExpPatternTextarea.getValue(),
       terminalSymbolsRegExpPattern = terminalSymbolsRegExpPatternInputValue,  ///
       terminalSymbolsRegExpPatternIsValid = regExpPatternIsValid(terminalSymbolsRegExpPattern);
 
@@ -57,9 +57,9 @@ function updateLexer() {
 
     lexer = BasicLexer.fromGrammar(grammar);
 
-    terminalSymbolsRegExpPatternTextArea.removeClass('error');
+    terminalSymbolsRegExpPatternTextarea.removeClass('error');
   } else {
-    terminalSymbolsRegExpPatternTextArea.addClass('error');
+    terminalSymbolsRegExpPatternTextarea.addClass('error');
 
     lexer = null;
   }
