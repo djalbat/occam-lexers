@@ -1,10 +1,10 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "2.1.42",
+  "version": "2.1.43",
   "license": "MIT",
   "homepage": "https://github.com/occam-proof-assistant/Lexers",
-  "description": "The Occam proof assistant's lexers.",
+  "description": "Occam's lexers.",
   "repository": {
     "type": "git",
     "url": "https://github.com/occam-proof-assistant/Lexers"
