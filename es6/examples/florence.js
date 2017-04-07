@@ -1,7 +1,7 @@
 'use strict';
 
 const Example = require('../example'),
-    FlorenceLexer = require('../florence/lexer');
+      FlorenceLexer = require('../florence/lexer');
 
 const florenceLexer = FlorenceLexer.fromNothing();
 

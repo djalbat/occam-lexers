@@ -1,13 +1,14 @@
 'use strict';
 
-const easy = require('easy'),
-      Textarea = easy.Textarea;
+const easy = require('easy');
 
 const Example = require('../example'),
       BasicLexer = require('../basic/lexer');
 
 const terminalSymbolsRegExpPatternTextareaSelector = 'textarea#terminalSymbolsRegExpPattern',
       terminalSymbolsRegExpPattern = `\\+|\\-|\\*|\\/|\\(|\\)|\\d+`;
+
+const { Textarea } = easy;
 
 let terminalSymbolsRegExpPatternTextarea,
     lexer = null;
