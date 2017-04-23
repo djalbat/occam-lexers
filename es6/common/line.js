@@ -8,10 +8,8 @@ class Line {
     this.content = content;
 
     this.tokens = undefined;
+    
     this.inComment = undefined;
-    this.number = undefined;
-
-    this.intermediateNumber = null;
   }
 
   getContent() {
@@ -24,14 +22,6 @@ class Line {
 
   isInComment() {
     return this.inComment;
-  }
-
-  getNumber() {
-    return this.number;
-  }
-
-  getIntermediateNumber() {
-    return this.intermediateNumber;
   }
 
   getHTML() {
@@ -54,14 +44,6 @@ class Line {
 
   setInComment(inComment) {
     this.inComment = inComment;
-  }
-
-  setNumber(number) {
-    this.number = number;
-  }
-
-  setIntermediateNumber(intermediateNumber) {
-    this.intermediateNumber = intermediateNumber;
   }
 
   pushToken(token) {
