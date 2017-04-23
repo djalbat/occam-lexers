@@ -5,7 +5,7 @@ const SignificantToken = require('../significant');
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
 
-  static fromContentAndLine(content, line) { return SignificantToken.fromContentAndLine(content, line, WhitespaceToken); }
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, WhitespaceToken); }
 
   static fromWithinContentAndLine(content, line) {
     let whitespaceToken = null;
@@ -16,8 +16,10 @@ class WhitespaceToken extends SignificantToken {
       const firstMatch = first(matches);
       
       content = firstMatch; ///
+      
+      const type = SignificantToken.types.whitespace;
 
-      whitespaceToken = WhitespaceToken.fromContentAndLine(content, line);
+      whitespaceToken = WhitespaceToken.fromContentLineAndType(content, line, type);
     }
 
     return whitespaceToken;
@@ -29,8 +31,6 @@ class WhitespaceToken extends SignificantToken {
     return position;
   }
 }
-
-WhitespaceToken.type = SignificantToken.types.whitespace;
 
 module.exports = WhitespaceToken;
 

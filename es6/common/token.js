@@ -39,7 +39,7 @@ class Token {
 
   clone(startPosition, endPosition) { return Token.clone(this, startPosition, endPosition, Token); }
 
-  static clone(token, startPosition = 0, endPosition = token.getLength(), Class) {
+  static clone(token, startPosition = 0, endPosition = token.getLength(), Class = Token) {
     let clonedToken = null;
 
     if (startPosition !== endPosition) {

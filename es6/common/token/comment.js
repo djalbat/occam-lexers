@@ -18,7 +18,7 @@ class CommentToken extends Token {
 
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, CommentToken); }
 
-  static clone(token, startPosition, endPosition, Class) { return Token.clone(token, startPosition, endPosition, Class); }
+  static clone(token, startPosition, endPosition, Class = CommentToken) { return Token.clone(token, startPosition, endPosition, Class) }
 
   static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 

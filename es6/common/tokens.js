@@ -41,8 +41,8 @@ function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) 
     }
 
     const token = Token.fromWithinContentAndLine(content, line),
-        tokenLength = token.getLength(),
-        tokenOffset = tokenPositionWithinContent + tokenLength;
+          tokenLength = token.getLength(),
+          tokenOffset = tokenPositionWithinContent + tokenLength;
     
     tokensOrRemainingContent.push(token);
     

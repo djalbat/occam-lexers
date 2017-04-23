@@ -5,7 +5,7 @@ const SignificantToken = require('../significant');
 class StringToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, StringToken); }
 
-  static fromContentAndLine(content, line) { return SignificantToken.fromContentAndLine(content, line, StringToken); }
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, StringToken); }
 
   static fromWithinContentAndLine(content, line) {
     let stringToken = null;
@@ -16,8 +16,10 @@ class StringToken extends SignificantToken {
       const firstMatch = first(matches);
       
       content = firstMatch; ///
+      
+      const type = SignificantToken.types.string;
 
-      stringToken = StringToken.fromContentAndLine(content, line);
+      stringToken = StringToken.fromContentLineAndType(content, line, type);
     }
     
     return stringToken;
@@ -29,8 +31,6 @@ class StringToken extends SignificantToken {
     return position;
   }
 }
-
-StringToken.type = SignificantToken.types.string;
 
 module.exports = StringToken;
 
