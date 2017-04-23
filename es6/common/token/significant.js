@@ -15,7 +15,22 @@ class SignificantToken extends Token {
 
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
 
-  static clone(token, startPosition, endPosition, Class = SignificantToken) { return Token.clone(token, startPosition, endPosition, Class) }
+  static clone(token, startPosition = 0, endPosition = token.getLength(), Class = SignificantToken) {
+    let clonedToken = null;
+
+    if (startPosition !== endPosition) {
+      const line = token.getLine(),
+            type = token.getType();
+
+      let content = token.getContent();
+
+      content = content.substring(startPosition, endPosition);
+
+      clonedToken = Class.fromContentLineAndType(content, line, type, Class);
+    }
+
+    return clonedToken;
+  }
 
   static fromContentLineAndType(content, line, type, Class = SignificantToken) {
     const html = Class.htmlFromContentAndType(content, type),
