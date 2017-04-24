@@ -1,8 +1,9 @@
 'use strict';
 
-const Token = require('../token');
+const util = require('../../util'),
+      NonSignificantToken = require('../nonSignificantToken');
 
-class CommentToken extends Token {
+class CommentToken extends NonSignificantToken {
   merge(commentToken) {
     let content = this.getContent();
     
@@ -23,11 +24,9 @@ class CommentToken extends Token {
   static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
 
   static htmlFromContent(content) {
-    let  innerHTML = content;
-
-    innerHTML = Token.sanitiseHTML(innerHTML);  ///
-
-    const html = `<span class="comment">${innerHTML}</span>`;
+    const sanitisedContent = util.sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
+          html = `<span class="comment">${innerHTML}</span>`;
 
     return html;
   }

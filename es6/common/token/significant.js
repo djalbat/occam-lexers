@@ -1,22 +1,47 @@
 'use strict';
 
-const Token = require('../token');
+const util = require('../../util');
 
-class SignificantToken extends Token {
-  constructor(content, line, html, type) {
-    super(content, line, html);
-    
+class SignificantToken {
+  constructor(content, line, type) {
+    this.content = content;
+    this.line = line;
     this.type = type;
+  }
+  
+  getContent() {
+    return this.content;
+  }
+  
+  getLine() {
+    return this.line;
   }
 
   getType() {
     return this.type;
   }
 
+  getHTML() {
+    const sanitisedContent = util.sanitiseContent(this.content),
+          className = this.type, ///
+          innerHTML = sanitisedContent, ///
+          html = `<span class="${className}">${innerHTML}</span>`;
+
+    return html;
+  }
+  
+  getLength() {
+    return this.content.length; ///
+  }
+
+  setType() {
+    return this.type;
+  }
+
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class = SignificantToken) {
-    let clonedToken = null;
+    let clonedSignificantToken = null;
 
     if (startPosition !== endPosition) {
       const line = token.getLine(),
@@ -26,42 +51,21 @@ class SignificantToken extends Token {
 
       content = content.substring(startPosition, endPosition);
 
-      clonedToken = Class.fromContentLineAndType(content, line, type, Class);
+      clonedSignificantToken = new Class(content, line, type);
     }
 
-    return clonedToken;
+    return clonedSignificantToken;
   }
 
-  static fromContentLineAndType(content, line, type, Class = SignificantToken) {
-    const html = Class.htmlFromContentAndType(content, type),
-          significantToken = new Class(content, line, html, type);
+  static fromSignificantToken(significantToken, Class = SignificantToken) {
+    const content = significantToken.getContent(),
+          line = significantToken.getLine(),
+          type = significantToken.getType();
+    
+    significantToken = new Class(content, line, type);
 
     return significantToken;
   }
-
-  static htmlFromContentAndType(content, type) {
-    let innerHTML = content; ///
-    
-    const className = type; ///
-
-    innerHTML = Token.sanitiseHTML(innerHTML);
-
-    const html = `<span class="${className}">${innerHTML}</span>`;
-
-    return html;
-  }
-
-  static fromToken(token, Class = SignificantToken) {
-    const content = token.getContent(),
-          line = token.getLine(),
-          type = token.getType();
-
-    token = Class.fromContentLineAndType(content, line, type, Class);
-
-    return token;
-  }
-
-  static sanitiseHTML(html) { return Token.sanitiseHTML(html); }
 }
 
 SignificantToken.types = {

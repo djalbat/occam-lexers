@@ -28,9 +28,9 @@ class Rule {
     const matches = content.match(this.regExp),
           firstMatch = first(matches);
 
-    content = firstMatch;
+    content = firstMatch; ///
 
-    const significantToken = SignificantToken.fromContentLineAndType(content, line, this.type);
+    const significantToken = new SignificantToken(content, line, this.type);
 
     return significantToken;
   }
