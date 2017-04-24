@@ -28,6 +28,10 @@ class SignificantToken {
     return this.innerHTML;
   }
 
+  getError() {
+    return this.error;
+  }
+
   getHTML() {
     const className = (this.error === true) ?
                         'error' :
