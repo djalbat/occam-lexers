@@ -19,9 +19,9 @@ class CommentToken extends NonSignificantToken {
 
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, CommentToken); }
 
-  static clone(token, startPosition, endPosition, Class = CommentToken) { return Token.clone(token, startPosition, endPosition, Class) }
+  static clone(token, startPosition, endPosition, Class = CommentToken) { return NonSignificantToken.clone(token, startPosition, endPosition, Class) }
 
-  static fromContentAndLine(content, line, Class = CommentToken) { return Token.fromContentAndLine(content, line, Class); }
+  static fromContentAndLine(content, line, Class = CommentToken) { return NonSignificantToken.fromContentAndLine(content, line, Class); }
 
   static htmlFromContent(content) {
     const sanitisedContent = util.sanitiseContent(content),
