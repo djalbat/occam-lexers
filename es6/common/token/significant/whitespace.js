@@ -5,6 +5,8 @@ const SignificantToken = require('../significant');
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
 
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, WhitespaceToken); }
+
   static fromWithinContentAndLine(content, line) {
     let whitespaceToken = null;
     
@@ -17,7 +19,7 @@ class WhitespaceToken extends SignificantToken {
       
       const type = SignificantToken.types.whitespace;
 
-      whitespaceToken = new WhitespaceToken(content, line, type);
+      whitespaceToken = WhitespaceToken.fromContentLineAndType(content, line, type);
     }
 
     return whitespaceToken;

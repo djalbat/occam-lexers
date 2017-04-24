@@ -43,8 +43,8 @@ class CommonLexer {
     
     const grammarTypes = grammar.map(function(grammarEntry) {
             const type = util.typeFromGrammarEntry(grammarEntry),
-                grammarType = type;  ///
-  
+                  grammarType = type;  ///
+    
             return grammarType;
           });
 

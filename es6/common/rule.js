@@ -30,7 +30,7 @@ class Rule {
 
     content = firstMatch; ///
 
-    const significantToken = new SignificantToken(content, line, this.type);
+    const significantToken = SignificantToken.fromContentLineAndType(content, line, this.type);
 
     return significantToken;
   }

@@ -43,13 +43,6 @@ class NonSignificantToken {
     return clonedNonSignificantToken;
   }
   
-  static fromContentAndLine(content, line, Class = NonSignificantToken) {
-    const html = Class.htmlFromContent(content),
-          token = new Class(content, line, html);
-
-    return token;
-  }
-
   static fromNonSignificantToken(nonSignificantToken, Class = NonSignificantToken) {
     const content = nonSignificantToken.getContent(),
           line = nonSignificantToken.getLine();
@@ -57,6 +50,13 @@ class NonSignificantToken {
     nonSignificantToken = Class.fromContentAndLine(content, line, Class);
     
     return nonSignificantToken;
+  }
+
+  static fromContentAndLine(content, line, Class = NonSignificantToken) {
+    const html = Class.htmlFromContent(content),
+          token = new Class(content, line, html);
+
+    return token;
   }
 
   static htmlFromContent(content) {

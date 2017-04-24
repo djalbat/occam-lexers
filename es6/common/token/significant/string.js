@@ -5,6 +5,8 @@ const SignificantToken = require('../significant');
 class StringToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, StringToken); }
 
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, StringToken); }
+
   static fromWithinContentAndLine(content, line) {
     let stringToken = null;
     
@@ -17,7 +19,7 @@ class StringToken extends SignificantToken {
       
       const type = SignificantToken.types.string;
 
-      stringToken = new StringToken(content, line, type);
+      stringToken = StringToken.fromContentLineAndType(content, line, type);
     }
     
     return stringToken;

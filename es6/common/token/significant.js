@@ -3,10 +3,13 @@
 const util = require('../../util');
 
 class SignificantToken {
-  constructor(content, line, type) {
+  constructor(content, line, type, innerHTML) {
     this.content = content;
     this.line = line;
     this.type = type;
+    this.innerHTML = innerHTML;
+
+    this.error = undefined; ///
   }
   
   getContent() {
@@ -21,21 +24,25 @@ class SignificantToken {
     return this.type;
   }
 
+  getInnerHTML() {
+    return this.innerHTML;
+  }
+
   getHTML() {
-    const sanitisedContent = util.sanitiseContent(this.content),
-          className = this.type, ///
-          innerHTML = sanitisedContent, ///
-          html = `<span class="${className}">${innerHTML}</span>`;
+    const className = (this.error === true) ?
+                        'error' :
+                          this.type,
+          html = `<span class="${className}">${this.innerHTML}</span>`;
 
     return html;
   }
-  
+
   getLength() {
     return this.content.length; ///
   }
 
-  setType() {
-    return this.type;
+  setError(error) {
+    this.error = error;
   }
 
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
@@ -51,7 +58,7 @@ class SignificantToken {
 
       content = content.substring(startPosition, endPosition);
 
-      clonedSignificantToken = new Class(content, line, type);
+      clonedSignificantToken = Class.fromContentLineAndType(content, line, type);
     }
 
     return clonedSignificantToken;
@@ -62,9 +69,23 @@ class SignificantToken {
           line = significantToken.getLine(),
           type = significantToken.getType();
     
-    significantToken = new Class(content, line, type);
+    significantToken = Class.fromContentLineAndType(content, line, type);
 
     return significantToken;
+  }
+
+  static fromContentLineAndType(content, line, type, Class = SignificantToken) {
+    const innerHTML = Class.innerHTMLFromContent(content),
+          significantToken = new Class(content, line, type, innerHTML);
+
+    return significantToken;
+  }
+
+  static innerHTMLFromContent(content) {
+    const sanitisedContent = util.sanitiseContent(content),
+          innerHTML = sanitisedContent; ///
+
+    return innerHTML;
   }
 }
 
