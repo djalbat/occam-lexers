@@ -1,7 +1,7 @@
 'use strict';
 
-const util = require('../../util'),
-      NonSignificantToken = require('../nonSignificantToken');
+const util = require('../../../util'),
+      NonSignificantToken = require('../nonSignificant');
 
 class CommentToken extends NonSignificantToken {
   merge(commentToken) {
