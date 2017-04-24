@@ -12,7 +12,7 @@ class EndOfLineToken extends SignificantToken {
   }
 
   static fromLine(line) {
-    const content = null,
+    const content = '',
           type = SignificantToken.types.endOfLine,
           endOfLineToken = new EndOfLineToken(content, line, type);
     
