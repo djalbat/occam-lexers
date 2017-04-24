@@ -55,14 +55,17 @@ class SignificantToken {
     let clonedSignificantToken = null;
 
     if (startPosition !== endPosition) {
-      const line = token.getLine(),
-            type = token.getType();
-
       let content = token.getContent();
+
+      const line = token.getLine(),
+            type = token.getType(),
+            error = token.getError();
 
       content = content.substring(startPosition, endPosition);
 
       clonedSignificantToken = Class.fromContentLineAndType(content, line, type);
+
+      clonedSignificantToken.setError(error);
     }
 
     return clonedSignificantToken;
