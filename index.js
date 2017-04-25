@@ -9,7 +9,6 @@ var lexers = {
   'SignificantToken': require('./lib/common/token/significant'),
   'StringToken': require('./lib/common/token/significant/string'),
   'EndOfLineToken': require('./lib/common/token/significant/endOfLine'),
-  'WhitespaceToken': require('./lib/common/token/significant/whitespace'),
   'NonSignificantToken': require('./lib/common/token/nonSignificant')
 };
 
