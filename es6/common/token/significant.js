@@ -50,9 +50,10 @@ class SignificantToken {
   }
 
   replaceWith(token) {
-    const replacedToken = this;
-
-    this.line.replaceToken(replacedToken, token);
+    const tokenToReplace = this,
+          successful = this.line.replaceToken(tokenToReplace, token);
+    
+    return successful;
   }
   
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }

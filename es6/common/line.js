@@ -50,12 +50,18 @@ class Line {
     this.tokens.push(token);
   }
 
-  replaceToken(replacedToken, token) {
-    const indexOfReplacedToken = this.tokens.indexOf(replacedToken),
-          start = indexOfReplacedToken,
-          deleteCount = 1;
+  replaceToken(tokenToReplace, token) {
+    const indexOfReplacedToken = this.tokens.indexOf(tokenToReplace),
+          successful = (indexOfReplacedToken > -1);
+    
+    if (successful) {
+      const start = indexOfReplacedToken,
+            deleteCount = 1;  
 
-    this.tokens.splice(start, deleteCount, token);
+      this.tokens.splice(start, deleteCount, token); 
+    }
+    
+    return successful;
   }
   
   static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
