@@ -49,6 +49,12 @@ class SignificantToken {
     this.error = error;
   }
 
+  replaceWith(token) {
+    const replacedToken = this;
+
+    this.line.replaceToken(replacedToken, token);
+  }
+  
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class = SignificantToken) {
@@ -69,16 +75,6 @@ class SignificantToken {
     }
 
     return clonedSignificantToken;
-  }
-
-  static fromSignificantToken(significantToken, Class = SignificantToken) {
-    const content = significantToken.getContent(),
-          line = significantToken.getLine(),
-          type = significantToken.getType();
-    
-    significantToken = Class.fromContentLineAndType(content, line, type);
-
-    return significantToken;
   }
 
   static fromContentLineAndType(content, line, type, Class = SignificantToken) {

@@ -25,6 +25,12 @@ class NonSignificantToken {
     return this.content.length; ///
   }
   
+  replaceWith(token) {
+    const replacedToken = this;
+    
+    this.line.replaceToken(replacedToken, token);
+  }
+  
   clone(startPosition, endPosition) { return NonSignificantToken.clone(this, startPosition, endPosition, NonSignificantToken); }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class = NonSignificantToken) {
@@ -43,15 +49,6 @@ class NonSignificantToken {
     return clonedNonSignificantToken;
   }
   
-  static fromNonSignificantToken(nonSignificantToken, Class = NonSignificantToken) {
-    const content = nonSignificantToken.getContent(),
-          line = nonSignificantToken.getLine();
-    
-    nonSignificantToken = Class.fromContentAndLine(content, line, Class);
-    
-    return nonSignificantToken;
-  }
-
   static fromContentAndLine(content, line, Class = NonSignificantToken) {
     const html = Class.htmlFromContent(content),
           token = new Class(content, line, html);

@@ -33,7 +33,7 @@ class Line {
           return html;
         }, '');
     
-    html += '\n';
+    html += '\n'; ///
     
     return html;
   }
@@ -48,6 +48,14 @@ class Line {
 
   pushToken(token) {
     this.tokens.push(token);
+  }
+
+  replaceToken(replacedToken, token) {
+    const indexOfReplacedToken = this.tokens.indexOf(replacedToken),
+          start = indexOfReplacedToken,
+          deleteCount = 1;
+
+    this.tokens.splice(start, deleteCount, token);
   }
   
   static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
