@@ -25,13 +25,6 @@ class NonSignificantToken {
     return this.content.length; ///
   }
   
-  replaceWith(token) {
-    const tokenToReplace = this,
-          successful = this.line.replaceToken(tokenToReplace, token);
-
-    return successful;
-  }
-  
   clone(startPosition, endPosition) { return NonSignificantToken.clone(this, startPosition, endPosition, NonSignificantToken); }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class = NonSignificantToken) {

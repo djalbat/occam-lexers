@@ -49,13 +49,6 @@ class SignificantToken {
     this.error = error;
   }
 
-  replaceWith(token) {
-    const tokenToReplace = this,
-          successful = this.line.replaceToken(tokenToReplace, token);
-    
-    return successful;
-  }
-  
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
 
   static clone(token, startPosition = 0, endPosition = token.getLength(), Class = SignificantToken) {
