@@ -21,10 +21,10 @@ ${mathematical_alphanumeric_symbols}
     unassigned = unicode_characters;  ///
 
 const grammar = [
-  
-  { special    : /,|;|\{|\}|=|:|\(|\)|\.\.\.|\.\./ },
-  
+
   { include    : /^include$/ },
+
+  { special    : /,|;|\{|\}|=|::|:|\(|\)|\.\.\.|\.\./ },
   
   { keyword    : /^(?:Rule|Axiom|Theorem|Lemma|Premises|Premise|Conclusion|Proof|Therefore|Suppose|Then|Hence|Variables|Variable|Metavariables|Metavariable|Constructors|Constructor|Type|Object|Definition|from|by|let|is|not|in|free|defined|undefined)$/ },
   
