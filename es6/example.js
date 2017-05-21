@@ -25,8 +25,7 @@ class Example {
     try {
       const contentTextareaValue = contentTextarea.getValue(),
             content = contentTextareaValue,  ///
-            contents = content.split(/\n/),
-            lines = lexer.linesFromContents(contents, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
+            lines = lexer.linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
             htmls = lines.reduce(function(htmls, line, index) {
               const lineHTML = line.getHTML(),
                     lineNumber = index + 1,

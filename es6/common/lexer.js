@@ -12,7 +12,14 @@ class CommonLexer {
     this.Line = Line;
   }
 
-  linesFromContents(contents, firstLineIndex = 0, context = new Context()) {
+  linesFromContent(content, firstLineIndex = 0, context = new Context()) {
+    const contents = content.split(/\n/),
+          lines = this.linesFromContents(contents, firstLineIndex, context);
+
+    return lines;
+  }
+
+  linesFromContents(contents, firstLineIndex, context) {
     const lines = [];
     
     let index = firstLineIndex,    
