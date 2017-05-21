@@ -1,7 +1,7 @@
 'use strict';
 
 class Context {
-  constructor(minimumLinesLength = Number.POSITIVE_INFINITY, previousLineInComment = null, followingLineInComment = null) {
+  constructor(minimumLinesLength = Infinity, previousLineInComment = null, followingLineInComment = null) {
     this.minimumLinesLength = minimumLinesLength;
     this.previousLineInComment = previousLineInComment;
     this.followingLineInComment = followingLineInComment;
