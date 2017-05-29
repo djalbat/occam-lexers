@@ -5,11 +5,11 @@ var lexers = {
   'BasicLexer': require('./lib/basic/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
   'PrimitiveLexer': require('./lib/primitive/lexer'),
-  'specialSymbols': require('./lib/specialSymbols'),
   'StringToken': require('./lib/common/token/significant/string'),
-  'EndOfLineToken': require('./lib/common/token/significant/endOfLine'),
   'SignificantToken': require('./lib/common/token/significant'),
-  'NonSignificantToken': require('./lib/common/token/nonSignificant')
+  'NonSignificantToken': require('./lib/common/token/nonSignificant'),
+  'EndOfLineToken': require('./lib/florence/token/significant/endOfLine'),
+  'specialSymbols': require('./lib/specialSymbols')
 };
 
 module.exports = lexers;
