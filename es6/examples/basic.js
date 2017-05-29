@@ -1,12 +1,14 @@
 'use strict';
 
 const Example = require('../example'),
-      BasicLexer = require('../basic/lexer'),
-      basicGrammar = require('../basic/grammar');
+      BasicLexer = require('../basic/lexer');
 
 class BasicExample {
   static run() {
-    Example.run(basicGrammar, BasicLexer);
+    const grammar = BasicLexer.grammar,
+          lexer = BasicLexer;
+
+    Example.run(grammar, lexer);
   }
 }
 

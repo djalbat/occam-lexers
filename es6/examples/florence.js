@@ -1,12 +1,14 @@
 'use strict';
 
 const Example = require('../example'),
-      FlorenceLexer = require('../florence/lexer'),
-      florenceGrammar = require('../florence/grammar');
+      FlorenceLexer = require('../florence/lexer');
 
 class FlorenceExample {
   static run() {
-    Example.run(florenceGrammar, FlorenceLexer);
+    const grammar = FlorenceLexer.grammar,
+          lexer = FlorenceLexer;
+
+    Example.run(grammar, lexer);
   }
 }
 

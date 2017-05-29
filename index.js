@@ -7,8 +7,9 @@ var lexers = {
   'PrimitiveLexer': require('./lib/primitive/lexer'),
   'StringToken': require('./lib/common/token/significant/string'),
   'SignificantToken': require('./lib/common/token/significant'),
-  'NonSignificantToken': require('./lib/common/token/nonSignificant'),
+  'WhitespaceToken': require('./lib/common/token/significant/whitespace'),
   'EndOfLineToken': require('./lib/florence/token/significant/endOfLine'),
+  'NonSignificantToken': require('./lib/common/token/nonSignificant'),
   'specialSymbols': require('./lib/specialSymbols')
 };
 
