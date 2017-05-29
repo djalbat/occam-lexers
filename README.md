@@ -26,9 +26,9 @@ All lexers bar the primitive lexer share common patterns and functionality. Each
 3. Strings
 4. Remaining tokens
 
-Comment tokens are considered to be non-significant whilst the other two types, note that this includes whitespace, being considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical grammars. On the other hand the regular expressions and related functionality to match the tokens in the first three passes is hard-coded. The basic lexer is also configured to ignore the first three types of tokens in fact, for simplicity's sake. Finally, note that the Florence lexer will add end of line tokens and that these, like whitespace, are also considered to be significant.
+Comment tokens are considered to be non-significant whilst the other two types, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical grammars. On the other hand the regular expressions and related functionality to match the tokens in the first three passes is hard-coded. The basic lexer is also configured to ignore the first three types of tokens in fact, for simplicity's sake. Finally, note that the Florence lexer will add end of line tokens and that these, like whitespace, are also considered to be significant.
 
-The fourth pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned [Florence lexical grammar](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+The fourth pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned Florence lexical grammar, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
@@ -50,7 +50,7 @@ You will need to do this if you want to look at the examples.
 
 These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
 
-Each of the examples has a textarea in which the corresponding lexer's grammar is shown. Note that the grammars are in JSON format and the regular expressions are supplied as strings with the usual escaping. You can change both the grammar and the content to be matched dynamically, and see the resulting tokens.
+Each of the examples has a textarea in which the corresponding lexer's grammar is shown. Note that grammars are in JSON format and the regular expressions are supplied as strings with the usual escaping. You can change both the grammar and the content to be matched dynamically, and see the resulting tokens.
 
 In the case of the Florence lexical grammar, the regular expression for `unassigned` tokens is split up into the following ranges:
 
