@@ -15,13 +15,13 @@ The Occam proof assistant's lexers.
 
 There are three lexers in all:
 
-* A very primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
+* A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
 * A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's vernacular, called Florence.
 
-The last two of these lexers share common code and patterns and each take four passes to process content. The first three passes match comments, strings and whitespace in that order. The last pass will match significant and error tokens.
+The last two of these lexers share common code and patterns, and each takes four passes to process content. The first three passes match comments, strings and whitespace in that order. The tokens matched by these passes are not defined in the lexical grammars and are effectively hard-coded into the lexers. The last pass will match significant tokens defined by the lexical grammar. Any tokens left over after this pass are error tokens.
 
-The final pass uses a recursive descent algorithm. This should be fast and should also help to make specification languages written with this approach in mind relatively simple. In the aforementioned [lexical grammar](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+This last pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned [Florence lexical grammar](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
@@ -72,6 +72,16 @@ The first pass of the Florence lexer picks out include directives with the follo
 It does not currently support single line comments.
 
 It will add end of line tokens.
+
+The regular expression for `unassigned` tokens is split up into the following ranges:
+
+* basic_latin: `\u{21}-\u{7E}`
+* latin1_supplement: `\u{A1}-\u{FF}`
+* mathematical_operators: `\u{2200}-\u{22FF}`
+* supplemental_mathematical_operators: `\u{2A00}-\u{2AFF}`
+* miscellaneous_technical: `\u{2300}-\u{23ff}`
+* mathematical_alphanumeric_symbols: `\u{1D400}-\u{1D7FF}`
+
 
 ## Building
 

@@ -21,11 +21,11 @@ class Example {
     contentTextarea.on('keyup', handler);
   }
 
-  static updateTokens(lexer, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
+  static updateTokens(lexer) {
     try {
       const contentTextareaValue = contentTextarea.getValue(),
             content = contentTextareaValue,  ///
-            lines = lexer.linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment),
+            lines = lexer.linesFromContent(content),
             htmls = lines.reduce(function(htmls, line, index) {
               const lineHTML = line.getHTML(),
                     lineNumber = index + 1,

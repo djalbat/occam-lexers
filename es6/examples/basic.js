@@ -52,9 +52,9 @@ function updateLexer() {
 
   if (terminalSymbolsRegExpPatternIsValid) {
     const terminalSymbolsRegExp = new RegExp(terminalSymbolsRegExpPattern),
-        grammar = [
-          { terminalSymbol : terminalSymbolsRegExp }
-        ];
+          grammar = [
+            { terminalSymbol : terminalSymbolsRegExp }
+          ];
 
     lexer = BasicLexer.fromGrammar(grammar);
 
