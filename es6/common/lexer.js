@@ -43,7 +43,7 @@ class CommonLexer {
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
-  static significantTokenTypesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
+  static significantTokenTypesFromGrammar(grammar) { return Rules.significantTokenTypesFromGrammar(grammar); }
 }
 
 module.exports = CommonLexer;
