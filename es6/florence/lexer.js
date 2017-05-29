@@ -3,7 +3,10 @@
 const Line = require('./line'),
       grammar = require('./grammar'),
       Context = require('../common/context'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      StringToken = require('../common/token/significant/string'),
+      WhitespaceToken = require('../common/token/significant/whitespace'),
+      EndOfLineToken = require('./token/significant/endOfLine');
 
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
@@ -13,10 +16,22 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static getSignificantTokenTypes() {
-    const significantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar);
+  static significantTokenTypes() {
+    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
+          significantTokenTypes = grammarSignificantTokenTypes.concat([
+            StringToken.type,
+            WhitespaceToken.type,
+            EndOfLineToken.type
+          ]);
 
     return significantTokenTypes;
+  }
+
+  static fromGrammar(grammar) {
+    const rules = CommonLexer.rulesFromGrammar(grammar),
+          florenceLexer = new FlorenceLexer(rules, Line);
+
+    return florenceLexer;
   }
 
   static fromNothing() {

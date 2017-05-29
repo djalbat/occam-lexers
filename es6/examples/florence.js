@@ -1,17 +1,12 @@
 'use strict';
 
 const Example = require('../example'),
-      FlorenceLexer = require('../florence/lexer');
-
-const florenceLexer = FlorenceLexer.fromNothing();
+      FlorenceLexer = require('../florence/lexer'),
+      florenceGrammar = require('../florence/grammar');
 
 class FlorenceExample {
   static run() {
-    Example.contentTextareaOnKeyUp(function() {
-      Example.updateTokens(florenceLexer);
-    });
-
-    Example.updateTokens(florenceLexer);
+    Example.run(florenceGrammar, FlorenceLexer);
   }
 }
 

@@ -4,26 +4,43 @@ const easy = require('easy'),
       easylayout = require('easy-layout');
 
 const { Textarea } = easy,
-      { SizeableElement, VerticalSplitter, options } = easylayout,
-      { TO_THE_RIGHT_OF } = options;
+      { SizeableElement, VerticalSplitter } = easylayout;
 
-const leftColumnSelector = '#leftColumn',
+const verticalSplitterSelector = '#verticalSplitter',
+      sizeableElementSelector = '#sizeableElement',
+      grammarTextareaSelector = 'textArea#grammar',
       contentTextareaSelector = 'textArea#content',
       tokensTextareaSelector = 'textArea#tokens',
+      sizeableElement = new SizeableElement(sizeableElementSelector),
+      grammarTextarea = new Textarea(grammarTextareaSelector),
       contentTextarea = new Textarea(contentTextareaSelector),
       tokensTextarea = new Textarea(tokensTextareaSelector),
-      leftColumn = new SizeableElement(leftColumnSelector);
+      beforeSizeableElement = false,
+      afterSizeableElement = true;
 
-new VerticalSplitter('.left.vertical.splitter', TO_THE_RIGHT_OF, leftColumn);
+new VerticalSplitter(verticalSplitterSelector, beforeSizeableElement, afterSizeableElement);
 
 class Example {
-  static contentTextareaOnKeyUp(handler) {
-    contentTextarea.on('keyup', handler);
+  static run(grammar, Lexer) {
+    const grammarTextAreaValue = JSON.stringify(grammar, null, '  ');
+
+    grammarTextarea.setValue(grammarTextAreaValue);
+
+    grammarTextarea.on('keyup', function() {
+      Example.updateTokens(Lexer); 
+    });
+
+    contentTextarea.on('keyup', function() {
+      Example.updateTokens(Lexer);
+    });
   }
 
-  static updateTokens(lexer) {
+  static updateTokens(Lexer) {
     try {
-      const contentTextareaValue = contentTextarea.getValue(),
+      const grammarTextareaValue = grammarTextarea.getValue(),
+            contentTextareaValue = contentTextarea.getValue(),
+            grammar = JSON.parse(grammarTextareaValue),
+            lexer = Lexer.fromGrammar(grammar),
             content = contentTextareaValue,  ///
             lines = lexer.linesFromContent(content),
             htmls = lines.reduce(function(htmls, line, index) {

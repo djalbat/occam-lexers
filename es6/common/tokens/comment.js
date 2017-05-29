@@ -1,9 +1,9 @@
 'use strict';
 
-const util = require('../util'),
-      EndOfCommentToken = require('./token/endOfComment'),
-      StartOfCommentToken = require('./token/startOfComment'),
-      MiddleOfCommentToken = require('./token/middleOfComment');
+const util = require('../../util'),
+      EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
+      StartOfCommentToken = require('../token/nonSignificant/comment/startOf'),
+      MiddleOfCommentToken = require('../token/nonSignificant/comment/middleOf');
 
 class CommentTokens {
   static pass(tokensOrContents, line, context) {

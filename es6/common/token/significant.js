@@ -86,10 +86,4 @@ class SignificantToken {
   }
 }
 
-SignificantToken.types = {
-  string: 'string',
-  endOfLine: 'endOfLine',
-  whitespace: 'whitespace'
-};
-
 module.exports = SignificantToken;

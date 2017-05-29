@@ -17,7 +17,7 @@ class StringToken extends SignificantToken {
       
       content = firstMatch; ///
       
-      const type = SignificantToken.types.string;
+      const type = StringToken.type;
 
       stringToken = StringToken.fromContentLineAndType(content, line, type);
     }
@@ -33,5 +33,7 @@ class StringToken extends SignificantToken {
 }
 
 module.exports = StringToken;
+
+StringToken.type = 'string';
 
 function first(array) { return array[0]; }

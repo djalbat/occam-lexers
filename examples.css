@@ -9,12 +9,6 @@
   padding: 0;
 }
 
-#leftColumn {
-  width: 40rem;
-  min-width: 20rem;
-  max-width: 80rem;
-}
-
 .columns {
   display: flex;
   align-items: stretch;
@@ -33,9 +27,19 @@
 }
 
 .column,
-#leftColumn {
+#sizeableElement {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.columns {
+  margin-bottom: 1rem;
+}
+
+#sizeableElement {
+  width: 60rem;
+  min-width: 40rem;
+  max-width: 120rem;
 }
 
 h1 {
@@ -46,7 +50,6 @@ h1 {
 
 h2 {
   font-size: 1.25rem;
-  margin-top: 1rem;
 }
 
 p,
@@ -62,6 +65,13 @@ textarea {
   border: 1px solid darkgray;
   height: 16rem;
   resize: vertical;
+  margin-top: 0.5rem;
+}
+
+textarea#grammar {
+  white-space: pre;
+  overflow-wrap: normal;
+  margin-bottom: 1rem;
 }
 
 textarea#tokens {
@@ -70,9 +80,5 @@ textarea#tokens {
 
 textarea.error {
   border-color: red;
-}
-
-textarea#terminalSymbolsRegExpPattern {
-  height: 3rem;
 }
 

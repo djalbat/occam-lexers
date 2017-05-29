@@ -2,7 +2,7 @@
 
 const Line = require('./line');
 
-class BNFLexer {
+class PrimitiveLexer {
   static linesFromGrammar(grammar) {
     const contents = contentsFromGrammar(grammar),
           lines = contents.map(function(content) {
@@ -15,7 +15,7 @@ class BNFLexer {
   }
 }
 
-module.exports = BNFLexer;
+module.exports = PrimitiveLexer;
 
 function contentsFromGrammar(grammar) {
   const contents = grammar.split('\n').reduce(function (contents, content) {

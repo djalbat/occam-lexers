@@ -17,11 +17,18 @@ There are three lexers in all:
 
 * A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
-* A lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's vernacular, called Florence.
+* The main lexer, namely the lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's vernacular, called Florence.
 
-The last two of these lexers share common code and patterns, and each takes four passes to process content. The first three passes match comments, strings and whitespace in that order. The tokens matched by these passes are not defined in the lexical grammars and are effectively hard-coded into the lexers. The last pass will match significant tokens defined by the lexical grammar. Any tokens left over after this pass are error tokens.
+All lexers bar the primitive lexer share common patterns and functionality. Each takes four passes to match four types of tokens, although with caveats:
 
-This last pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned [Florence lexical grammar](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+1. Comments
+2. Whitespace
+3. Strings
+4. Remaining tokens
+
+Comment tokens are considered to be non-significant whilst the other two types, note that this includes whitespace, being considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical grammars. On the other hand the regular expressions and related functionality to match the tokens in the first three passes is hard-coded. The basic lexer is also configured to ignore the first three types of tokens in fact, for simplicity's sake. Finally, note that the Florence lexer will add end of line tokens and that these, like whitespace, are also considered to be significant.
+
+The fourth pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned [Florence lexical grammar](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js), for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 ## Installation
 
@@ -43,45 +50,16 @@ You will need to do this if you want to look at the examples.
 
 These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
 
-### The basic example
+Each of the examples has a textarea in which the corresponding lexer's grammar is shown. Note that the grammars are in JSON format and the regular expressions are supplied as strings with the usual escaping. You can change both the grammar and the content to be matched dynamically, and see the resulting tokens.
 
-The first pass of the basic lexer will only pick out whitespace. And in this example at least, the second pass only has one rule, called the `terminalSymbols` rule, the regular expression pattern for which can be changed dynamically. The HTML for the resulting tokens is shown on the right, corresponding to content given on the left. This is the same for all the examples.
+In the case of the Florence lexical grammar, the regular expression for `unassigned` tokens is split up into the following ranges:
 
-If the terminal symbols pattern does not result in a valid regular expression, for example the following...
-
-    \+|\-|\*|\/|\(|\)|\
-
-...is not valid, the border of the text area will turn red and no tokens will be shown.
-
-There is a guard against content being unmatchable, you can see this in action if you change the terminal symbols regular expression pattern to the following:
-
-    \+|\-|\*|\/|\(|\)|
-
-By the way, neither of the two remaining examples allow the grammar to be changed dynamically, however this can be done by editing the `grammar.js` files in the requisite directories and rebuilding.
-
-### The Florence example
-
-The first pass of the Florence lexer picks out include directives with the following syntax...
-
-    include("...")
-
-...and comments like the following:
-
-    /* ... */
-
-It does not currently support single line comments.
-
-It will add end of line tokens.
-
-The regular expression for `unassigned` tokens is split up into the following ranges:
-
-* basic_latin: `\u{21}-\u{7E}`
-* latin1_supplement: `\u{A1}-\u{FF}`
-* mathematical_operators: `\u{2200}-\u{22FF}`
-* supplemental_mathematical_operators: `\u{2A00}-\u{2AFF}`
-* miscellaneous_technical: `\u{2300}-\u{23ff}`
-* mathematical_alphanumeric_symbols: `\u{1D400}-\u{1D7FF}`
-
+* `\u{21}-\u{7E}` - Basic Latin
+* `\u{A1}-\u{FF}` - Latin-1 Supplement
+* `\u{2200}-\u{22FF}` - Mathematical Operators
+* `\u{2A00}-\u{2AFF}` - Supplemental Mathematical Operators
+* `\u{2300}-\u{23ff}` - Miscellaneous Technical
+* `\u{1D400}-\u{1D7FF}` - Mathematical Alphanumeric Symbols
 
 ## Building
 

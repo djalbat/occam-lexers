@@ -17,7 +17,7 @@ class WhitespaceToken extends SignificantToken {
       
       content = firstMatch; ///
       
-      const type = SignificantToken.types.whitespace;
+      const type = WhitespaceToken.type;
 
       whitespaceToken = WhitespaceToken.fromContentLineAndType(content, line, type);
     }
@@ -33,5 +33,7 @@ class WhitespaceToken extends SignificantToken {
 }
 
 module.exports = WhitespaceToken;
+
+WhitespaceToken.type = 'whitespace'; 
 
 function first(array) { return array[0]; }

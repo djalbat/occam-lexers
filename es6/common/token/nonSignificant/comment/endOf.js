@@ -1,6 +1,6 @@
 'use strict';
 
-const CommentToken = require('../../common/token/nonSignificant/comment');
+const CommentToken = require('../comment');
 
 class EndOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, EndOfCommentToken); }

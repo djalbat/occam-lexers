@@ -1,10 +1,8 @@
 'use strict';
 
 const Line = require('./line'),
-      util = require('../util'),
       Rules = require('./rules'),
-      Context = require('./context'),
-      SignificantToken = require('./token/significant');
+      Context = require('./context');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -45,20 +43,7 @@ class CommonLexer {
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 
-  static significantTokenTypesFromGrammar(grammar) {
-    let  significantTokenTypes = Object.keys(SignificantToken.types);
-    
-    const grammarTypes = grammar.map(function(grammarEntry) {
-            const type = util.typeFromGrammarEntry(grammarEntry),
-                  grammarType = type;  ///
-    
-            return grammarType;
-          });
-
-    significantTokenTypes = significantTokenTypes.concat(grammarTypes); ///
-
-    return significantTokenTypes;
-  }
+  static significantTokenTypesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 }
 
 module.exports = CommonLexer;

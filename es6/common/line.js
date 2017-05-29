@@ -1,7 +1,7 @@
 'use strict';
 
 const util = require('../util'),
-      SignificantTokens = require('./significantTokens');
+      SignificantTokens = require('./tokens/significant');
 
 class Line {
   constructor(content) {
@@ -56,6 +56,7 @@ class Line {
           inComment = CommentTokens.pass(tokensOrContents, line, context);
 
     StringTokens.pass(tokensOrContents, line);
+    
     WhitespaceTokens.pass(tokensOrContents, line);
 
     const tokens = SignificantTokens.pass(tokensOrContents, line, rules);
