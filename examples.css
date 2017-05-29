@@ -16,24 +16,24 @@
   height: 100%;
 }
 
-.columns .column {
+.column {
   flex: 1;
 }
 
-.splitter.vertical {
+.vertical.splitter {
   width: 8px;
   min-width: 8px;
   background-color: lightgray;
+}
+
+.columns {
+  margin-bottom: 1rem;
 }
 
 .column,
 #sizeableElement {
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-.columns {
-  margin-bottom: 1rem;
 }
 
 #sizeableElement {
@@ -68,6 +68,10 @@ textarea {
   margin-top: 0.5rem;
 }
 
+textarea.error {
+  border-color: red;
+}
+
 textarea#grammar {
   white-space: pre;
   overflow-wrap: normal;
@@ -77,8 +81,3 @@ textarea#grammar {
 textarea#tokens {
   font-size: 0.75rem;
 }
-
-textarea.error {
-  border-color: red;
-}
-

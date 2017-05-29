@@ -17,7 +17,7 @@ There are three lexers in all:
 
 * A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
 * A basic lexer, for illustrative purposes.
-* The main lexer, namely the lexer for the [lexical grammar part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/grammar.js) of Occam's vernacular, called Florence.
+* The main lexer, namely the lexer for the lexical grammar part of Occam's vernacular, called Florence.
 
 All lexers bar the primitive lexer share common patterns and functionality. Each takes four passes to match four types of tokens, although with caveats:
 
