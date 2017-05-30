@@ -3,6 +3,7 @@
 const Line = require('./line'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
+      StringToken = require('../common/token/significant/string'),
       WhitespaceToken = require('../common/token/significant/whitespace');
 
 class BNFLexer extends CommonLexer {
@@ -10,6 +11,7 @@ class BNFLexer extends CommonLexer {
     const grammar = BNFLexer.grammar,
           grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
+            StringToken.type,
             WhitespaceToken.type
           ]);
 
