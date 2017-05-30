@@ -8,10 +8,13 @@ class BasicLexer extends CommonLexer {
   static significantTokenTypes() {
     const grammar = BasicLexer.grammar,
           grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
-          significantTokenTypes = grammarSignificantTokenTypes;
-    
+          significantTokenTypes = grammarSignificantTokenTypes.concat([
+            WhitespaceToken.type
+          ]);
+
     return significantTokenTypes;
   }
+
 
   static fromGrammar(grammar) {
     const rules = Rules.fromGrammar(grammar),
