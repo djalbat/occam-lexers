@@ -53,6 +53,15 @@ The gramar for the BNF lexer is the following:
     
 The three logical operators `!`, `&` and `|` are supported, together with the three repetition operators `?`, `*` and `+`. Grouping is also supported.  
 
+In the case of the Florence lexical grammar, the regular expression for `unassigned` tokens is split up into the following ranges:
+
+* `\u{21}-\u{7E}` - Basic Latin
+* `\u{A1}-\u{FF}` - Latin-1 Supplement
+* `\u{2200}-\u{22FF}` - Mathematical Operators
+* `\u{2A00}-\u{2AFF}` - Supplemental Mathematical Operators
+* `\u{2300}-\u{23ff}` - Miscellaneous Technical
+* `\u{1D400}-\u{1D7FF}` - Mathematical Alphanumeric Symbols
+
 ## Installation
 
 With [npm](https://www.npmjs.com/):
@@ -74,15 +83,6 @@ You will need to do this if you want to look at the examples.
 These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
 
 Each of the examples has a textarea in which the corresponding lexer's grammar is shown. Note that grammars are in JSON format and the regular expressions are supplied as strings with the usual escaping. You can change both the grammar and the content to be matched dynamically, and see the resulting tokens.
-
-In the case of the Florence lexical grammar, the regular expression for `unassigned` tokens is split up into the following ranges:
-
-* `\u{21}-\u{7E}` - Basic Latin
-* `\u{A1}-\u{FF}` - Latin-1 Supplement
-* `\u{2200}-\u{22FF}` - Mathematical Operators
-* `\u{2A00}-\u{2AFF}` - Supplemental Mathematical Operators
-* `\u{2300}-\u{23ff}` - Miscellaneous Technical
-* `\u{1D400}-\u{1D7FF}` - Mathematical Alphanumeric Symbols
 
 ## Building
 
