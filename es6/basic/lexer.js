@@ -2,7 +2,8 @@
 
 const Line = require('./line'),
       Rules = require('../common/rules'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      WhitespaceToken = require('../common/token/significant/whitespace');
 
 class BasicLexer extends CommonLexer {
   static significantTokenTypes() {
