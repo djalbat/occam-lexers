@@ -7,6 +7,13 @@ const Line = require('./line'),
       WhitespaceToken = require('../common/token/significant/whitespace');
 
 class BNFLexer extends CommonLexer {
+  linesFromGrammar(grammar) {
+    const content = grammar,  ///
+          lines = super.linesFromContent(content);
+
+    return lines;
+  }
+
   static significantTokenTypes() {
     const grammar = BNFLexer.grammar,
           grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
@@ -17,7 +24,6 @@ class BNFLexer extends CommonLexer {
 
     return significantTokenTypes;
   }
-
 
   static fromGrammar(grammar) {
     const rules = Rules.fromGrammar(grammar),
