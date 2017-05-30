@@ -13,11 +13,12 @@ The Occam proof assistant's lexers.
 
 ## Introduction
 
-There are three lexers in all:
+There are four lexers in all:
 
-* A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
-* A basic lexer, for illustrative purposes, and for developing new grammars.
-* The main lexer, namely the lexer for the lexical grammar part of Occam's vernacular, called Florence.
+* A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact
+* A BNF lexer, to replace the primitive lexer in time
+* A basic lexer, for illustrative purposes, and for developing new grammars
+* The main lexer, namely the lexer for the lexical grammar part of Occam's vernacular, called Florence
 
 All lexers bar the primitive lexer share common patterns and functionality. Each takes four passes to match four types of tokens, although with caveats:
 
