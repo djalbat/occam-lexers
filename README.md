@@ -15,10 +15,10 @@ The Occam proof assistant's lexers.
 
 There are four lexers in all:
 
-* A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact
-* A BNF lexer, to replace the primitive lexer in time
-* A basic lexer, for illustrative purposes, and for developing new grammars
-* The main lexer, namely the lexer for the lexical grammar part of Occam's vernacular, called Florence
+* A primitive lexer for a variant of extended [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form), hardly a lexer at all in fact.
+* A BNF lexer, to replace the primitive lexer in time.
+* A basic lexer, for illustrative purposes, and for developing new grammars.
+* The main lexer, namely the lexer for the lexical grammar part of Occam's vernacular, called Florence.
 
 All lexers bar the primitive lexer share common patterns and functionality. Each takes four passes to match four types of tokens, although with caveats:
 
@@ -27,9 +27,31 @@ All lexers bar the primitive lexer share common patterns and functionality. Each
 3. Strings
 4. Remaining tokens
 
-Comment tokens are considered to be non-significant whilst the other two types, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical grammars. On the other hand the regular expressions and related functionality to match the tokens in the first three passes is hard-coded. The basic lexer is also configured to ignore comments and strings. Finally, note that the Florence lexer will add end of line tokens and that these, like whitespace, are also considered to be significant.
+Comment tokens are considered to be non-significant whilst the other two types, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical grammars, the regular expressions and related functionality to match the tokens in the first three passes are hard-coded. The basic lexer is also configured to ignore comments and strings. Finally, note that the Florence lexer will add end of line tokens and that these, like whitespace, are considered to be significant.
 
 The fourth pass uses a recursive descent algorithm. This should be fast and helps to make the lexical grammars relatively simple. In the aforementioned Florence lexical grammar, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+
+The gramar for the BNF lexer is the following:
+
+    [
+    
+      { "regularExpression": "\\/[^/]+\\/" },
+    
+      { "noWhitespace": "<NO_WHITESPACE>" },
+    
+      { "endOfLine": "<END_OF_LINE>" },
+    
+      { "special": "::=|\\(|\\)|!|&|\\|" },
+    
+      { "operator": "\\?|\\*|\\+" },
+    
+      { "type": "\\[[^/]+\\]" },
+    
+      { "name": "\\w+" }
+    
+    ]
+    
+The three logical operators `!`, `&` and `|` are supported, together with the three repetition operators `?`, `*` and `+`. Grouping is also supported.  
 
 ## Installation
 
