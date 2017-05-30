@@ -34,7 +34,7 @@ class BNFLexer extends CommonLexer {
 
   static fromNothing() {
     const grammar = BNFLexer.grammar,
-          basicLexer = BNFLexer.fromgrammar(grammar);
+          basicLexer = BNFLexer.fromGrammar(grammar);
 
     return basicLexer;
   }

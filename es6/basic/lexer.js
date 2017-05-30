@@ -26,7 +26,7 @@ class BasicLexer extends CommonLexer {
 
   static fromNothing() {
     const grammar = BasicLexer.grammar,
-          basicLexer = BasicLexer.fromgrammar(grammar);
+          basicLexer = BasicLexer.fromGrammar(grammar);
 
     return basicLexer;
   }
