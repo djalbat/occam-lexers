@@ -42,20 +42,30 @@ class BNFLexer extends CommonLexer {
 
 module.exports = BNFLexer;
 
+BNFLexer.types = {
+  regularExpression : "regularExpression",
+  noWhitespace : "noWhitespace",
+  endOfLine : "endOfLine",
+  special : "special",
+  operator : "operator",
+  type : "type",
+  name : "name"
+};
+
 BNFLexer.grammar = [
 
-  { "regularExpression": "\\/[^/]+\\/" },
+  { "regularExpression" : "\\/[^/]+\\/" },
 
-  { "noWhitespace": "<NO_WHITESPACE>" },
+  { "noWhitespace" : "<NO_WHITESPACE>" },
 
-  { "endOfLine": "<END_OF_LINE>" },
+  { "endOfLine" : "<END_OF_LINE>" },
 
-  { "special": "::=|\\(|\\)|!|&|\\|" },
+  { "special" : "::=|\\(|\\)|!|&|\\|" },
 
-  { "operator": "\\?|\\*|\\+" },
+  { "operator" : "\\?|\\*|\\+" },
 
-  { "type": "\\[[^/]+\\]" },
+  { "type" : "\\[[^/]+\\]" },
 
-  { "name": "\\w+" }
+  { "name" : "\\w+" }
 
 ];
