@@ -4,8 +4,8 @@ const Line = require('./line'),
       Context = require('../common/context'),
       CommonLexer = require('../common/lexer'),
       StringToken = require('../common/token/significant/string'),
-      WhitespaceToken = require('../common/token/significant/whitespace'),
-      EndOfLineToken = require('./token/significant/endOfLine');
+      EndOfLineToken = require('../common/token/significant/endOfLine'),
+      WhitespaceToken = require('../common/token/significant/whitespace');
 
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
