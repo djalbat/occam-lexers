@@ -44,18 +44,13 @@ module.exports = BNFLexer;
 
 BNFLexer.grammar = [
 
-  { "regularExpression" : "\\/[^/]+\\/" },
+  { "regularExpression": "\\/[^/]+\\/" },
 
-  { "noWhitespace" : "<NO_WHITESPACE>" },
+  { "special": "::=|<NO_WHITESPACE>|<END_OF_LINE>|!|&|\\||\\(|\\)|\\?|\\*|\\+" },
 
-  { "endOfLine" : "<END_OF_LINE>" },
+  { "type": "\\[[^/]+\\]" },
 
-  { "special" : "::=|\\(|\\)|!|&|\\|" },
-
-  { "operator" : "\\?|\\*|\\+" },
-
-  { "type" : "\\[[^/]+\\]" },
-
-  { "name" : "\\w+" }
-
-];
+  { "name": "\\w+" }
+    
+]
+;
