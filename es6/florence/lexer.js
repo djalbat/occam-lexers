@@ -20,8 +20,8 @@ class FlorenceLexer extends CommonLexer {
           grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
             StringToken.type,
-            WhitespaceToken.type,
-            EndOfLineToken.type
+            EndOfLineToken.type,
+            WhitespaceToken.type
           ]);
 
     return significantTokenTypes;
