@@ -5,6 +5,12 @@ const SignificantToken = require('../significant');
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
 
+  getHTML() {
+    const html = this.innerHTML;  ///
+
+    return html;
+  }
+
   static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, WhitespaceToken); }
 
   static fromWithinContentAndLine(content, line) {
