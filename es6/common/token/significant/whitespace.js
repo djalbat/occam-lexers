@@ -1,6 +1,7 @@
 'use strict';
 
-const SignificantToken = require('../significant');
+const arrayUtil = require('../../../util/array'),
+      SignificantToken = require('../significant');
 
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
@@ -19,7 +20,7 @@ class WhitespaceToken extends SignificantToken {
     const matches = content.match(/([\t ]+)/);
 
     if (matches) {
-      const firstMatch = first(matches);
+      const firstMatch = arrayUtil.first(matches);
       
       content = firstMatch; ///
       
@@ -41,5 +42,3 @@ class WhitespaceToken extends SignificantToken {
 module.exports = WhitespaceToken;
 
 WhitespaceToken.type = 'whitespace'; 
-
-function first(array) { return array[0]; }

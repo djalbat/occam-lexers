@@ -1,6 +1,6 @@
 'use strict';
 
-const util = require('../../util');
+const tokenUtil = require('../../util/token');
 
 class NonSignificantToken {
   constructor(content, line, html) {
@@ -51,7 +51,7 @@ class NonSignificantToken {
   }
 
   static htmlFromContent(content) {
-    const sanitisedContent = util.sanitiseContent(content),
+    const sanitisedContent = tokenUtil.sanitiseContent(content),
           html = sanitisedContent;
 
     return html;

@@ -1,6 +1,7 @@
 'use strict';
 
-const CommentToken = require('../comment');
+const arrayUtil = require('../../../../util/array'),
+      CommentToken = require('../comment');
 
 class StartOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, StartOfCommentToken); }
@@ -13,7 +14,7 @@ class StartOfCommentToken extends CommentToken {
     const matches = content.match(/^\/\*/);
 
     if (matches) {
-      const firstMatch = first(matches);
+      const firstMatch = arrayUtil.first(matches);
 
       content = firstMatch; ///
 
@@ -31,5 +32,3 @@ class StartOfCommentToken extends CommentToken {
 }
 
 module.exports = StartOfCommentToken;
-
-function first(array) { return array[0]; }

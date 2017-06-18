@@ -1,7 +1,6 @@
 'use strict';
 
-const util = require('../util'),
-      SignificantTokens = require('./tokens/significant');
+const SignificantTokens = require('./tokens/significant');
 
 class Line {
   constructor(content) {

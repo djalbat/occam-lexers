@@ -1,6 +1,7 @@
 'use strict';
 
-const SignificantToken = require('../significant');
+const arrayUtil = require('../../../util/array'),
+      SignificantToken = require('../significant');
 
 class StringToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, StringToken); }
@@ -13,7 +14,7 @@ class StringToken extends SignificantToken {
     const matches = content.match(/("[^"]*")/);
 
     if (matches) {
-      const firstMatch = first(matches);
+      const firstMatch = arrayUtil.first(matches);
       
       content = firstMatch; ///
       
@@ -35,5 +36,3 @@ class StringToken extends SignificantToken {
 module.exports = StringToken;
 
 StringToken.type = 'string';
-
-function first(array) { return array[0]; }

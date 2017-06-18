@@ -1,6 +1,7 @@
 'use strict';
 
-const SignificantToken = require('../common/token/significant');
+const arrayUtil = require('../util/array'),
+      SignificantToken = require('../common/token/significant');
 
 class Rule {
   constructor(significantTokenType, regularExpression) {
@@ -22,7 +23,7 @@ class Rule {
     const matches = content.match(this.regularExpression);
     
     if (matches !== null) {
-      const firstMatch = first(matches);
+      const firstMatch = arrayUtil.first(matches);
       
       if (firstMatch !== '') {
         significantTokenPosition = matches.index; ///
@@ -34,7 +35,7 @@ class Rule {
 
   significantTokenFromWithinContentAndLine(content, line) {
     const matches = content.match(this.regularExpression),
-          firstMatch = first(matches);
+          firstMatch = arrayUtil.first(matches);
 
     content = firstMatch; ///
 
@@ -63,5 +64,3 @@ function isUnicode(regularExpressionPattern) {
 
   return unicode;
 }
-
-function first(array) { return array[0]; }

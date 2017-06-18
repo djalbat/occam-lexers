@@ -1,7 +1,7 @@
 'use strict';
 
 const Rule = require('./rule'),
-      util = require('../util');
+      arrayUtil = require('../util/array');
 
 class Rules {
   constructor(array) {
@@ -33,7 +33,7 @@ class Rules {
     const regularExpressionPattern = grammar.reduce(function(regularExpressionPattern, entry) {
             if (regularExpressionPattern === null) {
               const entryKeys = Object.keys(entry),
-                    firstEntryKey = first(entryKeys),
+                    firstEntryKey = arrayUtil.first(entryKeys),
                     entrySignificantTokenType = firstEntryKey;  ///
 
               if (entrySignificantTokenType === significantTokenType) {
@@ -50,7 +50,7 @@ class Rules {
   static significantTokenTypesFromGrammar(grammar) {
     const significantTokenTypes = grammar.map(function(entry) {
             const entryKeys = Object.keys(entry),
-                  firstEntryKey = first(entryKeys),
+                  firstEntryKey = arrayUtil.first(entryKeys),
                   significantTokenType = firstEntryKey; ///
 
             return significantTokenType;
@@ -61,5 +61,3 @@ class Rules {
 }
 
 module.exports = Rules;
-
-function first(array) { return array[0]; }

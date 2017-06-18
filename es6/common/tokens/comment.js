@@ -1,7 +1,6 @@
 'use strict';
 
-const util = require('../../util'),
-      EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
+const EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
       StartOfCommentToken = require('../token/nonSignificant/comment/startOf'),
       MiddleOfCommentToken = require('../token/nonSignificant/comment/middleOf');
 
@@ -26,7 +25,7 @@ class CommentTokens {
 
           commentTokenLength = commentToken.getLength();
         } else {
-          const middleOfCommentTokenLength = util.minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
+          const middleOfCommentTokenLength = minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
           commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
 
@@ -56,7 +55,7 @@ class CommentTokens {
 
           content = content.substring(commentTokenLength);
         } else {
-          contentLength = util.minimumBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
+          contentLength = minimumBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
 
           const remainingContent = content.substring(contentLength);
 
@@ -78,3 +77,18 @@ class CommentTokens {
 }
 
 module.exports = CommentTokens;
+
+function minimumBarMinusOne() {
+  const values = Array.prototype.slice.call(arguments),
+        minimumBarMinusOne = values.reduce(function(minimumBarMinusOne, value) {
+          if (value > -1) {
+            minimumBarMinusOne = (minimumBarMinusOne !== null) ?
+                                   Math.min(minimumBarMinusOne, value) :
+                                     value;
+          }
+  
+          return minimumBarMinusOne;
+        }, null);
+
+  return minimumBarMinusOne;
+}
