@@ -57,6 +57,7 @@ In the case of the Florence lexical grammar, the regular expression for `unassig
 
 * `\u{21}-\u{7E}` - Basic Latin
 * `\u{A1}-\u{FF}` - Latin-1 Supplement
+* `\u{370}-\u{3FF}` - Greek and Coptic
 * `\u{2200}-\u{22FF}` - Mathematical Operators
 * `\u{2A00}-\u{2AFF}` - Supplemental Mathematical Operators
 * `\u{2300}-\u{23ff}` - Miscellaneous Technical
