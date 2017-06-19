@@ -46,7 +46,7 @@ module.exports = FlorenceLexer;
 
 FlorenceLexer.grammar = [
 
-  { "special"    : ",|;|\\{|\\}|=|::|:|\\(|\\)|\\.\\.\\.|\\.\\." },
+  { "special"    : ",|;|\\{|\\}|⊢|=|::|:|\\(|\\)|\\.\\.\\.|\\.\\." },
 
   { "include"    : "^include$" },
 
