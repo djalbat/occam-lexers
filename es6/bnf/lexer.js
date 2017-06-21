@@ -1,6 +1,8 @@
 'use strict';
 
 const Line = require('./line'),
+      grammar = require('./grammar'),
+      specialSymbols = require('./specialSymbols'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
       StringToken = require('../common/token/significant/string'),
@@ -42,19 +44,6 @@ class BNFLexer extends CommonLexer {
 
 module.exports = BNFLexer;
 
-BNFLexer.grammar = [
+BNFLexer.grammar = grammar;
 
-  { "regularExpression": "\\/[^/]+\\/" },
-
-  { "special": "::=|\\||<NO_WHITESPACE>|<END_OF_LINE>|\\(|\\)|\\?|\\*|\\+|\\-|\\." },
-
-  { "type": "\\[[^/]+\\]" },
-
-  { "name": "\\w+" }
-    
-];
-
-BNFLexer.specialSymbols = {
-  END_OF_LINE : '<END_OF_LINE>',
-  NO_WHITESPACE : '<NO_WHITESPACE>'
-};
+BNFLexer.specialSymbols = specialSymbols;
