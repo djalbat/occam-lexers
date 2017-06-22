@@ -1,6 +1,7 @@
 'use strict';
 
 const Line = require('./line'),
+      grammar = require('./grammar'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
       WhitespaceToken = require('../common/token/significant/whitespace');
@@ -34,8 +35,4 @@ class BasicLexer extends CommonLexer {
 
 module.exports = BasicLexer;
 
-BasicLexer.grammar = [
-
-  { "terminal" : "\\+|\\-|\\*|\\/|\\(|\\)|\\d+" }
-
-];
+BasicLexer.grammar = grammar;
