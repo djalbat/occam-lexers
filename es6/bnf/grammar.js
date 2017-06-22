@@ -4,7 +4,7 @@ const grammar = [
 
   { "regularExpression": "\\/[^/]+\\/" },
 
-  { "special": "::=|\\||\\(|\\)|\\?|\\*|\\+|\\-|\\.|<NO_WHITESPACE>|<END_OF_LINE>|;" },
+  { "special": "::=|\\||\\(|\\)|\\?|\\*|\\+|\\-|\\.|<NO_WHITESPACE>|<END_OF_LINE>|ε|;" },
 
   { "type": "\\[[^/]+\\]" },
 
