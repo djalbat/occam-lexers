@@ -72,7 +72,7 @@ You will need to do this if you want to look at the examples.
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `examples.html` file in the project's root directory and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `index.html` file in the `examples` directory and read on.
 
 Each of the examples has a textarea in which the corresponding lexer's grammar is shown. Note that grammars are in JSON format and the regular expressions are supplied as strings with the usual escaping. You can change both the grammar and the content to be matched dynamically, and see the resulting tokens.
 
