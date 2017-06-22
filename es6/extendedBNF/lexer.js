@@ -8,7 +8,7 @@ const Line = require('./line'),
       StringToken = require('../common/token/significant/string'),
       WhitespaceToken = require('../common/token/significant/whitespace');
 
-class BNFLexer extends CommonLexer {
+class ExtendedBNFLexer extends CommonLexer {
   linesFromGrammar(grammar) {
     const content = grammar,  ///
           lines = super.linesFromContent(content);
@@ -17,7 +17,7 @@ class BNFLexer extends CommonLexer {
   }
 
   static significantTokenTypes() {
-    const grammar = BNFLexer.grammar,
+    const grammar = ExtendedBNFLexer.grammar,
           grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
             StringToken.type,
@@ -29,21 +29,21 @@ class BNFLexer extends CommonLexer {
 
   static fromGrammar(grammar) {
     const rules = Rules.fromGrammar(grammar),
-          basicLexer = new BNFLexer(rules, Line);
+          extendedBNFLexer = new ExtendedBNFLexer(rules, Line);
 
-    return basicLexer;
+    return extendedBNFLexer;
   }
 
   static fromNothing() {
-    const grammar = BNFLexer.grammar,
-          basicLexer = BNFLexer.fromGrammar(grammar);
+    const grammar = ExtendedBNFLexer.grammar,
+          extendedBNFLexer = ExtendedBNFLexer.fromGrammar(grammar);
 
-    return basicLexer;
+    return extendedBNFLexer;
   }
 }
 
-module.exports = BNFLexer;
+module.exports = ExtendedBNFLexer;
 
-BNFLexer.grammar = grammar;
+ExtendedBNFLexer.grammar = grammar;
 
-BNFLexer.specialSymbols = specialSymbols;
+ExtendedBNFLexer.specialSymbols = specialSymbols;

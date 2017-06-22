@@ -2,9 +2,9 @@
 
 var lexers = {
   'Line': require('./lib/common/line'),
-  'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
+  'ExtendedBNFLexer': require('./lib/extendedBNF/lexer'),
   'SignificantToken': require('./lib/common/token/significant'),
   'NonSignificantToken': require('./lib/common/token/nonSignificant'),
   'StringToken': require('./lib/common/token/significant/string'),

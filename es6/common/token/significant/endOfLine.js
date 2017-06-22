@@ -8,7 +8,7 @@ class EndOfLineToken extends SignificantToken {
   static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, EndOfLineToken); }
   
   getHTML() {
-    const html = '';
+    const html = '';  ///
     
     return html;
   }

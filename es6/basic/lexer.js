@@ -36,6 +36,6 @@ module.exports = BasicLexer;
 
 BasicLexer.grammar = [
 
-  { "terminal"    : "\\+|\\-|\\*|\\/|\\(|\\)|\\d+" }
+  { "terminal" : "\\+|\\-|\\*|\\/|\\(|\\)|\\d+" }
 
 ];
