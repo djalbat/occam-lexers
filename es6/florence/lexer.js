@@ -17,8 +17,7 @@ class FlorenceLexer extends CommonLexer {
   }
 
   static significantTokenTypes() {
-    const grammar = grammar,
-          grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
+    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
             StringToken.type,
             EndOfLineToken.type,
@@ -26,6 +25,10 @@ class FlorenceLexer extends CommonLexer {
           ]);
 
     return significantTokenTypes;
+  }
+
+  static fromCustomGrammars(customGrammars) {
+
   }
 
   static fromGrammar(grammar) {
@@ -36,8 +39,7 @@ class FlorenceLexer extends CommonLexer {
   }
 
   static fromNothing() {
-    const grammar = FlorenceLexer.grammar,
-          florenceLexer = FlorenceLexer.fromGrammar(grammar);
+    const florenceLexer = FlorenceLexer.fromGrammar(grammar);
 
     return florenceLexer;
   }

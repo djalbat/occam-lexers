@@ -17,8 +17,7 @@ class ExtendedBNFLexer extends CommonLexer {
   }
 
   static significantTokenTypes() {
-    const grammar = ExtendedBNFLexer.grammar,
-          grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
+    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
             StringToken.type,
             WhitespaceToken.type
@@ -35,8 +34,7 @@ class ExtendedBNFLexer extends CommonLexer {
   }
 
   static fromNothing() {
-    const grammar = ExtendedBNFLexer.grammar,
-          extendedBNFLexer = ExtendedBNFLexer.fromGrammar(grammar);
+    const extendedBNFLexer = ExtendedBNFLexer.fromGrammar(grammar);
 
     return extendedBNFLexer;
   }

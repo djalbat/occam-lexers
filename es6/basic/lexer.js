@@ -8,8 +8,7 @@ const Line = require('./line'),
 
 class BasicLexer extends CommonLexer {
   static significantTokenTypes() {
-    const grammar = BasicLexer.grammar,
-          grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
+    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
           significantTokenTypes = grammarSignificantTokenTypes.concat([
             WhitespaceToken.type
           ]);
@@ -26,8 +25,7 @@ class BasicLexer extends CommonLexer {
   }
 
   static fromNothing() {
-    const grammar = BasicLexer.grammar,
-          basicLexer = BasicLexer.fromGrammar(grammar);
+    const basicLexer = BasicLexer.fromGrammar(grammar);
 
     return basicLexer;
   }

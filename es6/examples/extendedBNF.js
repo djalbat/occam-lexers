@@ -6,9 +6,9 @@ const Example = require('../example'),
 class ExtendedBNFExample {
   static run() {
     const grammar = ExtendedBNFLexer.grammar,
-          lexer = ExtendedBNFLexer;
+          Lexer = ExtendedBNFLexer;
 
-    Example.run(grammar, lexer);
+    Example.run(grammar, Lexer);
   }
 }
 

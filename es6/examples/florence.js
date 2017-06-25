@@ -6,9 +6,9 @@ const Example = require('../example'),
 class FlorenceExample {
   static run() {
     const grammar = FlorenceLexer.grammar,
-          lexer = FlorenceLexer;
+          Lexer = FlorenceLexer;
 
-    Example.run(grammar, lexer);
+    Example.run(grammar, Lexer);
   }
 }
 

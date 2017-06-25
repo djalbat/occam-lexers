@@ -6,9 +6,9 @@ const Example = require('../example'),
 class BasicExample {
   static run() {
     const grammar = BasicLexer.grammar,
-          lexer = BasicLexer;
+          Lexer = BasicLexer;
 
-    Example.run(grammar, lexer);
+    Example.run(grammar, Lexer);
   }
 }
 
