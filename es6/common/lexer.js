@@ -1,6 +1,7 @@
 'use strict';
 
 const Line = require('./line'),
+      Rule = require('./rule'),
       Rules = require('./rules'),
       Context = require('./context');
 
@@ -40,6 +41,8 @@ class CommonLexer {
 
     return lines;
   }
+  
+  static ruleFromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern) { return Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern); }
 
   static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
 

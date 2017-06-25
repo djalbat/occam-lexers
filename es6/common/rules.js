@@ -15,6 +15,10 @@ class Rules {
 
     return rule;
   }
+
+  addRule(rule) {
+    this.array.unshift(rule); ///
+  }
   
   static fromGrammar(grammar) {
     const significantTokenTypes = Rules.significantTokenTypesFromGrammar(grammar),

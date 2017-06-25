@@ -2,6 +2,7 @@
 
 const Line = require('./line'),
       grammar = require('./grammar'),
+      Rule = require('../common/rule'),
       Context = require('../common/context'),
       CommonLexer = require('../common/lexer'),
       StringToken = require('../common/token/significant/string'),
@@ -28,7 +29,16 @@ class FlorenceLexer extends CommonLexer {
   }
 
   static fromCustomGrammars(customGrammars) {
+    const rules = CommonLexer.rulesFromGrammar(grammar),
+          customSignificantTokenType = 'custom',  ///
+          customGrammarsRegularExpressionPattern = regularExpressionPatternFromGrammars(customGrammars),
+          customRule =  CommonLexer.ruleFromSignificantTokenTypeAndRegularExpressionPattern(customSignificantTokenType, customGrammarsRegularExpressionPattern);
 
+    rules.addRule(customRule);
+
+    const florenceLexer = new FlorenceLexer(rules, Line);
+
+    return florenceLexer;
   }
 
   static fromGrammar(grammar) {
@@ -48,3 +58,17 @@ class FlorenceLexer extends CommonLexer {
 module.exports = FlorenceLexer;
 
 FlorenceLexer.grammar = grammar;
+
+function regularExpressionPatternFromGrammars(grammars) {
+  const regularExpressionPattern = grammars.reduce(function(regularExpressionPattern, grammar) {
+    if (regularExpressionPattern === null) {
+      regularExpressionPattern = grammar;
+    } else {
+      regularExpressionPattern = `${grammar}|${regularExpressionPattern}`;
+    }
+
+    return regularExpressionPattern;
+  }, null);
+
+  return regularExpressionPattern;
+}
