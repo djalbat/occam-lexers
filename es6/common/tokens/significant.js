@@ -49,7 +49,7 @@ function significantTokensFromWithinContentAndLine(content, line, rules, depth) 
         significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
       }
     } else {
-      throw new Error(`There is no rule to parse the content '${content}' on line ${line}`);
+      throw new Error(`There is no rule to parse the content '${content}'.`);
     }
   }
 
