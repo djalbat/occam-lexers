@@ -5,10 +5,10 @@ const Example = require('../example'),
 
 class FlorenceExample {
   static run() {
-    const grammar = FlorenceLexer.grammar,
+    const entries = FlorenceLexer.entries,
           Lexer = FlorenceLexer;
 
-    Example.run(grammar, Lexer);
+    Example.run(entries, Lexer);
   }
 }
 

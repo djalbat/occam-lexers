@@ -5,10 +5,10 @@ const Example = require('../example'),
 
 class ExtendedBNFExample {
   static run() {
-    const grammar = ExtendedBNFLexer.grammar,
+    const entries = ExtendedBNFLexer.entries,
           Lexer = ExtendedBNFLexer;
 
-    Example.run(grammar, Lexer);
+    Example.run(entries, Lexer);
   }
 }
 

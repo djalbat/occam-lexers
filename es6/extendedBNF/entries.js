@@ -1,6 +1,6 @@
 'use strict';
 
-const grammar = [
+const entries = [
 
   { "regularExpression": "\\/[^/]+\\/" },
 
@@ -12,4 +12,4 @@ const grammar = [
     
 ];
 
-module.exports = grammar;
+module.exports = entries;

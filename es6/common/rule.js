@@ -44,6 +44,16 @@ class Rule {
 
     return significantToken;
   }
+  
+  static fromEntry(entry) {
+    const entryKeys = Object.keys(entry),
+          firstEntryKey = arrayUtil.first(entryKeys),
+          significantTokenType = firstEntryKey, ///
+          regularExpressionPattern = entry[significantTokenType],
+          rule = Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern);
+        
+    return rule; 
+  }
 
   static fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern) {
     const unicode = isUnicode(regularExpressionPattern),

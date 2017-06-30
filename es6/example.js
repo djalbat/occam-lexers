@@ -8,11 +8,11 @@ const { Textarea } = easy,
 
 const verticalSplitterSelector = '#verticalSplitter',
       sizeableElementSelector = '#sizeableElement',
-      grammarTextareaSelector = 'textArea#grammar',
+      entriesTextareaSelector = 'textArea#entries',
       contentTextareaSelector = 'textArea#content',
       tokensTextareaSelector = 'textArea#tokens',
       sizeableElement = new SizeableElement(sizeableElementSelector),
-      grammarTextarea = new Textarea(grammarTextareaSelector),
+      entriesTextarea = new Textarea(entriesTextareaSelector),
       contentTextarea = new Textarea(contentTextareaSelector),
       tokensTextarea = new Textarea(tokensTextareaSelector),
       beforeSizeableElement = false,
@@ -21,12 +21,12 @@ const verticalSplitterSelector = '#verticalSplitter',
 new VerticalSplitter(verticalSplitterSelector, beforeSizeableElement, afterSizeableElement);
 
 class Example {
-  static run(grammar, Lexer) {
-    const grammarTextAreaValue = JSON.stringify(grammar, null, '  ');
+  static run(entries, Lexer) {
+    const entriesTextAreaValue = JSON.stringify(entries, null, '  ');
 
-    grammarTextarea.setValue(grammarTextAreaValue);
+    entriesTextarea.setValue(entriesTextAreaValue);
 
-    grammarTextarea.on('keyup', function() {
+    entriesTextarea.on('keyup', function() {
       Example.updateTokens(Lexer); 
     });
 
@@ -37,10 +37,10 @@ class Example {
 
   static updateTokens(Lexer) {
     try {
-      const grammarTextareaValue = grammarTextarea.getValue(),
+      const entriesTextareaValue = entriesTextarea.getValue(),
             contentTextareaValue = contentTextarea.getValue(),
-            grammar = JSON.parse(grammarTextareaValue),
-            lexer = Lexer.fromGrammar(grammar),
+            entries = JSON.parse(entriesTextareaValue),
+            lexer = Lexer.fromEntries(entries),
             content = contentTextareaValue,  ///
             lines = lexer.linesFromContent(content),
             htmls = lines.reduce(function(htmls, line, index) {

@@ -42,11 +42,9 @@ class CommonLexer {
     return lines;
   }
   
-  static ruleFromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern) { return Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern); }
-
-  static rulesFromGrammar(grammar) { return Rules.fromGrammar(grammar); }
-
-  static significantTokenTypesFromGrammar(grammar) { return Rules.significantTokenTypesFromGrammar(grammar); }
+  static ruleFromEntry(entry) { return Rule.fromEntry(entry); }
+  
+  static rulesFromEntries(entries) { return Rules.fromEntries(entries); }
 }
 
 module.exports = CommonLexer;

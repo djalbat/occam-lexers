@@ -1,31 +1,20 @@
 'use strict';
 
 const Line = require('./line'),
-      grammar = require('./grammar'),
+      entries = require('./entries'),
       Rules = require('../common/rules'),
-      CommonLexer = require('../common/lexer'),
-      WhitespaceToken = require('../common/token/significant/whitespace');
+      CommonLexer = require('../common/lexer');
 
 class BasicLexer extends CommonLexer {
-  static significantTokenTypes() {
-    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
-          significantTokenTypes = grammarSignificantTokenTypes.concat([
-            WhitespaceToken.type
-          ]);
-
-    return significantTokenTypes;
-  }
-
-
-  static fromGrammar(grammar) {
-    const rules = Rules.fromGrammar(grammar),
+  static fromEntries(entries) {
+    const rules = Rules.fromEntries(entries),
           basicLexer = new BasicLexer(rules, Line);
 
     return basicLexer;
   }
 
   static fromNothing() {
-    const basicLexer = BasicLexer.fromGrammar(grammar);
+    const basicLexer = BasicLexer.fromEntries(entries);
 
     return basicLexer;
   }
@@ -33,4 +22,4 @@ class BasicLexer extends CommonLexer {
 
 module.exports = BasicLexer;
 
-BasicLexer.grammar = grammar;
+BasicLexer.entries = entries;

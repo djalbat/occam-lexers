@@ -5,10 +5,10 @@ const Example = require('../example'),
 
 class BasicExample {
   static run() {
-    const grammar = BasicLexer.grammar,
+    const entries = BasicLexer.entries,
           Lexer = BasicLexer;
 
-    Example.run(grammar, Lexer);
+    Example.run(entries, Lexer);
   }
 }
 

@@ -1,9 +1,9 @@
 'use strict';
 
-const grammar = [
+const entries = [
 
   { "terminal" : "\\+|\\-|\\*|\\/|\\(|\\)|\\d+" }
 
 ];
 
-module.exports = grammar;
+module.exports = entries;

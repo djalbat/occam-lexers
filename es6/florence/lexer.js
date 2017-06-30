@@ -1,13 +1,9 @@
 'use strict';
 
 const Line = require('./line'),
-      grammar = require('./grammar'),
-      Rule = require('../common/rule'),
+      entries = require('./entries'),
       Context = require('../common/context'),
-      CommonLexer = require('../common/lexer'),
-      StringToken = require('../common/token/significant/string'),
-      EndOfLineToken = require('../common/token/significant/endOfLine'),
-      WhitespaceToken = require('../common/token/significant/whitespace');
+      CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
   linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
@@ -17,22 +13,9 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static significantTokenTypes() {
-    const grammarSignificantTokenTypes = CommonLexer.significantTokenTypesFromGrammar(grammar),
-          significantTokenTypes = grammarSignificantTokenTypes.concat([
-            StringToken.type,
-            EndOfLineToken.type,
-            WhitespaceToken.type
-          ]);
-
-    return significantTokenTypes;
-  }
-
-  static fromCustomGrammars(customGrammars) {
-    const rules = CommonLexer.rulesFromGrammar(grammar),
-          customSignificantTokenType = 'custom',  ///
-          customGrammarsRegularExpressionPattern = regularExpressionPatternFromGrammars(customGrammars),
-          customRule =  CommonLexer.ruleFromSignificantTokenTypeAndRegularExpressionPattern(customSignificantTokenType, customGrammarsRegularExpressionPattern);
+  static fromCustomEntry(customEntry) {
+    const rules = CommonLexer.rulesFromEntries(entries),
+          customRule =  CommonLexer.ruleFromEntry(customEntry);
 
     rules.addRule(customRule);
 
@@ -41,15 +24,15 @@ class FlorenceLexer extends CommonLexer {
     return florenceLexer;
   }
 
-  static fromGrammar(grammar) {
-    const rules = CommonLexer.rulesFromGrammar(grammar),
+  static fromEntries(entries) {
+    const rules = CommonLexer.rulesFromEntries(entries),
           florenceLexer = new FlorenceLexer(rules, Line);
 
     return florenceLexer;
   }
 
   static fromNothing() {
-    const florenceLexer = FlorenceLexer.fromGrammar(grammar);
+    const florenceLexer = FlorenceLexer.fromEntries(entries);
 
     return florenceLexer;
   }
@@ -57,18 +40,4 @@ class FlorenceLexer extends CommonLexer {
 
 module.exports = FlorenceLexer;
 
-FlorenceLexer.grammar = grammar;
-
-function regularExpressionPatternFromGrammars(grammars) {
-  const regularExpressionPattern = grammars.reduce(function(regularExpressionPattern, grammar) {
-    if (regularExpressionPattern === null) {
-      regularExpressionPattern = grammar;
-    } else {
-      regularExpressionPattern = `${grammar}|${regularExpressionPattern}`;
-    }
-
-    return regularExpressionPattern;
-  }, null);
-
-  return regularExpressionPattern;
-}
+FlorenceLexer.entries = entries;

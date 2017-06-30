@@ -20,10 +20,10 @@ class Rules {
     this.array.unshift(rule); ///
   }
   
-  static fromGrammar(grammar) {
-    const significantTokenTypes = Rules.significantTokenTypesFromGrammar(grammar),
+  static fromEntries(entries) {
+    const significantTokenTypes = significantTokenTypesFromEntries(entries),
           array = significantTokenTypes.map(function(significantTokenType) {
-            const regularExpressionPattern = Rules.findRegularExpressionPattern(significantTokenType, grammar),
+            const regularExpressionPattern = findRegularExpressionPattern(significantTokenType, entries),
                   rule = Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern);
       
             return rule;      
@@ -32,36 +32,36 @@ class Rules {
     
     return rules;
   }
-
-  static findRegularExpressionPattern(significantTokenType, grammar) {
-    const regularExpressionPattern = grammar.reduce(function(regularExpressionPattern, entry) {
-            if (regularExpressionPattern === null) {
-              const entryKeys = Object.keys(entry),
-                    firstEntryKey = arrayUtil.first(entryKeys),
-                    entrySignificantTokenType = firstEntryKey;  ///
-
-              if (entrySignificantTokenType === significantTokenType) {
-                regularExpressionPattern = entry[significantTokenType];
-              }
-            }
-
-            return regularExpressionPattern;
-          }, null);
-
-    return regularExpressionPattern;
-  }
-
-  static significantTokenTypesFromGrammar(grammar) {
-    const significantTokenTypes = grammar.map(function(entry) {
-            const entryKeys = Object.keys(entry),
-                  firstEntryKey = arrayUtil.first(entryKeys),
-                  significantTokenType = firstEntryKey; ///
-
-            return significantTokenType;
-          });
-
-    return significantTokenTypes;
-  }
 }
 
 module.exports = Rules;
+
+function findRegularExpressionPattern(significantTokenType, entries) {
+  const regularExpressionPattern = entries.reduce(function(regularExpressionPattern, entry) {
+    if (regularExpressionPattern === null) {
+      const entryKeys = Object.keys(entry),
+            firstEntryKey = arrayUtil.first(entryKeys),
+            entrySignificantTokenType = firstEntryKey;  ///
+
+      if (entrySignificantTokenType === significantTokenType) {
+        regularExpressionPattern = entry[significantTokenType];
+      }
+    }
+
+    return regularExpressionPattern;
+  }, null);
+
+  return regularExpressionPattern;
+}
+
+function significantTokenTypesFromEntries(entries) {
+  const significantTokenTypes = entries.map(function(entry) {
+    const entryKeys = Object.keys(entry),
+          firstEntryKey = arrayUtil.first(entryKeys),
+          significantTokenType = firstEntryKey; ///
+
+    return significantTokenType;
+  });
+
+  return significantTokenTypes;
+}

@@ -73,7 +73,7 @@ textarea.error {
   border-color: red;
 }
 
-textarea#grammar {
+textarea#entries {
   overflow-wrap: normal;
   margin-bottom: 1rem;
 }
