@@ -7,8 +7,8 @@ const Line = require('./line'),
       CommonLexer = require('../common/lexer');
 
 class ExtendedBNFLexer extends CommonLexer {
-  linesFromEntries(entries) {
-    const content = entries,  ///
+  linesFromExtendedBNF(extendedBNF) {
+    const content = extendedBNF,  ///
           lines = super.linesFromContent(content);
 
     return lines;
