@@ -13,11 +13,11 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static fromCustomEntry(customEntry) {
+  static fromCustomGrammarEntry(customGrammarEntry) {
     const rules = CommonLexer.rulesFromEntries(entries),
-          customRule =  CommonLexer.ruleFromEntry(customEntry);
+          customGrammarRule =  CommonLexer.ruleFromEntry(customGrammarEntry);
 
-    rules.addRule(customRule);
+    rules.addRule(customGrammarRule);
 
     const florenceLexer = new FlorenceLexer(rules, Line);
 
