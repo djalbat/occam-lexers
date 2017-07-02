@@ -6,9 +6,9 @@ const Line = require('./line'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer');
 
-class ExtendedBNFLexer extends CommonLexer {
-  linesFromExtendedBNF(extendedBNF) {
-    const content = extendedBNF,  ///
+class BNFLexer extends CommonLexer {
+  linesFromBNF(bnf) {
+    const content = bnf,  ///
           lines = super.linesFromContent(content);
 
     return lines;
@@ -16,20 +16,20 @@ class ExtendedBNFLexer extends CommonLexer {
 
   static fromEntries(entries) {
     const rules = Rules.fromEntries(entries),
-          extendedBNFLexer = new ExtendedBNFLexer(rules, Line);
+          bnfLexer = new BNFLexer(rules, Line);
 
-    return extendedBNFLexer;
+    return bnfLexer;
   }
 
   static fromNothing() {
-    const extendedBNFLexer = ExtendedBNFLexer.fromEntries(entries);
+    const bnfLexer = BNFLexer.fromEntries(entries);
 
-    return extendedBNFLexer;
+    return bnfLexer;
   }
 }
 
-module.exports = ExtendedBNFLexer;
+module.exports = BNFLexer;
 
-ExtendedBNFLexer.entries = entries;
+BNFLexer.entries = entries;
 
-ExtendedBNFLexer.specialSymbols = specialSymbols;
+BNFLexer.specialSymbols = specialSymbols;

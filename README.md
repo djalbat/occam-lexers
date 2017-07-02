@@ -15,7 +15,7 @@ The Occam proof assistant's lexers.
 
 There are four lexers in all:
 
-* An [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) lexer.
+* A BNF lexer, actually [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 * A basic lexer, for illustrative purposes, and for developing new grammars.
 * The main lexer, namely the lexer for the lexical patterns part of Occam's vernacular, called Florence.
 
@@ -30,7 +30,7 @@ Comment tokens are considered to be non-significant whilst the others, note that
 
 The fourth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. For the Florence lexical patterns, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
-The lexical entries for the extended BNF lexer are the following:
+The lexical entries for the BNF lexer are the following:
 
     [
     
