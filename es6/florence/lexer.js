@@ -13,8 +13,8 @@ class FlorenceLexer extends CommonLexer {
     return lines;
   }
 
-  static fromCustomGrammarLexicalPattern(customGrammarLexicalPattern) {
-    const custom = customGrammarLexicalPattern, ///
+  static fromCustomGrammarsLexicalPattern(customGrammarsLexicalPattern) {
+    const custom = customGrammarsLexicalPattern, ///
           customGrammarEntry = {
             custom: custom
           },
