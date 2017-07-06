@@ -1,18 +1,10 @@
 'use strict';
 
 const entries = require('./entries'),
-      Context = require('../common/context'),
       FlorenceLine = require('./line'),
       CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
-  linesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
-    const context = new Context(minimumLinesLength, previousLineInComment, followingLineInComment),
-          lines = super.linesFromContent(content, firstLineIndex, context);
-
-    return lines;
-  }
-
   static fromCustomGrammarsLexicalPattern(customGrammarsLexicalPattern) {
     const custom = customGrammarsLexicalPattern, ///
           customGrammarEntry = {

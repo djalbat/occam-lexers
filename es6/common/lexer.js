@@ -11,6 +11,14 @@ class CommonLexer {
     this.Line = Line;
   }
 
+  addedLinesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
+    const context = new Context(minimumLinesLength, previousLineInComment, followingLineInComment),
+          lines = this.linesFromContent(content, firstLineIndex, context),
+          addedLines = lines; ///
+
+    return addedLines;
+  }
+
   linesFromContent(content, firstLineIndex = 0, context = new Context()) {
     const contents = content.split(/\n/),
           lines = this.linesFromContents(contents, firstLineIndex, context);
