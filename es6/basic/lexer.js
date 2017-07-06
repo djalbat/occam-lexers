@@ -1,6 +1,6 @@
 'use strict';
 
-const Line = require('./line'),
+const BasicLine = require('./line'),
       entries = require('./entries'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer');
@@ -8,7 +8,7 @@ const Line = require('./line'),
 class BasicLexer extends CommonLexer {
   static fromEntries(entries) {
     const rules = Rules.fromEntries(entries),
-          basicLexer = new BasicLexer(rules, Line);
+          basicLexer = new BasicLexer(rules, BasicLine);
 
     return basicLexer;
   }

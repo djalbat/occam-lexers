@@ -1,8 +1,8 @@
 'use strict';
 
-const Line = require('./line'),
-      entries = require('./entries'),
+const entries = require('./entries'),
       Context = require('../common/context'),
+      FlorenceLine = require('./line'),
       CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
@@ -23,14 +23,14 @@ class FlorenceLexer extends CommonLexer {
 
     rules.addRule(customGrammarRule);
 
-    const florenceLexer = new FlorenceLexer(rules, Line);
+    const florenceLexer = new FlorenceLexer(rules, FlorenceLine);
 
     return florenceLexer;
   }
 
   static fromEntries(entries) {
     const rules = CommonLexer.rulesFromEntries(entries),
-          florenceLexer = new FlorenceLexer(rules, Line);
+          florenceLexer = new FlorenceLexer(rules, FlorenceLine);
 
     return florenceLexer;
   }

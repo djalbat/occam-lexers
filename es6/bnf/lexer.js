@@ -1,6 +1,6 @@
 'use strict';
 
-const Line = require('./line'),
+const BNFLine = require('./line'),
       entries = require('./entries'),
       specialSymbols = require('./specialSymbols'),
       Rules = require('../common/rules'),
@@ -16,7 +16,7 @@ class BNFLexer extends CommonLexer {
 
   static fromEntries(entries) {
     const rules = Rules.fromEntries(entries),
-          bnfLexer = new BNFLexer(rules, Line);
+          bnfLexer = new BNFLexer(rules, BNFLine);
 
     return bnfLexer;
   }
