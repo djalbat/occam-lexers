@@ -2,7 +2,7 @@
 
 const PlainLine = require('./line'),
       entries = require('./entries'),
-      Rules = require('../common/rules'),
+      Context = require('../common/context'),
       CommonLexer = require('../common/lexer');
 
 class PlainLexer extends CommonLexer {
@@ -14,7 +14,7 @@ class PlainLexer extends CommonLexer {
   }
 
   static fromEntries(entries) {
-    const rules = Rules.fromEntries(entries),
+    const rules = CommonLexer.rulesFromEntries(entries),
           plainLexer = new PlainLexer(rules, PlainLine);
 
     return plainLexer;
