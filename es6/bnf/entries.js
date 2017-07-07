@@ -10,7 +10,7 @@ const entries = [
 
   { "name": "[\\w|~]+" },
 
-  { "unknown" : "^.*$" }
+  { "error" : "^.*$" }
     
 ];
 

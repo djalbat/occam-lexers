@@ -4,7 +4,7 @@ const entries = [
 
   { "terminal" : "\\+|\\-|\\*|\\/|\\(|\\)|\\d+" },
 
-  { "unknown" : "^.*$" }
+  { "error" : "^.*$" }
 
 ];
 
