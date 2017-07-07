@@ -2,7 +2,7 @@
 
 const entries = [
 
-  { "plain" : "^.*$" }
+  { "unknown" : "^.*$" }
 
 ];
 

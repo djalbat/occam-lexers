@@ -40,7 +40,9 @@ The lexical entries for the BNF lexer are the following:
     
       { "type": "\\[[^/]+\\]" },
     
-      { "name": "[\\w|~]+" }
+      { "name": "[\\w|~]+" },
+                            
+      { "unknown" : "^.*$" }
     
     ]
     
