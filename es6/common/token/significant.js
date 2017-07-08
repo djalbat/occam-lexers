@@ -12,6 +12,12 @@ class SignificantToken {
     this.error = undefined; ///
   }
   
+  isSignificant() {
+    const significant = true;
+    
+    return significant;
+  }
+  
   getContent() {
     return this.content;
   }

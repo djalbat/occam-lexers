@@ -9,6 +9,12 @@ class NonSignificantToken {
     this.html = html;
   }
 
+  isSignificant() {
+    const significant = false;
+
+    return significant;
+  }
+
   getContent() {
     return this.content;
   }
