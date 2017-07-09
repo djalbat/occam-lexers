@@ -2,7 +2,6 @@
 
 var lexers = {
   'Line': require('./lib/common/line'),
-  'PlainLexer': require('./lib/plain/lexer'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
