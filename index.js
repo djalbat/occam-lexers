@@ -1,10 +1,11 @@
 'use strict';
 
 var lexers = {
-  'CommonLine': require('./lib/common/line'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
+  'CommonLexer': require('./lib/common/lexer'),
+  'CommonLine': require('./lib/common/line'),
   'Tokens': require('./lib/common/tokens'),
   'StringToken': require('./lib/common/token/significant/string'),
   'EndOfLineToken': require('./lib/common/token/significant/endOfLine'),
