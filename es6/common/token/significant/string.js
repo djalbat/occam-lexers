@@ -11,7 +11,7 @@ class StringToken extends SignificantToken {
   static fromWithinContentAndLine(content, line) {
     let stringToken = null;
     
-    const matches = content.match(/("[^"]*")/);
+    const matches = content.match(/("(?:[^\\"]|\\.)*")/);
 
     if (matches) {
       const firstMatch = arrayUtil.first(matches);
