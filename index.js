@@ -3,8 +3,8 @@
 var lexers = {
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
-  'FlorenceLexer': require('./lib/florence/lexer'),
   'CommonLexer': require('./lib/common/lexer'),
+  'FlorenceLexer': require('./lib/florence/lexer'),
   'CommonLine': require('./lib/common/line'),
   'Tokens': require('./lib/common/tokens'),
   'StringToken': require('./lib/common/token/significant/string'),

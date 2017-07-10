@@ -1,7 +1,6 @@
 'use strict';
 
-const Line = require('./line'),
-      Rule = require('./rule'),
+const Rule = require('./rule'),
       Rules = require('./rules'),
       Context = require('./context');
 
@@ -9,6 +8,14 @@ class CommonLexer {
   constructor(rules, Line) {
     this.rules = rules;
     this.Line = Line;
+  }
+  
+  getRules() {
+    return this.rules;
+  }
+  
+  getLine() {
+    return this.Line;
   }
 
   addedLinesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
