@@ -5,8 +5,8 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {
-  static fromCustomGrammarsLexicalPattern(customGrammarsLexicalPattern) {
-    const custom = customGrammarsLexicalPattern, ///
+  static fromCustomGrammarsCombinedLexicalPattern(customGrammarsCombinedLexicalPattern) {
+    const custom = customGrammarsCombinedLexicalPattern, ///
           customGrammarEntry = {
             custom: custom
           },
