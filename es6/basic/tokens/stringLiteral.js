@@ -1,9 +1,9 @@
 'use strict';
 
-class StringTokens {
+class StringLiteralTokens {
   static pass(tokensOrContents, line) { 
 
   }
 }
 
-module.exports = StringTokens;
+module.exports = StringLiteralTokens;

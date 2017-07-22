@@ -7,10 +7,11 @@ var lexers = {
   'FlorenceLexer': require('./lib/florence/lexer'),
   'CommonLine': require('./lib/common/line'),
   'Tokens': require('./lib/common/tokens'),
-  'StringToken': require('./lib/common/token/significant/string'),
+  'SignificantToken': require('./lib/common/token/significant'),
   'EndOfLineToken': require('./lib/common/token/significant/endOfLine'),
   'WhitespaceToken': require('./lib/common/token/significant/whitespace'),
-  'SignificantToken': require('./lib/common/token/significant'),
+  'StringLiteralToken': require('./lib/common/token/significant/stringLiteral'),
+  'RegularExpressionToken': require('./lib/common/token/significant/regularExpression'),
   'NonSignificantToken': require('./lib/common/token/nonSignificant')
 };
 
