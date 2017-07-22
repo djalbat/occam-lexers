@@ -11,7 +11,7 @@ class StringToken extends SignificantToken {
   static fromWithinContentAndLine(content, line) {
     let stringToken = null;
     
-    const matches = content.match(/("(?:[^\\"]|\\.)*")/);
+    const matches = content.match(StringToken.regularExpression);
 
     if (matches) {
       const firstMatch = arrayUtil.first(matches);
@@ -27,12 +27,14 @@ class StringToken extends SignificantToken {
   }
 
   static positionWithinContent(content) {
-    const position = content.search(/"[^"]*"/);
+    const position = content.search(StringToken.regularExpression);
 
     return position;
   }
 }
 
-module.exports = StringToken;
-
 StringToken.type = 'string';
+
+StringToken.regularExpression = /"(?:[^\\.]|\\.)*"/;
+
+module.exports = StringToken;

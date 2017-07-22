@@ -11,7 +11,7 @@ class StartOfCommentToken extends CommentToken {
   static fromWithinContentAndLine(content, line) {
     let startOfCommentToken = null;
     
-    const matches = content.match(/^\/\*/);
+    const matches = content.match(StartOfCommentToken.regularExpression);
 
     if (matches) {
       const firstMatch = arrayUtil.first(matches);
@@ -25,10 +25,12 @@ class StartOfCommentToken extends CommentToken {
   }
 
   static positionWithinContent(content) {
-    const position = content.search(/\/\*/);
+    const position = content.search(StartOfCommentToken.regularExpression);
 
     return position;
   }
 }
+
+StartOfCommentToken.regularExpression = /^\/\*/;
 
 module.exports = StartOfCommentToken;

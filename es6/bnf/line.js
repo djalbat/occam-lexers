@@ -1,13 +1,14 @@
 'use strict';
 
 const CommonLine = require('../common/line'),
-      StringTokens = require('../common/tokens/string'),
       CommentTokens = require('./tokens/comment'),
-      WhitespaceTokens = require('../common/tokens/whitespace');
+      StringTokens = require('../common/tokens/string'),
+      WhitespaceTokens = require('../common/tokens/whitespace'),
+      RegularExpressionTokens = require('../common/tokens/regularExpression');
 
 class BNFLine extends CommonLine {
   static fromContent(content, context, rules) { 
-    const line = super.fromContent(BNFLine, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens);
+    const line = super.fromContent(BNFLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringTokens, WhitespaceTokens);
 
     return line;
   }

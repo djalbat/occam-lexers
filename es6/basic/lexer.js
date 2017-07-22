@@ -20,6 +20,6 @@ class BasicLexer extends CommonLexer {
   }
 }
 
-module.exports = BasicLexer;
-
 BasicLexer.entries = entries;
+
+module.exports = BasicLexer;

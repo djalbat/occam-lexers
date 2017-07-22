@@ -69,8 +69,9 @@ class Rule {
 module.exports = Rule;
 
 function isUnicode(regularExpressionPattern) {
-  const matches = regularExpressionPattern.match(/u\{/),
-        unicode = (matches !== null);
+  const unicodeRegularExpression = /u\{/, ///
+        index = regularExpressionPattern.search(unicodeRegularExpression),
+        unicode = (index !== -1);
 
   return unicode;
 }

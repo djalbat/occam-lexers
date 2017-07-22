@@ -17,7 +17,7 @@ class WhitespaceToken extends SignificantToken {
   static fromWithinContentAndLine(content, line) {
     let whitespaceToken = null;
     
-    const matches = content.match(/([\t ]+)/);
+    const matches = content.match(WhitespaceToken.regularExpression);
 
     if (matches) {
       const firstMatch = arrayUtil.first(matches);
@@ -33,12 +33,14 @@ class WhitespaceToken extends SignificantToken {
   }
 
   static positionWithinContent(content) {
-    const position = content.search(/[\t ]+/);
+    const position = content.search(WhitespaceToken.regularExpression);
 
     return position;
   }
 }
 
-module.exports = WhitespaceToken;
+WhitespaceToken.type = 'whitespace';
 
-WhitespaceToken.type = 'whitespace'; 
+WhitespaceToken.regularExpression = /[\t ]+/;
+
+module.exports = WhitespaceToken;

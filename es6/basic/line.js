@@ -6,7 +6,7 @@ const CommonLine = require('../common/line'),
       WhitespaceTokens = require('../common/tokens/whitespace');
 
 class BasicLine extends CommonLine {
-  static fromContent(content, context, rules) { return super.fromContent(BasicLine, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens); }
+  static fromContent(content, context, rules) { return super.fromContent(BasicLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringTokens, WhitespaceTokens); }
 }
 
 module.exports = BasicLine;

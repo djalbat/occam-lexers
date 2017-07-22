@@ -11,7 +11,7 @@ class EndOfCommentToken extends CommentToken {
   static fromWithinContentAndLine(content, line) {
     let endOfCommentToken = null;
     
-    const matches = content.match(/^\*\//);
+    const matches = content.match(EndOfCommentToken.regularExpression);
 
     if (matches) {
       const firstMatch = arrayUtil.first(matches);
@@ -25,10 +25,13 @@ class EndOfCommentToken extends CommentToken {
   }
 
   static positionWithinContent(content) {
-    const position = content.search(/\*\//);
+    const position = content.search(EndOfCommentToken.regularExpression);
 
     return position;
   }
 }
 
+EndOfCommentToken.regularExpression = /^\*\//;
+
 module.exports = EndOfCommentToken;
+

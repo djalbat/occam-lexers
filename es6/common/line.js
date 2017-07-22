@@ -49,13 +49,15 @@ class Line {
     this.tokens.push(token);
   }
 
-  static fromContent(Line, content, context, rules, CommentTokens, StringTokens, WhitespaceTokens) {
+  static fromContent(Line, content, context, rules, CommentTokens, RegularExpressionTokens, StringTokens, WhitespaceTokens) {
     const line = new Line(content),
           tokensOrContents = [content],
           inComment = CommentTokens.pass(tokensOrContents, line, context);
 
+    RegularExpressionTokens.pass(tokensOrContents, line);
+
     StringTokens.pass(tokensOrContents, line);
-    
+
     WhitespaceTokens.pass(tokensOrContents, line);
 
     const tokens = SignificantTokens.pass(tokensOrContents, line, rules);

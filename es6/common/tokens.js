@@ -10,13 +10,13 @@ class Tokens {
 
     for (let index = 0; index < tokensOrContentsLength; index++) {
       const offsetIndex = index + offset,
-          tokenOrContent = tokensOrContents[offsetIndex];
+            tokenOrContent = tokensOrContents[offsetIndex];
 
       if (typeof tokenOrContent === 'string') {
         const content = tokenOrContent,  ///
-            tokensOrRemainingContent = tokensOrRemainingContentFromWithinContentAndLine(content, line, Token),
-            tokensOrRemainingContentLength = tokensOrRemainingContent.length,
-            start = offsetIndex;
+              tokensOrRemainingContent = tokensOrRemainingContentFromWithinContentAndLine(content, line, Token),
+              tokensOrRemainingContentLength = tokensOrRemainingContent.length,
+              start = offsetIndex;
 
         arrayUtil.splice(tokensOrContents, start, 1, tokensOrRemainingContent);
 
