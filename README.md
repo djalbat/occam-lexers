@@ -19,22 +19,21 @@ There are four lexers in all:
 * A basic lexer, for illustrative purposes, and for developing new grammars.
 * The main lexer, namely the lexer for the lexical patterns part of Occam's vernacular, called Florence.
 
-All lexers share common functionality. Each takes four passes to match four kinds of tokens, although with caveats:
+All lexers share common functionality. Each takes four passes to match five kinds of tokens, although with caveats:
 
 1. Comments
 2. Whitespace
-3. Strings
-4. Remaining tokens
+3. String literals
+4. Regular expressions
+5. Remaining tokens
 
-Comment tokens are considered to be non-significant whilst the others, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fourth pass will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the first three passes are hard-coded. Note that the extended BNF lexer ignores comments, the basic lexer both comments and strings. Finally, note that Florence lexer will add end of line tokens and that these, like whitespace, are considered to be significant.
+Comment tokens are considered to be non-significant whilst the others, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fifth pass will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the first four passes are hard-coded. Note that the extended BNF lexer ignores comments, the basic lexer comments, string literals and regular expressions. Finally, note that Florence lexer will add end of line tokens and that these, like whitespace, are considered to be significant. It will also not match regular expressions.
 
-The fourth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. For the Florence lexical patterns, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place. In fact all of the parsers have a last `error` entry which simply has the most general regular expression to mop up any content that remains after the other regular expressions have been tried.
+The fifth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. For the Florence lexical patterns, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place. In fact all of the parsers have a last `error` entry which simply has the most general regular expression to mop up any content that remains after the other regular expressions have been tried.
 
 The lexical entries for the BNF lexer are the following:
 
     [
-    
-      { "regularExpression": "\\/[^/]+\\/" },
     
       { "special": "::=|\\||\\(|\\)|\\?|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>" },
     
