@@ -37,10 +37,10 @@ The lexical entries for the BNF lexer are the following:
     
       { "special": "::=|\\||\\(|\\)|\\?|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>" },
     
-      { "type": "\\[[^/]+\\]" },
+      { "type": "\\[[^\\]]+\\]" },
     
       { "name": "[\\w|~]+" },
-                            
+    
       { "error" : "^.*$" }
     
     ]
