@@ -35,6 +35,6 @@ class RegularExpressionToken extends SignificantToken {
 
 RegularExpressionToken.type = 'regularExpression';
 
-RegularExpressionToken.regularExpression = /\/(?:[^\\.]|\\.)*\//;
+RegularExpressionToken.regularExpression = /\/(?:\\.|[^\/])*\//;
 
 module.exports = RegularExpressionToken;
