@@ -4,7 +4,7 @@ const arrayUtil = require('../../../util/array'),
       SignificantToken = require('../significant');
 
 class WhitespaceToken extends SignificantToken {
-  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, WhitespaceToken); }
+  clone(startPosition, endPosition) { return SignificantToken.clone(WhitespaceToken, this, startPosition, endPosition); }
 
   getHTML() {
     const html = this.innerHTML;  ///
@@ -12,7 +12,7 @@ class WhitespaceToken extends SignificantToken {
     return html;
   }
 
-  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, WhitespaceToken); }
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(WhitespaceToken, content, line, type); }
 
   static fromWithinContentAndLine(content, line) {
     let whitespaceToken = null;

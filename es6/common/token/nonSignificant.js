@@ -49,7 +49,13 @@ class NonSignificantToken {
     return clonedNonSignificantToken;
   }
   
-  static fromContentAndLine(Class = NonSignificantToken, content, line) {
+  static fromContentAndLine(Class, content, line) {
+    if (line === undefined) {
+      line = content;
+      content = Class;
+      Class = NonSignificantToken;
+    }
+
     const html = Class.htmlFromContent(content),
           token = new Class(content, line, html);
 

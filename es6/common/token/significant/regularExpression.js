@@ -4,9 +4,9 @@ const arrayUtil = require('../../../util/array'),
       SignificantToken = require('../significant');
 
 class RegularExpressionToken extends SignificantToken {
-  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, RegularExpressionToken); }
+  clone(startPosition, endPosition) { return SignificantToken.clone(RegularExpressionToken, this, startPosition, endPosition); }
 
-  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, RegularExpressionToken); }
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(RegularExpressionToken, content, line, type); }
 
   static fromWithinContentAndLine(content, line) {
     let regularExpressionToken = null;

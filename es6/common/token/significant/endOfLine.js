@@ -3,9 +3,9 @@
 const SignificantToken = require('../significant');
 
 class EndOfLineToken extends SignificantToken {
-  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, EndOfLineToken); }
+  clone(startPosition, endPosition) { return SignificantToken.clone(EndOfLineToken, this, startPosition, endPosition); }
   
-  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(content, line, type, EndOfLineToken); }
+  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(EndOfLineToken, content, line, type); }
   
   getHTML() {
     const html = '';  ///
