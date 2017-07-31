@@ -31,9 +31,9 @@ class NonSignificantToken {
     return this.content.length; ///
   }
   
-  clone(startPosition, endPosition) { return NonSignificantToken.clone(this, startPosition, endPosition, NonSignificantToken); }
+  clone(startPosition, endPosition) { return NonSignificantToken.clone(NonSignificantToken, this, startPosition, endPosition); }
 
-  static clone(token, startPosition = 0, endPosition = token.getLength(), Class = NonSignificantToken) {
+  static clone(Class = NonSignificantToken, token, startPosition = 0, endPosition = token.getLength()) {
     let clonedNonSignificantToken = null;
 
     if (startPosition !== endPosition) {
@@ -43,13 +43,13 @@ class NonSignificantToken {
       
       content = content.substring(startPosition, endPosition);
 
-      clonedNonSignificantToken = Class.fromContentAndLine(content, line, Class);
+      clonedNonSignificantToken = Class.fromContentAndLine(Class, content, line);
     }
 
     return clonedNonSignificantToken;
   }
   
-  static fromContentAndLine(content, line, Class = NonSignificantToken) {
+  static fromContentAndLine(Class = NonSignificantToken, content, line) {
     const html = Class.htmlFromContent(content),
           token = new Class(content, line, html);
 

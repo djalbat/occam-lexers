@@ -17,11 +17,11 @@ class CommentToken extends NonSignificantToken {
     return commentToken;
   }
 
-  clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, CommentToken); }
+  clone(startPosition, endPosition) { return CommentToken.clone(CommentToken, this, startPosition, endPosition); }
 
-  static clone(token, startPosition, endPosition, Class = CommentToken) { return NonSignificantToken.clone(token, startPosition, endPosition, Class) }
+  static clone(Class = CommentToken, token, startPosition, endPosition) { return NonSignificantToken.clone(Class, token, startPosition, endPosition) }
 
-  static fromContentAndLine(content, line, Class = CommentToken) { return NonSignificantToken.fromContentAndLine(content, line, Class); }
+  static fromContentAndLine(Class = CommentToken, content, line) { return NonSignificantToken.fromContentAndLine(Class, content, line); }
 
   static htmlFromContent(content) {
     const sanitisedContent = tokenUtil.sanitiseContent(content),

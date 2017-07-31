@@ -55,9 +55,9 @@ class SignificantToken {
     this.error = error;
   }
 
-  clone(startPosition, endPosition) { return SignificantToken.clone(this, startPosition, endPosition, SignificantToken) }
+  clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
 
-  static clone(token, startPosition, endPosition, Class = SignificantToken) {
+  static clone(Class = SignificantToken, token, startPosition, endPosition) {
     let clonedSignificantToken = null;
 
     if (startPosition !== endPosition) {

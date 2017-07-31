@@ -4,9 +4,9 @@ const arrayUtil = require('../../../../util/array'),
       CommentToken = require('../comment');
 
 class EndOfCommentToken extends CommentToken {
-  clone(startPosition, endPosition) { return CommentToken.clone(this, startPosition, endPosition, EndOfCommentToken); }
+  clone(startPosition, endPosition) { return CommentToken.clone(EndOfCommentToken, this, startPosition, endPosition); }
 
-  static fromContentAndLine(content, line) { return CommentToken.fromContentAndLine(content, line, EndOfCommentToken); }
+  static fromContentAndLine(content, line) { return CommentToken.fromContentAndLine(EndOfCommentToken, content, line); }
 
   static fromWithinContentAndLine(content, line) {
     let endOfCommentToken = null;
