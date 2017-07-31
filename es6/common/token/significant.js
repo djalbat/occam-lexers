@@ -77,7 +77,7 @@ class SignificantToken {
     return clonedSignificantToken;
   }
 
-  static fromContentLineAndType(content, line, type, Class = SignificantToken) {
+  static fromContentLineAndType(Class = SignificantToken, content, line, type) {
     const innerHTML = Class.innerHTMLFromContent(content),
           significantToken = new Class(content, line, type, innerHTML);
 
