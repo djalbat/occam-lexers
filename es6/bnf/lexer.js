@@ -2,9 +2,9 @@
 
 const BNFLine = require('./line'),
       entries = require('./entries'),
-      specialSymbols = require('./specialSymbols'),
       Rules = require('../common/rules'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      specialSymbols = require('./specialSymbols');
 
 class BNFLexer extends CommonLexer {
   linesFromBNF(bnf) {

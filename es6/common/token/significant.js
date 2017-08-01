@@ -57,15 +57,15 @@ class SignificantToken {
 
   clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
 
-  static clone(Class = SignificantToken, token, startPosition, endPosition) {
+  static clone(Class = SignificantToken, significantToken, startPosition = 0, endPosition = significantToken.getLength()) {
     let clonedSignificantToken = null;
 
     if (startPosition !== endPosition) {
-      let content = token.getContent();
+      let content = significantToken.getContent();
 
-      const line = token.getLine(),
-            type = token.getType(),
-            error = token.getError();
+      const line = significantToken.getLine(),
+            type = significantToken.getType(),
+            error = significantToken.getError();
 
       content = content.substring(startPosition, endPosition);
 
@@ -84,18 +84,12 @@ class SignificantToken {
       content = Class;
       Class = SignificantToken;
     }
-    
-    const innerHTML = Class.innerHTMLFromContent(content),
+
+    const sanitisedContent = tokenUtil.sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
           significantToken = new Class(content, line, type, innerHTML);
 
     return significantToken;
-  }
-
-  static innerHTMLFromContent(content) {
-    const sanitisedContent = tokenUtil.sanitiseContent(content),
-          innerHTML = sanitisedContent; ///
-
-    return innerHTML;
   }
 }
 

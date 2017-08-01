@@ -21,14 +21,19 @@ class CommentToken extends NonSignificantToken {
 
   static clone(Class = CommentToken, token, startPosition, endPosition) { return NonSignificantToken.clone(Class, token, startPosition, endPosition) }
 
-  static fromContentAndLine(Class = CommentToken, content, line) { return NonSignificantToken.fromContentAndLine(Class, content, line); }
-
-  static htmlFromContent(content) {
+  static fromContentAndLine(Class, content, line) {
+    if (line === undefined) {
+      line = content;
+      content = Class;
+      Class = CommentToken;
+    }
+    
     const sanitisedContent = tokenUtil.sanitiseContent(content),
           innerHTML = sanitisedContent, ///
-          html = `<span class="comment">${innerHTML}</span>`;
+          html = `<span class="comment">${innerHTML}</span>`,
+          commentToken = new Class(content, line, html);
 
-    return html;
+    return commentToken;
   }
 }
 

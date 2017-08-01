@@ -8,7 +8,7 @@ class MiddleOfCommentToken extends CommentToken {
   static fromContentAndLine(content, line, length) {
     content = content.substr(0, length);  ///
 
-    const middleOfCommentToken = CommentToken.fromContentAndLine(content, line, MiddleOfCommentToken);
+    const middleOfCommentToken = CommentToken.fromContentAndLine(MiddleOfCommentToken, content, line);
 
     return middleOfCommentToken;
   }

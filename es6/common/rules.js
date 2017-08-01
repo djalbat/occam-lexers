@@ -37,19 +37,17 @@ class Rules {
 module.exports = Rules;
 
 function findRegularExpressionPattern(significantTokenType, entries) {
-  const regularExpressionPattern = entries.reduce(function(regularExpressionPattern, entry) {
-    if (regularExpressionPattern === null) {
-      const entryKeys = Object.keys(entry),
-            firstEntryKey = arrayUtil.first(entryKeys),
-            entrySignificantTokenType = firstEntryKey;  ///
+  const entry = entries.find(function(entry) {
+          const entryKeys = Object.keys(entry),
+                firstEntryKey = arrayUtil.first(entryKeys),
+                entrySignificantTokenType = firstEntryKey,  ///
+                found = (entrySignificantTokenType === significantTokenType);
 
-      if (entrySignificantTokenType === significantTokenType) {
-        regularExpressionPattern = entry[significantTokenType];
-      }
-    }
-
-    return regularExpressionPattern;
-  }, null);
+          return found;
+        }) || null, ///
+        regularExpressionPattern = (entry !== null) ?
+                                      entry[significantTokenType] : ///
+                                        null;
 
   return regularExpressionPattern;
 }

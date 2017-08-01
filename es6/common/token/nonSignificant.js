@@ -56,17 +56,11 @@ class NonSignificantToken {
       Class = NonSignificantToken;
     }
 
-    const html = Class.htmlFromContent(content),
+    const sanitisedContent = tokenUtil.sanitiseContent(content),
+          html = sanitisedContent,
           token = new Class(content, line, html);
 
     return token;
-  }
-
-  static htmlFromContent(content) {
-    const sanitisedContent = tokenUtil.sanitiseContent(content),
-          html = sanitisedContent;
-
-    return html;
   }
 }
 

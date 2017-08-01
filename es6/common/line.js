@@ -6,9 +6,9 @@ class Line {
   constructor(content) {
     this.content = content;
 
-    this.tokens = undefined;
+    this.tokens = undefined;  ///
     
-    this.inComment = undefined;
+    this.inComment = undefined; ///
   }
 
   getContent() {
@@ -25,12 +25,12 @@ class Line {
 
   getHTML() {
     let html = this.tokens.reduce(function(html, token) {
-          const tokenHTML = token.getHTML();
-          
-          html += tokenHTML;
-          
-          return html;
-        }, '');
+                 const tokenHTML = token.getHTML();
+                  
+                 html += tokenHTML;
+                  
+                 return html;
+               }, '');
     
     html += '\n'; ///
     
