@@ -77,7 +77,7 @@ class SignificantToken {
     return clonedSignificantToken;
   }
 
-  static fromContentLineAndType(Class, content, line, type) {
+  static fromContentLineAndType(Class, content, line, type, ...remainingArguments) {
     if (type === undefined) {
       type = line;
       line = content;
@@ -87,7 +87,7 @@ class SignificantToken {
 
     const sanitisedContent = tokenUtil.sanitiseContent(content),
           innerHTML = sanitisedContent, ///
-          significantToken = new Class(content, line, type, innerHTML);
+          significantToken = new Class(content, line, type, innerHTML, ...remainingArguments);
 
     return significantToken;
   }
