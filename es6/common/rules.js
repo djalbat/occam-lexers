@@ -1,7 +1,10 @@
 'use strict';
 
-const Rule = require('./rule'),
-      arrayUtil = require('../util/array');
+const necessary = require('necessary');
+
+const Rule = require('./rule');
+
+const { array } = necessary;
 
 class Rules {
   constructor(array) {
@@ -39,7 +42,7 @@ module.exports = Rules;
 function findRegularExpressionPattern(significantTokenType, entries) {
   const entry = entries.find(function(entry) {
           const entryKeys = Object.keys(entry),
-                firstEntryKey = arrayUtil.first(entryKeys),
+                firstEntryKey = array.first(entryKeys),
                 entrySignificantTokenType = firstEntryKey,  ///
                 found = (entrySignificantTokenType === significantTokenType);
 
@@ -55,7 +58,7 @@ function findRegularExpressionPattern(significantTokenType, entries) {
 function significantTokenTypesFromEntries(entries) {
   const significantTokenTypes = entries.map(function(entry) {
     const entryKeys = Object.keys(entry),
-          firstEntryKey = arrayUtil.first(entryKeys),
+          firstEntryKey = array.first(entryKeys),
           significantTokenType = firstEntryKey; ///
 
     return significantTokenType;

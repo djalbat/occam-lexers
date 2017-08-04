@@ -1,7 +1,10 @@
 'use strict';
 
-const arrayUtil = require('../../../../util/array'),
-      CommentToken = require('../comment');
+const necessary = require('necessary');
+
+const CommentToken = require('../comment');
+
+const { array } = necessary;
 
 class StartOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(StartOfCommentToken, this, startPosition, endPosition); }
@@ -14,7 +17,7 @@ class StartOfCommentToken extends CommentToken {
     const matches = content.match(StartOfCommentToken.regularExpression);
 
     if (matches) {
-      const firstMatch = arrayUtil.first(matches);
+      const firstMatch = array.first(matches);
 
       content = firstMatch; ///
 

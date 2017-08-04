@@ -1,6 +1,8 @@
 'use strict';
 
-const arrayUtil = require('../util/array');
+const necessary = require('necessary');
+
+const { array } = necessary;
 
 class Tokens {
   static pass(tokensOrContents, line, Token) {
@@ -18,7 +20,7 @@ class Tokens {
               tokensOrRemainingContentLength = tokensOrRemainingContent.length,
               start = offsetIndex;
 
-        arrayUtil.splice(tokensOrContents, start, 1, tokensOrRemainingContent);
+        array.splice(tokensOrContents, start, 1, tokensOrRemainingContent);
 
         offset += tokensOrRemainingContentLength - 1;
       }

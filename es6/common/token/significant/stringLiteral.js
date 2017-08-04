@@ -1,7 +1,10 @@
 'use strict';
 
-const arrayUtil = require('../../../util/array'),
-      SignificantToken = require('../significant');
+const necessary = require('necessary');
+
+const SignificantToken = require('../significant');
+
+const { array } = necessary;
 
 class StringLiteralToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(StringLiteralToken, this, startPosition, endPosition); }
@@ -14,7 +17,7 @@ class StringLiteralToken extends SignificantToken {
     const matches = content.match(StringLiteralToken.regularExpression);
 
     if (matches) {
-      const firstMatch = arrayUtil.first(matches);
+      const firstMatch = array.first(matches);
       
       content = firstMatch; ///
       
