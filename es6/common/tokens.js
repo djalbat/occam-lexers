@@ -2,7 +2,8 @@
 
 const necessary = require('necessary');
 
-const { array } = necessary;
+const { array } = necessary,
+      { splice } = array;
 
 class Tokens {
   static pass(tokensOrContents, line, Token) {
@@ -20,7 +21,7 @@ class Tokens {
               tokensOrRemainingContentLength = tokensOrRemainingContent.length,
               start = offsetIndex;
 
-        array.splice(tokensOrContents, start, 1, tokensOrRemainingContent);
+        splice(tokensOrContents, start, 1, tokensOrRemainingContent);
 
         offset += tokensOrRemainingContentLength - 1;
       }

@@ -4,7 +4,8 @@ const necessary = require('necessary');
 
 const CommentToken = require('../comment');
 
-const { array } = necessary;
+const { array } = necessary,
+      { first } = array;
 
 class EndOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(EndOfCommentToken, this, startPosition, endPosition); }
@@ -17,7 +18,7 @@ class EndOfCommentToken extends CommentToken {
     const matches = content.match(EndOfCommentToken.regularExpression);
 
     if (matches) {
-      const firstMatch = array.first(matches);
+      const firstMatch = first(matches);
 
       content = firstMatch; ///
 

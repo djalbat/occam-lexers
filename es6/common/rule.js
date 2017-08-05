@@ -4,7 +4,8 @@ const necessary = require('necessary');
 
 const SignificantToken = require('../common/token/significant');
 
-const { array } = necessary;
+const { array } = necessary,
+      { first } = array;
 
 class Rule {
   constructor(significantTokenType, regularExpression) {
@@ -26,7 +27,7 @@ class Rule {
     const matches = content.match(this.regularExpression);
     
     if (matches !== null) {
-      const firstMatch = array.first(matches);
+      const firstMatch = first(matches);
       
       if (firstMatch !== '') {
         significantTokenPosition = matches.index; ///
@@ -38,7 +39,7 @@ class Rule {
 
   significantTokenFromWithinContentAndLine(content, line) {
     const matches = content.match(this.regularExpression),
-          firstMatch = array.first(matches);
+          firstMatch = first(matches);
 
     content = firstMatch; ///
 
@@ -50,7 +51,7 @@ class Rule {
   
   static fromEntry(entry) {
     const entryKeys = Object.keys(entry),
-          firstEntryKey = array.first(entryKeys),
+          firstEntryKey = first(entryKeys),
           significantTokenType = firstEntryKey, ///
           regularExpressionPattern = entry[significantTokenType],
           rule = Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern);

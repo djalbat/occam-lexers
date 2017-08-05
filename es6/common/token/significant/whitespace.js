@@ -4,7 +4,8 @@ const necessary = require('necessary');
 
 const SignificantToken = require('../significant');
 
-const { array } = necessary;
+const { array } = necessary,
+      { first } = array;
 
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(WhitespaceToken, this, startPosition, endPosition); }
@@ -23,7 +24,7 @@ class WhitespaceToken extends SignificantToken {
     const matches = content.match(WhitespaceToken.regularExpression);
 
     if (matches) {
-      const firstMatch = array.first(matches);
+      const firstMatch = first(matches);
       
       content = firstMatch; ///
       
