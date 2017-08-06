@@ -10,13 +10,9 @@ const CommonLine = require('../common/line'),
 class FlorenceLine extends CommonLine {
   static fromContent(content, context, rules) {
     const line = super.fromContent(FlorenceLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens),
-          lineInComment = line.isInComment();
+          endOfLineToken = EndOfLineToken.fromLine(line);
 
-    if (!lineInComment) {
-      const endOfLineToken = EndOfLineToken.fromLine(line);
-
-      line.pushToken(endOfLineToken);
-    }
+    line.pushToken(endOfLineToken);
 
     return line;
   }
