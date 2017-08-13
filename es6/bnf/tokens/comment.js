@@ -1,7 +1,7 @@
 'use strict';
 
 class CommentTokens {
-  static pass(tokensOrRemainingContent, line, context) {
+  static pass(tokensOrRemainingContent, line, configuration) {
     const inComment = false;  ///
 
     return inComment;

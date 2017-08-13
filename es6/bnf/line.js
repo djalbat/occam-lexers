@@ -7,8 +7,8 @@ const CommonLine = require('../common/line'),
       RegularExpressionTokens = require('../common/tokens/regularExpression');
 
 class BNFLine extends CommonLine {
-  static fromContent(content, context, rules) { 
-    const line = super.fromContent(BNFLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+  static fromContent(content, rules, configuration) { 
+    const line = super.fromContent(BNFLine, content, rules, configuration, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
 
     return line;
   }

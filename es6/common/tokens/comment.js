@@ -5,11 +5,11 @@ const EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
       MiddleOfCommentToken = require('../token/nonSignificant/comment/middleOf');
 
 class CommentTokens {
-  static pass(tokensOrContents, line, context) {
+  static pass(tokensOrContents, line, configuration) {
     let content = tokensOrContents.pop(),
         commentToken,
         commentTokenLength,
-        previousLineInComment = context.isPreviousLineInComment(),
+        previousLineInComment = configuration.isPreviousLineInComment(),
         inComment = (previousLineInComment === true);
 
     while (content !== '') {
@@ -70,7 +70,7 @@ class CommentTokens {
 
     previousLineInComment = inComment;  ///
 
-    context.setPreviousLineInComment(previousLineInComment);
+    configuration.setPreviousLineInComment(previousLineInComment);
 
     return inComment;
   }

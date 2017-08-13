@@ -7,7 +7,7 @@ const CommonLine = require('../common/line'),
       RegularExpressionTokens = require('./tokens/regularExpression');
 
 class BasicLine extends CommonLine {
-  static fromContent(content, context, rules) { return super.fromContent(BasicLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens); }
+  static fromContent(content, rules, configuration) { return super.fromContent(BasicLine, content, rules, configuration, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens); }
 }
 
 module.exports = BasicLine;

@@ -2,7 +2,7 @@
 
 const Rule = require('./rule'),
       Rules = require('./rules'),
-      Context = require('./context');
+      Configuration = require('./configuration');
 
 class CommonLexer {
   constructor(rules, Line) {
@@ -19,21 +19,21 @@ class CommonLexer {
   }
 
   addedLinesFromContent(content, firstLineIndex, minimumLinesLength, previousLineInComment, followingLineInComment) {
-    const context = new Context(minimumLinesLength, previousLineInComment, followingLineInComment),
-          lines = this.linesFromContent(content, firstLineIndex, context),
+    const configuration = new Configuration(minimumLinesLength, previousLineInComment, followingLineInComment),
+          lines = this.linesFromContent(content, firstLineIndex, configuration),
           addedLines = lines; ///
 
     return addedLines;
   }
 
-  linesFromContent(content, firstLineIndex = 0, context = new Context()) {
+  linesFromContent(content, firstLineIndex = 0, configuration = new Configuration()) {
     const contents = content.split(/\n/),
-          lines = this.linesFromContents(contents, firstLineIndex, context);
+          lines = this.linesFromContents(contents, firstLineIndex, configuration);
 
     return lines;
   }
 
-  linesFromContents(contents, firstLineIndex, context) {
+  linesFromContents(contents, firstLineIndex, configuration) {
     const lines = [];
     
     let index = firstLineIndex,    
@@ -41,13 +41,13 @@ class CommonLexer {
 
     while (content !== undefined) {
       const length = index - firstLineIndex,
-            terminate = context.shouldTerminate(length);
+            terminate = configuration.shouldTerminate(length);
 
       if (terminate) {
         break;
       }
 
-      const line = this.Line.fromContent(content, context, this.rules);
+      const line = this.Line.fromContent(content, this.rules, configuration);
 
       lines.push(line);
 

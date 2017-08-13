@@ -1,6 +1,6 @@
 'use strict';
 
-class Context {
+class Configuration {
   constructor(minimumLinesLength = Infinity, previousLineInComment = null, followingLineInComment = null) {
     this.minimumLinesLength = minimumLinesLength;
     this.previousLineInComment = previousLineInComment;
@@ -40,4 +40,4 @@ class Context {
   }
 }
 
-module.exports = Context;
+module.exports = Configuration;
