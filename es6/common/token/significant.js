@@ -8,8 +8,6 @@ class SignificantToken {
     this.line = line;
     this.type = type;
     this.innerHTML = innerHTML;
-
-    this.error = undefined; ///
   }
   
   isSignificant() {
@@ -34,14 +32,8 @@ class SignificantToken {
     return this.innerHTML;
   }
 
-  getError() {
-    return this.error;
-  }
-
   getHTML() {
-    const className = (this.error === true) ?
-                        'error' :
-                          this.type,
+    const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;
 
     return html;
@@ -49,10 +41,6 @@ class SignificantToken {
 
   getLength() {
     return this.content.length; ///
-  }
-
-  setError(error) {
-    this.error = error;
   }
 
   clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
@@ -64,14 +52,11 @@ class SignificantToken {
       let content = significantToken.getContent();
 
       const line = significantToken.getLine(),
-            type = significantToken.getType(),
-            error = significantToken.getError();
+            type = significantToken.getType();
 
-      content = content.substring(startPosition, endPosition);
+      content = content.substring(startPosition, endPosition);  ///
 
       clonedSignificantToken = Class.fromContentLineAndType(content, line, type);
-
-      clonedSignificantToken.setError(error);
     }
 
     return clonedSignificantToken;
