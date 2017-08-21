@@ -23,9 +23,9 @@ class Line {
     return this.inComment;
   }
 
-  getHTML() {
+  asHTML() {
     let html = this.tokens.reduce(function(html, token) {
-                 const tokenHTML = token.getHTML();
+                 const tokenHTML = token.asHTML();
                   
                  html += tokenHTML;
                   

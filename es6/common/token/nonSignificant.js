@@ -31,6 +31,12 @@ class NonSignificantToken {
     return this.content.length; ///
   }
   
+  asHTML() {
+    const html = this.html; ///
+    
+    return html;
+  }
+
   clone(startPosition, endPosition) { return NonSignificantToken.clone(NonSignificantToken, this, startPosition, endPosition); }
 
   static clone(Class = NonSignificantToken, token, startPosition = 0, endPosition = token.getLength()) {
