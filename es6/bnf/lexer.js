@@ -28,9 +28,10 @@ class BNFLexer extends CommonLexer {
   }
 }
 
-BNFLexer.entries = entries;
-
-BNFLexer.specialSymbols = specialSymbols;
+Object.assign(BNFLexer, {
+  entries: entries,
+  specialSymbols: specialSymbols
+});
 
 module.exports = BNFLexer;
 

@@ -34,7 +34,8 @@ class FlorenceLexer extends CommonLexer {
   }
 }
 
-FlorenceLexer.entries = entries;
+Object.assign(FlorenceLexer, {
+  entries: entries
+});
 
 module.exports = FlorenceLexer;
-

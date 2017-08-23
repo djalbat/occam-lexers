@@ -20,6 +20,8 @@ class BasicLexer extends CommonLexer {
   }
 }
 
-BasicLexer.entries = entries;
+Object.assign(BasicLexer, {
+  entries: entries
+});
 
 module.exports = BasicLexer;
