@@ -4,8 +4,8 @@ const necessary = require('necessary');
 
 const SignificantToken = require('../significant');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities;
 
 class StringLiteralToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(StringLiteralToken, this, startPosition, endPosition); }

@@ -4,8 +4,8 @@ const necessary = require('necessary');
 
 const SignificantToken = require('../common/token/significant');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities;
 
 class Rule {
   constructor(significantTokenType, regularExpression) {

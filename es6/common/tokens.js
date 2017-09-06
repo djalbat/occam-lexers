@@ -2,8 +2,8 @@
 
 const necessary = require('necessary');
 
-const { array } = necessary,
-      { splice } = array;
+const { arrayUtilities } = necessary,
+      { splice } = arrayUtilities;
 
 class Tokens {
   static pass(tokensOrContents, line, Token) {

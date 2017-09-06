@@ -4,8 +4,8 @@ const necessary = require('necessary');
 
 const Rule = require('./rule');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities;
 
 class Rules {
   constructor(array) {

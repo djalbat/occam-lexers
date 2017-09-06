@@ -4,8 +4,8 @@ const necessary = require('necessary');
 
 const CommentToken = require('../comment');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities;
 
 class StartOfCommentToken extends CommentToken {
   clone(startPosition, endPosition) { return CommentToken.clone(StartOfCommentToken, this, startPosition, endPosition); }

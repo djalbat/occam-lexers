@@ -4,8 +4,8 @@ const necessary = require('necessary');
 
 const SignificantToken = require('../significant');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities;
 
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(WhitespaceToken, this, startPosition, endPosition); }
