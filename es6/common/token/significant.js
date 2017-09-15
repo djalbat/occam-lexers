@@ -32,7 +32,7 @@ class SignificantToken {
     return this.innerHTML;
   }
 
-  asHTML() {
+  asHTML(filePath) {
     const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;
 

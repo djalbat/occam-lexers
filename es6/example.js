@@ -44,7 +44,8 @@ class Example {
             content = contentTextareaValue,  ///
             lines = lexer.linesFromContent(content),
             htmls = lines.reduce(function(htmls, line, index) {
-              const lineHTML = line.asHTML(),
+              const filePath = null,  ///
+                    lineHTML = line.asHTML(filePath),
                     lineNumber = index + 1,
                     html = `${lineNumber}: ${lineHTML}`;
   

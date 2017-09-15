@@ -31,7 +31,7 @@ class NonSignificantToken {
     return this.content.length; ///
   }
   
-  asHTML() {
+  asHTML(filePath) {
     const html = this.html; ///
     
     return html;

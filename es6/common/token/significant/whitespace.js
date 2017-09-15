@@ -10,7 +10,7 @@ const { arrayUtilities } = necessary,
 class WhitespaceToken extends SignificantToken {
   clone(startPosition, endPosition) { return SignificantToken.clone(WhitespaceToken, this, startPosition, endPosition); }
 
-  asHTML() {
+  asHTML(filePath) {
     const html = this.innerHTML;  ///
 
     return html;

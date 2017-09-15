@@ -23,9 +23,9 @@ class Line {
     return this.inComment;
   }
 
-  asHTML() {
+  asHTML(filePath) {
     let html = this.tokens.reduce(function(html, token) {
-                 const tokenHTML = token.asHTML();
+                 const tokenHTML = token.asHTML(filePath);
                   
                  html += tokenHTML;
                   
