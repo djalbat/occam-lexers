@@ -1,7 +1,7 @@
 'use strict';
 
 class Configuration {
-  constructor(minimumLinesLength = Infinity, previousLineInComment = null, followingLineInComment = null) {
+  constructor(minimumLinesLength = Infinity, previousLineInComment = false, followingLineInComment = false) { ///
     this.minimumLinesLength = minimumLinesLength;
     this.previousLineInComment = previousLineInComment;
     this.followingLineInComment = followingLineInComment;
@@ -27,7 +27,7 @@ class Configuration {
     let terminate = false;
 
     if (length >= this.minimumLinesLength) {
-      if (this.followingLineInComment === null) {
+      if (this.followingLineInComment === false) {
         terminate = true;
       }
 
