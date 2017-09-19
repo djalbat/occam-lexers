@@ -27,10 +27,6 @@ class Configuration {
     let terminate = false;
 
     if (length >= this.minimumLinesLength) {
-      if (this.followingLineInComment === false) {
-        terminate = true;
-      }
-
       if (this.previousLineInComment === this.followingLineInComment) {
         terminate = true;
       }
