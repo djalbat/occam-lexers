@@ -35,6 +35,6 @@ class StartOfCommentToken extends CommentToken {
   }
 }
 
-StartOfCommentToken.regularExpression = /^\/\*/;
+StartOfCommentToken.regularExpression = /\/\*/;
 
 module.exports = StartOfCommentToken;

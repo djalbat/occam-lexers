@@ -35,7 +35,7 @@ class EndOfCommentToken extends CommentToken {
   }
 }
 
-EndOfCommentToken.regularExpression = /^\*\//;
+EndOfCommentToken.regularExpression = /\*\//;
 
 module.exports = EndOfCommentToken;
 
