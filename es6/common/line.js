@@ -2,7 +2,7 @@
 
 const SignificantTokens = require('./tokens/significant');
 
-class Line {
+class CommonLine {
   constructor(content) {
     this.content = content;
 
@@ -70,4 +70,4 @@ class Line {
   }
 }
 
-module.exports = Line;
+module.exports = CommonLine;
