@@ -1,6 +1,6 @@
 'use strict';
 
-var lexers = {
+const lexers = {
   'CommonLine': require('./lib/common/line'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
