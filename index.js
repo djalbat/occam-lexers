@@ -1,6 +1,6 @@
 'use strict';
 
-const lexers = {
+module.exports = {
   'CommonLine': require('./lib/common/line'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
@@ -17,5 +17,3 @@ const lexers = {
   'RegularExpressionToken': require('./lib/common/token/significant/regularExpression'),
   'NonSignificantToken': require('./lib/common/token/nonSignificant')
 };
-
-module.exports = lexers;
