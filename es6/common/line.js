@@ -3,12 +3,12 @@
 const SignificantTokens = require('./tokens/significant');
 
 class CommonLine {
-  constructor(content, rules, tokens, inComment, configuration, replacementTokenMap) {
+  constructor(content, rules, configuration, tokens, inComment, replacementTokenMap) {
     this.content = content;
     this.rules = rules;
+    this.configuration = configuration;
     this.tokens = tokens;
     this.inComment = inComment;
-    this.configuration = configuration;
     this.replacementTokenMap = replacementTokenMap;
   }
 
@@ -18,6 +18,10 @@ class CommonLine {
 
   getRules() {
     return this.rules;
+  }
+
+  getConfiguration() {
+    return this.configuration;
   }
 
   getTokens(withReplacementTokens = false) {
@@ -40,10 +44,6 @@ class CommonLine {
 
   isInComment() {
     return this.inComment;
-  }
-
-  getConfiguration() {
-    return this.configuration;
   }
 
   getReplacementTokenMap() {
@@ -143,7 +143,8 @@ class CommonLine {
   static fromContentRulesAndConfiguration(Line, content, rules, configuration) {
     const tokens = undefined, ///
           inComment = undefined, //
-          line = new Line(content, rules, tokens, inComment, configuration);
+          replacementTokenMap = {},
+          line = new Line(content, rules, configuration, tokens, inComment, replacementTokenMap);
 
     return line;
   }
