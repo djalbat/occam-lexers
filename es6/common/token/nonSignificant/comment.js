@@ -1,7 +1,9 @@
 'use strict';
 
-const tokenUtil = require('../../../util/token'),
+const tokenUtilities = require('../../../utilities/token'),
       NonSignificantToken = require('../nonSignificant');
+
+const { sanitiseContent } = tokenUtilities;
 
 class CommentToken extends NonSignificantToken {
   merge(commentToken) {
@@ -28,7 +30,7 @@ class CommentToken extends NonSignificantToken {
       Class = CommentToken;
     }
     
-    const sanitisedContent = tokenUtil.sanitiseContent(content),
+    const sanitisedContent = sanitiseContent(content),
           innerHTML = sanitisedContent, ///
           html = `<span class="comment">${innerHTML}</span>`,
           commentToken = new Class(content, line, html);
