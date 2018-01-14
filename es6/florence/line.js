@@ -12,11 +12,14 @@ class FlorenceLine extends CommonLine {
     super.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
 
     const florenceLine = this,  ///
-          line = florenceLine;  ///
+          line = florenceLine,  ///
+          tokens = line.getTokens();
 
     const endOfLineToken = EndOfLineToken.fromLine(line);
 
-    this.pushToken(endOfLineToken);
+    tokens.push(endOfLineToken);
+
+    this.setTokens(tokens);
   }
 
   static fromContentRulesAndConfiguration(content, rules, configuration) {

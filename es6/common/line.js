@@ -97,8 +97,8 @@ class CommonLine {
     return html;
   }
 
-  pushToken(token) {
-    this.tokens.push(token);
+  setTokens(tokens) {
+    this.tokens = tokens;
   }
 
   replaceToken(replacedToken, replacementToken) {
