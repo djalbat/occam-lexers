@@ -22,6 +22,10 @@ class EndOfLineToken extends SignificantToken {
   }
 }
 
-EndOfLineToken.type = 'endOfLine';
+const type = 'endOfLine';
+
+Object.assign(EndOfLineToken, {
+  type: type
+});
 
 module.exports = EndOfLineToken;

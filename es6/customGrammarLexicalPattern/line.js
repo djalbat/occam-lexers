@@ -7,7 +7,13 @@ const CommonLine = require('../common/line'),
       RegularExpressionTokens = require('./tokens/regularExpression');
 
 class CustomGrammarLexicalPatternLine extends CommonLine {
-  static fromContent(content, context, rules) { return super.fromContent(CustomGrammarLexicalPatternLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens); }
+  static fromContentRulesAndConfiguration(content, rules, configuration) {
+    const customGrammarLexicalPatternLine = super.fromContentRulesAndConfiguration(CustomGrammarLexicalPatternLine, content, rules, configuration);
+
+    customGrammarLexicalPatternLine.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+
+    return customGrammarLexicalPatternLine;
+  }
 }
 
 module.exports = CustomGrammarLexicalPatternLine;

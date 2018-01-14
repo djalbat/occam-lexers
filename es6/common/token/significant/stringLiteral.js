@@ -37,8 +37,12 @@ class StringLiteralToken extends SignificantToken {
   }
 }
 
-StringLiteralToken.type = 'string';
+const type = 'string',
+      regularExpression = /"(?:\\.|[^"])*"/;
 
-StringLiteralToken.regularExpression = /"(?:\\.|[^"])*"/;
+Object.assign(StringLiteralToken, {
+  type: type,
+  regularExpression: regularExpression
+});
 
 module.exports = StringLiteralToken;

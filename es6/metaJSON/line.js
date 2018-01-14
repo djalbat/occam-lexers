@@ -7,7 +7,13 @@ const CommonLine = require('../common/line'),
       RegularExpressionTokens = require('./tokens/regularExpression');
 
 class MetaJSONLine extends CommonLine {
-  static fromContent(content, context, rules) { return super.fromContent(MetaJSONLine, content, context, rules, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens); }
+  static fromContentRulesAndConfiguration(content, rules, configuration) {
+    const metaJSONLine = super.fromContentRulesAndConfiguration(MetaJSONLine, content, rules, configuration);
+
+    metaJSONLine.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+
+    return metaJSONLine;
+  }
 }
 
 module.exports = MetaJSONLine;

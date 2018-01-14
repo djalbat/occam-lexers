@@ -1,7 +1,7 @@
 'use strict';
 
 const entries = require('./entries'),
-      FlorenceLine = require('./line'),
+      FlorenceLine = require('../florence/line'),
       CommonLexer = require('../common/lexer');
 
 class FlorenceLexer extends CommonLexer {

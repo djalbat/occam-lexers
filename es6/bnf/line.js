@@ -7,10 +7,12 @@ const CommonLine = require('../common/line'),
       RegularExpressionTokens = require('../common/tokens/regularExpression');
 
 class BNFLine extends CommonLine {
-  static fromContent(content, rules, configuration) { 
-    const line = super.fromContent(BNFLine, content, rules, configuration, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+  static fromContentRulesAndConfiguration(content, rules, configuration) {
+    const bnfLine = super.fromContentRulesAndConfiguration(BNFLine, content, rules, configuration);
 
-    return line;
+    bnfLine.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+
+    return bnfLine;
   }
 }
 

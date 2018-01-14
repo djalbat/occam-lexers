@@ -43,8 +43,12 @@ class WhitespaceToken extends SignificantToken {
   }
 }
 
-WhitespaceToken.type = 'whitespace';
+const type = 'whitespace',
+      regularExpression = /[\t ]+/;
 
-WhitespaceToken.regularExpression = /[\t ]+/;
+Object.assign(WhitespaceToken, {
+  type: type,
+  regularExpression: regularExpression
+});
 
 module.exports = WhitespaceToken;

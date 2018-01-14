@@ -1,12 +1,13 @@
 'use strict';
 
-const BNFLexer = require('../bnf/lexer');
+const BNFLexer = require('../bnf/lexer'),
+      CustomGrammarBNFLine = require('../customGrammarBNF/line');
 
 class CustomGrammarBNFLexer extends BNFLexer {
   static fromNothing() {
     const bnfLexer = BNFLexer.fromNothing(),
           rules = bnfLexer.getRules(),
-          Line = bnfLexer.getLine(),
+          Line = CustomGrammarBNFLine,  ///
           customGrammarBNFLexer = new CustomGrammarBNFLexer(rules, Line);
 
     return customGrammarBNFLexer;

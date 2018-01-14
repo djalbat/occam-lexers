@@ -2,7 +2,7 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      CustomGrammarLexicalPatternLine = require('./line');
+      CustomGrammarLexicalPatternLine = require('../customGrammarLexicalPattern/line');
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
   static fromEntries(entries) {

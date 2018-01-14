@@ -47,7 +47,7 @@ class CommonLexer {
         break;
       }
 
-      const line = this.Line.fromContent(content, this.rules, configuration);
+      const line = this.Line.fromContentRulesAndConfiguration(content, this.rules, configuration);
 
       lines.push(line);
 

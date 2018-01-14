@@ -1,7 +1,7 @@
 'use strict';
 
 const entries = require('./entries'),
-      MetaJSONLine = require('./line'),
+      MetaJSONLine = require('../metaJSON/line'),
       CommonLexer = require('../common/lexer');
 
 class MetaJSONLexer extends CommonLexer {

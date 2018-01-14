@@ -8,13 +8,23 @@ const CommonLine = require('../common/line'),
       EndOfLineToken = require('../common/token/significant/endOfLine');
 
 class FlorenceLine extends CommonLine {
-  static fromContent(content, rules, configuration) {
-    const line = super.fromContent(FlorenceLine, content, rules, configuration, CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens),
-          endOfLineToken = EndOfLineToken.fromLine(line);
+  initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens) {
+    super.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
 
-    line.pushToken(endOfLineToken);
+    const florenceLine = this,  ///
+          line = florenceLine;  ///
 
-    return line;
+    const endOfLineToken = EndOfLineToken.fromLine(line);
+
+    this.pushToken(endOfLineToken);
+  }
+
+  static fromContentRulesAndConfiguration(content, rules, configuration) {
+    const florenceLine = super.fromContentRulesAndConfiguration(FlorenceLine, content, rules, configuration);
+
+    florenceLine.initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens);
+
+    return florenceLine;
   }
 }
 
