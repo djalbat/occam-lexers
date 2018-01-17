@@ -1,7 +1,9 @@
 'use strict';
 
 function sanitiseContent(content) {
-  const sanitisedContent = content.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
+  const sanitisedContent = (content !== null) ?
+                              content.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;') :
+                                null;
 
   return sanitisedContent;
 }
