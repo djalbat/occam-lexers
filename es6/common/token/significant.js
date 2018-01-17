@@ -34,15 +34,17 @@ class SignificantToken {
     return this.innerHTML;
   }
 
-  asHTML(filePath) {
-    const className = this.type,  ///
-          html = `<span class="${className}">${this.innerHTML}</span>`;
+  getLength() {
+    const length = this.content.length; ///
 
-    return html;
+    return length;
   }
 
-  getLength() {
-    return this.content.length; ///
+  asHTML(filePath) {
+    const className = this.type,  ///
+        html = `<span class="${className}">${this.innerHTML}</span>`;
+
+    return html;
   }
 
   clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
