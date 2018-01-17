@@ -14,8 +14,8 @@ class EndOfLineToken extends SignificantToken {
   }
 
   static fromLine(line) {
-    const content = '',
-          type = EndOfLineToken.type,
+    const content = null, ///
+          { type } = EndOfLineToken,
           endOfLineToken = EndOfLineToken.fromContentLineAndType(content, line, type);
     
     return endOfLineToken;

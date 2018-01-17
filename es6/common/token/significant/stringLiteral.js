@@ -22,7 +22,7 @@ class StringLiteralToken extends SignificantToken {
       
       content = firstMatch; ///
       
-      const type = StringLiteralToken.type;
+      const { type } = StringLiteralToken;
 
       stringLiteralToken = StringLiteralToken.fromContentLineAndType(content, line, type);
     }

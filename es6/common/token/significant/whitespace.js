@@ -28,7 +28,7 @@ class WhitespaceToken extends SignificantToken {
       
       content = firstMatch; ///
       
-      const type = WhitespaceToken.type;
+      const { type } = WhitespaceToken;
 
       whitespaceToken = WhitespaceToken.fromContentLineAndType(content, line, type);
     }

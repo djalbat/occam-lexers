@@ -22,7 +22,7 @@ class RegularExpressionToken extends SignificantToken {
       
       content = firstMatch; ///
       
-      const type = RegularExpressionToken.type;
+      const { type } = RegularExpressionToken;
 
       regularExpressionToken = RegularExpressionToken.fromContentLineAndType(content, line, type);
     }
