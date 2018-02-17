@@ -1,9 +1,9 @@
 'use strict';
 
-const tokenUtilities = require('../../../utilities/token'),
+const contentUtilities = require('../../../utilities/content'),
       NonSignificantToken = require('../nonSignificant');
 
-const { sanitiseContent } = tokenUtilities;
+const { sanitiseContent } = contentUtilities;
 
 class CommentToken extends NonSignificantToken {
   merge(commentToken) {

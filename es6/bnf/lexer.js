@@ -4,14 +4,18 @@ const BNFLine = require('./line'),
       entries = require('./entries'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
-      specialSymbols = require('./specialSymbols');
+      specialSymbols = require('./specialSymbols'),
+      tokensUtilities = require('../utilities/tokens');
+
+const { tokensFromLines } = tokensUtilities;
 
 class BNFLexer extends CommonLexer {
-  linesFromBNF(bnf) {
+  tokensFromBNF(bnf) {
     const content = bnf,  ///
-          lines = super.linesFromContent(content);
+          lines = super.linesFromContent(content),
+          tokens = tokensFromLines(lines);
 
-    return lines;
+    return tokens;
   }
 
   static fromEntries(entries) {

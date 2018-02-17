@@ -1,8 +1,8 @@
 'use strict';
 
-const tokenUtilities = require('../../utilities/token');
+const contentUtilities = require('../../utilities/content');
 
-const { sanitiseContent } = tokenUtilities;
+const { sanitiseContent } = contentUtilities;
 
 class NonSignificantToken {
   constructor(content, line, html) {
