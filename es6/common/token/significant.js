@@ -34,16 +34,22 @@ class SignificantToken {
     return length;
   }
 
+  isSignificantToken() {
+    const significantToken = true;
+
+    return significantToken;
+  }
+
   isWhitespaceToken() {
     const whitespaceToken = false;
 
     return whitespaceToken;
   }
 
-  isSignificantToken() {
-    const significantToken = true;
+  isEndOfLineToken() {
+    const endOfLineToken = false;
 
-    return significantToken;
+    return endOfLineToken;
   }
 
   asHTML(filePath) {
