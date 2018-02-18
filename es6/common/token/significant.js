@@ -12,12 +12,6 @@ class SignificantToken {
     this.innerHTML = innerHTML;
   }
   
-  isSignificant() {
-    const significant = true;
-    
-    return significant;
-  }
-  
   getContent() {
     return this.content;
   }
@@ -38,6 +32,18 @@ class SignificantToken {
     const length = this.content.length; ///
 
     return length;
+  }
+
+  isSignificant() {
+    const significant = true;
+
+    return significant;
+  }
+
+  isWhitespaceToken() {
+    const whitespaceToken = false;
+
+    return whitespaceToken;
   }
 
   asHTML(filePath) {
