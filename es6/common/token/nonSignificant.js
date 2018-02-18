@@ -11,12 +11,6 @@ class NonSignificantToken {
     this.html = html;
   }
 
-  isSignificant() {
-    const significant = false;
-
-    return significant;
-  }
-
   getContent() {
     return this.content;
   }
@@ -32,7 +26,13 @@ class NonSignificantToken {
   getLength() {
     return this.content.length; ///
   }
-  
+
+  isSignificant() {
+    const significant = false;
+
+    return significant;
+  }
+
   asHTML(filePath) {
     const html = this.html; ///
     
