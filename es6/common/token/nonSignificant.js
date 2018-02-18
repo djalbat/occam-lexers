@@ -65,7 +65,7 @@ class NonSignificantToken {
     }
 
     const sanitisedContent = sanitiseContent(content),
-          html = sanitisedContent,
+          html = sanitisedContent,  ///
           token = new Class(content, line, html);
 
     return token;
