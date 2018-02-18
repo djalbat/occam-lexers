@@ -1,5 +1,7 @@
 'use strict';
 
+const SignificantTokens = require('./tokens/significant');
+
 class CommonLine {
   constructor(content, rules, configuration, tokens, inComment, coveringTokenMap) {
     this.content = content;
