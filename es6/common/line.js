@@ -46,14 +46,16 @@ class CommonLine {
     return this.inComment;
   }
 
-  getReplacementTokenMap() {
-    return this.replacementTokenMap;
+  getReplacementToken(replacementTokenIndex) {
+    const replacementToken = this.replacementTokenMap[replacementTokenIndex] || null;
+
+    return replacementToken
   }
 
-  getIndexes() {
-    const indexes = Object.keys(this.replacementTokenMap);
+  getReplacementTokenIndexes() {
+    const replacementTokenIndexes = Object.keys(this.replacementTokenMap);
 
-    return indexes;
+    return replacementTokenIndexes;
   }
 
   getFirstTokenIndex(firstToken = null) {
@@ -105,19 +107,36 @@ class CommonLine {
     const withReplacementTokens = false,
           tokens = this.getTokens(withReplacementTokens),
           replacedTokenIndex = tokens.indexOf(replacedToken),
-          index = replacedTokenIndex;  ///
+          replacementTokenIndex = replacedTokenIndex;  ///
 
-    this.replacementTokenMap[index] = replacementToken;
+    this.replacementTokenMap[replacementTokenIndex] = replacementToken;
+  }
+
+  spliceToken(oldToken, newToken, newReplacementToken) {
+    const oldTokenIndex = this.tokens.indexOf(oldToken),
+          oldReplacementTokenIndex = oldTokenIndex, ///
+          start = oldTokenIndex,  ///
+          deleteCount = 1;  ///
+
+    this.tokens.splice(start, deleteCount, newToken);
+
+    delete this.replacementTokenMap[oldReplacementTokenIndex];
+    
+    if (newReplacementToken) {
+      const newReplacementTokenIndex = oldTokenIndex; ///
+
+      this.replacementTokenMap[newReplacementTokenIndex] = newReplacementToken;
+    }
   }
 
   removeReplacementTokens(firstToken, lastToken) {
-    const indexes = this.getIndexes(),
+    const replacementTokenIndexes = this.getReplacementTokenIndexes(),
           firstTokenIndex = this.getFirstTokenIndex(firstToken),
           lastTokenIndex = this.getLastTokenIndex(lastToken);
 
-    indexes.forEach(function(index) {
-      if ((index >= firstTokenIndex) && (index <= lastTokenIndex)) {
-        delete this.replacementTokenMap[index];
+    replacementTokenIndexes.forEach(function(replacementTokenIndex) {
+      if ((replacementTokenIndex >= firstTokenIndex) && (replacementTokenIndex <= lastTokenIndex)) {
+        delete this.replacementTokenMap[replacementTokenIndex];
       }
     }.bind(this));
   }
