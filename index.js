@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  'BasicLexer': require('./lib/bnf/basic'),
+  'BasicLexer': require('./lib/basic'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'PlainLexer': require('./lib/plain/lexer'),
   'MetaJSONLexer': require('./lib/metaJSON/lexer'),
