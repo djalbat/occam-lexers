@@ -27,10 +27,10 @@ class NonSignificantToken {
     return this.content.length; ///
   }
 
-  isSignificant() {
-    const significant = false;
+  isSignificantToken() {
+    const significantToken = false;
 
-    return significant;
+    return significantToken;
   }
 
   asHTML(filePath) {
