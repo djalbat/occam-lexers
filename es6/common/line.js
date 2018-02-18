@@ -1,15 +1,13 @@
 'use strict';
 
-const SignificantTokens = require('./tokens/significant');
-
 class CommonLine {
-  constructor(content, rules, configuration, tokens, inComment, replacementTokenMap) {
+  constructor(content, rules, configuration, tokens, inComment, coveringTokenMap) {
     this.content = content;
     this.rules = rules;
     this.configuration = configuration;
     this.tokens = tokens;
     this.inComment = inComment;
-    this.replacementTokenMap = replacementTokenMap;
+    this.coveringTokenMap = coveringTokenMap;
   }
 
   getContent() {
@@ -24,14 +22,14 @@ class CommonLine {
     return this.configuration;
   }
 
-  getTokens(withReplacementTokens = false) {
+  getTokens(withCoveringTokens = false) {
     let tokens = this.tokens;
 
-    if (withReplacementTokens) {
+    if (withCoveringTokens) {
       tokens = tokens.reduce(function(tokens, token, index) {
-        const replacementToken = this.replacementTokenMap[index];
+        const coveringToken = this.coveringTokenMap[index];
 
-        token = replacementToken || token;  ///
+        token = coveringToken || token;  ///
 
         tokens.push(token);
 
@@ -46,21 +44,21 @@ class CommonLine {
     return this.inComment;
   }
 
-  getReplacementToken(replacementTokenIndex) {
-    const replacementToken = this.replacementTokenMap[replacementTokenIndex] || null;
+  getCoveringToken(coveringTokenIndex) {
+    const coveringToken = this.coveringTokenMap[coveringTokenIndex] || null;
 
-    return replacementToken
+    return coveringToken
   }
 
-  getReplacementTokenIndexes() {
-    const replacementTokenIndexes = Object.keys(this.replacementTokenMap);
+  getCoveringTokenIndexes() {
+    const coveringTokenIndexes = Object.keys(this.coveringTokenMap);
 
-    return replacementTokenIndexes;
+    return coveringTokenIndexes;
   }
 
   getFirstTokenIndex(firstToken = null) {
-    const withReplacementTokens = false,
-          tokens = this.getTokens(withReplacementTokens),
+    const withCoveringTokens = false,
+          tokens = this.getTokens(withCoveringTokens),
           firstIndex = 0,
           firstTokenIndex = (firstToken === null) ?
                               firstIndex :
@@ -70,8 +68,8 @@ class CommonLine {
   }
 
   getLastTokenIndex(lastToken = null) {
-    const withReplacementTokens = false,
-          tokens = this.getTokens(withReplacementTokens),
+    const withCoveringTokens = false,
+          tokens = this.getTokens(withCoveringTokens),
           tokensLength = tokens.length,
           lastIndex = tokensLength - 1,
           lastTokenIndex = (lastToken === null) ?
@@ -81,10 +79,10 @@ class CommonLine {
     return lastTokenIndex;
   }
 
-  asHTML(filePath, withReplacementTokens) {
+  asHTML(filePath, withCoveringTokens) {
     let html;
 
-    const tokens = this.getTokens(withReplacementTokens);
+    const tokens = this.getTokens(withCoveringTokens);
 
     html = tokens.reduce(function(html, token) {
       const tokenHTML = token.asHTML(filePath);
@@ -103,40 +101,38 @@ class CommonLine {
     this.tokens = tokens;
   }
 
-  replaceToken(replacedToken, replacementToken) {
-    const withReplacementTokens = false,
-          tokens = this.getTokens(withReplacementTokens),
-          replacedTokenIndex = tokens.indexOf(replacedToken),
-          replacementTokenIndex = replacedTokenIndex;  ///
+  coverToken(coveredToken, coveringToken) {
+    const coveredTokenIndex = this.tokens.indexOf(coveredToken),
+          coveringTokenIndex = coveredTokenIndex;  ///
 
-    this.replacementTokenMap[replacementTokenIndex] = replacementToken;
+    this.coveringTokenMap[coveringTokenIndex] = coveringToken;
   }
 
-  spliceToken(oldToken, newToken, newReplacementToken) {
+  replaceToken(oldToken, newToken, newCoveringToken) {
     const oldTokenIndex = this.tokens.indexOf(oldToken),
-          oldReplacementTokenIndex = oldTokenIndex, ///
+          oldCoveringTokenIndex = oldTokenIndex, ///
           start = oldTokenIndex,  ///
           deleteCount = 1;  ///
 
     this.tokens.splice(start, deleteCount, newToken);
 
-    delete this.replacementTokenMap[oldReplacementTokenIndex];
-    
-    if (newReplacementToken) {
-      const newReplacementTokenIndex = oldTokenIndex; ///
+    delete this.coveringTokenMap[oldCoveringTokenIndex];
 
-      this.replacementTokenMap[newReplacementTokenIndex] = newReplacementToken;
+    if (newCoveringToken) {
+      const newCoveringTokenIndex = oldTokenIndex; ///
+
+      this.coveringTokenMap[newCoveringTokenIndex] = newCoveringToken;
     }
   }
 
-  removeReplacementTokens(firstToken, lastToken) {
-    const replacementTokenIndexes = this.getReplacementTokenIndexes(),
+  removeCoveringTokens(firstToken, lastToken) {
+    const indexes = this.getIndexes(),
           firstTokenIndex = this.getFirstTokenIndex(firstToken),
           lastTokenIndex = this.getLastTokenIndex(lastToken);
 
-    replacementTokenIndexes.forEach(function(replacementTokenIndex) {
-      if ((replacementTokenIndex >= firstTokenIndex) && (replacementTokenIndex <= lastTokenIndex)) {
-        delete this.replacementTokenMap[replacementTokenIndex];
+    indexes.forEach(function(index) {
+      if ((index >= firstTokenIndex) && (index <= lastTokenIndex)) {
+        delete this.coveringTokenMap[index];
       }
     }.bind(this));
   }
@@ -162,8 +158,8 @@ class CommonLine {
   static fromContentRulesAndConfiguration(Line, content, rules, configuration) {
     const tokens = undefined, ///
           inComment = undefined, //
-          replacementTokenMap = {},
-          line = new Line(content, rules, configuration, tokens, inComment, replacementTokenMap);
+          coveringTokenMap = {},
+          line = new Line(content, rules, configuration, tokens, inComment, coveringTokenMap);
 
     return line;
   }
