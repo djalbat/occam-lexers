@@ -59,6 +59,10 @@ class SignificantToken {
     return html;
   }
 
+  setLine(line) {
+    this.line = line;
+  }
+
   clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
 
   static clone(Class = SignificantToken, significantToken, startPosition = 0, endPosition = significantToken.getLength()) {

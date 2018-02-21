@@ -114,9 +114,12 @@ class CommonLine {
     const oldTokenIndex = this.tokens.indexOf(oldToken),
           oldCoveringTokenIndex = oldTokenIndex, ///
           start = oldTokenIndex,  ///
-          deleteCount = 1;  ///
+          deleteCount = 1,  ///
+          line = this;  ///
 
     this.tokens.splice(start, deleteCount, newToken);
+
+    newToken.setLine(line);
 
     delete this.coveringTokenMap[oldCoveringTokenIndex];
 

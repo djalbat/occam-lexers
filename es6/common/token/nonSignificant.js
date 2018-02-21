@@ -39,6 +39,10 @@ class NonSignificantToken {
     return html;
   }
 
+  setLine(line) {
+    this.line = line;
+  }
+
   clone(startPosition, endPosition) { return NonSignificantToken.clone(NonSignificantToken, this, startPosition, endPosition); }
 
   static clone(Class = NonSignificantToken, token, startPosition = 0, endPosition = token.getLength()) {
