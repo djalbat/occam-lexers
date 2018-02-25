@@ -50,7 +50,7 @@ class WhitespaceToken extends SignificantToken {
 }
 
 const type = 'whitespace',
-      regularExpression = /[\t ]+/;
+      regularExpression = /[\t \n]+/;
 
 Object.assign(WhitespaceToken, {
   type: type,

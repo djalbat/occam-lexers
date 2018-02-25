@@ -82,19 +82,14 @@ class CommonLine {
   }
 
   asHTML(filePath, withCoveringTokens) {
-    let html;
+    const tokens = this.getTokens(withCoveringTokens),
+          html = tokens.reduce(function(html, token) {
+            const tokenHTML = token.asHTML(filePath);
 
-    const tokens = this.getTokens(withCoveringTokens);
+            html += tokenHTML;
 
-    html = tokens.reduce(function(html, token) {
-      const tokenHTML = token.asHTML(filePath);
-
-      html += tokenHTML;
-
-      return html;
-    }, '');
-    
-    html += '\n'; ///
+            return html;
+          }, '');
     
     return html;
   }

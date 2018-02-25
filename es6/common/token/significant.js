@@ -46,12 +46,6 @@ class SignificantToken {
     return whitespaceToken;
   }
 
-  isEndOfLineToken() {
-    const endOfLineToken = false;
-
-    return endOfLineToken;
-  }
-
   asHTML(filePath) {
     const className = this.type,  ///
         html = `<span class="${className}">${this.innerHTML}</span>`;

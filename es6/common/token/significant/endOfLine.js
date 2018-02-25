@@ -9,12 +9,6 @@ class EndOfLineToken extends SignificantToken {
     return length;
   }
 
-  isEndOfLineToken() {
-    const endOfLineToken = true;
-
-    return endOfLineToken;
-  }
-
   asHTML(filePath) {
     const html = '';  ///
     

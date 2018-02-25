@@ -27,8 +27,20 @@ class CommonLexer {
   }
 
   linesFromContent(content, firstLineIndex = 0, configuration = new Configuration()) {
-    const contents = content.split(/\n/),
-          lines = this.linesFromContents(contents, firstLineIndex, configuration);
+    let contents = content.split(/\n/);
+
+    const contentsLength = contents.length,
+          lastIndex = contentsLength - 1;
+
+    contents = contents.map(function(content, index) {
+      if (index !== lastIndex) {
+        content = `${content}\n`;
+      }
+
+      return content;
+    });
+
+    const lines = this.linesFromContents(contents, firstLineIndex, configuration);
 
     return lines;
   }
