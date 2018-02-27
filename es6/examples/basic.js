@@ -5,7 +5,7 @@ const Example = require('../example'),
 
 class BasicExample {
   static run() {
-    const entries = BasicLexer.entries,
+    const { entries } = BasicLexer,
           Lexer = BasicLexer;
 
     Example.run(entries, Lexer);

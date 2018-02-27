@@ -1,36 +1,46 @@
 'use strict';
 
 class Configuration {
-  constructor(minimumLinesLength = Infinity, previousLineInComment = false, followingLineInComment = false) { ///
-    this.minimumLinesLength = minimumLinesLength;
-    this.previousLineInComment = previousLineInComment;
-    this.followingLineInComment = followingLineInComment;
+  constructor(minimumContentLength, previousTokenInComment, nextTokenInComment) {
+    this.minimumContentLength = minimumContentLength;
+    this.previousTokenInComment = previousTokenInComment;
+    this.nextTokenInComment = nextTokenInComment;
   }
 
-  getMinimumLinesLength() {
-    return this.minimumLinesLength;
+  isPreviousTokenInComment() {
+    return this.previousTokenInComment;
   }
 
-  isPreviousLineInComment() {
-    return this.previousLineInComment;
+  isNextTokenInComment() {
+    return this.nextTokenInComment;
   }
 
-  isFollowingLineInComment() {
-    return this.followingLineInComment;
+  setPreviousTokenInComment(previousTokenInComment) {
+    this.previousTokenInComment = previousTokenInComment;
   }
 
-  setPreviousLineInComment(previousLineInComment) {
-    this.previousLineInComment = previousLineInComment;
-  }
+  shouldTerminate(contentLength, tokens) {
+    const terminate = tokens.some(function(token, index) {
+      let terminate = false;
 
-  shouldTerminate(length) {
-    let terminate = false;
+      const tokenContentLength = token.getContentLength();
 
-    if (length >= this.minimumLinesLength) {
-      if (this.previousLineInComment === this.followingLineInComment) {
-        terminate = true;
+      contentLength += tokenContentLength;
+
+      if (contentLength >= this.minimumContentLength) {
+        const tokenCommentToken = token.isCommentToken();
+
+        terminate = (tokenCommentToken === this.nextTokenInComment);
+
+        if (terminate) {
+          const start = index + 1;
+
+          tokens.splice(start);
+        }
       }
-    }
+
+      return terminate;
+    }.bind(this));
 
     return terminate;
   }

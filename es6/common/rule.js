@@ -22,29 +22,19 @@ class Rule {
   }
   
   significantTokenPositionWithinContent(content) {
-    let significantTokenPosition = -1;
-    
-    const matches = content.match(this.regularExpression);
-    
-    if (matches !== null) {
-      const firstMatch = first(matches);
-      
-      if (firstMatch !== '') {
-        significantTokenPosition = matches.index; ///
-      }
-    }
+    const significantTokenPosition = content.search(this.regularExpression);
 
     return significantTokenPosition;
   }
 
-  significantTokenFromWithinContentAndLine(content, line) {
+  significantTokenFromWithinContent(content) {
     const matches = content.match(this.regularExpression),
           firstMatch = first(matches);
 
     content = firstMatch; ///
 
     const type = this.significantTokenType, ///
-          significantToken = SignificantToken.fromContentLineAndType(content, line, type);
+          significantToken = SignificantToken.fromContentAndType(content, type);
 
     return significantToken;
   }

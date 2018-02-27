@@ -5,7 +5,7 @@ const Example = require('../example'),
 
 class FlorenceExample {
   static run() {
-    const entries = FlorenceLexer.entries,
+    const { entries } = FlorenceLexer,
           Lexer = FlorenceLexer;
 
     Example.run(entries, Lexer);

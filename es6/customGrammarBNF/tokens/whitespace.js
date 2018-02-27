@@ -1,7 +1,7 @@
 'use strict';
 
 class WhitespaceTokens {
-  static pass(tokensOrContents, line) {
+  static pass(tokensOrContents) {
 
   }
 }

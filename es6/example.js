@@ -42,18 +42,32 @@ class Example {
             entries = JSON.parse(entriesTextareaValue),
             lexer = Lexer.fromEntries(entries),
             content = contentTextareaValue,  ///
-            lines = lexer.linesFromContent(content),
-            htmls = lines.reduce(function(htmls, line, index) {
+            tokens = lexer.tokensFromContent(content);
+
+      let lineNumber = 1,
+          previousToken = null;
+
+      const html = tokens.reduce(function(html, token) {
               const filePath = null,  ///
-                    lineHTML = line.asHTML(filePath),
-                    lineNumber = index + 1,
-                    html = `${lineNumber}: ${lineHTML}`;
+                    tokenHTML = token.asHTML(filePath);
+
+              if (previousToken === null) {
+                html += `${lineNumber++}: `;
+              } else {
+                const previousTokenEndOfLineToken = previousToken.isEndOfLineToken();
+
+                if (previousTokenEndOfLineToken) {
+                  html += `${lineNumber++}: `;
+                }
+              }
+
+              html += tokenHTML;
+
+              previousToken = token;
   
-              htmls += html;
-  
-              return htmls;
+              return html;
             }, ''),
-            tokensTextareaHTML = htmls;  ///
+            tokensTextareaHTML = html;  ///
 
       tokensTextarea.html(tokensTextareaHTML);
 

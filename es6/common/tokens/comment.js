@@ -5,12 +5,10 @@ const EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
       MiddleOfCommentToken = require('../token/nonSignificant/comment/middleOf');
 
 class CommentTokens {
-  static pass(tokensOrContents, line, configuration) {
+  static pass(tokensOrContents, inComment) {
     let content = tokensOrContents.pop(),
         commentToken,
-        commentTokenLength,
-        previousLineInComment = configuration.isPreviousLineInComment(),
-        inComment = (previousLineInComment === true);
+        commentTokenLength;
 
     while (content !== '') {
       let contentLength = content.length;
@@ -21,13 +19,13 @@ class CommentTokens {
         if (endOfCommentTokenPositionWithinContent === 0) {
           inComment = false;
 
-          commentToken = EndOfCommentToken.fromWithinContentAndLine(content, line);
+          commentToken = EndOfCommentToken.fromWithinContent(content);
 
           commentTokenLength = commentToken.getLength();
         } else {
           const middleOfCommentTokenLength = minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
-          commentToken = MiddleOfCommentToken.fromContentAndLine(content, line, middleOfCommentTokenLength);
+          commentToken = MiddleOfCommentToken.fromContent(content, middleOfCommentTokenLength);
 
           commentTokenLength = middleOfCommentTokenLength;
         }
@@ -47,7 +45,7 @@ class CommentTokens {
         if (startOfCommentTokenPositionWithinContent === 0) {
           inComment = true;
 
-          commentToken = StartOfCommentToken.fromWithinContentAndLine(content, line);
+          commentToken = StartOfCommentToken.fromWithinContent(content);
 
           commentTokenLength = commentToken.getLength();
 
@@ -67,10 +65,6 @@ class CommentTokens {
         }
       }
     }
-
-    previousLineInComment = inComment;  ///
-
-    configuration.setPreviousLineInComment(previousLineInComment);
 
     return inComment;
   }

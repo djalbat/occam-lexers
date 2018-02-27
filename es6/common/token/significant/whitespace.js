@@ -1,15 +1,8 @@
 'use strict';
 
-const necessary = require('necessary');
-
 const SignificantToken = require('../significant');
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities;
-
 class WhitespaceToken extends SignificantToken {
-  clone(startPosition, endPosition) { return SignificantToken.clone(WhitespaceToken, this, startPosition, endPosition); }
-
   isWhitespaceToken() {
     const whitespaceToken = true;
 
@@ -22,35 +15,17 @@ class WhitespaceToken extends SignificantToken {
     return html;
   }
 
-  static fromContentLineAndType(content, line, type) { return SignificantToken.fromContentLineAndType(WhitespaceToken, content, line, type); }
+  clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
 
-  static fromWithinContentAndLine(content, line) {
-    let whitespaceToken = null;
-    
-    const matches = content.match(WhitespaceToken.regularExpression);
+  static fromContent(content) { return SignificantToken.fromContent(WhitespaceToken, content); }
 
-    if (matches) {
-      const firstMatch = first(matches);
-      
-      content = firstMatch; ///
-      
-      const { type } = WhitespaceToken;
+  static fromWithinContent(content) { return SignificantToken.fromWithinContent(WhitespaceToken, content); }
 
-      whitespaceToken = WhitespaceToken.fromContentLineAndType(content, line, type);
-    }
-
-    return whitespaceToken;
-  }
-
-  static positionWithinContent(content) {
-    const position = content.search(WhitespaceToken.regularExpression);
-
-    return position;
-  }
+  static positionWithinContent(content) { return SignificantToken.positionWithinContent(WhitespaceToken, content); }
 }
 
 const type = 'whitespace',
-      regularExpression = /[\t \n]+/;
+      regularExpression = /[\t ]+/;
 
 Object.assign(WhitespaceToken, {
   type: type,

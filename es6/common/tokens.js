@@ -6,24 +6,30 @@ const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
 
 class Tokens {
-  static pass(tokensOrContents, line, Token) {
-    let offset = 0;
-    
-    const tokensOrContentsLength = tokensOrContents.length;
+  static pass(tokensOrContents, Token) {
+    let index = 0,
+        tokensOrContentsLength = tokensOrContents.length;
 
-    for (let index = 0; index < tokensOrContentsLength; index++) {
-      const offsetIndex = index + offset,
-            tokenOrContent = tokensOrContents[offsetIndex];
+    while (index < tokensOrContentsLength) {
+      const tokenOrContent = tokensOrContents[index],
+            tokenOrContentContent = (typeof tokenOrContent === 'string');
 
-      if (typeof tokenOrContent === 'string') {
+      if (tokenOrContentContent) {
         const content = tokenOrContent,  ///
-              tokensOrRemainingContent = tokensOrRemainingContentFromWithinContentAndLine(content, line, Token),
+              tokensOrRemainingContent = tokensOrRemainingContentFromWithinContent(content, Token),
               tokensOrRemainingContentLength = tokensOrRemainingContent.length,
-              start = offsetIndex;
+              start = index,  ///
+              deleteCount = 1;
 
-        splice(tokensOrContents, start, 1, tokensOrRemainingContent);
+        splice(tokensOrContents, start, deleteCount, tokensOrRemainingContent);
 
-        offset += tokensOrRemainingContentLength - 1;
+        tokensOrContentsLength -= 1;
+
+        tokensOrContentsLength += tokensOrRemainingContentLength;
+
+        index += tokensOrRemainingContentLength;
+      } else {
+        index += 1;
       }
     }
   }
@@ -31,7 +37,7 @@ class Tokens {
 
 module.exports = Tokens;
 
-function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) {
+function tokensOrRemainingContentFromWithinContent(content, Token) {
   let remainingContent,
       tokensOrRemainingContent = [],       
       tokenPositionWithinContent = Token.positionWithinContent(content);
@@ -43,9 +49,9 @@ function tokensOrRemainingContentFromWithinContentAndLine(content, line, Token) 
       tokensOrRemainingContent.push(remainingContent);
     }
 
-    const token = Token.fromWithinContentAndLine(content, line),
-          tokenLength = token.getLength(),
-          tokenOffset = tokenPositionWithinContent + tokenLength;
+    const token = Token.fromWithinContent(content),
+          tokenContentLength = token.getContentLength(),
+          tokenOffset = tokenPositionWithinContent + tokenContentLength;
     
     tokensOrRemainingContent.push(token);
     

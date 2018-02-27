@@ -1,41 +1,21 @@
 'use strict';
 
-const necessary = require('necessary');
-
 const CommentToken = require('../comment');
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities;
-
 class EndOfCommentToken extends CommentToken {
-  clone(startPosition, endPosition) { return CommentToken.clone(EndOfCommentToken, this, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(startPosition, endPosition); }
 
-  static fromContentAndLine(content, line) { return CommentToken.fromContentAndLine(EndOfCommentToken, content, line); }
+  static fromContent(content) { return CommentToken.fromContent(content); }
 
-  static fromWithinContentAndLine(content, line) {
-    let endOfCommentToken = null;
-    
-    const matches = content.match(EndOfCommentToken.regularExpression);
+  static fromWithinContent(content) { return CommentToken.fromWithinContent(content); }
 
-    if (matches) {
-      const firstMatch = first(matches);
-
-      content = firstMatch; ///
-
-      endOfCommentToken = EndOfCommentToken.fromContentAndLine(content, line);
-    }
-
-    return endOfCommentToken;
-  }
-
-  static positionWithinContent(content) {
-    const position = content.search(EndOfCommentToken.regularExpression);
-
-    return position;
-  }
+  static positionWithinContent(content) { return CommentToken.positionWithinContent(content); }
 }
 
-EndOfCommentToken.regularExpression = /\*\//;
+const regularExpression = /\*\//;
+
+Object.assign(EndOfCommentToken, {
+  regularExpression: regularExpression
+});
 
 module.exports = EndOfCommentToken;
-

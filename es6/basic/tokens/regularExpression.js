@@ -1,7 +1,7 @@
 'use strict';
 
 class RegularExpressionTokens {
-  static pass(tokensOrContents, line) { 
+  static pass(tokensOrContents) {
 
   }
 }

@@ -1,42 +1,39 @@
 'use strict';
 
-const contentUtilities = require('../../../utilities/content'),
-      NonSignificantToken = require('../nonSignificant');
-
-const { sanitiseContent } = contentUtilities;
+const NonSignificantToken = require('../nonSignificant');
 
 class CommentToken extends NonSignificantToken {
+  isCommentToken() {
+    const commentToken = true;
+
+    return commentToken;
+  }
+
   merge(commentToken) {
     let content = this.getContent();
     
-    const line = this.getLine(),
-          commentTokenContent = commentToken.getContent();
+    const commentTokenContent = commentToken.getContent();
 
-    content += commentTokenContent;
+    content = `${content}${commentTokenContent}`; ///
 
-    commentToken = CommentToken.fromContentAndLine(content, line);  ///
-
-    return commentToken;
-  }
-
-  clone(startPosition, endPosition) { return CommentToken.clone(CommentToken, this, startPosition, endPosition); }
-
-  static clone(Class = CommentToken, token, startPosition, endPosition) { return NonSignificantToken.clone(Class, token, startPosition, endPosition) }
-
-  static fromContentAndLine(Class, content, line) {
-    if (line === undefined) {
-      line = content;
-      content = Class;
-      Class = CommentToken;
-    }
-    
-    const sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          html = `<span class="comment">${innerHTML}</span>`,
-          commentToken = new Class(content, line, html);
+    commentToken = NonSignificantToken.fromContent(CommentToken, content);
 
     return commentToken;
   }
+
+  clone(startPosition, endPosition) { return super.clone(CommentToken, startPosition, endPosition); }
+
+  static fromContent(content) { return SignificantToken.fromContent(CommentToken, content); }
+
+  static fromWithinContent(content) { return SignificantToken.fromWithinContent(CommentToken, content); }
+
+  static positionWithinContent(content) { return SignificantToken.positionWithinContent(CommentToken, content); }
 }
+
+const type = 'comment';
+
+Object.assign(CommentToken, {
+  type: type
+});
 
 module.exports = CommentToken;

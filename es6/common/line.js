@@ -138,17 +138,16 @@ class CommonLine {
   }
 
   initialise(CommentTokens, RegularExpressionTokens, StringLiteralTokens, WhitespaceTokens) {
-    const line = this,  ///
-          tokensOrContents = [this.content],
-          inComment = CommentTokens.pass(tokensOrContents, line, this.configuration);
+    const tokensOrContents = [this.content],
+          inComment = CommentTokens.pass(tokensOrContents, this.configuration);
 
-    RegularExpressionTokens.pass(tokensOrContents, line);
+    RegularExpressionTokens.pass(tokensOrContents);
 
-    StringLiteralTokens.pass(tokensOrContents, line);
+    StringLiteralTokens.pass(tokensOrContents);
 
-    WhitespaceTokens.pass(tokensOrContents, line);
+    WhitespaceTokens.pass(tokensOrContents);
 
-    const tokens = SignificantTokens.pass(tokensOrContents, line, this.rules);
+    const tokens = SignificantTokens.pass(tokensOrContents, this.rules);
 
     this.tokens = tokens;
 

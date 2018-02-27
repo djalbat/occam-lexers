@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "4.0.15",
+  "version": "4.0.16",
   "license": "MIT",
   "homepage": "https://github.com/occam-proof-assistant/Lexers",
   "description": "Occam's lexers.",
@@ -10,7 +10,7 @@
     "url": "https://github.com/occam-proof-assistant/Lexers"
   },
   "dependencies": {
-    "necessary": "^1.8.1"
+    "necessary": "^2.5.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",

@@ -1,13 +1,16 @@
 'use strict';
 
+const necessary = require('necessary');
+
 const contentUtilities = require('../../utilities/content');
 
-const { sanitiseContent } = contentUtilities;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities,
+      { sanitiseContent } = contentUtilities;
 
 class SignificantToken {
-  constructor(content, line, type, innerHTML) {
+  constructor(content, type, innerHTML) {
     this.content = content;
-    this.line = line;
     this.type = type;
     this.innerHTML = innerHTML;
   }
@@ -16,10 +19,6 @@ class SignificantToken {
     return this.content;
   }
   
-  getLine() {
-    return this.line;
-  }
-
   getType() {
     return this.type;
   }
@@ -28,10 +27,10 @@ class SignificantToken {
     return this.innerHTML;
   }
 
-  getLength() {
-    const length = this.content.length; ///
+  getContentLength() {
+    const contentLength = this.content.length;
 
-    return length;
+    return contentLength;
   }
 
   isSignificantToken() {
@@ -46,49 +45,78 @@ class SignificantToken {
     return whitespaceToken;
   }
 
+  isEndOfLineToken() {
+    const endOfLineToken = false;
+
+    return endOfLineToken;
+  }
+
+  isCommentToken() {
+    const commentToken = false;
+
+    return commentToken;
+  }
+
   asHTML(filePath) {
     const className = this.type,  ///
-        html = `<span class="${className}">${this.innerHTML}</span>`;
+          html = `<span class="${className}">${this.innerHTML}</span>`;
 
     return html;
   }
 
-  setLine(line) {
-    this.line = line;
-  }
-
-  clone(startPosition, endPosition) { return SignificantToken.clone(SignificantToken, this, startPosition, endPosition) }
-
-  static clone(Class = SignificantToken, significantToken, startPosition = 0, endPosition = significantToken.getLength()) {
-    let clonedSignificantToken = null;
+  clone(Class, startPosition = 0, endPosition = this.getLength()) {
+    let significantToken = null;
 
     if (startPosition !== endPosition) {
-      let content = significantToken.getContent();
-
-      const line = significantToken.getLine(),
-            type = significantToken.getType();
+      let content = this.getContent();
 
       content = content.substring(startPosition, endPosition);  ///
 
-      clonedSignificantToken = Class.fromContentLineAndType(content, line, type);
+      significantToken = Class.fromContent(content);
     }
-
-    return clonedSignificantToken;
-  }
-
-  static fromContentLineAndType(Class, content, line, type, ...remainingArguments) {
-    if (type === undefined) {
-      type = line;
-      line = content;
-      content = Class;
-      Class = SignificantToken;
-    }
-
-    const sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          significantToken = new Class(content, line, type, innerHTML, ...remainingArguments);
 
     return significantToken;
+  }
+
+  static fromContentAndType(content, type) {
+    const sanitisedContent = sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
+          significantToken = new SignificantToken(content, type, innerHTML);
+
+    return significantToken;
+  }
+
+  static fromContent(Class, content) {
+    const sanitisedContent = sanitiseContent(content),
+          { type } = Class,
+          innerHTML = sanitisedContent, ///
+          significantToken = new Class(content, type, innerHTML);
+
+    return significantToken;
+  }
+
+  static fromWithinContent(Class, content) {
+    let significantToken = null;
+
+    const { regularExpression } = Class,
+          matches = content.match(regularExpression);
+
+    if (matches) {
+      const firstMatch = first(matches);
+
+      content = firstMatch; ///
+
+      significantToken = SignificantToken.fromContent(Class, content);
+    }
+
+    return significantToken;
+  }
+
+  static positionWithinContent(Class, content) {
+    const { regularExpression } = Class,
+        position = content.search(regularExpression);
+
+    return position;
   }
 }
 

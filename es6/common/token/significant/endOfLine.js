@@ -2,55 +2,34 @@
 
 const SignificantToken = require('../significant');
 
-class EndOfLineToken extends SignificantToken {
-  getLength() {
-    const length = 0; ///
+class EndOfLineSignificantToken extends SignificantToken {
+  isEndOfLineToken() {
+    const endOfLineToken = true;
 
-    return length;
+    return endOfLineToken;
   }
 
   asHTML(filePath) {
-    const html = '';  ///
+    const html = '\n';  ///
     
     return html;
   }
 
-  clone(startPosition, endPosition) { return EndOfLineToken.clone(this, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition); }
 
-  static clone(endOfLineToken, startPosition = 0, endPosition = endOfLineToken.getLength()) {
-    let clonedEndOfLineToken = null;
+  static fromContent(content) { return SignificantToken.fromContent(EndOfLineSignificantToken, content); }
 
-    if (startPosition !== endPosition) {
-      const content = null,
-            line = endOfLineToken.getLine(),
-            type = endOfLineToken.getType(),
+  static fromWithinContent(content) { return SignificantToken.fromWithinContent(EndOfLineSignificantToken, content); }
 
-      clonedEndOfLineToken = EndOfLineToken.fromContentLineAndType(content, line, type);
-    }
-
-    return clonedEndOfLineToken;
-  }
-
-  static fromLine(line) {
-    const content = null, ///
-          { type } = EndOfLineToken,
-          endOfLineToken = EndOfLineToken.fromContentLineAndType(content, line, type);
-    
-    return endOfLineToken;
-  }
-
-  static fromContentLineAndType(content, line, type) {
-    const innerHTML = null, ///
-          endOfLineToken = new EndOfLineToken(content, line, type, innerHTML);
-
-    return endOfLineToken;
-  }
+  static positionWithinContent(content) { return SignificantToken.positionWithinContent(EndOfLineSignificantToken, content); }
 }
 
-const type = 'endOfLine';
+const type = 'endOfLine',
+      regularExpression = /\r\n|\r|\n/;
 
-Object.assign(EndOfLineToken, {
-  type: type
+Object.assign(EndOfLineSignificantToken, {
+  type: type,
+  regularExpression: regularExpression
 });
 
-module.exports = EndOfLineToken;
+module.exports = EndOfLineSignificantToken;

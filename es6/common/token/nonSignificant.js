@@ -1,30 +1,32 @@
 'use strict';
 
+const necessary = require('necessary');
+
 const contentUtilities = require('../../utilities/content');
 
-const { sanitiseContent } = contentUtilities;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities,
+      { sanitiseContent } = contentUtilities;
 
 class NonSignificantToken {
-  constructor(content, line, html) {
+  constructor(content, type, innerHTML) {
     this.content = content;
-    this.line = line;
-    this.html = html;
+    this.type = type;
+    this.innerHTML = innerHTML;
   }
 
   getContent() {
     return this.content;
   }
   
-  getLine() {
-    return this.line;
-  }
-
-  getHTML() {
-    return this.html;
+  getInnerHTML() {
+    return this.innerHTML;
   }
   
-  getLength() {
-    return this.content.length; ///
+  getContentLength() {
+    const contentLength = this.content.length;
+
+    return contentLength;
   }
 
   isSignificantToken() {
@@ -33,46 +35,70 @@ class NonSignificantToken {
     return significantToken;
   }
 
+  isEndOfLineToken() {
+    const endOfLineToken = false;
+
+    return endOfLineToken;
+  }
+
+  isCommentToken() {
+    const commentToken = false;
+
+    return commentToken;
+  }
+
   asHTML(filePath) {
-    const html = this.html; ///
-    
+    const className = this.type,  ///
+          html = `<span class="${className}">${this.innerHTML}</span>`;
+
     return html;
   }
 
-  setLine(line) {
-    this.line = line;
-  }
-
-  clone(startPosition, endPosition) { return NonSignificantToken.clone(NonSignificantToken, this, startPosition, endPosition); }
-
-  static clone(Class = NonSignificantToken, token, startPosition = 0, endPosition = token.getLength()) {
-    let clonedNonSignificantToken = null;
+  clone(Class, startPosition = 0, endPosition = this.getLength()) {
+    let nonSignificantToken = null;
 
     if (startPosition !== endPosition) {
-      const line = token.getLine();
+      let content = this.getContent();
 
-      let content = token.getContent();
-      
-      content = content.substring(startPosition, endPosition);
+      content = content.substring(startPosition, endPosition);  ///
 
-      clonedNonSignificantToken = Class.fromContentAndLine(Class, content, line);
+      nonSignificantToken = Class.fromContent(content);
     }
 
-    return clonedNonSignificantToken;
+    return nonSignificantToken;
   }
-  
-  static fromContentAndLine(Class, content, line) {
-    if (line === undefined) {
-      line = content;
-      content = Class;
-      Class = NonSignificantToken;
+
+  static fromContent(Class, content) {
+    const sanitisedContent = sanitiseContent(content),
+          { type } = Class,
+          innerHTML = sanitisedContent, ///
+          nonSignificantToken = new Class(content, type, innerHTML);
+
+    return nonSignificantToken;
+  }
+
+  static fromWithinContent(Class, content) {
+    let nonSignificantToken = null;
+
+    const { regularExpression } = Class,
+          matches = content.match(regularExpression);
+
+    if (matches) {
+      const firstMatch = first(matches);
+
+      content = firstMatch; ///
+
+      nonSignificantToken = NonSignificantToken.fromContent(Class, content);
     }
 
-    const sanitisedContent = sanitiseContent(content),
-          html = sanitisedContent,  ///
-          token = new Class(content, line, html);
+    return nonSignificantToken;
+  }
 
-    return token;
+  static positionWithinContent(Class, content) {
+    const { regularExpression } = Class,
+          position = content.search(regularExpression);
+
+    return position;
   }
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 class StringLiteralTokens {
-  static pass(tokensOrContents, line) { 
+  static pass(tokensOrContents) {
 
   }
 }

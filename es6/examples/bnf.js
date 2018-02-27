@@ -5,7 +5,7 @@ const Example = require('../example'),
 
 class BNFExample {
   static run() {
-    const entries = BNFLexer.entries,
+    const { entries } = BNFLexer,
           Lexer = BNFLexer;
 
     Example.run(entries, Lexer);

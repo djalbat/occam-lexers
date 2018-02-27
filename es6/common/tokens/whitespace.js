@@ -4,7 +4,7 @@ const Tokens = require('../tokens'),
       WhitespaceToken = require('../token/significant/whitespace');
 
 class WhitespaceTokens {
-  static pass(tokensOrContents, line) { Tokens.pass(tokensOrContents, line, WhitespaceToken); }
+  static pass(tokensOrContents) { Tokens.pass(tokensOrContents, WhitespaceToken); }
 }
 
 module.exports = WhitespaceTokens;
