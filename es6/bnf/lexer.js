@@ -1,26 +1,30 @@
 'use strict';
 
-const BNFLine = require('./line'),
-      entries = require('./entries'),
+const entries = require('./entries'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
       specialSymbols = require('./specialSymbols'),
-      tokensUtilities = require('../utilities/tokens');
+      tokensUtilities = require('../utilities/tokens'),
+      CommentTokens = require('./tokens/comment'),
+      EndOfLineTokens = require('./tokens/endOfLine'),
+      WhitespaceTokens = require('../common/tokens/whitespace'),
+      StringLiteralTokens = require('../common/tokens/stringLiteral'),
+      RegularExpressionTokens = require('../common/tokens/regularExpression');
 
-const { significantTokensFromLines } = tokensUtilities;
+const { significantTokensFromTokens } = tokensUtilities;
 
 class BNFLexer extends CommonLexer {
   significantTokensFromBNF(bnf) {
     const content = bnf,  ///
-          lines = super.linesFromContent(content),
-          significantTokens = significantTokensFromLines(lines);
+          tokens = super.tokensFromContent(content),
+          significantTokens = significantTokensFromTokens(tokens);
 
     return significantTokens;
   }
 
   static fromEntries(entries) {
     const rules = Rules.fromEntries(entries),
-          bnfLexer = new BNFLexer(rules, BNFLine);
+          bnfLexer = new BNFLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
     return bnfLexer;
   }
