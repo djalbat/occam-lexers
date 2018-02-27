@@ -22,12 +22,7 @@ class BNFLexer extends CommonLexer {
     return significantTokens;
   }
 
-  static fromEntries(Class, entries) {
-    if (entries === undefined) {
-      entries = Class;
-      Class = BNFLexer;
-    }
-
+  static fromEntries(Class = BNFLexer, entries) {
     const rules = Rules.fromEntries(entries),
           bnfLexer = new Class(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
