@@ -1,22 +1,22 @@
 'use strict';
 
 const entries = require('./entries'),
-      MetaJSONLine = require('../metaJSON/line'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      CommentTokens = require('./tokens/comment'),
+      EndOfLineTokens = require('./tokens/endOfLine'),
+      WhitespaceTokens = require('./tokens/whitespace'),
+      StringLiteralTokens = require('./tokens/stringLiteral'),
+      RegularExpressionTokens = require('./tokens/regularExpression');
 
 class MetaJSONLexer extends CommonLexer {
   static fromEntries(entries) {
     const rules = CommonLexer.rulesFromEntries(entries),
-          plainLexer = new MetaJSONLexer(rules, MetaJSONLine);
+          metaJSONLexer = new MetaJSONLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
-    return plainLexer;
+    return metaJSONLexer;
   }
 
-  static fromNothing() {
-    const plainLexer = MetaJSONLexer.fromEntries(entries);
-
-    return plainLexer;
-  }
+  static fromNothing() { return metaJSONLexer.fromEntries(entries); }
 }
 
 Object.assign(MetaJSONLexer, {
