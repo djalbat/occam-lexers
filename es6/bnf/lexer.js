@@ -22,18 +22,19 @@ class BNFLexer extends CommonLexer {
     return significantTokens;
   }
 
-  static fromEntries(entries) {
+  static fromEntries(Class, entries) {
+    if (entries === undefined) {
+      entries = Class;
+      Class = BNFLexer;
+    }
+
     const rules = Rules.fromEntries(entries),
-          bnfLexer = new BNFLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
+          bnfLexer = new Class(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
     return bnfLexer;
   }
 
-  static fromNothing() {
-    const bnfLexer = BNFLexer.fromEntries(entries);
-
-    return bnfLexer;
-  }
+  static fromNothing(Class) { return BNFLexer.fromEntries(Class, entries); }
 }
 
 Object.assign(BNFLexer, {

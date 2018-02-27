@@ -17,11 +17,7 @@ class BasicLexer extends CommonLexer {
     return basicLexer;
   }
 
-  static fromNothing() {
-    const basicLexer = BasicLexer.fromEntries(entries);
-
-    return basicLexer;
-  }
+  static fromNothing() { return BasicLexer.fromEntries(entries); }
 }
 
 Object.assign(BasicLexer, {

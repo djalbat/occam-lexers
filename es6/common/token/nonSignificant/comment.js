@@ -21,13 +21,13 @@ class CommentToken extends NonSignificantToken {
     return commentToken;
   }
 
-  clone(startPosition, endPosition) { return super.clone(CommentToken, startPosition, endPosition); }
+  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
 
-  static fromContent(content) { return SignificantToken.fromContent(CommentToken, content); }
+  static fromContent(Class, content) { return NonSignificantToken.fromContent(Class, content); }
 
-  static fromWithinContent(content) { return SignificantToken.fromWithinContent(CommentToken, content); }
+  static fromWithinContent(Class, content) { return NonSignificantToken.fromWithinContent(Class, content); }
 
-  static positionWithinContent(content) { return SignificantToken.positionWithinContent(CommentToken, content); }
+  static positionWithinContent(Class, content) { return NonSignificantToken.positionWithinContent(Class, content); }
 }
 
 const type = 'comment';

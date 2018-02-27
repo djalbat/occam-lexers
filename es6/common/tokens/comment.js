@@ -8,7 +8,7 @@ class CommentTokens {
   static pass(tokensOrContents, inComment) {
     let content = tokensOrContents.pop(),
         commentToken,
-        commentTokenLength;
+        commentTokenContentLength;
 
     while (content !== '') {
       let contentLength = content.length;
@@ -21,13 +21,13 @@ class CommentTokens {
 
           commentToken = EndOfCommentToken.fromWithinContent(content);
 
-          commentTokenLength = commentToken.getLength();
+          commentTokenContentLength = commentToken.getContentLength();
         } else {
-          const middleOfCommentTokenLength = minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
+          const middleOfCommentTokenContentLength = minimumBarMinusOne(endOfCommentTokenPositionWithinContent, contentLength);
 
-          commentToken = MiddleOfCommentToken.fromContent(content, middleOfCommentTokenLength);
+          commentToken = MiddleOfCommentToken.fromContent(content, middleOfCommentTokenContentLength);
 
-          commentTokenLength = middleOfCommentTokenLength;
+          commentTokenContentLength = middleOfCommentTokenContentLength;
         }
 
         const previousCommentToken = tokensOrContents.pop();
@@ -38,7 +38,7 @@ class CommentTokens {
 
         tokensOrContents.push(commentToken);
 
-        content = content.substring(commentTokenLength);
+        content = content.substring(commentTokenContentLength);
       } else {
         const startOfCommentTokenPositionWithinContent = StartOfCommentToken.positionWithinContent(content);
 
@@ -47,11 +47,11 @@ class CommentTokens {
 
           commentToken = StartOfCommentToken.fromWithinContent(content);
 
-          commentTokenLength = commentToken.getLength();
+          commentTokenContentLength = commentToken.getContentLength();
 
           tokensOrContents.push(commentToken);
 
-          content = content.substring(commentTokenLength);
+          content = content.substring(commentTokenContentLength);
         } else {
           contentLength = minimumBarMinusOne(startOfCommentTokenPositionWithinContent, contentLength);
 

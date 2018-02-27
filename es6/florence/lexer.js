@@ -1,8 +1,12 @@
 'use strict';
 
 const entries = require('./entries'),
-      FlorenceLine = require('../florence/line'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      CommentTokens = require('../common/tokens/comment'),
+      EndOfLineTokens = require('./tokens/endOfLine'),
+      WhitespaceTokens = require('../common/tokens/whitespace'),
+      StringLiteralTokens = require('../common/tokens/stringLiteral'),
+      RegularExpressionTokens = require('./tokens/regularExpression');
 
 class FlorenceLexer extends CommonLexer {
   static fromCombinedCustomGrammarsLexicalPattern(combinedCustomGrammarsLexicalPattern) {
@@ -15,23 +19,19 @@ class FlorenceLexer extends CommonLexer {
 
     rules.addRule(customGrammarRule);
 
-    const florenceLexer = new FlorenceLexer(rules, FlorenceLine);
+    const florenceLexer = new FlorenceLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
     return florenceLexer;
   }
 
   static fromEntries(entries) {
     const rules = CommonLexer.rulesFromEntries(entries),
-          florenceLexer = new FlorenceLexer(rules, FlorenceLine);
+          florenceLexer = new FlorenceLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
 
     return florenceLexer;
   }
 
-  static fromNothing() {
-    const florenceLexer = FlorenceLexer.fromEntries(entries);
-
-    return florenceLexer;
-  }
+  static fromNothing() { return FlorenceLexer.fromEntries(entries); }
 }
 
 Object.assign(FlorenceLexer, {
