@@ -17,7 +17,7 @@ Three lexers are documented:
 
 * A BNF lexer, actually [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 * A basic lexer, for illustrative purposes.
-* The Florence lexer, namely the lexer for the lexical patterns part of Occam's vernacular, called Florence.
+* The Florence lexer, namely the lexer for the [lexical patterns part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/entries.js) of Occam's vernacular, called Florence.
 
 All lexers share common functionality. Each takes six passes to match the following five types of tokens, although with caveats:
 
