@@ -13,23 +13,28 @@ The Occam proof assistant's lexers.
 
 ## Introduction
 
-There are four lexers in all:
+Three lexers are documented:
 
 * A BNF lexer, actually [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
-* A basic lexer, for illustrative purposes, and for developing new grammars.
-* The main lexer, namely the lexer for the lexical patterns part of Occam's vernacular, called Florence.
+* A basic lexer, for illustrative purposes.
+* The Florence lexer, namely the lexer for the lexical patterns part of Occam's vernacular, called Florence.
 
-All lexers share common functionality. Each takes four passes to match five kinds of tokens, although with caveats:
+All lexers share common functionality. Each takes six passes to match the following five types of tokens, although with caveats:
 
-1. Comments
-2. Whitespace
-3. String literals
-4. Regular expressions
-5. Remaining tokens
+1. Ends of lines
+2. Comments
+3. Whitespace
+4. String literals
+5. Regular expressions
+6. Other significant tokens
 
-Comment tokens are considered to be non-significant whilst the others, note that this includes whitespace, are considered to be significant. If any content is left over that cannot be matched, an error is thrown. Only the fifth pass will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the first four passes are hard-coded. Note that the extended BNF lexer ignores comments, the basic lexer comments, string literals and regular expressions. Finally, note that Florence lexer will add end of line tokens and that these, like whitespace, are considered to be significant. It will also not match regular expressions.
+If any content is left over that cannot be matched, an error is thrown.
 
-The fifth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. For the Florence lexical patterns, for example, there is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place. In fact all of the parsers have a last `error` entry which simply has the most general regular expression to mop up any content that remains after the other regular expressions have been tried.
+Only the sixth and last pass will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the other passes are hard-coded.
+
+Comment tokens are considered to be non-significant whilst the others, note that this includes whitespace, are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others consider them non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that the extended BNF lexer ignores comments, the basic lexer comments, string literals and regular expressions. The Florence lexer also ignores regular expressions.
+
+The sixth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. There is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, for example, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place. In fact all of the parsers have a last `error` entry which simply has the most general regular expression to mop up any content that remains after the other regular expressions have been tried.
 
 The lexical entries for the BNF lexer are the following:
 
