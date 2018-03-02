@@ -15,7 +15,7 @@ function passGivenCallback(tokensOrContents, callback) {
 
   while (index < tokensOrContentsLength) {
     const tokenOrContent = tokensOrContents[index],
-        tokenOrContentContent = (typeof tokenOrContent === 'string');
+          tokenOrContentContent = (typeof tokenOrContent === 'string');
 
     if (tokenOrContentContent) {
       const content = tokenOrContent,  ///

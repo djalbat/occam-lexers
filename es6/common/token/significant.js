@@ -1,69 +1,10 @@
 'use strict';
 
-const necessary = require('necessary');
+const Token = require('../token');
 
-const contentUtilities = require('../../utilities/content');
+const significant = true;
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities,
-      { sanitiseContent } = contentUtilities;
-
-class SignificantToken {
-  constructor(content, type, innerHTML) {
-    this.content = content;
-    this.type = type;
-    this.innerHTML = innerHTML;
-  }
-  
-  getContent() {
-    return this.content;
-  }
-  
-  getType() {
-    return this.type;
-  }
-
-  getInnerHTML() {
-    return this.innerHTML;
-  }
-
-  getContentLength() {
-    const contentLength = this.content.length;
-
-    return contentLength;
-  }
-
-  isSignificantToken() {
-    const significantToken = true;
-
-    return significantToken;
-  }
-
-  isWhitespaceToken() {
-    const whitespaceToken = false;
-
-    return whitespaceToken;
-  }
-
-  isEndOfLineToken() {
-    const endOfLineToken = false;
-
-    return endOfLineToken;
-  }
-
-  isCommentToken() {
-    const commentToken = false;
-
-    return commentToken;
-  }
-
-  asHTML(filePath) {
-    const className = this.type,  ///
-          html = `<span class="${className}">${this.innerHTML}</span>`;
-
-    return html;
-  }
-
+class SignificantToken extends Token {
   clone(Class, startPosition, endPosition) {
     if (endPosition === undefined) {
       endPosition = startPosition;
@@ -71,26 +12,12 @@ class SignificantToken {
       Class = SignificantToken;
     }
 
-    let significantToken = null;
-
-    if (startPosition !== endPosition) {
-      let content = this.getContent();
-
-      content = content.substring(startPosition, endPosition);  ///
-
-      significantToken = Class.fromContent(content);
-    }
+    const significantToken = super.clone(Class, startPosition, endPosition);
 
     return significantToken;
   }
 
-  static fromContentAndType(content, type) {
-    const sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          significantToken = new SignificantToken(content, type, innerHTML);
-
-    return significantToken;
-  }
+  static fromContentAndType(content, type) { return Token.fromContentAndType(SignificantToken, content, type, significant); }
 
   static fromContent(Class, content) {
     if (content === undefined) {
@@ -98,10 +25,7 @@ class SignificantToken {
       Class = SignificantToken;
     }
 
-    const sanitisedContent = sanitiseContent(content),
-          { type } = Class,
-          innerHTML = sanitisedContent, ///
-          significantToken = new Class(content, type, innerHTML);
+    const significantToken = Token.fromContent(Class, content, significant);
 
     return significantToken;
   }
@@ -112,18 +36,7 @@ class SignificantToken {
       Class = SignificantToken;
     }
 
-    let significantToken = null;
-
-    const { regularExpression } = Class,
-          matches = content.match(regularExpression);
-
-    if (matches) {
-      const firstMatch = first(matches);
-
-      content = firstMatch; ///
-
-      significantToken = SignificantToken.fromContent(Class, content);
-    }
+    const significantToken = Token.fromWithinContent(Class, content, significant);
 
     return significantToken;
   }
@@ -134,8 +47,7 @@ class SignificantToken {
       Class = SignificantToken;
     }
 
-    const { regularExpression } = Class,
-          position = content.search(regularExpression);
+    const position = Token.positionWithinContent(Class, content) ;
 
     return position;
   }
