@@ -64,7 +64,7 @@ class SignificantToken {
     return html;
   }
 
-  clone(Class, startPosition = 0, endPosition = this.getLength()) {
+  clone(Class, startPosition = 0, endPosition = this.getContentLength()) {  ///
     let significantToken = null;
 
     if (startPosition !== endPosition) {

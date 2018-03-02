@@ -54,7 +54,7 @@ class NonSignificantToken {
     return html;
   }
 
-  clone(Class, startPosition = 0, endPosition = this.getLength()) {
+  clone(Class, startPosition = 0, endPosition = this.getContentLength()) {  ///
     let nonSignificantToken = null;
 
     if (startPosition !== endPosition) {
