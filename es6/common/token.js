@@ -51,7 +51,7 @@ class Token {
     return html;
   }
 
-  clone(Class, startPosition, endPosition) {
+  clone(Class, startPosition, endPosition, significant) {
     let token = null;
 
     if (startPosition !== endPosition) {

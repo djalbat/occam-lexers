@@ -18,7 +18,7 @@ class SignificantToken extends Token {
       Class = SignificantToken;
     }
 
-    const significantToken = super.clone(Class, startPosition, endPosition);
+    const significantToken = super.clone(Class, startPosition, endPosition, significant);
 
     return significantToken;
   }
