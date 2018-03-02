@@ -1,10 +1,12 @@
 'use strict';
 
-const Tokens = require('../tokens'),
+const tokens = require('../../common/tokens'),
       StringLiteralToken = require('../token/significant/stringLiteral');
 
-class StringLiteralTokens {
-  static pass(tokensOrContents) { Tokens.pass(tokensOrContents, StringLiteralToken); }
-}
+const { passGivenToken } = tokens;
 
-module.exports = StringLiteralTokens;
+function pass(tokensOrContents) { passGivenToken(tokensOrContents, StringLiteralToken); }
+
+module.exports = {
+  pass: pass
+};

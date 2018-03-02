@@ -1,10 +1,13 @@
 'use strict';
 
-const Tokens = require('../tokens'),
+const tokens = require('../../common/tokens'),
       RegularExpression = require('../token/significant/regularExpression');
 
-class RegularExpressions {
-  static pass(tokensOrContents) { Tokens.pass(tokensOrContents, RegularExpression); }
-}
+const { passGivenToken } = tokens;
 
-module.exports = RegularExpressions;
+function pass(tokensOrContents) { passGivenToken(tokensOrContents, RegularExpression); }
+
+module.exports = {
+  pass: pass
+};
+

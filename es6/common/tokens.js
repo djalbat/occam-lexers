@@ -5,37 +5,42 @@ const necessary = require('necessary');
 const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
 
-class Tokens {
-  static pass(tokensOrContents, Token) {
-    let index = 0,
-        tokensOrContentsLength = tokensOrContents.length;
+function passGivenToken(tokensOrContents, Token) {
+  passGivenCallback(tokensOrContents, function(content) { return tokensOrRemainingContentFromWithinContent(content, Token); });
+}
 
-    while (index < tokensOrContentsLength) {
-      const tokenOrContent = tokensOrContents[index],
-            tokenOrContentContent = (typeof tokenOrContent === 'string');
+function passGivenCallback(tokensOrContents, callback) {
+  let index = 0,
+      tokensOrContentsLength = tokensOrContents.length;
 
-      if (tokenOrContentContent) {
-        const content = tokenOrContent,  ///
-              tokensOrRemainingContent = tokensOrRemainingContentFromWithinContent(content, Token),
-              tokensOrRemainingContentLength = tokensOrRemainingContent.length,
-              start = index,  ///
-              deleteCount = 1;
+  while (index < tokensOrContentsLength) {
+    const tokenOrContent = tokensOrContents[index],
+        tokenOrContentContent = (typeof tokenOrContent === 'string');
 
-        splice(tokensOrContents, start, deleteCount, tokensOrRemainingContent);
+    if (tokenOrContentContent) {
+      const content = tokenOrContent,  ///
+            tokensOrRemainingContent = callback(content),
+            tokensOrRemainingContentLength = tokensOrRemainingContent.length,
+            start = index,  ///
+            deleteCount = 1;
 
-        tokensOrContentsLength -= 1;
+      splice(tokensOrContents, start, deleteCount, tokensOrRemainingContent);
 
-        tokensOrContentsLength += tokensOrRemainingContentLength;
+      tokensOrContentsLength -= 1;
 
-        index += tokensOrRemainingContentLength;
-      } else {
-        index += 1;
-      }
+      tokensOrContentsLength += tokensOrRemainingContentLength;
+
+      index += tokensOrRemainingContentLength;
+    } else {
+      index += 1;
     }
   }
 }
 
-module.exports = Tokens;
+module.exports = {
+  passGivenToken: passGivenToken,
+  passGivenCallback: passGivenCallback
+};
 
 function tokensOrRemainingContentFromWithinContent(content, Token) {
   let remainingContent,

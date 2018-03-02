@@ -1,12 +1,13 @@
 'use strict';
 
-const Tokens = require('../../common/tokens'),
+const tokens = require('../../common/tokens'),
       EndOfLineNonSignificantToken = require('../../common/token/nonSignificant/endOfLine');
 
-const EndOfLineToken = EndOfLineNonSignificantToken;  ///
+const { passGivenToken } = tokens,
+      EndOfLineToken = EndOfLineNonSignificantToken;  ///
 
-class EndOfLineTokens {
-  static pass(tokensOrContents) { Tokens.pass(tokensOrContents, EndOfLineToken); }
-}
+function pass(tokensOrContents) { passGivenToken(tokensOrContents, EndOfLineToken); }
 
-module.exports = EndOfLineTokens;
+module.exports = {
+  pass: pass
+};
