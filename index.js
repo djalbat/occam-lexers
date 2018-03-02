@@ -7,5 +7,7 @@ module.exports = {
   'MetaJSONLexer': require('./lib/metaJSON/lexer'),
   'FlorenceLexer': require('./lib/florence/lexer'),
   'CustomGrammarBNFLexer': require('./lib/customGrammarBNF/lexer'),
-  'CustomGrammarLexicalPatternLexer': require('./lib/customGrammarLexicalPattern/lexer')
+  'CustomGrammarLexicalPatternLexer': require('./lib/customGrammarLexicalPattern/lexer'),
+  'NonSignificantToken': require('./lib/common/token/nonSignificant'),
+  'SignificantToken': require('./lib/common/token/significant')
 };
