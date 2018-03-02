@@ -64,7 +64,13 @@ class SignificantToken {
     return html;
   }
 
-  clone(Class, startPosition = 0, endPosition = this.getContentLength()) {  ///
+  clone(Class, startPosition, endPosition) {
+    if (endPosition === undefined) {
+      endPosition = startPosition;
+      startPosition = Class;
+      Class = SignificantToken;
+    }
+
     let significantToken = null;
 
     if (startPosition !== endPosition) {
@@ -87,6 +93,11 @@ class SignificantToken {
   }
 
   static fromContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = SignificantToken;
+    }
+
     const sanitisedContent = sanitiseContent(content),
           { type } = Class,
           innerHTML = sanitisedContent, ///
@@ -96,6 +107,11 @@ class SignificantToken {
   }
 
   static fromWithinContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = SignificantToken;
+    }
+
     let significantToken = null;
 
     const { regularExpression } = Class,
@@ -113,8 +129,13 @@ class SignificantToken {
   }
 
   static positionWithinContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = SignificantToken;
+    }
+
     const { regularExpression } = Class,
-        position = content.search(regularExpression);
+          position = content.search(regularExpression);
 
     return position;
   }

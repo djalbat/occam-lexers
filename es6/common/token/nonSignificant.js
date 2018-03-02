@@ -54,7 +54,13 @@ class NonSignificantToken {
     return html;
   }
 
-  clone(Class, startPosition = 0, endPosition = this.getContentLength()) {  ///
+  clone(Class, startPosition, endPosition) {
+    if (endPosition === undefined) {
+      endPosition = startPosition;
+      startPosition = Class;
+      Class = NonSignificantToken;
+    }
+
     let nonSignificantToken = null;
 
     if (startPosition !== endPosition) {
@@ -68,7 +74,20 @@ class NonSignificantToken {
     return nonSignificantToken;
   }
 
+  static fromContentAndType(content, type) {
+    const sanitisedContent = sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
+          nonSignificantToken = new NonSignificantToken(content, type, innerHTML);
+
+    return nonSignificantToken;
+  }
+
   static fromContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = NonSignificantToken;
+    }
+
     const sanitisedContent = sanitiseContent(content),
           { type } = Class,
           innerHTML = sanitisedContent, ///
@@ -78,6 +97,11 @@ class NonSignificantToken {
   }
 
   static fromWithinContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = NonSignificantToken;
+    }
+
     let nonSignificantToken = null;
 
     const { regularExpression } = Class,
@@ -95,6 +119,11 @@ class NonSignificantToken {
   }
 
   static positionWithinContent(Class, content) {
+    if (content === undefined) {
+      content = Class;
+      Class = NonSignificantToken;
+    }
+
     const { regularExpression } = Class,
           position = content.search(regularExpression);
 
