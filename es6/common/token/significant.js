@@ -23,7 +23,17 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
-  static fromContentAndType(content, type) { return Token.fromContentAndType(SignificantToken, content, type, significant); }
+  static fromContentAndType(Class, content, type) {
+    if (type === undefined) {
+      type = content;
+      content = Class;
+      Class = SignificantToken;
+    }
+
+    const significantToken = Token.fromContentAndType(Class, content, type, significant);
+
+    return significantToken;
+  }
 
   static fromContent(Class, content) {
     if (content === undefined) {

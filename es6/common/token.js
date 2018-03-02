@@ -59,7 +59,11 @@ class Token {
 
       content = content.substring(startPosition, endPosition);  ///
 
-      token = Class.fromContent(content);
+      const type = this.getType(),
+            sanitisedContent = sanitiseContent(content),
+            innerHTML = sanitisedContent; ///
+
+      token = new Class(type, content, innerHTML, significant);
     }
 
     return token;
@@ -93,7 +97,11 @@ class Token {
 
       content = firstMatch; ///
 
-      token = Token.fromContent(Class, content, significant);
+      const { type } = Class,
+            sanitisedContent = sanitiseContent(content),
+            innerHTML = sanitisedContent; ///
+
+      token = new Class(type, content, innerHTML, significant);
     }
 
     return token;
