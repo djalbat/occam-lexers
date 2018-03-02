@@ -44,12 +44,6 @@ class Token {
     return endOfLineToken;
   }
 
-  isCommentToken() {
-    const commentToken = false;
-
-    return commentToken;
-  }
-
   asHTML(filePath) {
     const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;

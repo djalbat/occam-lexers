@@ -5,6 +5,12 @@ const Token = require('../token');
 const significant = true;
 
 class SignificantToken extends Token {
+  isWhitespaceToken() {
+    const whitespaceToken = false;
+
+    return whitespaceToken;
+  }
+
   clone(Class, startPosition, endPosition) {
     if (endPosition === undefined) {
       endPosition = startPosition;
