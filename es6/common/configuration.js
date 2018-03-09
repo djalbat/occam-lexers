@@ -1,22 +1,18 @@
 'use strict';
 
 class Configuration {
-  constructor(minimumContentLength, previousTokenInComment, nextTokenInComment) {
+  constructor(previousTokenCommentToken, nextTokenCommentToken, minimumContentLength) {
+    this.previousTokenCommentToken = previousTokenCommentToken;
+    this.nextTokenCommentToken = nextTokenCommentToken;
     this.minimumContentLength = minimumContentLength;
-    this.previousTokenInComment = previousTokenInComment;
-    this.nextTokenInComment = nextTokenInComment;
   }
 
-  isPreviousTokenInComment() {
-    return this.previousTokenInComment;
+  isPreviousTokenCommentToken() {
+    return this.previousTokenCommentToken;
   }
 
-  isNextTokenInComment() {
-    return this.nextTokenInComment;
-  }
-
-  setPreviousTokenInComment(previousTokenInComment) {
-    this.previousTokenInComment = previousTokenInComment;
+  isNextTokenCommentToken() {
+    return this.nextTokenCommentToken;
   }
 
   shouldTerminate(contentLength, tokens) {
@@ -30,7 +26,7 @@ class Configuration {
       if (contentLength >= this.minimumContentLength) {
         const tokenCommentToken = token.isCommentToken();
 
-        terminate = (tokenCommentToken === this.nextTokenInComment);
+        terminate = (tokenCommentToken === this.nextTokenCommentToken);
 
         if (terminate) {
           const start = index + 1;

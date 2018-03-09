@@ -24,8 +24,8 @@ class CommonLexer {
     return this.rules;
   }
 
-  tokensFromContent(content, minimumContentLength = Infinity, previousTokenInComment = false, nextTokenInComment = false) {
-    const configuration = new Configuration(minimumContentLength, previousTokenInComment, nextTokenInComment),
+  tokensFromContent(content, previousTokenCommentToken = false, nextTokenCommentToken = false, minimumContentLength = Infinity) {
+    const configuration = new Configuration(previousTokenCommentToken, nextTokenCommentToken, minimumContentLength),
           tokens = this.tokensFromContentAndConfiguration(content, configuration);
 
     return tokens;
@@ -33,12 +33,12 @@ class CommonLexer {
   
   tokensFromContentAndConfiguration(content, configuration) {
     const tokensOrContents = [content], ///
-          previousTokenInComment = configuration.isPreviousTokenInComment();
+          previousTokenCommentToken = configuration.isPreviousTokenCommentToken();
 
     this.EndOfLineTokens.pass(tokensOrContents);
 
     let index = 0,
-        inComment = previousTokenInComment, ///
+        inComment = previousTokenCommentToken, ///
         contentLength = 0,
         tokensOrContentsLength = tokensOrContents.length;
 
