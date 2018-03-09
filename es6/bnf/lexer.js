@@ -4,14 +4,11 @@ const entries = require('./entries'),
       Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
       specialSymbols = require('./specialSymbols'),
-      tokensUtilities = require('../utilities/tokens'),
       CommentTokens = require('./tokens/comment'),
       EndOfLineTokens = require('./tokens/endOfLine'),
       WhitespaceTokens = require('../common/tokens/whitespace'),
       StringLiteralTokens = require('../common/tokens/stringLiteral'),
       RegularExpressionTokens = require('../common/tokens/regularExpression');
-
-const { significantTokensFromTokens } = tokensUtilities;
 
 class BNFLexer extends CommonLexer {
   significantTokensFromBNF(bnf) {
@@ -38,3 +35,19 @@ Object.assign(BNFLexer, {
 });
 
 module.exports = BNFLexer;
+
+function significantTokensFromTokens(tokens) {
+  const significantTokens = tokens.reduce(function(significantTokens, token) {
+    const tokenSignificant = token.isSignificant();
+
+    if (tokenSignificant) {
+      const significantToken = token; ///
+
+      significantTokens.push(significantToken);
+    }
+
+    return significantTokens;
+  }, []);
+
+  return significantTokens;
+}

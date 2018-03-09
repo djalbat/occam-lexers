@@ -2,11 +2,8 @@
 
 const necessary = require('necessary');
 
-const contentUtilities = require('../utilities/content');
-
 const { arrayUtilities } = necessary,
-      { first } = arrayUtilities,
-      { sanitiseContent } = contentUtilities;
+      { first } = arrayUtilities;
 
 class Token {
   constructor(type, content, innerHTML, significant) {
@@ -128,3 +125,9 @@ class Token {
 }
 
 module.exports = Token;
+
+function sanitiseContent(content) {
+  const sanitisedContent = content.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
+
+  return sanitisedContent;
+}
