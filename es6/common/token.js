@@ -44,6 +44,18 @@ class Token {
     return endOfLineToken;
   }
 
+  isWhitespaceToken() {
+    const whitespaceToken = false;
+
+    return whitespaceToken;
+  }
+
+  isCommentToken() {
+    const commentToken = false;
+
+    return commentToken;
+  }
+
   asHTML(filePath) {
     const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;

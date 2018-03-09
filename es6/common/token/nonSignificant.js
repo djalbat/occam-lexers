@@ -5,12 +5,6 @@ const Token = require('../token');
 const significant = false;
 
 class NonSignificantToken extends Token {
-  isCommentToken() {
-    const commentToken = false;
-
-    return commentToken;
-  }
-
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition, significant); }
 
   static fromContentAndType(Class, content, type) { return Token.fromContentAndType(Class, content, type, significant); }
