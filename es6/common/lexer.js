@@ -16,21 +16,19 @@ class CommonLexer {
     return this.rules;
   }
 
-  tokensFromContent(content, inComment = false) {
+  tokensFromContent(content) {
     const tokensOrContents = [content]; ///
 
     this.processEndOfLineTokens(tokensOrContents);
 
-    this.processAllBarEndOfLineTokens(tokensOrContents, inComment);
+    this.processAllBarEndOfLineTokens(tokensOrContents);
 
     const tokens = tokensOrContents;  ///
 
     return tokens;
   }
 
-  processEndOfLineTokens(tokensOrContents) {}
-
-  processAllBarEndOfLineTokens(tokensOrContents, inComment) {
+  processAllBarEndOfLineTokens(tokensOrContents, inComment = false) {
     inComment = this.processCommentTokens(tokensOrContents, inComment);
 
     this.processRegularExpressionTokens(tokensOrContents);
