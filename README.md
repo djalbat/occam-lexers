@@ -30,11 +30,11 @@ All lexers share common functionality. Each takes six passes to match the follow
 
 If any content is left over that cannot be matched, an error is thrown.
 
-Only the sixth and last pass will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the other passes are hard-coded.
+Only the sixth and last process will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the other passes are hard-coded.
 
 Comment tokens are considered to be non-significant whilst the others, note that this includes whitespace, are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others consider them non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that the extended BNF lexer ignores comments, the basic lexer comments, string literals and regular expressions. The Florence lexer also ignores regular expressions.
 
-The sixth pass uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. There is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, for example, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+The sixth process uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. There is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, for example, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
 
 The lexical entries for the BNF lexer are the following:
 

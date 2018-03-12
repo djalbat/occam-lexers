@@ -1,37 +1,36 @@
 'use strict';
 
 const entries = require('./entries'),
+      Rule = require('../common/rule'),
+      Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('../common/tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('../common/tokens/whitespace'),
-      StringLiteralTokens = require('../common/tokens/stringLiteral'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      SignificantEndOfLineTokens = require('../common/tokens/endOfLine/significant');
 
 class FlorenceLexer extends CommonLexer {
+  processEndOfLineTokens(tokensOrContents) {
+    SignificantEndOfLineTokens.process(tokensOrContents);
+  }
+
+  processRegularExpressionTokens(tokensOrContents) {}
+
+  static fromNothing() { return CommonLexer.fromNothing(FlorenceLexer); }
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }
+
   static fromCombinedCustomGrammarsLexicalPattern(combinedCustomGrammarsLexicalPattern) {
     const custom = combinedCustomGrammarsLexicalPattern, ///
           customGrammarEntry = {
             custom: custom
           },
-          customGrammarRule =  CommonLexer.ruleFromEntry(customGrammarEntry),
-          rules = CommonLexer.rulesFromEntries(entries);
+          customGrammarRule =  Rule.fromEntry(customGrammarEntry),
+          rules = Rules.fromEntries(entries);
 
     rules.addRule(customGrammarRule);
 
-    const florenceLexer = new FlorenceLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
+    const florenceLexer = new FlorenceLexer(rules);
 
     return florenceLexer;
   }
-
-  static fromEntries(entries) {
-    const rules = CommonLexer.rulesFromEntries(entries),
-          florenceLexer = new FlorenceLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
-
-    return florenceLexer;
-  }
-
-  static fromNothing() { return FlorenceLexer.fromEntries(entries); }
 }
 
 Object.assign(FlorenceLexer, {

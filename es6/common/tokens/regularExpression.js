@@ -3,11 +3,11 @@
 const tokens = require('../../common/tokens'),
       RegularExpression = require('../token/significant/regularExpression');
 
-const { passGivenToken } = tokens;
+const { processByToken } = tokens;
 
-function pass(tokensOrContents) { passGivenToken(tokensOrContents, RegularExpression); }
+function process(tokensOrContents) { processByToken(tokensOrContents, RegularExpression); }
 
 module.exports = {
-  pass: pass
+  process: process
 };
 

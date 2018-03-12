@@ -2,14 +2,14 @@
 
 const tokens = require('../tokens');
 
-const { passGivenCallback } = tokens;
+const { processByCallback } = tokens;
 
-function pass(tokensOrContents, rules) {
-  passGivenCallback(tokensOrContents, function(content) { return significantTokensFromWithinContent(content, rules); });
+function process(tokensOrContents, rules) {
+  processByCallback(tokensOrContents, function(content) { return significantTokensFromWithinContent(content, rules); });
 }
 
 module.exports = {
-  pass: pass
+  process: process
 };
 
 function significantTokensFromWithinContent(content, rules, depth = 0) {

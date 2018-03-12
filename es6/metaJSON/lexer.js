@@ -2,21 +2,18 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('./tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('./tokens/whitespace'),
-      StringLiteralTokens = require('./tokens/stringLiteral'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class MetaJSONLexer extends CommonLexer {
-  static fromEntries(entries) {
-    const rules = CommonLexer.rulesFromEntries(entries),
-          metaJSONLexer = new MetaJSONLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
-
-    return metaJSONLexer;
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
-  static fromNothing() { return metaJSONLexer.fromEntries(entries); }
+  processCommentTokens(tokensOrContents, inComment) {}
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
+
+  static fromNothing() { return CommonLexer.fromNothing(MetaJSONLexer); }
 }
 
 Object.assign(MetaJSONLexer, {

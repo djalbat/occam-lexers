@@ -1,23 +1,23 @@
 'use strict';
 
 const entries = require('./entries'),
-      Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('./tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('../common/tokens/whitespace'),
-      StringLiteralTokens = require('./tokens/stringLiteral'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class BasicLexer extends CommonLexer {
-  static fromEntries(entries) {
-    const rules = Rules.fromEntries(entries),
-          basicLexer = new BasicLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
+  processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
-    return basicLexer;
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
-  static fromNothing() { return BasicLexer.fromEntries(entries); }
+  processRegularExpressionTokens(tokensOrContents) {}
+
+  processStringLiteralTokens(tokensOrContents) {}
+
+  static fromNothing() { return CommonLexer.fromNothing(BasicLexer); }
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(BasicLexer, entries); }
 }
 
 Object.assign(BasicLexer, {

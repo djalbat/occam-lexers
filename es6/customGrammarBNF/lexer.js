@@ -2,21 +2,22 @@
 
 const entries = require('../bnf/entries'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('../bnf/tokens/comment'),
-      EndOfLineTokens = require('../bnf/tokens/endOfLine'),
-      WhitespaceTokens = require('../common/tokens/whitespace'),
-      StringLiteralTokens = require('../common/tokens/stringLiteral'),
-      RegularExpressionTokens = require('../common/tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class CustomGrammarBNFLexer extends CommonLexer {
-  static fromEntries(entries) {
-    const rules = Rules.fromEntries(entries),
-          customGrammarBNFLexer = new CustomGrammarBNFLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
+  processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
-    return customGrammarBNFLexer;
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
-  static fromNothing() { return CustomGrammarBNFLexer.fromEntries(entries); }
+  static fromNothing() { return CommonLexer.fromNothing(CustomGrammarBNFLexer); }
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(CustomGrammarBNFLexer, entries); }
 }
+
+Object.assign(CustomGrammarBNFLexer, {
+  entries: entries
+});
 
 module.exports = CustomGrammarBNFLexer;

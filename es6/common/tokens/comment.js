@@ -4,8 +4,7 @@ const EndOfCommentToken = require('../token/nonSignificant/comment/endOf'),
       StartOfCommentToken = require('../token/nonSignificant/comment/startOf'),
       MiddleOfCommentToken = require('../token/nonSignificant/comment/middleOf');
 
-class CommentTokens {
-  static pass(tokensOrContents, inComment) {
+function process(tokensOrContents, inComment) {
     let content = tokensOrContents.pop(),
         commentToken,
         commentTokenContentLength;
@@ -68,9 +67,10 @@ class CommentTokens {
 
     return inComment;
   }
-}
 
-module.exports = CommentTokens;
+module.exports = {
+  process: process
+};
 
 function minimumBarMinusOne() {
   const values = Array.prototype.slice.call(arguments),

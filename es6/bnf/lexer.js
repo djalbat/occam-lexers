@@ -1,16 +1,17 @@
 'use strict';
 
 const entries = require('./entries'),
-      Rules = require('../common/rules'),
       CommonLexer = require('../common/lexer'),
       specialSymbols = require('./specialSymbols'),
-      CommentTokens = require('./tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('../common/tokens/whitespace'),
-      StringLiteralTokens = require('../common/tokens/stringLiteral'),
-      RegularExpressionTokens = require('../common/tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class BNFLexer extends CommonLexer {
+  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
+  }
+
   significantTokensFromBNF(bnf) {
     const content = bnf,  ///
           tokens = super.tokensFromContent(content),
@@ -19,14 +20,9 @@ class BNFLexer extends CommonLexer {
     return significantTokens;
   }
 
-  static fromEntries(entries) {
-    const rules = Rules.fromEntries(entries),
-          bnfLexer = new BNFLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
+  static fromNothing() { return CommonLexer.fromNothing(BNFLexer); }
 
-    return bnfLexer;
-  }
-
-  static fromNothing() { return BNFLexer.fromEntries(entries); }
+  static fromEntries(entries) { return CommonLexer.fromEntries(BNFLexer, entries); }
 }
 
 Object.assign(BNFLexer, {

@@ -2,21 +2,26 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('./tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('./tokens/whitespace'),
-      StringLiteralTokens = require('./tokens/stringLiteral'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
-  static fromEntries(entries) {
-    const rules = Rules.fromEntries(entries),
-          customGrammarLexicalPatternLexer = new CustomGrammarLexicalPatternLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
-
-    return customGrammarLexicalPatternLexer;
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
-  static fromNothing() { return CustomGrammarLexicalPatternLexer.fromEntries(entries); }
+  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+
+  processRegularExpressionTokens(tokensOrContents) {}
+
+  processStringLiteralTokens(tokensOrContents) {}
+
+  static fromNothing() { return CommonLexer.fromNothing(CustomGrammarLexicalPatternLexer); }
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(CustomGrammarLexicalPatternLexer, entries); }
 }
+
+Object.assign(CustomGrammarLexicalPatternLexer, {
+  entries: entries
+});
 
 module.exports = CustomGrammarLexicalPatternLexer;

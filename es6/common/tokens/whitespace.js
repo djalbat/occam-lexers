@@ -3,10 +3,10 @@
 const tokens = require('../../common/tokens'),
       WhitespaceToken = require('../token/significant/whitespace');
 
-const { passGivenToken } = tokens;
+const { processByToken } = tokens;
 
-function pass(tokensOrContents) { passGivenToken(tokensOrContents, WhitespaceToken); }
+function process(tokensOrContents) { processByToken(tokensOrContents, WhitespaceToken); }
 
 module.exports = {
-  pass: pass
+  process: process
 };

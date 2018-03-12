@@ -36,7 +36,7 @@ class Example {
   }
 
   static updateTokens(Lexer) {
-    try {
+    // try {
       const entriesTextareaValue = entriesTextarea.getValue(),
             contentTextareaValue = contentTextarea.getValue(),
             entries = JSON.parse(entriesTextareaValue),
@@ -72,11 +72,11 @@ class Example {
       tokensTextarea.html(tokensTextareaHTML);
 
       contentTextarea.removeClass('error');
-    } catch (error) {
-      contentTextarea.addClass('error');
-
-      Example.clearTokens();
-    }
+    // } catch (error) {
+    //   contentTextarea.addClass('error');
+    //
+    //   Example.clearTokens();
+    // }
   }
 
   static clearTokens() {

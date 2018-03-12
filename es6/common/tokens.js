@@ -5,11 +5,11 @@ const necessary = require('necessary');
 const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
 
-function passGivenToken(tokensOrContents, Token) {
-  passGivenCallback(tokensOrContents, function(content) { return tokensOrRemainingContentFromWithinContent(content, Token); });
+function processByToken(tokensOrContents, Token) {
+  processByCallback(tokensOrContents, function(content) { return tokensOrRemainingContentFromWithinContent(content, Token); });
 }
 
-function passGivenCallback(tokensOrContents, callback) {
+function processByCallback(tokensOrContents, callback) {
   let index = 0,
       tokensOrContentsLength = tokensOrContents.length;
 
@@ -38,8 +38,8 @@ function passGivenCallback(tokensOrContents, callback) {
 }
 
 module.exports = {
-  passGivenToken: passGivenToken,
-  passGivenCallback: passGivenCallback
+  processByToken: processByToken,
+  processByCallback: processByCallback
 };
 
 function tokensOrRemainingContentFromWithinContent(content, Token) {

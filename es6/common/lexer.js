@@ -1,133 +1,85 @@
 'use strict';
 
-const necessary = require('necessary');
-
-const Rule = require('./rule'),
-      Rules = require('./rules'),
-      Configuration = require('./configuration'),
-      SignificantTokens = require('./tokens/significant');
-
-const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities;
+const Rules = require('./rules'),
+      CommentTokens = require('./tokens/comment'),
+      WhitespaceTokens = require('./tokens/whitespace'),
+      SignificantTokens = require('./tokens/significant'),
+      StringLiteralTokens = require('./tokens/stringLiteral'),
+      RegularExpressionTokens = require('./tokens/regularExpression');
 
 class CommonLexer {
-  constructor(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens) {
+  constructor(rules) {
     this.rules = rules;
-    this.EndOfLineTokens = EndOfLineTokens;
-    this.CommentTokens = CommentTokens;
-    this.WhitespaceTokens = WhitespaceTokens;
-    this.StringLiteralTokens = StringLiteralTokens;
-    this.RegularExpressionTokens = RegularExpressionTokens;
   }
   
   getRules() {
     return this.rules;
   }
 
-  tokensFromContent(content, previousTokenCommentToken = false, nextTokenCommentToken = false, minimumContentLength = Infinity) {
-    const configuration = new Configuration(previousTokenCommentToken, nextTokenCommentToken, minimumContentLength),
-          tokens = this.tokensFromContentAndConfiguration(content, configuration);
+  tokensFromContent(content, inComment = false) {
+    const tokensOrContents = [content]; ///
 
-    return tokens;
-  }
-  
-  tokensFromContentAndConfiguration(content, configuration) {
-    const tokensOrContents = [content], ///
-          previousTokenCommentToken = configuration.isPreviousTokenCommentToken();
+    this.processEndOfLineTokens(tokensOrContents);
 
-    this.EndOfLineTokens.pass(tokensOrContents);
-
-    let index = 0,
-        inComment = previousTokenCommentToken, ///
-        contentLength = 0,
-        tokensOrContentsLength = tokensOrContents.length;
-
-    while (index < tokensOrContentsLength) {
-      const tokenOrContent = tokensOrContents[index],
-            tokenOrContentContent = (typeof tokenOrContent === 'string');
-
-      if (tokenOrContentContent) {
-        const content = tokenOrContent, ///
-              nonEndOfLineTokensOrContent = [content];
-
-        inComment = this.nonEndOfLineTokensFromContent(nonEndOfLineTokensOrContent, inComment);
-
-        const nonEndOfLineTokens = nonEndOfLineTokensOrContent, ///
-              terminate = configuration.shouldTerminate(contentLength, nonEndOfLineTokens),
-              start = index,  ///
-              deleteCount = 1,
-              nonEndOfLineTokensLength = nonEndOfLineTokens.length;
-
-        splice(tokensOrContents, start, deleteCount, nonEndOfLineTokens);
-
-        tokensOrContentsLength -= 1;
-
-        tokensOrContentsLength += nonEndOfLineTokensLength;
-
-        index += nonEndOfLineTokensLength;
-
-        if (terminate) {
-          const start = index;  ///
-
-          splice(tokensOrContents, start);
-
-          break;
-        } else {
-          const nonEndOfLineTokensContentsLength = nonEndOfLineTokens.reduce(function(nonEndOfLineTokensContentsLength, nonEndOfLineToken) {
-            const nonEndOfLineTokensContentLength = nonEndOfLineToken.getContentLength();
-
-            nonEndOfLineTokensContentsLength += nonEndOfLineTokensContentLength;
-
-            return nonEndOfLineTokensContentsLength;
-          }, 0);
-
-          contentLength += nonEndOfLineTokensContentsLength;
-        }
-      } else {
-        const endOfLineToken = tokenOrContent,  ///
-              endOfLineTokens = [endOfLineToken],
-              terminate = configuration.shouldTerminate(contentLength, endOfLineTokens);
-
-        index += 1;
-
-        if (terminate) {
-          const start = index;  ///
-
-          splice(tokensOrContents, start);
-
-          break;
-        } else {
-          const endOfLineTokenContentLength = endOfLineToken.getContentLength();
-
-          contentLength += endOfLineTokenContentLength;
-        }
-      }
-    }
+    this.processAllBarEndOfLineTokens(tokensOrContents, inComment);
 
     const tokens = tokensOrContents;  ///
 
     return tokens;
   }
 
-  nonEndOfLineTokensFromContent(nonEndOfLineTokensOrContent, inComment) {
-    const tokensOrContents = nonEndOfLineTokensOrContent; ///
+  processEndOfLineTokens(tokensOrContents) {}
 
-    inComment = this.CommentTokens.pass(tokensOrContents, inComment);
+  processAllBarEndOfLineTokens(tokensOrContents, inComment) {
+    inComment = this.processCommentTokens(tokensOrContents, inComment);
 
-    this.RegularExpressionTokens.pass(tokensOrContents);
+    this.processRegularExpressionTokens(tokensOrContents);
 
-    this.StringLiteralTokens.pass(tokensOrContents);
+    this.processStringLiteralTokens(tokensOrContents);
 
-    this.WhitespaceTokens.pass(tokensOrContents);
+    this.processWhitespaceTokens(tokensOrContents);
 
-    SignificantTokens.pass(tokensOrContents, this.rules);
+    this.processSignificantTokens(tokensOrContents);
 
     return inComment;
   }
-  
-  static ruleFromEntry(entry) { return Rule.fromEntry(entry); }
-  
-  static rulesFromEntries(entries) { return Rules.fromEntries(entries); }
+
+  processCommentTokens(tokensOrContents, inComment) {
+    inComment = CommentTokens.process(tokensOrContents, inComment);
+
+    return inComment;
+  }
+
+  processRegularExpressionTokens(tokensOrContents) {
+    RegularExpressionTokens.process(tokensOrContents);
+  }
+
+  processStringLiteralTokens(tokensOrContents) {
+    StringLiteralTokens.process(tokensOrContents);
+  }
+
+  processWhitespaceTokens(tokensOrContents) {
+    WhitespaceTokens.process(tokensOrContents);
+  }
+
+  processSignificantTokens(tokensOrContents) {
+    SignificantTokens.process(tokensOrContents, this.rules)
+  }
+
+  static fromNothing(Class) {
+    const { entries } = Class,
+          rules = Rules.fromEntries(entries),
+          lexer = new Class(rules);
+
+    return lexer;
+  }
+
+  static fromEntries(Class, entries) {
+    const rules = Rules.fromEntries(entries),
+          lexer = new Class(rules);
+
+    return lexer;
+  }
 }
 
 module.exports = CommonLexer;

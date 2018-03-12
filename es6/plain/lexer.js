@@ -2,21 +2,26 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      CommentTokens = require('./tokens/comment'),
-      EndOfLineTokens = require('./tokens/endOfLine'),
-      WhitespaceTokens = require('./tokens/whitespace'),
-      StringLiteralTokens = require('./tokens/stringLiteral'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class PlainLexer extends CommonLexer {
-  static fromEntries(entries) {
-    const rules = CommonLexer.rulesFromEntries(entries),
-          plainLexer = new PlainLexer(rules, EndOfLineTokens, CommentTokens, WhitespaceTokens, StringLiteralTokens, RegularExpressionTokens);
-
-    return plainLexer;
+  processEndOfLineTokens(tokensOrContents) {
+    NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
-  static fromNothing() { return PlainLexer.fromEntries(entries); }
+  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+
+  processRegularExpressionTokens(tokensOrContents) {}
+
+  processStringLiteralTokens(tokensOrContents) {}
+
+  static fromEntries(entries) { return CommonLexer.fromEntries(PlainLexer, entries); }
+
+  static fromNothing() { return CommonLexer.fromNothing(PlainLexer); }
 }
+
+Object.assign(PlainLexer, {
+  entries: entries
+});
 
 module.exports = PlainLexer;

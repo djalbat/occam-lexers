@@ -3,10 +3,10 @@
 const tokens = require('../../common/tokens'),
       StringLiteralToken = require('../token/significant/stringLiteral');
 
-const { passGivenToken } = tokens;
+const { processByToken } = tokens;
 
-function pass(tokensOrContents) { passGivenToken(tokensOrContents, StringLiteralToken); }
+function process(tokensOrContents) { processByToken(tokensOrContents, StringLiteralToken); }
 
 module.exports = {
-  pass: pass
+  process: process
 };
