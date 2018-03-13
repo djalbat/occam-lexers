@@ -1,6 +1,9 @@
 'use strict';
 
-const SignificantToken = require('../significant');
+const types = require('../../types'),
+      SignificantToken = require('../significant');
+
+const { regularExpressionType } = types;
 
 class RegularExpressionToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(RegularExpressionToken, startPosition, endPosition); }
@@ -12,7 +15,7 @@ class RegularExpressionToken extends SignificantToken {
   static positionWithinContent(content) { return SignificantToken.positionWithinContent(RegularExpressionToken, content); }
 }
 
-const type = 'regularExpression',
+const type = regularExpressionType, ///
       regularExpression = /\/(?:\\.|[^\/])*\//;
 
 Object.assign(RegularExpressionToken, {

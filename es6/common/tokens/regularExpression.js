@@ -1,6 +1,6 @@
 'use strict';
 
-const tokens = require('../../common/tokens'),
+const tokens = require('../tokens'),
       RegularExpression = require('../token/significant/regularExpression');
 
 const { processByToken } = tokens;

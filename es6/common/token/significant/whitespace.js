@@ -1,14 +1,11 @@
 'use strict';
 
-const SignificantToken = require('../significant');
+const types = require('../../types'),
+      SignificantToken = require('../significant');
+
+const { whitespaceType } = types;
 
 class WhitespaceToken extends SignificantToken {
-  isWhitespaceToken() {
-    const whitespaceToken = true;
-
-    return whitespaceToken;
-  }
-
   asHTML(filePath) {
     const html = this.innerHTML;  ///
 
@@ -24,7 +21,7 @@ class WhitespaceToken extends SignificantToken {
   static positionWithinContent(content) { return SignificantToken.positionWithinContent(WhitespaceToken, content); }
 }
 
-const type = 'whitespace',
+const type = whitespaceType,  ///
       regularExpression = /[\t ]+/;
 
 Object.assign(WhitespaceToken, {

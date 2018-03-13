@@ -6,7 +6,24 @@ const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
 
 function processByToken(tokensOrContents, Token) {
-  processByCallback(tokensOrContents, function(content) { return tokensOrRemainingContentFromWithinContent(content, Token); });
+  processByCallback(tokensOrContents, function(tokenOrContent) {
+    let tokensOrRemainingContents;
+
+    const tokenOrContentContent = (typeof tokenOrContent === 'string');
+
+    if (tokenOrContentContent) {
+      const content = tokenOrContent, ///
+            tokenOrRemainingContent = tokenOrRemainingContentFromContentAndToken(content, Token);
+
+      tokensOrRemainingContents = tokenOrRemainingContent;  ///
+    } else {
+      const token = tokenOrContent;  ///
+
+      tokensOrRemainingContents = [token];
+    }
+
+    return tokensOrRemainingContents;
+  });
 }
 
 function processByCallback(tokensOrContents, callback) {
@@ -15,25 +32,18 @@ function processByCallback(tokensOrContents, callback) {
 
   while (index < tokensOrContentsLength) {
     const tokenOrContent = tokensOrContents[index],
-          tokenOrContentContent = (typeof tokenOrContent === 'string');
+          tokensOrRemainingContents = callback(tokenOrContent),
+          tokensOrRemainingContentsLength = tokensOrRemainingContents.length,
+          start = index,  ///
+          deleteCount = 1;
 
-    if (tokenOrContentContent) {
-      const content = tokenOrContent,  ///
-            tokensOrRemainingContent = callback(content),
-            tokensOrRemainingContentLength = tokensOrRemainingContent.length,
-            start = index,  ///
-            deleteCount = 1;
+    splice(tokensOrContents, start, deleteCount, tokensOrRemainingContents);
 
-      splice(tokensOrContents, start, deleteCount, tokensOrRemainingContent);
+    tokensOrContentsLength -= 1;
 
-      tokensOrContentsLength -= 1;
+    tokensOrContentsLength += tokensOrRemainingContentsLength;
 
-      tokensOrContentsLength += tokensOrRemainingContentLength;
-
-      index += tokensOrRemainingContentLength;
-    } else {
-      index += 1;
-    }
+    index += tokensOrRemainingContentsLength;
   }
 }
 
@@ -42,23 +52,23 @@ module.exports = {
   processByCallback: processByCallback
 };
 
-function tokensOrRemainingContentFromWithinContent(content, Token) {
-  let remainingContent,
-      tokensOrRemainingContent = [],       
+function tokenOrRemainingContentFromContentAndToken(content, Token) {
+  let tokenOrRemainingContent = [],
+      remainingContent,
       tokenPositionWithinContent = Token.positionWithinContent(content);
   
   while (tokenPositionWithinContent !== -1) {
     if (tokenPositionWithinContent > 0) {
       remainingContent = content.substring(0, tokenPositionWithinContent);
 
-      tokensOrRemainingContent.push(remainingContent);
+      tokenOrRemainingContent.push(remainingContent);
     }
 
     const token = Token.fromWithinContent(content),
           tokenContentLength = token.getContentLength(),
           tokenOffset = tokenPositionWithinContent + tokenContentLength;
     
-    tokensOrRemainingContent.push(token);
+    tokenOrRemainingContent.push(token);
     
     content = content.substring(tokenOffset);
 
@@ -68,8 +78,8 @@ function tokensOrRemainingContentFromWithinContent(content, Token) {
   if (content !== '') {
     remainingContent = content;
 
-    tokensOrRemainingContent.push(remainingContent);
+    tokenOrRemainingContent.push(remainingContent);
   }
 
-  return tokensOrRemainingContent;
+  return tokenOrRemainingContent;
 }

@@ -1,14 +1,11 @@
 'use strict';
 
-const NonSignificantToken = require('../nonSignificant');
+const types = require('../../types'),
+      NonSignificantToken = require('../nonSignificant');
+
+const { endOfLineType } = types;
 
 class EndOfLineNonSignificantToken extends NonSignificantToken {
-  isEndOfLineToken() {
-    const endOfLineToken = true;
-
-    return endOfLineToken;
-  }
-
   asHTML(filePath) {
     const html = '\n';  ///
 
@@ -24,7 +21,7 @@ class EndOfLineNonSignificantToken extends NonSignificantToken {
   static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(EndOfLineNonSignificantToken, content); }
 }
 
-const type = 'endOfLine',
+const type = endOfLineType,
       regularExpression = /\r\n|\r|\n/;
 
 Object.assign(EndOfLineNonSignificantToken, {

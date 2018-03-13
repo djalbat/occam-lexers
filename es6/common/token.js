@@ -2,8 +2,11 @@
 
 const necessary = require('necessary');
 
+const types = require('./types');
+
 const { arrayUtilities } = necessary,
-      { first } = arrayUtilities;
+      { first } = arrayUtilities,
+      { endOfLineType, whitespaceType, commentType, multiLineCommentType, singleLineCommentType } = types;
 
 class Token {
   constructor(type, content, innerHTML, significant) {
@@ -36,21 +39,33 @@ class Token {
   }
 
   isEndOfLineToken() {
-    const endOfLineToken = false;
+    const endOfLineToken = (this.type === endOfLineType); ///
 
     return endOfLineToken;
   }
 
   isWhitespaceToken() {
-    const whitespaceToken = false;
+    const whitespaceToken = (this.type === whitespaceType); ///
 
     return whitespaceToken;
   }
 
   isCommentToken() {
-    const commentToken = false;
+    const commentToken = this.type.includes(commentType); ///
 
     return commentToken;
+  }
+
+  isMultiLineCommentToken() {
+    const multiLineCommentToken = this.type.includes(multiLineCommentType); ///
+
+    return multiLineCommentToken;
+  }
+
+  isSingleLineCommentToken() {
+    const singleLineCommentToken = this.type.includes(singleLineCommentType); ///
+
+    return singleLineCommentToken;
   }
 
   asHTML(filePath) {

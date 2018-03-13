@@ -28,8 +28,8 @@ class CommonLexer {
     return tokens;
   }
 
-  processAllBarEndOfLineTokens(tokensOrContents, inComment = false) {
-    inComment = this.processCommentTokens(tokensOrContents, inComment);
+  processAllBarEndOfLineTokens(tokensOrContents, commentType) {
+    commentType = this.processCommentTokens(tokensOrContents, commentType);
 
     this.processRegularExpressionTokens(tokensOrContents);
 
@@ -39,13 +39,13 @@ class CommonLexer {
 
     this.processSignificantTokens(tokensOrContents);
 
-    return inComment;
+    return commentType;
   }
 
-  processCommentTokens(tokensOrContents, inComment) {
-    inComment = CommentTokens.process(tokensOrContents, inComment);
+  processCommentTokens(tokensOrContents, commentType = null) {
+    commentType = CommentTokens.process(tokensOrContents, commentType);
 
-    return inComment;
+    return commentType;
   }
 
   processRegularExpressionTokens(tokensOrContents) {

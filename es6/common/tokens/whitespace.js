@@ -1,11 +1,11 @@
 'use strict';
 
-const tokens = require('../../common/tokens'),
+const tokens = require('../tokens'),
       WhitespaceToken = require('../token/significant/whitespace');
 
 const { processByToken } = tokens;
 
-function process(tokensOrContents) { processByToken(tokensOrContents, WhitespaceToken); }
+function process(tokensAndContents) { processByToken(tokensAndContents, WhitespaceToken); }
 
 module.exports = {
   process: process

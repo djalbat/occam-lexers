@@ -5,14 +5,32 @@ const tokens = require('../tokens');
 const { processByCallback } = tokens;
 
 function process(tokensOrContents, rules) {
-  processByCallback(tokensOrContents, function(content) { return significantTokensFromWithinContent(content, rules); });
+  processByCallback(tokensOrContents, function(tokenOrContent) {
+    let tokensOrRemainingContents;
+
+    const tokenOrContentContent = (typeof tokenOrContent === 'string');
+
+    if (tokenOrContentContent) {
+      const content = tokenOrContent, ///
+            depth = 0,
+            significantTokens = significantTokensFromContent(content, rules, depth);
+
+      tokensOrRemainingContents = significantTokens; ///
+    } else {
+      const token = tokenOrContent;  ///
+
+      tokensOrRemainingContents = [token];
+    }
+
+    return tokensOrRemainingContents;
+  });
 }
 
 module.exports = {
   process: process
 };
 
-function significantTokensFromWithinContent(content, rules, depth = 0) {
+function significantTokensFromContent(content, rules, depth) {
   let significantTokens = [];
 
   if (content !== '') {
@@ -23,7 +41,7 @@ function significantTokensFromWithinContent(content, rules, depth = 0) {
             significantTokenPositionWithinContent = rule.significantTokenPositionWithinContent(content);
 
       if (significantTokenPositionWithinContent === -1) {
-        significantTokens = significantTokensFromWithinContent(content, rules, nextDepth);
+        significantTokens = significantTokensFromContent(content, rules, nextDepth);
       } else {
         const significantToken = rule.significantTokenFromWithinContent(content),
               significantTokenContentLength = significantToken.getContentLength(),
@@ -31,8 +49,8 @@ function significantTokensFromWithinContent(content, rules, depth = 0) {
               right = significantTokenPositionWithinContent + significantTokenContentLength,  ///
               leftContent = content.substring(0, left),
               rightContent = content.substring(right),
-              leftSignificantTokens = significantTokensFromWithinContent(leftContent, rules, nextDepth),
-              rightSignificantTokens = significantTokensFromWithinContent(rightContent, rules, depth);
+              leftSignificantTokens = significantTokensFromContent(leftContent, rules, nextDepth),
+              rightSignificantTokens = significantTokensFromContent(rightContent, rules, depth);
 
         significantTokens = [].concat(leftSignificantTokens).concat(significantToken).concat(rightSignificantTokens);
       }

@@ -1,14 +1,11 @@
 'use strict';
 
-const SignificantToken = require('../significant');
+const types = require('../../types'),
+      SignificantToken = require('../significant');
+
+const { endOfLineType } = types;
 
 class EndOfLineSignificantToken extends SignificantToken {
-  isEndOfLineToken() {
-    const endOfLineToken = true;
-
-    return endOfLineToken;
-  }
-
   asHTML(filePath) {
     const html = '\n';  ///
     
@@ -24,7 +21,7 @@ class EndOfLineSignificantToken extends SignificantToken {
   static positionWithinContent(content) { return SignificantToken.positionWithinContent(EndOfLineSignificantToken, content); }
 }
 
-const type = 'endOfLine',
+const type = endOfLineType, ///
       regularExpression = /\r\n|\r|\n/;
 
 Object.assign(EndOfLineSignificantToken, {

@@ -16,9 +16,10 @@ const verticalSplitterSelector = '#verticalSplitter',
       contentTextarea = new Textarea(contentTextareaSelector),
       tokensTextarea = new Textarea(tokensTextareaSelector),
       beforeSizeableElement = false,
-      afterSizeableElement = true;
+      afterSizeableElement = true,
+      verticalSplitter = new VerticalSplitter(verticalSplitterSelector, beforeSizeableElement, afterSizeableElement);
 
-new VerticalSplitter(verticalSplitterSelector, beforeSizeableElement, afterSizeableElement);
+verticalSplitter.initialise();
 
 class Example {
   static run(entries, Lexer) {
