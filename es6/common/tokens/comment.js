@@ -17,7 +17,7 @@ function process(tokensOrContents, commentType) {
   processByCallback(tokensOrContents, function(tokenOrContent) {
     const commentTokensOrRemainingContents = [];
 
-    commentType = commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
 
     const tokensOrRemainingContents = commentTokensOrRemainingContents; ///
 
@@ -31,7 +31,7 @@ module.exports = {
   process: process
 };
 
-function commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemainingContents, tokenOrContent, commentType) {
+function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {
   const tokenOrContentContent = (typeof tokenOrContent === 'string');
 
   if (tokenOrContentContent) {
@@ -43,7 +43,7 @@ function commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemai
       const hyperlinkSingleLineCommentTokenPosition = HyperlinkSingleLineCommentToken.positionWithinContent(content);
 
       if (hyperlinkSingleLineCommentTokenPosition > -1) {
-        hyperlinkCommentTokenFromContent(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, commentType, content);
+        processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content)
       } else {
         const middleOfSingleLineCommentToken = MiddleOfSingleLineCommentToken.fromContent(content);
 
@@ -53,14 +53,12 @@ function commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemai
       const hyperlinkMultiLineCommentTokenPosition = HyperlinkMultiLineCommentToken.positionWithinContent(content);
 
       if (hyperlinkMultiLineCommentTokenPosition > -1) {
-        hyperlinkCommentTokenFromContent(HyperlinkMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, commentType, content)
+        processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
 
         if (endOfMultiLineCommentTokenPosition > -1) {
-          endOfCommentTokenFromContent(EndOfMultiLineCommentToken, EndOfMultiLineCommentToken, commentTokensOrRemainingContents, content);
-
-          commentType = null; ///
+          commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
         } else {
           const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
 
@@ -75,22 +73,14 @@ function commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemai
         if (false) {
 
         } else if (startOfSingleLineCommentTokenPosition < startOfMultiLineCommentTokenPosition) {
-          commentType = singleLineCommentType; ///
-
-          startOfCommentTokenFromContent(StartOfSingleLineCommentToken, commentTokensOrRemainingContents, commentType, content);
+          commentType = processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
         } else if (startOfMultiLineCommentTokenPosition < startOfSingleLineCommentTokenPosition) {
-          commentType = multiLineCommentType; ///
-
-          startOfCommentTokenFromContent(StartOfMultiLineCommentToken, commentTokensOrRemainingContents, commentType, content);
+          commentType = processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
         }
       } else if (startOfSingleLineCommentTokenPosition > -1) {
-        commentType = singleLineCommentType; ///
-
-        startOfCommentTokenFromContent(StartOfSingleLineCommentToken, commentTokensOrRemainingContents, commentType, content);
+        commentType = processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
       } else if (startOfMultiLineCommentTokenPosition > -1) {
-        commentType = multiLineCommentType; ///
-
-        startOfCommentTokenFromContent(StartOfMultiLineCommentToken, commentTokensOrRemainingContents, commentType, content);
+        commentType = processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const remainingContent = content; ///
 
@@ -115,7 +105,43 @@ function commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemai
   return commentType;
 }
 
-function startOfCommentTokenFromContent(StartOfCommentToken, commentTokensOrRemainingContents, commentType, content) {
+function processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content) {
+  let commentType = singleLineCommentType;  ///
+
+  commentType = processStartOfCommentToken(StartOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+
+  return commentType;
+}
+
+function processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+  let commentType = multiLineCommentType; ///
+
+  commentType = processStartOfCommentToken(StartOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+
+  return commentType;
+}
+
+function processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+  let commentType = null;
+
+  commentType = processEndOfCommentToken(EndOfMultiLineCommentToken, EndOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+
+  return commentType;
+}
+
+function processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content) {
+  const commentType = singleLineCommentType;  ///
+
+  processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+}
+
+function processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+  const commentType = multiLineCommentType;  ///
+
+  processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+}
+
+function processStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
   const startOfSingleLineCommentToken = StartOfCommentToken.fromWithinContent(content),
         position = StartOfCommentToken.positionWithinContent(content),  ///
         contentLength = startOfSingleLineCommentToken.getContentLength(),
@@ -137,11 +163,13 @@ function startOfCommentTokenFromContent(StartOfCommentToken, commentTokensOrRema
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent;  ///
 
-    commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
+
+  return commentType;
 }
 
-function endOfCommentTokenFromContent(EndOfCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content) {
+function processEndOfCommentToken(EndOfCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
   const endOfMultiLineCommentToken = EndOfCommentToken.fromWithinContent(content),
         position = EndOfCommentToken.positionWithinContent(content),
         contentLength = endOfMultiLineCommentToken.getContentLength(),
@@ -162,14 +190,15 @@ function endOfCommentTokenFromContent(EndOfCommentToken, MiddleOfCommentToken, c
   commentTokensOrRemainingContents.push(endOfMultiLineCommentToken);
 
   if (rightContentLength > 0) {
-    const tokenOrContent = rightContent,  ///
-          commentType = null; ///
+    const tokenOrContent = rightContent; ///
 
-    commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
+
+  return commentType;
 }
 
-function hyperlinkCommentTokenFromContent(HyperlinkCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, commentType, content) {
+function processHyperlinkCommentToken(HyperlinkCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
   const hyperlinkCommentToken = HyperlinkCommentToken.fromWithinContent(content),
         position = HyperlinkCommentToken.positionWithinContent(content),  ///
         contentLength = hyperlinkCommentToken.getContentLength(),
@@ -192,6 +221,6 @@ function hyperlinkCommentTokenFromContent(HyperlinkCommentToken, MiddleOfComment
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent;  ///
 
-    commentTokensOrRemainingContentsFromTokenOrContent(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
 }
