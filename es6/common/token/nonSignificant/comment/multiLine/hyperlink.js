@@ -5,7 +5,7 @@ const types = require('../../../../types'),
 
 const { hyperlinkMultiLineCommentType } = types;
 
-class HyperlinkMultiLineCommentTokenn extends MultiLineCommentToken {
+class HyperlinkMultiLineCommentToken extends MultiLineCommentToken {
   asHTML(filePath) {
     const href = this.content,  ///
           className = this.type,  ///
@@ -14,21 +14,21 @@ class HyperlinkMultiLineCommentTokenn extends MultiLineCommentToken {
     return html;
   }
 
-  clone(startPosition, endPosition) { return super.clone(HyperlinkMultiLineCommentTokenn, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(HyperlinkMultiLineCommentToken, startPosition, endPosition); }
 
-  static fromContent(content) { return MultiLineCommentToken.fromContent(HyperlinkMultiLineCommentTokenn, content); }
+  static fromContent(content) { return MultiLineCommentToken.fromContent(HyperlinkMultiLineCommentToken, content); }
 
-  static fromWithinContent(content) { return MultiLineCommentToken.fromWithinContent(HyperlinkMultiLineCommentTokenn, content); }
+  static fromWithinContent(content) { return MultiLineCommentToken.fromWithinContent(HyperlinkMultiLineCommentToken, content); }
 
-  static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(HyperlinkMultiLineCommentTokenn, content); }
+  static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(HyperlinkMultiLineCommentToken, content); }
 }
 
 const type = hyperlinkMultiLineCommentType,
-      regularExpression = /https?:\/\/[^\s]+/;
+      regularExpression = /\bhttps?:\/\/[^\s\*]+/;
 
-Object.assign(HyperlinkMultiLineCommentTokenn, {
+Object.assign(HyperlinkMultiLineCommentToken, {
   type: type,
   regularExpression: regularExpression
 });
 
-module.exports = HyperlinkMultiLineCommentTokenn;
+module.exports = HyperlinkMultiLineCommentToken;

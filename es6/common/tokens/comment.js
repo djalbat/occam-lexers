@@ -138,7 +138,7 @@ function processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents
 function processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content) {
   const commentType = multiLineCommentType;  ///
 
-  processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  processHyperlinkCommentToken(HyperlinkMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
 }
 
 function processStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
