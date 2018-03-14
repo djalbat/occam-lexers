@@ -43,7 +43,7 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
       const hyperlinkSingleLineCommentTokenPosition = HyperlinkSingleLineCommentToken.positionWithinContent(content);
 
       if (hyperlinkSingleLineCommentTokenPosition > -1) {
-        processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content)
+        commentType = processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content)
       } else {
         const middleOfSingleLineCommentToken = MiddleOfSingleLineCommentToken.fromContent(content);
 
@@ -53,7 +53,7 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
       const hyperlinkMultiLineCommentTokenPosition = HyperlinkMultiLineCommentToken.positionWithinContent(content);
 
       if (hyperlinkMultiLineCommentTokenPosition > -1) {
-        processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content);
+        commentType = processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
 
@@ -130,15 +130,19 @@ function processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, con
 }
 
 function processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content) {
-  const commentType = singleLineCommentType;  ///
+  let commentType = singleLineCommentType;  ///
 
-  processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+
+  return commentType;
 }
 
 function processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content) {
-  const commentType = multiLineCommentType;  ///
+  let commentType = multiLineCommentType;  ///
 
-  processHyperlinkCommentToken(HyperlinkMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = processHyperlinkCommentToken(HyperlinkMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+
+  return commentType;
 }
 
 function processStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
@@ -221,6 +225,8 @@ function processHyperlinkCommentToken(HyperlinkCommentToken, MiddleOfCommentToke
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent;  ///
 
-    processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
+
+  return commentType;
 }
