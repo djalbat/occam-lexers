@@ -22,7 +22,17 @@ class Rule {
   }
   
   significantTokenPositionWithinContent(content) {
-    const significantTokenPosition = content.search(this.regularExpression);
+    let significantTokenPosition = -1;
+
+    const matches = content.match(this.regularExpression);
+
+    if (matches !== null) {
+      const firstMatch = first(matches);
+
+      if (firstMatch !== '') {
+        significantTokenPosition = matches.index; ///
+      }
+    }
 
     return significantTokenPosition;
   }
