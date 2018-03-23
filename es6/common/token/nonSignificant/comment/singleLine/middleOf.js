@@ -3,7 +3,7 @@
 const types = require('../../../../types'),
       SingleLineCommentToken = require('../../comment/singleLine');
 
-const { singleLineCommentType } = types;
+const { middleOfSingleLineCommentType } = types;
 
 class MiddleOfSingleLineCommentToken extends SingleLineCommentToken {
   clone(startPosition, endPosition) { return super.clone(MiddleOfSingleLineCommentToken, startPosition, endPosition); }
@@ -11,7 +11,7 @@ class MiddleOfSingleLineCommentToken extends SingleLineCommentToken {
   static fromContent(content) { return SingleLineCommentToken.fromContent(MiddleOfSingleLineCommentToken, content); }
 }
 
-const type = singleLineCommentType;
+const type = middleOfSingleLineCommentType;
 
 Object.assign(MiddleOfSingleLineCommentToken, {
   type: type

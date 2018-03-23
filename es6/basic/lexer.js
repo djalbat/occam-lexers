@@ -11,6 +11,8 @@ class BasicLexer extends CommonLexer {
     NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
+  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+
   processRegularExpressionTokens(tokensOrContents) {}
 
   processStringLiteralTokens(tokensOrContents) {}

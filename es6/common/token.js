@@ -6,7 +6,7 @@ const types = require('./types');
 
 const { arrayUtilities } = necessary,
       { first } = arrayUtilities,
-      { endOfLineType, whitespaceType, commentType, multiLineCommentType, singleLineCommentType } = types;
+      { commentType, middleType, multiLineType, singleLineType, endOfLineType, whitespaceType,  } = types;
 
 class Token {
   constructor(type, content, innerHTML, significant) {
@@ -28,42 +28,58 @@ class Token {
     return this.innerHTML;
   }
 
-  isSignificant() {
-    return this.significant;
-  }
-  
   getContentLength() {
     const contentLength = this.content.length;
 
     return contentLength;
   }
 
+  isSignificant() {
+    return this.significant;
+  }
+  
+  isCommentToken() {
+    const typeIncludesCommentType = this.type.includes(commentType),
+          commentToken = typeIncludesCommentType; ///
+
+    return commentToken;
+  }
+
   isEndOfLineToken() {
-    const endOfLineToken = (this.type === endOfLineType); ///
+    const typeEndOfLineType = (this.type === endOfLineType),
+          endOfLineToken = typeEndOfLineType; ///
 
     return endOfLineToken;
   }
 
   isWhitespaceToken() {
-    const whitespaceToken = (this.type === whitespaceType); ///
+    const typeWhitespaceType = (this.type === whitespaceType),
+          whitespaceToken = typeWhitespaceType; ///
 
     return whitespaceToken;
   }
 
-  isCommentToken() {
-    const commentToken = this.type.includes(commentType); ///
+  isMiddleOfCommentToken() {
+    const typeIncludesMiddleType = this.type.includes(middleType),
+          typeIncludesCommentType = this.type.includes(commentType),
+          middleOfCommentToken = typeIncludesMiddleType && typeIncludesCommentType; ///
 
-    return commentToken;
+    return middleOfCommentToken;
+
   }
 
   isMultiLineCommentToken() {
-    const multiLineCommentToken = this.type.includes(multiLineCommentType); ///
+    const typeIncludesCommentType = this.type.includes(commentType),
+          typeIncludesMultiLineType = this.type.includes(multiLineType),
+          multiLineCommentToken = typeIncludesMultiLineType && typeIncludesCommentType; ///
 
     return multiLineCommentToken;
   }
 
   isSingleLineCommentToken() {
-    const singleLineCommentToken = this.type.includes(singleLineCommentType); ///
+    const typeIncludesCommentType = this.type.includes(commentType),
+          typeIncludesSingleLineType = this.type.includes(singleLineType),
+          singleLineCommentToken = typeIncludesSingleLineType && typeIncludesCommentType; ///
 
     return singleLineCommentToken;
   }

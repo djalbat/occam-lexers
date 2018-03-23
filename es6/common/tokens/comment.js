@@ -5,12 +5,10 @@ const types = require('../types'),
       EndOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/endOf'),
       StartOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/middleOf'),
-      HyperlinkMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/hyperlink'),
       StartOfSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/startOf'),
-      MiddleOfSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/middleOf'),
-      HyperlinkSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/hyperlink');
+      MiddleOfSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/middleOf');
 
-const { multiLineCommentType, singleLineCommentType } = types,
+const { multiLineType, singleLineType, multiLineCommentType, singleLineCommentType } = types,
       { processByCallback } = tokens;
 
 function process(tokensOrContents, commentType) {
@@ -32,38 +30,29 @@ module.exports = {
 };
 
 function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {
-  const tokenOrContentContent = (typeof tokenOrContent === 'string');
+  const tokenOrContentString = (typeof tokenOrContent === 'string'),
+        tokenOrContentContent = tokenOrContentString; ///
 
   if (tokenOrContentContent) {
-    const content = tokenOrContent; ///
+    const content = tokenOrContent,
+          commentTypeSingleLineCommentType = isCommentTypeSingleLineCommentType(commentType),
+          commentTypeMultiLineCommentType = isCommentTypeMultiLineCommentType(commentType);
 
     if (false) {
 
-    } else if (commentType === singleLineCommentType) {
-      const hyperlinkSingleLineCommentTokenPosition = HyperlinkSingleLineCommentToken.positionWithinContent(content);
+    } else if (commentTypeSingleLineCommentType) {
+      const middleOfSingleLineCommentToken = MiddleOfSingleLineCommentToken.fromContent(content);
 
-      if (hyperlinkSingleLineCommentTokenPosition > -1) {
-        commentType = processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content)
+      commentTokensOrRemainingContents.push(middleOfSingleLineCommentToken);
+    } else if (commentTypeMultiLineCommentType) {
+      const endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
+
+      if (endOfMultiLineCommentTokenPosition > -1) {
+        commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
-        const middleOfSingleLineCommentToken = MiddleOfSingleLineCommentToken.fromContent(content);
+        const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
 
-        commentTokensOrRemainingContents.push(middleOfSingleLineCommentToken);
-      }
-    } else if (commentType === multiLineCommentType) {
-      const hyperlinkMultiLineCommentTokenPosition = HyperlinkMultiLineCommentToken.positionWithinContent(content);
-
-      if (hyperlinkMultiLineCommentTokenPosition > -1) {
-        commentType = processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content);
-      } else {
-        const endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
-
-        if (endOfMultiLineCommentTokenPosition > -1) {
-          commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
-        } else {
-          const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
-
-          commentTokensOrRemainingContents.push(middleOfMultiLineCommentToken);
-        }
+        commentTokensOrRemainingContents.push(middleOfMultiLineCommentToken);
       }
     } else {
       const startOfSingleLineCommentTokenPosition = StartOfSingleLineCommentToken.positionWithinContent(content),
@@ -92,7 +81,7 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
           tokenEndOfLineToken = token.isEndOfLineToken();
 
     if (tokenEndOfLineToken) {
-      const commentTypeSingleLineCommentType = (commentType === singleLineCommentType);
+      const commentTypeSingleLineCommentType = isCommentTypeSingleLineCommentType(commentType);
 
       if (commentTypeSingleLineCommentType) {
         commentType = null;
@@ -103,6 +92,30 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
   }
 
   return commentType;
+}
+
+function isCommentTypeMultiLineCommentType(commentType) {
+  let commentTypeMultiLineCommentType = false;
+
+  if (commentType !== null) {
+    const commentTypeIncludesMultiLineType = commentType.includes(multiLineType);
+
+    commentTypeMultiLineCommentType = commentTypeIncludesMultiLineType;
+  }
+
+  return commentTypeMultiLineCommentType;
+}
+
+function isCommentTypeSingleLineCommentType(commentType) {
+  let commentTypeSingleLineCommentType = false;
+
+  if (commentType !== null) {
+    const commentTypeIncludesSingleLineType = commentType.includes(singleLineType);
+
+    commentTypeSingleLineCommentType = commentTypeIncludesSingleLineType;
+  }
+
+  return commentTypeSingleLineCommentType;
 }
 
 function processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content) {
@@ -124,23 +137,7 @@ function processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, c
 function processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
   let commentType = null;
 
-  commentType = processEndOfCommentToken(EndOfMultiLineCommentToken, EndOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
-
-  return commentType;
-}
-
-function processHyperlinkSingleLineCommentToken(commentTokensOrRemainingContents, content) {
-  let commentType = singleLineCommentType;  ///
-
-  commentType = processHyperlinkCommentToken(HyperlinkSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
-
-  return commentType;
-}
-
-function processHyperlinkMultiLineCommentToken(commentTokensOrRemainingContents, content) {
-  let commentType = multiLineCommentType;  ///
-
-  commentType = processHyperlinkCommentToken(HyperlinkMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = processEndOfCommentToken(EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
 
   return commentType;
 }
@@ -195,35 +192,6 @@ function processEndOfCommentToken(EndOfCommentToken, MiddleOfCommentToken, comme
 
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent; ///
-
-    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
-  }
-
-  return commentType;
-}
-
-function processHyperlinkCommentToken(HyperlinkCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
-  const hyperlinkCommentToken = HyperlinkCommentToken.fromWithinContent(content),
-        position = HyperlinkCommentToken.positionWithinContent(content),  ///
-        contentLength = hyperlinkCommentToken.getContentLength(),
-        left = position,
-        right = position + contentLength,
-        leftContent = content.substring(0, left),
-        rightContent = content.substring(right),
-        leftContentLength = leftContent.length,
-        rightContentLength = rightContent.length;
-
-  if (leftContentLength > 0) {
-    const content = leftContent,  ///
-          middleOfCommentToken = MiddleOfCommentToken.fromContent(content);
-
-    commentTokensOrRemainingContents.push(middleOfCommentToken);
-  }
-
-  commentTokensOrRemainingContents.push(hyperlinkCommentToken);
-
-  if (rightContentLength > 0) {
-    const tokenOrContent = rightContent;  ///
 
     commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }

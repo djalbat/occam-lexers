@@ -5,6 +5,7 @@ const Rules = require('./rules'),
       WhitespaceTokens = require('./tokens/whitespace'),
       SignificantTokens = require('./tokens/significant'),
       StringLiteralTokens = require('./tokens/stringLiteral'),
+      MiddleOfCommentTokens = require('./tokens/middleOfComment'),
       RegularExpressionTokens = require('./tokens/regularExpression');
 
 class CommonLexer {
@@ -31,6 +32,8 @@ class CommonLexer {
   processAllBarEndOfLineTokens(tokensOrContents, commentType) {
     commentType = this.processCommentTokens(tokensOrContents, commentType);
 
+    this.postProcessMiddleOfCommentTokens(tokensOrContents);
+
     this.processRegularExpressionTokens(tokensOrContents);
 
     this.processStringLiteralTokens(tokensOrContents);
@@ -46,6 +49,10 @@ class CommonLexer {
     commentType = CommentTokens.process(tokensOrContents, commentType);
 
     return commentType;
+  }
+
+  postProcessMiddleOfCommentTokens(tokensOrContents) {
+    MiddleOfCommentTokens.postProcess(tokensOrContents);
   }
 
   processRegularExpressionTokens(tokensOrContents) {

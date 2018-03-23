@@ -7,6 +7,8 @@ const entries = require('../bnf/entries'),
 class CustomGrammarBNFLexer extends CommonLexer {
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
+  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+
   processEndOfLineTokens(tokensOrContents) {
     NonSignificantEndOfLineTokens.process(tokensOrContents);
   }

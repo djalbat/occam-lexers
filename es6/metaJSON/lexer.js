@@ -9,6 +9,8 @@ class MetaJSONLexer extends CommonLexer {
     NonSignificantEndOfLineTokens.process(tokensOrContents);
   }
 
+  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+
   processCommentTokens(tokensOrContents, inComment) {}
 
   static fromEntries(entries) { return CommonLexer.fromEntries(MetaJSONLexer, entries); }

@@ -8,6 +8,8 @@ const entries = require('./entries'),
 class BNFLexer extends CommonLexer {
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
+  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+
   processEndOfLineTokens(tokensOrContents) {
     NonSignificantEndOfLineTokens.process(tokensOrContents);
   }

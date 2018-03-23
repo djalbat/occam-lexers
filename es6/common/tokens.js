@@ -9,7 +9,8 @@ function processByToken(tokensOrContents, Token) {
   processByCallback(tokensOrContents, function(tokenOrContent) {
     let tokensOrRemainingContents;
 
-    const tokenOrContentContent = (typeof tokenOrContent === 'string');
+    const tokenOrContentString = (typeof tokenOrContent === 'string'),
+          tokenOrContentContent = tokenOrContentString; ///
 
     if (tokenOrContentContent) {
       const content = tokenOrContent, ///

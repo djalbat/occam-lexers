@@ -11,6 +11,8 @@ class PlainLexer extends CommonLexer {
 
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
+  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+
   processRegularExpressionTokens(tokensOrContents) {}
 
   processStringLiteralTokens(tokensOrContents) {}
