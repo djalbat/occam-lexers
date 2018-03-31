@@ -18,6 +18,12 @@ class FlorenceLexer extends CommonLexer {
   static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }
 
   static fromCombinedCustomGrammarsLexicalPattern(combinedCustomGrammarsLexicalPattern) {
+    const florenceLexer = FlorenceLexer.fromEntriesAndCombinedCustomGrammarsLexicalPattern(entries, combinedCustomGrammarsLexicalPattern);
+
+    return florenceLexer;
+  }
+
+  static fromEntriesAndCombinedCustomGrammarsLexicalPattern(entries, combinedCustomGrammarsLexicalPattern) {
     const custom = combinedCustomGrammarsLexicalPattern, ///
           customGrammarEntry = {
             custom: custom
