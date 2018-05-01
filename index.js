@@ -3,6 +3,7 @@
 module.exports = {
   'NonSignificantToken': require('./lib/common/token/nonSignificant'),
   'SignificantToken': require('./lib/common/token/significant'),
+  'LaTeXLexer': require('./lib/latex/lexer'),
   'BasicLexer': require('./lib/basic/lexer'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'PlainLexer': require('./lib/plain/lexer'),
