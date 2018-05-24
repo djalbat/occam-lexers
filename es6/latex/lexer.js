@@ -1,14 +1,9 @@
 'use strict';
 
 const entries = require('./entries'),
-      CommonLexer = require('../common/lexer'),
-      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
+      CommonLexer = require('../common/lexer');
 
 class LaTeXLexer extends CommonLexer {
-  processEndOfLineTokens(tokensOrContents) {
-    NonSignificantEndOfLineTokens.process(tokensOrContents);
-  }
-
   processRegularExpressionTokens(tokensOrContents) {}
 
   static fromNothing() { return CommonLexer.fromNothing(LaTeXLexer); }

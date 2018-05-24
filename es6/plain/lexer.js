@@ -1,14 +1,9 @@
 'use strict';
 
 const entries = require('./entries'),
-      CommonLexer = require('../common/lexer'),
-      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
+      CommonLexer = require('../common/lexer');
 
 class PlainLexer extends CommonLexer {
-  processEndOfLineTokens(tokensOrContents) {
-    NonSignificantEndOfLineTokens.process(tokensOrContents);
-  }
-
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
   postProcessMiddleOfCommentTokens(tokensOrContents) {}

@@ -1,17 +1,12 @@
 'use strict';
 
 const entries = require('../bnf/entries'),
-      CommonLexer = require('../common/lexer'),
-      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
+      CommonLexer = require('../common/lexer');
 
 class CustomGrammarBNFLexer extends CommonLexer {
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
   postProcessMiddleOfCommentTokens(tokensOrContents) {}
-
-  processEndOfLineTokens(tokensOrContents) {
-    NonSignificantEndOfLineTokens.process(tokensOrContents);
-  }
 
   static fromNothing() { return CommonLexer.fromNothing(CustomGrammarBNFLexer); }
 

@@ -6,7 +6,8 @@ const Rules = require('./rules'),
       SignificantTokens = require('./tokens/significant'),
       StringLiteralTokens = require('./tokens/stringLiteral'),
       MiddleOfCommentTokens = require('./tokens/middleOfComment'),
-      RegularExpressionTokens = require('./tokens/regularExpression');
+      RegularExpressionTokens = require('./tokens/regularExpression'),
+      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
 
 class CommonLexer {
   constructor(rules) {
@@ -18,11 +19,12 @@ class CommonLexer {
   }
 
   tokensFromContent(content) {
-    const tokensOrContents = [content]; ///
+    const tokensOrContents = [content], ///
+          commentType = null;
 
     this.processEndOfLineTokens(tokensOrContents);
 
-    this.processAllBarEndOfLineTokens(tokensOrContents);
+    this.processAllBarEndOfLineTokens(tokensOrContents, commentType);
 
     const tokens = tokensOrContents;  ///
 
@@ -30,13 +32,13 @@ class CommonLexer {
   }
 
   processAllBarEndOfLineTokens(tokensOrContents, commentType) {
+    this.processStringLiteralTokens(tokensOrContents);
+
     commentType = this.processCommentTokens(tokensOrContents, commentType);
 
     this.postProcessMiddleOfCommentTokens(tokensOrContents);
 
     this.processRegularExpressionTokens(tokensOrContents);
-
-    this.processStringLiteralTokens(tokensOrContents);
 
     this.processWhitespaceTokens(tokensOrContents);
 
@@ -45,31 +47,19 @@ class CommonLexer {
     return commentType;
   }
 
-  processCommentTokens(tokensOrContents, commentType = null) {
-    commentType = CommentTokens.process(tokensOrContents, commentType);
+  processEndOfLineTokens(tokensOrContents) { NonSignificantEndOfLineTokens.process(tokensOrContents); }
 
-    return commentType;
-  }
+  processStringLiteralTokens(tokensOrContents) { StringLiteralTokens.process(tokensOrContents); }
 
-  postProcessMiddleOfCommentTokens(tokensOrContents) {
-    MiddleOfCommentTokens.postProcess(tokensOrContents);
-  }
+  processCommentTokens(tokensOrContents, commentType) { return CommentTokens.process(tokensOrContents, commentType); }
 
-  processRegularExpressionTokens(tokensOrContents) {
-    RegularExpressionTokens.process(tokensOrContents);
-  }
+  postProcessMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.postProcess(tokensOrContents); }
 
-  processStringLiteralTokens(tokensOrContents) {
-    StringLiteralTokens.process(tokensOrContents);
-  }
+  processRegularExpressionTokens(tokensOrContents) { RegularExpressionTokens.process(tokensOrContents); }
 
-  processWhitespaceTokens(tokensOrContents) {
-    WhitespaceTokens.process(tokensOrContents);
-  }
+  processWhitespaceTokens(tokensOrContents) { WhitespaceTokens.process(tokensOrContents); }
 
-  processSignificantTokens(tokensOrContents) {
-    SignificantTokens.process(tokensOrContents, this.rules)
-  }
+  processSignificantTokens(tokensOrContents) { SignificantTokens.process(tokensOrContents, this.rules) }
 
   static fromNothing(Class) {
     const { entries } = Class,

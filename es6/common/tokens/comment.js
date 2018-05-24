@@ -2,6 +2,7 @@
 
 const types = require('../types'),
       tokens = require('../tokens'),
+      StringLiteralToken = require('../token/significant/stringLiteral'),
       EndOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/endOf'),
       StartOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/middleOf'),
@@ -30,13 +31,15 @@ module.exports = {
 };
 
 function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {
-  const tokenOrContentString = (typeof tokenOrContent === 'string'),
-        tokenOrContentContent = tokenOrContentString; ///
+  const tokenOrContentContent = isTokenOrContentContent(tokenOrContent),
+        tokenOrContentStringLiteralToken = isTokenOrContentStringLiteralToken(tokenOrContent),
+        commentTypeSingleLineCommentType = isCommentTypeSingleLineCommentType(commentType),
+        commentTypeMultiLineCommentType = isCommentTypeMultiLineCommentType(commentType);
 
-  if (tokenOrContentContent) {
-    const content = tokenOrContent,
-          commentTypeSingleLineCommentType = isCommentTypeSingleLineCommentType(commentType),
-          commentTypeMultiLineCommentType = isCommentTypeMultiLineCommentType(commentType);
+  if (false) {
+
+  } else if (tokenOrContentContent) {
+    const content = tokenOrContent; ///
 
     if (false) {
 
@@ -76,6 +79,29 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
         commentTokensOrRemainingContents.push(remainingContent);
       }
     }
+  } else if (tokenOrContentStringLiteralToken) {
+    const stringLiteralToken = tokenOrContent;  ///
+
+    if (false) {
+
+    } else if (commentTypeSingleLineCommentType) {
+      const middleOfSingleLineCommentToken = MiddleOfSingleLineCommentToken.fromStringLiteralToken(stringLiteralToken);
+
+      commentTokensOrRemainingContents.push(middleOfSingleLineCommentToken);
+    } else if (commentTypeMultiLineCommentType) {
+      const content = stringLiteralToken.getContent(),
+            endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
+
+      if (endOfMultiLineCommentTokenPosition > -1) {
+        commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
+      } else {
+        const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
+
+        commentTokensOrRemainingContents.push(middleOfMultiLineCommentToken);
+      }
+    } else {
+      commentTokensOrRemainingContents.push(stringLiteralToken);
+    }
   } else {
     const token = tokenOrContent, ///
           tokenEndOfLineToken = token.isEndOfLineToken();
@@ -94,16 +120,28 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
   return commentType;
 }
 
-function isCommentTypeMultiLineCommentType(commentType) {
-  let commentTypeMultiLineCommentType = false;
+function isTokenOrContentContent(tokenOrContent) {
+  const tokenOrContentString = (typeof tokenOrContent === 'string'),
+        tokenOrContentContent = tokenOrContentString; ///
 
-  if (commentType !== null) {
-    const commentTypeIncludesMultiLineType = commentType.includes(multiLineType);
+  return tokenOrContentContent;
+}
 
-    commentTypeMultiLineCommentType = commentTypeIncludesMultiLineType;
+function isTokenOrContentStringLiteralToken(tokenOrContent) {
+  let tokenOrContentStringLiteralToken = false;
+
+  const tokenOrContentString = (typeof tokenOrContent === 'string'),
+        tokenOrContentContent = tokenOrContentString, ///
+        tokenOrContentToken = !tokenOrContentContent;
+
+  if (tokenOrContentToken) {
+    const token = tokenOrContent,
+          tokenStringLiteralToken = (token instanceof StringLiteralToken);
+
+    tokenOrContentStringLiteralToken = tokenStringLiteralToken; ///
   }
 
-  return commentTypeMultiLineCommentType;
+  return tokenOrContentStringLiteralToken;
 }
 
 function isCommentTypeSingleLineCommentType(commentType) {
@@ -116,6 +154,18 @@ function isCommentTypeSingleLineCommentType(commentType) {
   }
 
   return commentTypeSingleLineCommentType;
+}
+
+function isCommentTypeMultiLineCommentType(commentType) {
+  let commentTypeMultiLineCommentType = false;
+
+  if (commentType !== null) {
+    const commentTypeIncludesMultiLineType = commentType.includes(multiLineType);
+
+    commentTypeMultiLineCommentType = commentTypeIncludesMultiLineType;
+  }
+
+  return commentTypeMultiLineCommentType;
 }
 
 function processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content) {

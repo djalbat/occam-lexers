@@ -2,17 +2,12 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      specialSymbols = require('./specialSymbols'),
-      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant');
+      specialSymbols = require('./specialSymbols');
 
 class BNFLexer extends CommonLexer {
   processCommentTokens(tokensOrContents, inComment) { return inComment; }
 
   postProcessMiddleOfCommentTokens(tokensOrContents) {}
-
-  processEndOfLineTokens(tokensOrContents) {
-    NonSignificantEndOfLineTokens.process(tokensOrContents);
-  }
 
   significantTokensFromBNF(bnf) {
     const content = bnf,  ///
