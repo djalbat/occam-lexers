@@ -25,8 +25,8 @@ const type = whitespaceType,  ///
       regularExpression = /[\t ]+/;
 
 Object.assign(WhitespaceToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = WhitespaceToken;

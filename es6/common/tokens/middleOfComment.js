@@ -21,7 +21,7 @@ function postProcess(tokensOrContents) {
 }
 
 module.exports = {
-  postProcess: postProcess
+  postProcess
 };
 
 function postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent) {

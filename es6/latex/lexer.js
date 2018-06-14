@@ -12,7 +12,7 @@ class LaTeXLexer extends CommonLexer {
 }
 
 Object.assign(LaTeXLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = LaTeXLexer;

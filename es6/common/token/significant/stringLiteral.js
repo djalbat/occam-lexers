@@ -29,8 +29,8 @@ const type = stringLiteralType, ///
       regularExpression = /"(?:\\.|[^"])*"/;
 
 Object.assign(StringLiteralToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = StringLiteralToken;

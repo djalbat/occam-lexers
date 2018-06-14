@@ -14,7 +14,7 @@ class MetaJSONLexer extends CommonLexer {
 }
 
 Object.assign(MetaJSONLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = MetaJSONLexer;

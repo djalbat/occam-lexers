@@ -49,8 +49,8 @@ function processByCallback(tokensOrContents, callback) {
 }
 
 module.exports = {
-  processByToken: processByToken,
-  processByCallback: processByCallback
+  processByToken,
+  processByCallback
 };
 
 function tokenOrRemainingContentFromContentAndToken(content, Token) {

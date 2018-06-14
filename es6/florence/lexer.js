@@ -26,7 +26,7 @@ class FlorenceLexer extends CommonLexer {
   static fromEntriesAndCombinedCustomGrammarsLexicalPattern(entries, combinedCustomGrammarsLexicalPattern) {
     const custom = combinedCustomGrammarsLexicalPattern, ///
           customGrammarEntry = {
-            custom: custom
+            custom
           },
           customGrammarRule =  Rule.fromEntry(customGrammarEntry),
           rules = Rules.fromEntries(entries);
@@ -40,7 +40,7 @@ class FlorenceLexer extends CommonLexer {
 }
 
 Object.assign(FlorenceLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = FlorenceLexer;

@@ -27,8 +27,8 @@ const type = hyperlinkInMultiLineCommentType,
       regularExpression = /\bhttps?:\/\/[^\s\*]+/;
 
 Object.assign(HyperlinkInMultiLineCommentToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = HyperlinkInMultiLineCommentToken;

@@ -19,8 +19,8 @@ const type = regularExpressionType, ///
       regularExpression = /\/(?:\\.|[^\/])*\//;
 
 Object.assign(RegularExpressionToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = RegularExpressionToken;

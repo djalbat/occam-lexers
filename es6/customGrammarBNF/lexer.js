@@ -14,7 +14,7 @@ class CustomGrammarBNFLexer extends CommonLexer {
 }
 
 Object.assign(CustomGrammarBNFLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = CustomGrammarBNFLexer;

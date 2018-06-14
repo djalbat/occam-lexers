@@ -18,7 +18,7 @@ class CustomGrammarLexicalPatternLexer extends CommonLexer {
 }
 
 Object.assign(CustomGrammarLexicalPatternLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = CustomGrammarLexicalPatternLexer;

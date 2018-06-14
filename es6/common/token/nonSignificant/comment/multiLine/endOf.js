@@ -19,8 +19,8 @@ const type = multiLineCommentType,  ///
       regularExpression = /\*\//;
 
 Object.assign(EndOfMultiLineCommentToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = EndOfMultiLineCommentToken;

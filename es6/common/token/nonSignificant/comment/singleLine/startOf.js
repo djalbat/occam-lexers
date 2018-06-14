@@ -19,8 +19,8 @@ const type = singleLineCommentType,
       regularExpression = /\/\//;
 
 Object.assign(StartOfSingleLineCommentToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = StartOfSingleLineCommentToken;

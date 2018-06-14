@@ -21,7 +21,7 @@ class MiddleOfSingleLineCommentToken extends SingleLineCommentToken {
 const type = middleOfSingleLineCommentType;
 
 Object.assign(MiddleOfSingleLineCommentToken, {
-  type: type
+  type
 });
 
 module.exports = MiddleOfSingleLineCommentToken;

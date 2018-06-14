@@ -8,6 +8,6 @@ const { processByToken } = tokens;
 function process(tokensOrContents) { processByToken(tokensOrContents, RegularExpression); }
 
 module.exports = {
-  process: process
+  process
 };
 

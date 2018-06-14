@@ -25,8 +25,8 @@ const type = endOfLineType, ///
       regularExpression = /\r\n|\r|\n/;
 
 Object.assign(EndOfLineSignificantToken, {
-  type: type,
-  regularExpression: regularExpression
+  type,
+  regularExpression
 });
 
 module.exports = EndOfLineSignificantToken;

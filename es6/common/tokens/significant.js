@@ -28,7 +28,7 @@ function process(tokensOrContents, rules) {
 }
 
 module.exports = {
-  process: process
+  process
 };
 
 function significantTokensFromContent(content, rules, depth) {

@@ -8,5 +8,5 @@ const { processByToken } = tokens;
 function process(tokensAndContents) { processByToken(tokensAndContents, StringLiteralToken); }
 
 module.exports = {
-  process: process
+  process
 };

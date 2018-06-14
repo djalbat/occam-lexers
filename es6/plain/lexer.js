@@ -18,7 +18,7 @@ class PlainLexer extends CommonLexer {
 }
 
 Object.assign(PlainLexer, {
-  entries: entries
+  entries
 });
 
 module.exports = PlainLexer;

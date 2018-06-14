@@ -27,7 +27,7 @@ function process(tokensOrContents, commentType) {
 }
 
 module.exports = {
-  process: process
+  process
 };
 
 function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {

@@ -21,7 +21,7 @@ class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
 const type = middleOfMultiLineCommentType;  ///
 
 Object.assign(MiddleOfMultiLineCommentToken, {
-  type: type
+  type
 });
 
 module.exports = MiddleOfMultiLineCommentToken;

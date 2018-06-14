@@ -16,22 +16,20 @@ const middleType = 'middle',
       hyperlinkInMultiLineCommentType = `${hyperlinkType} ${multiLineCommentType}`,
       hyperlinkInSingleLineCommentType = `${hyperlinkType} ${singleLineCommentType}`;
 
-const types = {
-  middleType: middleType,
-  commentType: commentType,
-  multiLineType: multiLineType,
-  singleLineType: singleLineType,
-  hyperlinkType: hyperlinkType,
-  endOfLineType: endOfLineType,
-  whitespaceType: whitespaceType,
-  stringLiteralType: stringLiteralType,
-  regularExpressionType: regularExpressionType,
-  multiLineCommentType: multiLineCommentType,
-  singleLineCommentType: singleLineCommentType,
-  middleOfMultiLineCommentType: middleOfMultiLineCommentType,
-  middleOfSingleLineCommentType: middleOfSingleLineCommentType,
-  hyperlinkInMultiLineCommentType: hyperlinkInMultiLineCommentType,
-  hyperlinkInSingleLineCommentType: hyperlinkInSingleLineCommentType
+module.exports = {
+	middleType,
+	commentType,
+	multiLineType,
+	singleLineType,
+	hyperlinkType,
+	endOfLineType,
+	whitespaceType,
+	stringLiteralType,
+	regularExpressionType,
+	multiLineCommentType,
+	singleLineCommentType,
+	middleOfMultiLineCommentType,
+	middleOfSingleLineCommentType,
+	hyperlinkInMultiLineCommentType,
+	hyperlinkInSingleLineCommentType
 };
-
-module.exports = types;
