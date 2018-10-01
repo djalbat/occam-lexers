@@ -1,11 +1,11 @@
 'use strict';
 
 const types = require('../../types'),
-      SignificantToken = require('../significant');
+      NonSignificantToken = require('../nonSignificant');
 
 const { whitespaceType } = types;
 
-class WhitespaceToken extends SignificantToken {
+class WhitespaceToken extends NonSignificantToken {
   asHTML(filePath) {
     const html = this.innerHTML;  ///
 
@@ -14,11 +14,11 @@ class WhitespaceToken extends SignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
 
-  static fromContent(content) { return SignificantToken.fromContent(WhitespaceToken, content); }
+  static fromContent(content) { return NonSignificantToken.fromContent(WhitespaceToken, content); }
 
-  static fromWithinContent(content) { return SignificantToken.fromWithinContent(WhitespaceToken, content); }
+  static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(WhitespaceToken, content); }
 
-  static positionWithinContent(content) { return SignificantToken.positionWithinContent(WhitespaceToken, content); }
+  static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(WhitespaceToken, content); }
 }
 
 const type = whitespaceType,  ///

@@ -1,7 +1,7 @@
 'use strict';
 
 const tokens = require('../tokens'),
-      WhitespaceToken = require('../token/significant/whitespace');
+      WhitespaceToken = require('../token/nonSignificant/whitespace');
 
 const { processByToken } = tokens;
 
