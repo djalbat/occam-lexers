@@ -6,7 +6,7 @@ const types = require('./types');
 
 const { arrayUtilities } = necessary,
       { first } = arrayUtilities,
-      { commentType, middleType, multiLineType, singleLineType, endOfLineType, whitespaceType,  } = types;
+      { commentType, middleType, multiLineType, singleLineType, endOfLineType, whitespaceType } = types;
 
 class Token {
   constructor(type, content, innerHTML, significant) {

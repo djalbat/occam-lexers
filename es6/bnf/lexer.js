@@ -9,12 +9,11 @@ class BNFLexer extends CommonLexer {
 
   postProcessMiddleOfCommentTokens(tokensOrContents) {}
 
-  significantTokensFromBNF(bnf) {
+  tokensFromBNF(bnf) {
     const content = bnf,  ///
-          tokens = super.tokensFromContent(content),
-          significantTokens = significantTokensFromTokens(tokens);
+          tokens = super.tokensFromContent(content);
 
-    return significantTokens;
+    return tokens;
   }
 
   static fromNothing() { return CommonLexer.fromNothing(BNFLexer); }
@@ -28,19 +27,3 @@ Object.assign(BNFLexer, {
 });
 
 module.exports = BNFLexer;
-
-function significantTokensFromTokens(tokens) {
-  const significantTokens = tokens.reduce(function(significantTokens, token) {
-    const tokenSignificant = token.isSignificant();
-
-    if (tokenSignificant) {
-      const significantToken = token; ///
-
-      significantTokens.push(significantToken);
-    }
-
-    return significantTokens;
-  }, []);
-
-  return significantTokens;
-}
