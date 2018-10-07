@@ -43,7 +43,7 @@ class Example {
             entries = JSON.parse(entriesTextareaValue),
             lexer = Lexer.fromEntries(entries),
             content = contentTextareaValue,  ///
-            tokens = lexer.tokensFromContent(content);
+            tokens = lexer.tokenise(content);
 
       let lineNumber = 1,
           previousToken = null;

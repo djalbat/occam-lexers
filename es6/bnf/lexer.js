@@ -11,7 +11,7 @@ class BNFLexer extends CommonLexer {
 
   tokensFromBNF(bnf) {
     const content = bnf,  ///
-          tokens = super.tokensFromContent(content);
+          tokens = super.tokenise(content);
 
     return tokens;
   }

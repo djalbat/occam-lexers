@@ -18,7 +18,7 @@ class CommonLexer {
     return this.rules;
   }
 
-  tokensFromContent(content) {
+  tokenise(content) {
     const tokensOrContents = [content], ///
           commentType = null;
 
