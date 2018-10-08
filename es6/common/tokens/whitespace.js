@@ -3,10 +3,10 @@
 const tokens = require('../tokens'),
       WhitespaceToken = require('../token/nonSignificant/whitespace');
 
-const { processByToken } = tokens;
+const { tokeniseByToken } = tokens;
 
-function process(tokensAndContents) { processByToken(tokensAndContents, WhitespaceToken); }
+function tokenise(tokensAndContents) { tokeniseByToken(tokensAndContents, WhitespaceToken); }
 
 module.exports = {
-  process
+  tokenise
 };

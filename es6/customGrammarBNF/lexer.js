@@ -4,9 +4,9 @@ const entries = require('../bnf/entries'),
       CommonLexer = require('../common/lexer');
 
 class CustomGrammarBNFLexer extends CommonLexer {
-  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+  tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
-  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
   static fromNothing() { return CommonLexer.fromNothing(CustomGrammarBNFLexer); }
 

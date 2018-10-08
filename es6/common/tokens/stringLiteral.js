@@ -3,10 +3,10 @@
 const tokens = require('../tokens'),
       StringLiteralToken = require('../token/significant/stringLiteral');
 
-const { processByToken } = tokens;
+const { tokeniseByToken } = tokens;
 
-function process(tokensAndContents) { processByToken(tokensAndContents, StringLiteralToken); }
+function tokenise(tokensAndContents) { tokeniseByToken(tokensAndContents, StringLiteralToken); }
 
 module.exports = {
-  process
+  tokenise
 };

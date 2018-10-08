@@ -4,13 +4,13 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
-  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+  tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
-  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
-  processRegularExpressionTokens(tokensOrContents) {}
+  tokeniseRegularExpressions(tokensOrContents) {}
 
-  processStringLiteralTokens(tokensOrContents) {}
+  tokeniseStringLiterals(tokensOrContents) {}
 
   static fromNothing() { return CommonLexer.fromNothing(CustomGrammarLexicalPatternLexer); }
 

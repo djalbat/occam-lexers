@@ -5,9 +5,9 @@ const entries = require('./entries'),
       specialSymbols = require('./specialSymbols');
 
 class BNFLexer extends CommonLexer {
-  processCommentTokens(tokensOrContents, inComment) { return inComment; }
+  tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
-  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
   tokensFromBNF(bnf) {
     const content = bnf,  ///

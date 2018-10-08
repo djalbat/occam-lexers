@@ -3,10 +3,10 @@
 const tokens = require('../../tokens'),
       EndOfLineNonSignificantToken = require('../../token/nonSignificant/endOfLine');
 
-const { processByToken } = tokens;
+const { tokeniseByToken } = tokens;
 
-function process(tokensOrContents) { processByToken(tokensOrContents, EndOfLineNonSignificantToken); }
+function tokenise(tokensOrContents) { tokeniseByToken(tokensOrContents, EndOfLineNonSignificantToken); }
 
 module.exports = {
-  process
+  tokenise
 };

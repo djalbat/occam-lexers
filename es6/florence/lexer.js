@@ -7,11 +7,9 @@ const entries = require('./entries'),
       SignificantEndOfLineTokens = require('../common/tokens/endOfLine/significant');
 
 class FlorenceLexer extends CommonLexer {
-  processEndOfLineTokens(tokensOrContents) {
-    SignificantEndOfLineTokens.process(tokensOrContents);
-  }
+  tokeniseEndOfLines(tokensOrContents) { SignificantEndOfLineTokens.tokenise(tokensOrContents); }
 
-  processRegularExpressionTokens(tokensOrContents) {}
+  tokeniseRegularExpressions(tokensOrContents) {}
 
   static fromNothing() { return CommonLexer.fromNothing(FlorenceLexer); }
 

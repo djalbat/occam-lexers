@@ -10,13 +10,13 @@ const types = require('../types'),
       MiddleOfSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/middleOf');
 
 const { multiLineType, singleLineType, multiLineCommentType, singleLineCommentType } = types,
-      { processByCallback } = tokens;
+      { tokeniseByCallback } = tokens;
 
-function process(tokensOrContents, commentType) {
-  processByCallback(tokensOrContents, function(tokenOrContent) {
+function tokenise(tokensOrContents, commentType) {
+  tokeniseByCallback(tokensOrContents, function(tokenOrContent) {
     const commentTokensOrRemainingContents = [];
 
-    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = tokeniseCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
 
     const tokensOrRemainingContents = commentTokensOrRemainingContents; ///
 
@@ -27,10 +27,10 @@ function process(tokensOrContents, commentType) {
 }
 
 module.exports = {
-  process
+  tokenise
 };
 
-function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {
+function tokeniseCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType) {
   const tokenOrContentContent = isTokenOrContentContent(tokenOrContent),
         tokenOrContentStringLiteralToken = isTokenOrContentStringLiteralToken(tokenOrContent),
         commentTypeSingleLineCommentType = isCommentTypeSingleLineCommentType(commentType),
@@ -51,7 +51,7 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
       const endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
 
       if (endOfMultiLineCommentTokenPosition > -1) {
-        commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
+        commentType = tokeniseEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
 
@@ -65,14 +65,14 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
         if (false) {
 
         } else if (startOfSingleLineCommentTokenPosition < startOfMultiLineCommentTokenPosition) {
-          commentType = processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
+          commentType = tokeniseStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
         } else if (startOfMultiLineCommentTokenPosition < startOfSingleLineCommentTokenPosition) {
-          commentType = processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
+          commentType = tokeniseStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
         }
       } else if (startOfSingleLineCommentTokenPosition > -1) {
-        commentType = processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
+        commentType = tokeniseStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content);
       } else if (startOfMultiLineCommentTokenPosition > -1) {
-        commentType = processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
+        commentType = tokeniseStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const remainingContent = content; ///
 
@@ -93,7 +93,7 @@ function processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, 
             endOfMultiLineCommentTokenPosition = EndOfMultiLineCommentToken.positionWithinContent(content);
 
       if (endOfMultiLineCommentTokenPosition > -1) {
-        commentType = processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
+        commentType = tokeniseEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content);
       } else {
         const middleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken.fromContent(content);
 
@@ -168,31 +168,31 @@ function isCommentTypeMultiLineCommentType(commentType) {
   return commentTypeMultiLineCommentType;
 }
 
-function processStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content) {
+function tokeniseStartOfSingleLineCommentToken(commentTokensOrRemainingContents, content) {
   let commentType = singleLineCommentType;  ///
 
-  commentType = processStartOfCommentToken(StartOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = tokeniseStartOfCommentToken(StartOfSingleLineCommentToken, commentTokensOrRemainingContents, content, commentType);
 
   return commentType;
 }
 
-function processStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+function tokeniseStartOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
   let commentType = multiLineCommentType; ///
 
-  commentType = processStartOfCommentToken(StartOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = tokeniseStartOfCommentToken(StartOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
 
   return commentType;
 }
 
-function processEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+function tokeniseEndOfMultiLineCommentToken(commentTokensOrRemainingContents, content) {
   let commentType = null;
 
-  commentType = processEndOfCommentToken(EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
+  commentType = tokeniseEndOfCommentToken(EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content, commentType);
 
   return commentType;
 }
 
-function processStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
+function tokeniseStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
   const startOfSingleLineCommentToken = StartOfCommentToken.fromWithinContent(content),
         position = StartOfCommentToken.positionWithinContent(content),  ///
         contentLength = startOfSingleLineCommentToken.getContentLength(),
@@ -214,13 +214,13 @@ function processStartOfCommentToken(StartOfCommentToken, commentTokensOrRemainin
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent;  ///
 
-    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = tokeniseCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
 
   return commentType;
 }
 
-function processEndOfCommentToken(EndOfCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
+function tokeniseEndOfCommentToken(EndOfCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content, commentType) {
   const endOfMultiLineCommentToken = EndOfCommentToken.fromWithinContent(content),
         position = EndOfCommentToken.positionWithinContent(content),
         contentLength = endOfMultiLineCommentToken.getContentLength(),
@@ -243,7 +243,7 @@ function processEndOfCommentToken(EndOfCommentToken, MiddleOfCommentToken, comme
   if (rightContentLength > 0) {
     const tokenOrContent = rightContent; ///
 
-    commentType = processCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
+    commentType = tokeniseCommentTokens(commentTokensOrRemainingContents, tokenOrContent, commentType);
   }
 
   return commentType;

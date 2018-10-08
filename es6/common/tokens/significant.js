@@ -2,10 +2,10 @@
 
 const tokens = require('../tokens');
 
-const { processByCallback } = tokens;
+const { tokeniseByCallback } = tokens;
 
-function process(tokensOrContents, rules) {
-  processByCallback(tokensOrContents, function(tokenOrContent) {
+function tokenise(tokensOrContents, rules) {
+  tokeniseByCallback(tokensOrContents, function(tokenOrContent) {
     let tokensOrRemainingContents;
 
     const tokenOrContentString = (typeof tokenOrContent === 'string'),
@@ -28,7 +28,7 @@ function process(tokensOrContents, rules) {
 }
 
 module.exports = {
-  process
+  tokenise
 };
 
 function significantTokensFromContent(content, rules, depth) {

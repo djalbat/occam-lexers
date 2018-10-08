@@ -5,8 +5,8 @@ const necessary = require('necessary');
 const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
 
-function processByToken(tokensOrContents, Token) {
-  processByCallback(tokensOrContents, function(tokenOrContent) {
+function tokeniseByToken(tokensOrContents, Token) {
+  tokeniseByCallback(tokensOrContents, function(tokenOrContent) {
     let tokensOrRemainingContents;
 
     const tokenOrContentString = (typeof tokenOrContent === 'string'),
@@ -27,7 +27,7 @@ function processByToken(tokensOrContents, Token) {
   });
 }
 
-function processByCallback(tokensOrContents, callback) {
+function tokeniseByCallback(tokensOrContents, callback) {
   let index = 0,
       tokensOrContentsLength = tokensOrContents.length;
 
@@ -49,8 +49,8 @@ function processByCallback(tokensOrContents, callback) {
 }
 
 module.exports = {
-  processByToken,
-  processByCallback
+  tokeniseByToken,
+  tokeniseByCallback
 };
 
 function tokenOrRemainingContentFromContentAndToken(content, Token) {

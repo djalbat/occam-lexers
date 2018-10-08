@@ -6,13 +6,13 @@ const tokens = require('../tokens'),
       HyperlinkInMultiLineCommentToken = require('../token/nonSignificant/comment/multiLine/hyperlinkIn'),
       HyperlinkInSingleLineCommentToken = require('../token/nonSignificant/comment/singleLine/hyperlinkIn');
 
-const { processByCallback } = tokens;
+const { tokeniseByCallback } = tokens;
 
-function postProcess(tokensOrContents) {
-  processByCallback(tokensOrContents, function(tokenOrContent) {
+function reTokenise(tokensOrContents) {
+  tokeniseByCallback(tokensOrContents, function(tokenOrContent) {
     const commentTokensOrRemainingContents = [];
 
-    postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent);
+    reTokeniseMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent);
 
     const tokensOrRemainingContents = commentTokensOrRemainingContents; ///
 
@@ -21,10 +21,10 @@ function postProcess(tokensOrContents) {
 }
 
 module.exports = {
-  postProcess
+  reTokenise
 };
 
-function postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent) {
+function reTokeniseMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent) {
   const tokenOrContentString = (typeof tokenOrContent === 'string'),
         tokenOrContentContent = tokenOrContentString; ///
 
@@ -48,7 +48,7 @@ function postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, toke
               hyperlinkInMultiLineCommentTokenPosition = HyperlinkInMultiLineCommentToken.positionWithinContent(content);
 
         if (hyperlinkInMultiLineCommentTokenPosition > -1) {
-          processHyperlinkInMultiLineCommentToken(commentTokensOrRemainingContents, content);
+          tokeniseHyperlinkInMultiLineCommentToken(commentTokensOrRemainingContents, content);
         } else {
           commentTokensOrRemainingContents.push(token);
         }
@@ -57,7 +57,7 @@ function postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, toke
               hyperlinkInSingleLineCommentTokenPosition = HyperlinkInSingleLineCommentToken.positionWithinContent(content);
 
         if (hyperlinkInSingleLineCommentTokenPosition > -1) {
-          processHyperlinkInSingleLineCommentToken(commentTokensOrRemainingContents, content);
+          tokeniseHyperlinkInSingleLineCommentToken(commentTokensOrRemainingContents, content);
         } else {
           commentTokensOrRemainingContents.push(token);
         }
@@ -70,15 +70,15 @@ function postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, toke
   }
 }
 
-function processHyperlinkInMultiLineCommentToken(commentTokensOrRemainingContents, content) {
-  processHyperlinkInCommentToken(HyperlinkInMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content);
+function tokeniseHyperlinkInMultiLineCommentToken(commentTokensOrRemainingContents, content) {
+  tokeniseHyperlinkInCommentToken(HyperlinkInMultiLineCommentToken, MiddleOfMultiLineCommentToken, commentTokensOrRemainingContents, content);
 }
 
-function processHyperlinkInSingleLineCommentToken(commentTokensOrRemainingContents, content) {
-  processHyperlinkInCommentToken(HyperlinkInSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content);
+function tokeniseHyperlinkInSingleLineCommentToken(commentTokensOrRemainingContents, content) {
+  tokeniseHyperlinkInCommentToken(HyperlinkInSingleLineCommentToken, MiddleOfSingleLineCommentToken, commentTokensOrRemainingContents, content);
 }
 
-function processHyperlinkInCommentToken(HyperlinkInCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content) {
+function tokeniseHyperlinkInCommentToken(HyperlinkInCommentToken, MiddleOfCommentToken, commentTokensOrRemainingContents, content) {
   const hyperlinkInCommentToken = HyperlinkInCommentToken.fromWithinContent(content),
         position = HyperlinkInCommentToken.positionWithinContent(content),  ///
         contentLength = hyperlinkInCommentToken.getContentLength(),
@@ -103,6 +103,6 @@ function processHyperlinkInCommentToken(HyperlinkInCommentToken, MiddleOfComment
           middleOfCommentToken = MiddleOfCommentToken.fromContent(content),
           tokenOrContent = middleOfCommentToken;  ///
 
-    postProcessMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent);
+    reTokeniseMiddleOfCommentTokens(commentTokensOrRemainingContents, tokenOrContent);
   }
 }

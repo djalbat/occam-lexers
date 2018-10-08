@@ -4,7 +4,7 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class LaTeXLexer extends CommonLexer {
-  processRegularExpressionTokens(tokensOrContents) {}
+  tokeniseRegularExpressions(tokensOrContents) {}
 
   static fromNothing() { return CommonLexer.fromNothing(LaTeXLexer); }
 

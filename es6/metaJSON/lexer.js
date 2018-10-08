@@ -4,9 +4,9 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class MetaJSONLexer extends CommonLexer {
-  postProcessMiddleOfCommentTokens(tokensOrContents) {}
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
-  processCommentTokens(tokensOrContents, inComment) {}
+  tokeniseComments(tokensOrContents, inComment) {}
 
   static fromEntries(entries) { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
 

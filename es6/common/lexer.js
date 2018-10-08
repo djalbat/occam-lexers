@@ -22,44 +22,44 @@ class CommonLexer {
     const tokensOrContents = [content], ///
           commentType = null;
 
-    this.processEndOfLineTokens(tokensOrContents);
+    this.tokeniseEndOfLines(tokensOrContents);
 
-    this.processAllBarEndOfLineTokens(tokensOrContents, commentType);
+    this.tokeniseAllBarEndOfLines(tokensOrContents, commentType);
 
     const tokens = tokensOrContents;  ///
 
     return tokens;
   }
 
-  processAllBarEndOfLineTokens(tokensOrContents, commentType) {
-    this.processStringLiteralTokens(tokensOrContents);
+  tokeniseAllBarEndOfLines(tokensOrContents, commentType) {
+    this.tokeniseStringLiterals(tokensOrContents);
 
-    commentType = this.processCommentTokens(tokensOrContents, commentType);
+    commentType = this.tokeniseComments(tokensOrContents, commentType);
 
-    this.postProcessMiddleOfCommentTokens(tokensOrContents);
+    this.reTokeniseMiddleOfCommentTokens(tokensOrContents);
 
-    this.processRegularExpressionTokens(tokensOrContents);
+    this.tokeniseRegularExpressions(tokensOrContents);
 
-    this.processWhitespaceTokens(tokensOrContents);
+    this.tokeniseWhitespace(tokensOrContents);
 
-    this.processSignificantTokens(tokensOrContents);
+    this.tokeniseSignificantContent(tokensOrContents);
 
     return commentType;
   }
 
-  processEndOfLineTokens(tokensOrContents) { NonSignificantEndOfLineTokens.process(tokensOrContents); }
+  tokeniseEndOfLines(tokensOrContents) { NonSignificantEndOfLineTokens.tokenise(tokensOrContents); }
 
-  processStringLiteralTokens(tokensOrContents) { StringLiteralTokens.process(tokensOrContents); }
+  tokeniseStringLiterals(tokensOrContents) { StringLiteralTokens.tokenise(tokensOrContents); }
 
-  processCommentTokens(tokensOrContents, commentType) { return CommentTokens.process(tokensOrContents, commentType); }
+  tokeniseComments(tokensOrContents, commentType) { return CommentTokens.tokenise(tokensOrContents, commentType); }
 
-  postProcessMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.postProcess(tokensOrContents); }
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.reTokenise(tokensOrContents); }
 
-  processRegularExpressionTokens(tokensOrContents) { RegularExpressionTokens.process(tokensOrContents); }
+  tokeniseRegularExpressions(tokensOrContents) { RegularExpressionTokens.tokenise(tokensOrContents); }
 
-  processWhitespaceTokens(tokensOrContents) { WhitespaceTokens.process(tokensOrContents); }
+  tokeniseWhitespace(tokensOrContents) { WhitespaceTokens.tokenise(tokensOrContents); }
 
-  processSignificantTokens(tokensOrContents) { SignificantTokens.process(tokensOrContents, this.rules) }
+  tokeniseSignificantContent(tokensOrContents) { SignificantTokens.tokenise(tokensOrContents, this.rules) }
 
   static fromNothing(Class) {
     const { entries } = Class,
