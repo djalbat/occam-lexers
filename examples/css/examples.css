@@ -31,12 +31,12 @@
 }
 
 .column,
-#sizeableElement {
+.sizeable {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-#sizeableElement {
+.sizeable {
   width: 60rem;
   min-width: 40rem;
   max-width: 120rem;
@@ -73,11 +73,11 @@ textarea.error {
   border-color: red;
 }
 
-textarea#entries {
+textarea.entries {
   overflow-wrap: normal;
   margin-bottom: 1rem;
 }
 
-textarea#tokens {
+textarea.tokens {
   font-size: 0.75rem;
 }

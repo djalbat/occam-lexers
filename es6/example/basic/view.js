@@ -1,17 +1,73 @@
 'use strict';
 
-const easy = require('easy');
+const easy = require('easy'),
+      easyLayout = require('easy-layout');
 
-const { Element } = easy;
+const { Element } = easy,
+      { SizeableElement } = easyLayout;
+
+const BasicLexer = require('../../basic/lexer'),
+      TokensTextarea = require('../common/textarea/tokens'),
+      EntriesTextarea = require('../common/textarea/entries'),
+      ContentTextarea = require('../common/textarea/content'),
+      LeftVerticalSplitter = require('../common/verticalSplitter/left');
 
 class BasicExampleView extends Element {
+  keyUpHandler() {
+    try {
+      const entries = this.getEntries(),
+            content = this.getContent(),
+            basicLexer = BasicLexer.fromEntries(entries),
+            tokens = basicLexer.tokenise(content);
+
+      this.hideError();
+
+      this.setTokens(tokens);
+    } catch (error) {
+      this.showError();
+
+      this.clearTokens();
+    }
+  }
+
   childElements(properties) {
+    const keyUpHandler = this.keyUpHandler.bind(this);
+
     return ([
-      'Basic example'
+
+      <h1>Basic Example</h1>,
+      <div className="columns">
+        <SizeableElement>
+          <h2>Entries</h2>
+          <EntriesTextarea onKeyUp={keyUpHandler} />
+          <h2>Content</h2>
+          <ContentTextarea onKeyUp={keyUpHandler} />
+        </SizeableElement>
+        <LeftVerticalSplitter />
+        <div className="column">
+          <h2>Tokens</h2>
+          <TokensTextarea />
+        </div>
+      </div>
+
     ]);
   }
 
-  static fromProperties(properties) { return Element.fromProperties(BasicExampleView, properties, document); }
+  initialise() {
+    this.assignContext();
+
+    const { entries } = BasicLexer;
+
+    this.setEntries(entries);
+  }
+
+  static fromProperties(properties) {
+    const basicExampleView = Element.fromProperties(BasicExampleView, properties);
+
+    basicExampleView.initialise();
+
+    return basicExampleView
+  }
 }
 
 Object.assign(BasicExampleView, {
@@ -22,35 +78,3 @@ Object.assign(BasicExampleView, {
 });
 
 module.exports = BasicExampleView;
-
-/*
-const Example = require('../../example'),
-      BasicLexer = require('../../basic/lexer');
-
-class BasicExample {
-  static run() {
-    const { entries } = BasicLexer,
-          Lexer = BasicLexer;
-
-    Example.run(entries, Lexer);
-  }
-}
-
-    <h1>Basic example</h1>
-    <div className="columns">
-      <div id="sizeableElement">
-        <h2>Entries</h2>
-        <textarea id="entries" spellCheck="false"></textarea>
-        <h2>Content</h2>
-        <textarea id="content" spellCheck="false"></textarea>
-      </div><div className="left vertical splitter" id="verticalSplitter"></div>
-      <div className="column">
-        <h2>Tokens</h2>
-        <textarea rows="30" id="tokens" readOnly></textarea>
-      </div>
-    </div>
-    <p>
-      <a href="index.html">...back</a>
-    </p>
-
- */
