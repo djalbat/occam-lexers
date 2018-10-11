@@ -53,7 +53,10 @@ Object.assign(EntriesTextarea, {
     className: 'entries',
     spellcheck: false,
     readOnly: true
-  }
+  },
+  ignoredProperties: [
+    'onKeyUp'
+  ]
 });
 
 module.exports = EntriesTextarea;
