@@ -16,15 +16,8 @@ class EntriesTextarea extends InputElement {
   }
 
   getEntries() {
-    let entries;
-
-    try {
-      const value = this.getValue();
-
-      entries = JSON.parse(value);
-    } catch (error) {
-      entries = {};
-    }
+    const value = this.getValue(),
+          entries = JSON.parse(value);
 
     return entries;
   }

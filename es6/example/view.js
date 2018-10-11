@@ -9,7 +9,7 @@ const { Element } = easy,
 const TokensTextarea = require('./common/textarea/tokens'),
       EntriesTextarea = require('./common/textarea/entries'),
       ContentTextarea = require('./common/textarea/content'),
-      LeftVerticalSplitter = require('./common/verticalSplitter/left');
+      MainVerticalSplitter = require('./common/verticalSplitter/main');
 
 class ExampleView extends Element {
   keyUpHandler() {
@@ -40,7 +40,7 @@ class ExampleView extends Element {
           <h2>Content</h2>
           <ContentTextarea onKeyUp={keyUpHandler} />
         </SizeableElement>
-        <LeftVerticalSplitter />
+        <MainVerticalSplitter />
         <div className="column">
           <h2>Tokens</h2>
           <TokensTextarea />

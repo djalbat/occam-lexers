@@ -4,22 +4,22 @@ const easylayout = require('easy-layout');
 
 const { Splitter, VerticalSplitter } = easylayout;
 
-class LeftVerticalSplitter extends VerticalSplitter {
+class MainVerticalSplitter extends VerticalSplitter {
   static fromProperties(properties) {
     const afterSizeableElement = true;
 
     Object.assign(properties, { afterSizeableElement });
 
-    const leftVerticalSplitter = Splitter.fromProperties(LeftVerticalSplitter, properties);
+    const mainVerticalSplitter = Splitter.fromProperties(MainVerticalSplitter, properties);
 
-    return leftVerticalSplitter;
+    return mainVerticalSplitter;
   }
 }
 
-Object.assign(LeftVerticalSplitter, {
+Object.assign(MainVerticalSplitter, {
   defaultProperties: {
-    className: 'left'
+    className: 'main'
   }
 });
 
-module.exports = LeftVerticalSplitter;
+module.exports = MainVerticalSplitter;
