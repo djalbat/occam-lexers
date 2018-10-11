@@ -51,7 +51,7 @@ Object.assign(EntriesTextarea, {
   tagName: 'textarea',
   defaultProperties: {
     className: 'entries',
-    spellcheck: false,
+    spellCheck: false,
     readOnly: true
   },
   ignoredProperties: [
