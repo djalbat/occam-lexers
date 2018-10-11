@@ -28,7 +28,7 @@ class EntriesTextarea extends InputElement {
     });
   }
 
-  static fromProperties(properties) { return InputElement.fromProperties(EntriesTextarea, properties, keyUpHandler); }
+  static fromProperties(properties) { return InputElement.fromProperties(EntriesTextarea, properties); }
 }
 
 Object.assign(EntriesTextarea, {

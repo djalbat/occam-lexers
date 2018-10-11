@@ -12,6 +12,16 @@ const TokensTextarea = require('./common/textarea/tokens'),
       MainVerticalSplitter = require('./common/verticalSplitter/main');
 
 class ExampleView extends Element {
+  getTokens() {
+    const Lexer = this.getLexer(),
+          entries = this.getEntries(),
+          content = this.getContent(),
+          lexer = Lexer.fromEntries(entries),
+          tokens = lexer.tokenise(content);
+
+    return tokens;
+  }
+
   keyUpHandler() {
     try {
       const tokens = this.getTokens();
@@ -52,14 +62,24 @@ class ExampleView extends Element {
 
   initialise() {
     this.assignContext();
+
+    const Lexer = this.getLexer(),
+          initialContent = this.getInitialContent(),
+          content = initialContent, ///
+          { entries } = Lexer;
+
+    this.setContent(content);
+    this.setEntries(entries);
+
+    this.keyUpHandler();
   }
 
   static fromProperties(Class, properties) {
-    const florenceExampleView = Element.fromProperties(Class, properties);
+    const exampleView = Element.fromProperties(Class, properties);
 
-    florenceExampleView.initialise();
+    exampleView.initialise();
 
-    return florenceExampleView
+    return exampleView
   }
 }
 

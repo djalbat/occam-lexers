@@ -4,13 +4,10 @@ const BasicLexer = require('../../basic/lexer'),
       ExampleView = require('../../example/view');
 
 class BasicExampleView extends ExampleView {
-  getTokens() {
-    const entries = this.getEntries(),
-          content = this.getContent(),
-          basicLexer = BasicLexer.fromEntries(entries),
-          tokens = basicLexer.tokenise(content);
+  getLexer() {
+    const Lexer = BasicLexer; ///
 
-    return tokens;
+    return Lexer;
   }
 
   getTitle() {
@@ -19,12 +16,10 @@ class BasicExampleView extends ExampleView {
     return title;
   }
 
-  initialise() {
-    super.initialise();
+  getInitialContent() {
+    const initialContent = '1+2/3';
 
-    const { entries } = BasicLexer;
-
-    this.setEntries(entries);
+    return initialContent;
   }
 
   static fromProperties(properties) { return ExampleView.fromProperties(BasicExampleView, properties);}

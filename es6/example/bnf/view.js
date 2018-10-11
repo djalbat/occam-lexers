@@ -4,13 +4,10 @@ const BNFLexer = require('../../bnf/lexer'),
       ExampleView = require('../../example/view');
 
 class BNFExampleView extends ExampleView {
-  getTokens() {
-    const entries = this.getEntries(),
-          content = this.getContent(),
-          bnfLexer = BNFLexer.fromEntries(entries),
-          tokens = bnfLexer.tokenise(content);
+  getLexer() {
+    const Lexer = BNFLexer;  ///
 
-    return tokens;
+    return Lexer;
   }
 
   getTitle() {
@@ -19,13 +16,14 @@ class BNFExampleView extends ExampleView {
     return title;
   }
 
-  initialise() {
-    super.initialise();
+  getInitialContent() {
+    const { entries } = BNFLexer,
+          entriesString = JSON.stringify(entries, null, '  '),
+          initialContent = entriesString; ///
 
-    const { entries } = BNFLexer;
-
-    this.setEntries(entries);
+    return initialContent;
   }
+
 
   static fromProperties(properties) { return ExampleView.fromProperties(BNFExampleView, properties);}
 }

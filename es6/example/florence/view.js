@@ -4,13 +4,10 @@ const ExampleView = require('../../example/view'),
       FlorenceLexer = require('../../florence/lexer');
 
 class FlorenceExampleView extends ExampleView {
-  getTokens() {
-    const entries = this.getEntries(),
-          content = this.getContent(),
-          florenceLexer = FlorenceLexer.fromEntries(entries),
-          tokens = florenceLexer.tokenise(content);
+  getLexer() {
+    const Lexer = FlorenceLexer;  ///
 
-    return tokens;
+    return Lexer;
   }
 
   getTitle() {
@@ -19,12 +16,10 @@ class FlorenceExampleView extends ExampleView {
     return title;
   }
 
-  initialise() {
-    super.initialise();
+  getInitialContent() {
+    const initialContent = '';
 
-    const { entries } = FlorenceLexer;
-
-    this.setEntries(entries);
+    return initialContent;
   }
 
   static fromProperties(properties) { return ExampleView.fromProperties(FlorenceExampleView, properties);}

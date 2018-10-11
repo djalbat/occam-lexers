@@ -40,7 +40,7 @@ class ContentTextarea extends InputElement {
     });
   }
 
-  static fromProperties(properties) { return InputElement.fromProperties(ContentTextarea, properties, keyUpHandler); }
+  static fromProperties(properties) { return InputElement.fromProperties(ContentTextarea, properties); }
 }
 
 Object.assign(ContentTextarea, {
