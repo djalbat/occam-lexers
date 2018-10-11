@@ -9,37 +9,24 @@
   padding: 0;
 }
 
-.columns {
-  display: flex;
-  align-items: stretch;
-  flex-direction: row;
-  height: 100%;
-}
-
-.column {
-  flex: 1;
-}
-
 .vertical.splitter {
   width: 8px;
   min-width: 8px;
   background-color: lightgray;
 }
 
-.columns {
-  margin-bottom: 1rem;
-}
-
-.column,
-.sizeable {
+.column {
+  flex-direction: column;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
 .sizeable {
   width: 60rem;
-  min-width: 40rem;
+  min-width: 20rem;
   max-width: 120rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 h1 {
@@ -52,9 +39,9 @@ h2 {
   font-size: 1.25rem;
 }
 
-p,
-ul {
-  text-align: center;
+p {
+  margin-top: 1rem;
+    text-align: center;
 }
 
 textarea {
