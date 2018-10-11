@@ -1,79 +1,38 @@
 'use strict';
 
-const easy = require('easy'),
-      easyLayout = require('easy-layout');
-
-const { Element } = easy,
-      { SizeableElement } = easyLayout;
-
 const BNFLexer = require('../../bnf/lexer'),
-      TokensTextarea = require('../common/textarea/tokens'),
-      EntriesTextarea = require('../common/textarea/entries'),
-      ContentTextarea = require('../common/textarea/content'),
-      LeftVerticalSplitter = require('../common/verticalSplitter/left');
+      ExampleView = require('../../example/view');
 
-class BNFExampleView extends Element {
-  keyUpHandler() {
-    try {
-      const entries = this.getEntries(),
-            content = this.getContent(),
-            bnfLexer = BNFLexer.fromEntries(entries),
-            tokens = bnfLexer.tokenise(content);
+class BNFExampleView extends ExampleView {
+  getTokens() {
+    const entries = this.getEntries(),
+          content = this.getContent(),
+          bnfLexer = BNFLexer.fromEntries(entries),
+          tokens = bnfLexer.tokenise(content);
 
-      this.hideError();
-
-      this.setTokens(tokens);
-    } catch (error) {
-      this.showError();
-
-      this.clearTokens();
-    }
+    return tokens;
   }
 
-  childElements(properties) {
-    const keyUpHandler = this.keyUpHandler.bind(this);
+  getTitle() {
+    const title = 'BNF lexer example';
 
-    return ([
-
-      <h1>BNF Example</h1>,
-      <div className="columns">
-        <SizeableElement>
-          <h2>Entries</h2>
-          <EntriesTextarea onKeyUp={keyUpHandler} />
-          <h2>Content</h2>
-          <ContentTextarea onKeyUp={keyUpHandler} />
-        </SizeableElement>
-        <LeftVerticalSplitter />
-        <div className="column">
-          <h2>Tokens</h2>
-          <TokensTextarea />
-        </div>
-      </div>
-
-    ]);
+    return title;
   }
 
   initialise() {
-    this.assignContext();
+    super.initialise();
 
     const { entries } = BNFLexer;
 
     this.setEntries(entries);
   }
 
-  static fromProperties(properties) {
-    const bnfExampleView = Element.fromProperties(BNFExampleView, properties);
-
-    bnfExampleView.initialise();
-
-    return bnfExampleView
-  }
+  static fromProperties(properties) { return ExampleView.fromProperties(BNFExampleView, properties);}
 }
 
 Object.assign(BNFExampleView, {
-  tagName: 'div',
   defaultProperties: {
-    className: 'bnf example'
+    className: 'bnf'
   }
 });
 

@@ -1,57 +1,39 @@
 'use strict';
 
-const easy = require('easy');
+const ExampleView = require('../../example/view'),
+      FlorenceLexer = require('../../florence/lexer');
 
-const { Element } = easy;
+class FlorenceExampleView extends ExampleView {
+  getTokens() {
+    const entries = this.getEntries(),
+          content = this.getContent(),
+          florenceLexer = FlorenceLexer.fromEntries(entries),
+          tokens = florenceLexer.tokenise(content);
 
-class FlorenceExampleView extends Element {
-  childElements(properties) {
-    return ([
-      'Florence example'
-    ]);
+    return tokens;
   }
 
-  static fromProperties(properties) { return Element.fromProperties(FlorenceExampleView, properties, document); }
+  getTitle() {
+    const title = 'Florence lexer example';
+
+    return title;
+  }
+
+  initialise() {
+    super.initialise();
+
+    const { entries } = FlorenceLexer;
+
+    this.setEntries(entries);
+  }
+
+  static fromProperties(properties) { return ExampleView.fromProperties(FlorenceExampleView, properties);}
 }
 
 Object.assign(FlorenceExampleView, {
-  tagName: 'div',
   defaultProperties: {
-    className: 'florence example'
+    className: 'florence'
   }
 });
 
 module.exports = FlorenceExampleView;
-
-/*
-const Example = require('../../example'),
-      FlorenceLexer = require('../../florence/lexer');
-
-class FlorenceExample {
-  static run() {
-    const { entries } = FlorenceLexer,
-          Lexer = FlorenceLexer;
-
-    Example.run(entries, Lexer);
-  }
-}
-
-
-    <h1>Florence example</h1>
-    <div className="columns">
-      <div id="sizeableElement">
-        <h2>Entries</h2>
-        <textarea id="entries" spellCheck="false"></textarea>
-        <h2>Content</h2>
-        <textarea id="content" spellCheck="false"></textarea>
-      </div><div className="left vertical splitter" id="verticalSplitter"></div>
-      <div className="column">
-        <h2>Tokens</h2>
-        <textarea rows="30" id="tokens" readOnly></textarea>
-      </div>
-    </div>
-    <p>
-      <a href="index.html">...back</a>
-    </p>
-
- */
