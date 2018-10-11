@@ -1,17 +1,73 @@
 'use strict';
 
-const easy = require('easy');
+const easy = require('easy'),
+      easyLayout = require('easy-layout');
 
-const { Element } = easy;
+const { Element } = easy,
+      { SizeableElement } = easyLayout;
+
+const BNFLexer = require('../../bnf/lexer'),
+      TokensTextarea = require('../common/textarea/tokens'),
+      EntriesTextarea = require('../common/textarea/entries'),
+      ContentTextarea = require('../common/textarea/content'),
+      LeftVerticalSplitter = require('../common/verticalSplitter/left');
 
 class BNFExampleView extends Element {
+  keyUpHandler() {
+    try {
+      const entries = this.getEntries(),
+            content = this.getContent(),
+            bnfLexer = BNFLexer.fromEntries(entries),
+            tokens = bnfLexer.tokenise(content);
+
+      this.hideError();
+
+      this.setTokens(tokens);
+    } catch (error) {
+      this.showError();
+
+      this.clearTokens();
+    }
+  }
+
   childElements(properties) {
+    const keyUpHandler = this.keyUpHandler.bind(this);
+
     return ([
-      'BNF example'
+
+      <h1>BNF Example</h1>,
+      <div className="columns">
+        <SizeableElement>
+          <h2>Entries</h2>
+          <EntriesTextarea onKeyUp={keyUpHandler} />
+          <h2>Content</h2>
+          <ContentTextarea onKeyUp={keyUpHandler} />
+        </SizeableElement>
+        <LeftVerticalSplitter />
+        <div className="column">
+          <h2>Tokens</h2>
+          <TokensTextarea />
+        </div>
+      </div>
+
     ]);
   }
 
-  static fromProperties(properties) { return Element.fromProperties(BNFExampleView, properties, document); }
+  initialise() {
+    this.assignContext();
+
+    const { entries } = BNFLexer;
+
+    this.setEntries(entries);
+  }
+
+  static fromProperties(properties) {
+    const bnfExampleView = Element.fromProperties(BNFExampleView, properties);
+
+    bnfExampleView.initialise();
+
+    return bnfExampleView
+  }
 }
 
 Object.assign(BNFExampleView, {
@@ -22,37 +78,3 @@ Object.assign(BNFExampleView, {
 });
 
 module.exports = BNFExampleView;
-
-/*
-
-const Example = require('../../example'),
-      BNFLexer = require('../../bnf/lexer');
-
-class BNFExample {
-  static run() {
-    const { entries } = BNFLexer,
-          Lexer = BNFLexer;
-
-    Example.run(entries, Lexer);
-  }
-}
-
-
-    <h1>BNF example</h1>
-    <div class="columns">
-      <div id="sizeableElement">
-        <h2>Entries</h2>
-        <textarea id="entries" spellcheck="false"></textarea>
-        <h2>Content</h2>
-        <textarea id="content" spellcheck="false"></textarea>
-      </div><div class="left vertical splitter" id="verticalSplitter"></div>
-      <div class="column">
-        <h2>Tokens</h2>
-        <textarea rows="30" id="tokens" readonly></textarea>
-      </div>
-    </div>
-    <p>
-      <a href="index.html">...back</a>
-    </p>
-
- */
