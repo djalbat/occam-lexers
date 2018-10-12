@@ -18,9 +18,8 @@ class CommonLexer {
     return this.rules;
   }
 
-  tokenise(content) {
-    const tokensOrContents = [content], ///
-          commentType = null;
+  tokenise(content, commentType = null) {
+    const tokensOrContents = [content]; ///
 
     this.tokeniseEndOfLines(tokensOrContents);
 
