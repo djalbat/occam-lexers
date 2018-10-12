@@ -6,11 +6,11 @@ const entries = require('./entries'),
 class PlainLexer extends CommonLexer {
   tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
+  tokeniseStringLiterals(tokensOrContents) {}
 
   tokeniseRegularExpressions(tokensOrContents) {}
 
-  tokeniseStringLiterals(tokensOrContents) {}
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
   static fromEntries(entries) { return CommonLexer.fromEntries(PlainLexer, entries); }
 

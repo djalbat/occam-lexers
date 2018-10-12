@@ -12,7 +12,9 @@ const types = require('../types'),
 const { multiLineType, singleLineType, multiLineCommentType, singleLineCommentType } = types,
       { tokeniseByCallback } = tokens;
 
-function tokenise(tokensOrContents, commentType) {
+function tokenise(tokensOrContents) {
+  let commentType = null;
+
   tokeniseByCallback(tokensOrContents, function(tokenOrContent) {
     const commentTokensOrRemainingContents = [];
 
@@ -22,8 +24,6 @@ function tokenise(tokensOrContents, commentType) {
 
     return tokensOrRemainingContents;
   });
-
-  return commentType;
 }
 
 module.exports = {

@@ -18,22 +18,14 @@ class CommonLexer {
     return this.rules;
   }
 
-  tokenise(content, commentType = null) {
+  tokenise(content) {
     const tokensOrContents = [content]; ///
 
     this.tokeniseEndOfLines(tokensOrContents);
 
-    this.tokeniseAllBarEndOfLines(tokensOrContents, commentType);
-
-    const tokens = tokensOrContents;  ///
-
-    return tokens;
-  }
-
-  tokeniseAllBarEndOfLines(tokensOrContents, commentType) {
     this.tokeniseStringLiterals(tokensOrContents);
 
-    commentType = this.tokeniseComments(tokensOrContents, commentType);
+    this.tokeniseComments(tokensOrContents);
 
     this.reTokeniseMiddleOfCommentTokens(tokensOrContents);
 
@@ -43,22 +35,24 @@ class CommonLexer {
 
     this.tokeniseSignificantContent(tokensOrContents);
 
-    return commentType;
+    const tokens = tokensOrContents;  ///
+
+    return tokens;
   }
+
+  tokeniseComments(tokensOrContents) { CommentTokens.tokenise(tokensOrContents); }
+
+  tokeniseWhitespace(tokensOrContents) { WhitespaceTokens.tokenise(tokensOrContents); }
 
   tokeniseEndOfLines(tokensOrContents) { NonSignificantEndOfLineTokens.tokenise(tokensOrContents); }
 
   tokeniseStringLiterals(tokensOrContents) { StringLiteralTokens.tokenise(tokensOrContents); }
 
-  tokeniseComments(tokensOrContents, commentType) { return CommentTokens.tokenise(tokensOrContents, commentType); }
-
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.reTokenise(tokensOrContents); }
+  tokeniseSignificantContent(tokensOrContents) { SignificantTokens.tokenise(tokensOrContents, this.rules) }
 
   tokeniseRegularExpressions(tokensOrContents) { RegularExpressionTokens.tokenise(tokensOrContents); }
 
-  tokeniseWhitespace(tokensOrContents) { WhitespaceTokens.tokenise(tokensOrContents); }
-
-  tokeniseSignificantContent(tokensOrContents) { SignificantTokens.tokenise(tokensOrContents, this.rules) }
+  reTokeniseMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.reTokenise(tokensOrContents); }
 
   static fromNothing(Class) {
     const { entries } = Class,
