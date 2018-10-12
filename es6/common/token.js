@@ -84,6 +84,26 @@ class Token {
     return singleLineCommentToken;
   }
 
+  isEqualTo(token) {
+    let equalTo = false;
+
+    const tokenSignificant = token.isSignificant();
+
+    if (this.significant === tokenSignificant) {
+      const tokenContent = token.getContent();
+
+      if (this.content === tokenContent) {
+        const tokenType = token.getType();
+
+        if (this.type === tokenType) {
+          equalTo = true;
+        }
+      }
+    }
+
+    return equalTo;
+  }
+
   asHTML(filePath) {
     const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;
