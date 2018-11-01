@@ -17,9 +17,19 @@ class BNFExampleView extends ExampleView {
   }
 
   getInitialContent() {
-    const { entries } = BNFLexer,
-          entriesString = JSON.stringify(entries, null, '  '),
-          initialContent = entriesString; ///
+    const initialContent = `ruleName             ::=  [name] ;
+
+  regularExpression    ::=  [regularExpression] ;
+  
+  significantTokenType ::=  [type] ;
+
+  terminalSymbol       ::=  [stringLiteral] ;
+  
+  endOfLine            ::=  "<END_OF_LINE>" ;
+  
+  epsilon              ::=  "ε" ;
+
+  wildcard             ::=  "." ;`
 
     return initialContent;
   }

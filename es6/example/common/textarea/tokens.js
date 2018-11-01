@@ -56,6 +56,7 @@ Object.assign(TokensTextarea, {
   tagName: 'textarea',
   defaultProperties: {
     className: 'tokens',
+    spellCheck: 'false',
     readOnly: true,
     rows: '30'
   }
