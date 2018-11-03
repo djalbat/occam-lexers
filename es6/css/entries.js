@@ -3,15 +3,6 @@
 const entries = [
 
   {
-    "special": ";|,|\\|=|~=|=|\\{|\\}|\\(|\\)|\\[|\\]"
-  },
-  {
-    "keyword": "(?:!important|@media)"
-  },
-  {
-    "colour": "#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})"
-  },
-  {
     "percentage": "(?:[0-9]+|[0-9]*\\.[0-9]+)\\%"
   },
   {
@@ -36,13 +27,13 @@ const entries = [
     "number": "[0-9]+|[0-9]*\\.[0-9]+"
   },
   {
-    "pseudoElement": "::[_a-z][_a-z0-9-]*"
+    "special": ";|::|:|\\.|,|/|\\|=|~=|=|>|\\{|\\}|\\(|\\)|\\[|\\]"
   },
   {
-    "pseudoClass": ":[_a-z][_a-z0-9-]*"
+    "colour": "#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})"
   },
   {
-    "class": "\\.[_a-z][_a-z0-9-]*"
+    "keyword": "(?:!important|@media)"
   },
   {
     "operator": "^and|not|only|not$"
