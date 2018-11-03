@@ -3,6 +3,12 @@
 const entries = [
 
   {
+    "colour": "#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})"
+  },
+  {
+    "keyword": "(?:!important|@media)"
+  },
+  {
     "percentage": "(?:[0-9]+|[0-9]*\\.[0-9]+)\\%"
   },
   {
@@ -28,12 +34,6 @@ const entries = [
   },
   {
     "special": ";|::|:|\\.|,|/|\\|=|~=|=|>|\\{|\\}|\\(|\\)|\\[|\\]"
-  },
-  {
-    "colour": "#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})"
-  },
-  {
-    "keyword": "(?:!important|@media)"
   },
   {
     "operator": "^and|not|only|not$"
