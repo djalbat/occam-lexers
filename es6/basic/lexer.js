@@ -6,7 +6,9 @@ const entries = require('./entries'),
 class BasicLexer extends CommonLexer {
   tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
-  tokeniseStringLiterals(tokensOrContents) {}
+  tokeniseDoublyQuotedStringLiterals(tokensOrContents) {}
+
+  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
 
   tokeniseRegularExpressions(tokensOrContents) {}
 

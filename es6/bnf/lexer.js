@@ -7,6 +7,8 @@ const entries = require('./entries'),
 class BNFLexer extends CommonLexer {
   tokeniseComments(tokensOrContents, inComment) { return inComment; }
 
+  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+
   reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
   tokensFromBNF(bnf) {

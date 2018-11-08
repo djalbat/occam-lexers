@@ -11,6 +11,8 @@ class FlorenceLexer extends CommonLexer {
 
   tokeniseRegularExpressions(tokensOrContents) {}
 
+  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+
   static fromNothing() { return CommonLexer.fromNothing(FlorenceLexer); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }

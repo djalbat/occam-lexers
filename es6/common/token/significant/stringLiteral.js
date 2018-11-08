@@ -1,12 +1,9 @@
 'use strict';
 
-const types = require('../../types'),
-      SignificantToken = require('../significant');
-
-const { stringLiteralType } = types;
+const SignificantToken = require('../significant');
 
 class StringLiteralToken extends SignificantToken {
-  clone(startPosition, endPosition) { return super.clone(StringLiteralToken, startPosition, endPosition); }
+  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
 
   getString() {
     const content = this.getContent(),
@@ -18,19 +15,11 @@ class StringLiteralToken extends SignificantToken {
     return string;
   }
 
-  static fromContent(content) { return SignificantToken.fromContent(StringLiteralToken, content); }
+  static fromContent(Class, content) { return SignificantToken.fromContent(Class, content); }
 
-  static fromWithinContent(content) { return SignificantToken.fromWithinContent(StringLiteralToken, content); }
+  static fromWithinContent(Class, content) { return SignificantToken.fromWithinContent(Class, content); }
 
-  static positionWithinContent(content) { return SignificantToken.positionWithinContent(StringLiteralToken, content); }
+  static positionWithinContent(Class, content) { return SignificantToken.positionWithinContent(Class, content); }
 }
-
-const type = stringLiteralType, ///
-      regularExpression = /"(?:\\.|[^"])*"/;
-
-Object.assign(StringLiteralToken, {
-  type,
-  regularExpression
-});
 
 module.exports = StringLiteralToken;

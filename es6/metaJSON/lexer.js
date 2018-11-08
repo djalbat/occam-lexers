@@ -6,6 +6,8 @@ const entries = require('./entries'),
 class MetaJSONLexer extends CommonLexer {
   tokeniseComments(tokensOrContents, inComment) {}
 
+  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+
   reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
 
   static fromEntries(entries) { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
