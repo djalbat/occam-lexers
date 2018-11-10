@@ -39,7 +39,7 @@ const entries = [
     "operator": "^(?:and|not|only|not)$"
   },
   {
-    "identifier": "[_a-z][_a-z0-9-]*"
+    "identifier": "[_a-zA-Z][_a-zA-Z0-9-]*"
   },
   {
     "unaryOperator": "\\+|\\-"
