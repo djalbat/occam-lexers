@@ -36,7 +36,7 @@ const entries = [
     "special": ";|::|:|\\.|,|/|\\|=|~=|=|>|\\{|\\}|\\(|\\)|\\[|\\]"
   },
   {
-    "operator": "^(?:and|not|only|not)$"
+    "operator": "^(?:and|not|only)$"
   },
   {
     "identifier": "[_a-zA-Z][_a-zA-Z0-9-]*"
