@@ -8,7 +8,6 @@ The Occam proof assistant's lexers.
 - [Installation](#installation)
 - [Examples](#examples)
 - [Building](#building)
-- [Resources](#resources)
 - [Contact](#contact)
 
 ## Introduction

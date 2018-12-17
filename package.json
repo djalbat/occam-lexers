@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "8.0.18",
+  "version": "8.0.19",
   "license": "MIT",
   "homepage": "https://github.com/occam-proof-assistant/occam-lexers",
   "description": "Occam's lexers.",
