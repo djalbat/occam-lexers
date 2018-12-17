@@ -3,6 +3,8 @@
 module.exports = {
   'SignificantToken': require('./lib/common/token/significant'),
   'NonSignificantToken': require('./lib/common/token/nonSignificant'),
+  'Rule': require('./lib/common/rule'),
+  'Rules': require('./lib/common/rules'),
   'BNFLexer': require('./lib/bnf/lexer'),
   'CSSLexer': require('./lib/css/lexer'),
   'LaTeXLexer': require('./lib/latex/lexer'),
