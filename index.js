@@ -11,7 +11,7 @@ module.exports = {
   LaTeXLexer: require('./lib/latex/lexer'),
   BasicLexer: require('./lib/basic/lexer'),
   PlainLexer: require('./lib/plain/lexer'),
-  CommonLexer: require('./lib/plain/common'),
+  CommonLexer: require('./lib/common/lexer'),
   MetaJSONLexer: require('./lib/metaJSON/lexer'),
   FlorenceLexer: require('./lib/florence/lexer')
 };
