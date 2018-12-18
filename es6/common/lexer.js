@@ -59,16 +59,16 @@ class CommonLexer {
 
   reTokeniseMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.reTokenise(tokensOrContents); }
 
-  static fromEntries(Class, entries) {
-    const rules = Rules.fromEntries(entries),
-          lexer = new Class(rules);
+  static fromNothing(Class) {
+    const { entries } = Class,
+          lexer = CommonLexer.fromEntries(Class, entries);
 
     return lexer;
   }
 
-  static fromNothing(Class) {
-    const { entries } = Class,
-          lexer = CommonLexer.fromEntries(Class, entries);
+  static fromEntries(Class, entries) {
+    const rules = Rules.fromEntries(entries),
+          lexer = new Class(rules);
 
     return lexer;
   }

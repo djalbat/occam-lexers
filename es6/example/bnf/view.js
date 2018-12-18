@@ -17,7 +17,7 @@ class BNFExampleView extends ExampleView {
   }
 
   getInitialContent() {
-    const initialContent = `ruleName             ::=  [name] ;
+    const initialContent = `  ruleName             ::=  [name] ;
 
   regularExpression    ::=  [regularExpression] ;
   
