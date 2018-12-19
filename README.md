@@ -1,6 +1,6 @@
 # Lexers
 
-The Occam proof assistant's lexers.
+[Occam](https://github.com/jecs-imperial/occam)'s lexers.
 
 ### Contents
 
