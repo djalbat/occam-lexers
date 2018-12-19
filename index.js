@@ -10,8 +10,6 @@ module.exports = {
   BNFLexer: require('./lib/bnf/lexer'),
   LaTeXLexer: require('./lib/latex/lexer'),
   BasicLexer: require('./lib/basic/lexer'),
-  PlainLexer: require('./lib/plain/lexer'),
   CommonLexer: require('./lib/common/lexer'),
-  MetaJSONLexer: require('./lib/metaJSON/lexer'),
   FlorenceLexer: require('./lib/florence/lexer')
 };
