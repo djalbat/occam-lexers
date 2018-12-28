@@ -48,6 +48,16 @@ class Rule {
 
     return significantToken;
   }
+
+  asEntry() {
+    const entry = {},
+          significantTokenType = this.significantTokenType,
+          regularExpressionPattern = '' + this.regularExpression;
+
+    entry[significantTokenType] = regularExpressionPattern;
+
+    return entry;
+  }
   
   static fromEntry(entry) {
     const entryKeys = Object.keys(entry),
