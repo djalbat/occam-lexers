@@ -11,7 +11,9 @@ class Rules {
   constructor(array) {
     this.array = array;
   }
-  
+
+  map(callback ) { return this.array.map(callback); }
+
   reduce(callback, initialValue) { return this.array.reduce(callback, initialValue); }
 
   getRule(depth) {
@@ -44,10 +46,11 @@ function findRegularExpressionPattern(significantTokenType, entries) {
   const entry = entries.find(function(entry) {
           const entryKeys = Object.keys(entry),
                 firstEntryKey = first(entryKeys),
-                entrySignificantTokenType = firstEntryKey,  ///
-                found = (entrySignificantTokenType === significantTokenType);
+                entrySignificantTokenType = firstEntryKey;  ///
 
-          return found;
+          if (entrySignificantTokenType === significantTokenType) {
+            return true;
+          }
         }) || null, ///
         regularExpressionPattern = (entry !== null) ?
                                       entry[significantTokenType] : ///
