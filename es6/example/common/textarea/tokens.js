@@ -5,6 +5,14 @@ const easy = require('easy');
 const { InputElement } = easy;
 
 class TokensTextarea extends InputElement {
+  showError() {
+    this.addClass('error');
+  }
+
+  hideError() {
+    this.removeClass('error');
+  }
+
   setTokens(tokens) {
     let lineNumber = 1,
         previousToken = null;
@@ -37,14 +45,6 @@ class TokensTextarea extends InputElement {
     const html = '';
 
     this.html(html);
-  }
-
-  showError() {
-    this.addClass('error');
-  }
-
-  hideError() {
-    this.removeClass('error');
   }
 
   parentContext() {
