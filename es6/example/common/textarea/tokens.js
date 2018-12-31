@@ -39,11 +39,23 @@ class TokensTextarea extends InputElement {
     this.html(html);
   }
 
+  showError() {
+    this.addClass('error');
+  }
+
+  hideError() {
+    this.removeClass('error');
+  }
+
   parentContext() {
-    const setTokens = this.setTokens.bind(this),
+    const showError = this.showError.bind(this),
+          hideError = this.hideError.bind(this),
+          setTokens = this.setTokens.bind(this),
           clearTokens = this.clearTokens.bind(this);
 
     return ({
+      showError,
+      hideError,
       setTokens,
       clearTokens
     });
