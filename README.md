@@ -6,6 +6,7 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+- [Usage](#usage)
 - [Examples](#examples)
 - [Building](#building)
 - [Contact](#contact)
@@ -64,6 +65,21 @@ You can also clone the repository with [Git](https://git-scm.com/)...
     npm install
 
 You will need to do this if you want to look at the examples.
+
+## Usage
+
+```js
+const lexers = require('occam-lexers');
+
+const { FlorenceLexer } = lexers;
+
+const florenceLexer = FlorenceLexer.fromNothing();
+
+const content = ...,
+      tokens = florenceLexer.tokenise(content);
+
+...
+```
 
 ## Examples
 
