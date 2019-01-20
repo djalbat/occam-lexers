@@ -6,7 +6,7 @@ const types = require('../../types'),
 const { whitespaceType } = types;
 
 class WhitespaceToken extends NonSignificantToken {
-  asHTML(filePath) {
+  asHTML() {
     const html = this.innerHTML;  ///
 
     return html;

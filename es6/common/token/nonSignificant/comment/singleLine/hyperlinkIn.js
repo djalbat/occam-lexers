@@ -6,7 +6,7 @@ const types = require('../../../../types'),
 const { hyperlinkInSingleLineCommentType } = types;
 
 class HyperlinkInSingleLineCommentToken extends SingleLineCommentToken {
-  asHTML(filePath) {
+  asHTML() {
     const href = this.content,  ///
           className = this.type,  ///
           html = `<span class="${className}"><a href="${href}" target="_blank">${this.innerHTML}</a></span>`;

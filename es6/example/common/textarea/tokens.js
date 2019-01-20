@@ -18,8 +18,7 @@ class TokensTextarea extends InputElement {
         previousToken = null;
 
     const html = tokens.reduce(function(html, token) {
-      const filePath = null,  ///
-            tokenHTML = token.asHTML(filePath);
+      const tokenHTML = token.asHTML();
 
       if (previousToken === null) {
         html += `${lineNumber++}: `;

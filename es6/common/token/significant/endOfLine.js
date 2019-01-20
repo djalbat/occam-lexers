@@ -6,7 +6,7 @@ const types = require('../../types'),
 const { endOfLineType } = types;
 
 class EndOfLineSignificantToken extends SignificantToken {
-  asHTML(filePath) {
+  asHTML() {
     const html = '\n';  ///
     
     return html;
