@@ -24,7 +24,7 @@ class HyperlinkInMultiLineCommentToken extends MultiLineCommentToken {
 }
 
 const type = hyperlinkInMultiLineCommentType,
-      regularExpression = /\bhttps?:\/\/[^\s\*]+/;
+      regularExpression = /\bhttps?:\/\/[^\s*]+/;
 
 Object.assign(HyperlinkInMultiLineCommentToken, {
   type,

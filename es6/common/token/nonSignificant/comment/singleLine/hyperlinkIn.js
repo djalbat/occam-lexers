@@ -24,7 +24,7 @@ class HyperlinkInSingleLineCommentToken extends SingleLineCommentToken {
 }
 
 const type = hyperlinkInSingleLineCommentType,
-      regularExpression = /\bhttps?:\/\/[^\s]+/;
+      regularExpression = /\bhttps?:\/\/[^\s*]+/;
 
 Object.assign(HyperlinkInSingleLineCommentToken, {
   type,
