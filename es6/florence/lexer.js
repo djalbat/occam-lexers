@@ -11,8 +11,6 @@ class FlorenceLexer extends CommonLexer {
 
   tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
 
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
-
   static fromNothing() { return CommonLexer.fromNothing(FlorenceLexer); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }

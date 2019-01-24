@@ -12,8 +12,6 @@ class BasicLexer extends CommonLexer {
 
   tokeniseRegularExpressions(tokensOrContents) {}
 
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
-
   static fromNothing() { return CommonLexer.fromNothing(BasicLexer); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(BasicLexer, entries); }

@@ -9,8 +9,6 @@ class BNFLexer extends CommonLexer {
 
   tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
 
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) {}
-
   tokensFromBNF(bnf) {
     const content = bnf,  ///
           tokens = super.tokenise(content);

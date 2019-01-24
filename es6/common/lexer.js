@@ -5,7 +5,6 @@ const Rules = require('./rules'),
       CommentTokens = require('./tokens/comment'),
       WhitespaceTokens = require('./tokens/whitespace'),
       SignificantTokens = require('./tokens/significant'),
-      MiddleOfCommentTokens = require('./tokens/middleOfComment'),
       RegularExpressionTokens = require('./tokens/regularExpression'),
       NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant'),
       SinglyQuotedStringLiteralTokens = require('./tokens/stringLiteral/singlyQuoted'),
@@ -33,8 +32,6 @@ class CommonLexer {
 
     this.tokeniseComments(tokensOrContents);
 
-    this.reTokeniseMiddleOfCommentTokens(tokensOrContents);
-
     this.tokeniseRegularExpressions(tokensOrContents);
 
     this.tokeniseWhitespace(tokensOrContents);
@@ -57,8 +54,6 @@ class CommonLexer {
   tokeniseSignificantContent(tokensOrContents) { SignificantTokens.tokenise(tokensOrContents, this.rules) }
 
   tokeniseRegularExpressions(tokensOrContents) { RegularExpressionTokens.tokenise(tokensOrContents); }
-
-  reTokeniseMiddleOfCommentTokens(tokensOrContents) { MiddleOfCommentTokens.reTokenise(tokensOrContents); }
 
   tokeniseDoublyQuotedStringLiterals(tokensOrContents) { DoublyQuotedStringLiteralTokens.tokenise(tokensOrContents); }
 
