@@ -1,7 +1,7 @@
 'use strict';
 
 const types = require('../../types'),
-      SignificantToken = require('../significant');
+      SignificantToken = require('../../token/significant');
 
 const { regularExpressionType } = types;
 

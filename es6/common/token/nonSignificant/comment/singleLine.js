@@ -1,6 +1,6 @@
 'use strict';
 
-const NonSignificantToken = require('../../nonSignificant');
+const NonSignificantToken = require('../../../token/nonSignificant');
 
 class SingleLineCommentToken extends NonSignificantToken {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }

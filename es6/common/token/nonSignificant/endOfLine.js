@@ -1,7 +1,7 @@
 'use strict';
 
 const types = require('../../types'),
-      NonSignificantToken = require('../nonSignificant');
+      NonSignificantToken = require('../../token/nonSignificant');
 
 const { endOfLineType } = types;
 

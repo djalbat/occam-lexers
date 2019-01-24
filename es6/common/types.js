@@ -1,7 +1,6 @@
 'use strict';
 
-const urlType = 'url',
-      middleType = 'middle',
+const middleType = 'middle',
       commentType = 'comment',
       multiLineType = `multi-line`,
       singleLineType =`single-line`,
@@ -15,7 +14,6 @@ const urlType = 'url',
       middleOfSingleLineCommentType = `${middleType} ${singleLineCommentType}`;
 
 module.exports = {
-  urlType,
 	middleType,
 	commentType,
 	multiLineType,
