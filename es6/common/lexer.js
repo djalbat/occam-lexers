@@ -1,8 +1,8 @@
 'use strict';
 
 const Rules = require('./rules'),
+      URLTokens = require('./tokens/url'),
       CommentTokens = require('./tokens/comment'),
-      HyperlinkTokens = require('./tokens/hyperlink'),
       WhitespaceTokens = require('./tokens/whitespace'),
       SignificantTokens = require('./tokens/significant'),
       MiddleOfCommentTokens = require('./tokens/middleOfComment'),
@@ -29,7 +29,7 @@ class CommonLexer {
 
     this.tokeniseSinglyQuotedStringLiterals(tokensOrContents);
 
-    this.tokeniseHyperlinks(tokensOrContents);
+    this.tokeniseURLs(tokensOrContents);
 
     this.tokeniseComments(tokensOrContents);
 
@@ -48,7 +48,7 @@ class CommonLexer {
 
   tokeniseComments(tokensOrContents) { CommentTokens.tokenise(tokensOrContents); }
 
-  tokeniseHyperlinks(tokensOrContents) { HyperlinkTokens.tokenise(tokensOrContents); }
+  tokeniseURLs(tokensOrContents) { URLTokens.tokenise(tokensOrContents); }
 
   tokeniseWhitespace(tokensOrContents) { WhitespaceTokens.tokenise(tokensOrContents); }
 

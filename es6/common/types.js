@@ -1,10 +1,10 @@
 'use strict';
 
-const middleType = 'middle',
+const urlType = 'url',
+      middleType = 'middle',
       commentType = 'comment',
       multiLineType = `multi-line`,
       singleLineType =`single-line`,
-      hyperlinkType = 'hyperlink',
       endOfLineType = 'end-of-line',
       whitespaceType = 'whitespace',
       stringLiteralType = 'string-literal',
@@ -12,16 +12,14 @@ const middleType = 'middle',
       multiLineCommentType = `${multiLineType} ${commentType}`,
       singleLineCommentType =`${singleLineType} ${commentType}`,
       middleOfMultiLineCommentType = `${middleType} ${multiLineCommentType}`,
-      middleOfSingleLineCommentType = `${middleType} ${singleLineCommentType}`,
-      hyperlinkInMultiLineCommentType = `${hyperlinkType} ${multiLineCommentType}`,
-      hyperlinkInSingleLineCommentType = `${hyperlinkType} ${singleLineCommentType}`;
+      middleOfSingleLineCommentType = `${middleType} ${singleLineCommentType}`;
 
 module.exports = {
+  urlType,
 	middleType,
 	commentType,
 	multiLineType,
 	singleLineType,
-	hyperlinkType,
 	endOfLineType,
 	whitespaceType,
 	stringLiteralType,
@@ -29,7 +27,5 @@ module.exports = {
 	multiLineCommentType,
 	singleLineCommentType,
 	middleOfMultiLineCommentType,
-	middleOfSingleLineCommentType,
-	hyperlinkInMultiLineCommentType,
-	hyperlinkInSingleLineCommentType
+	middleOfSingleLineCommentType
 };
