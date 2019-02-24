@@ -129,24 +129,24 @@ class Token {
     return token;
   }
 
-  static fromContentAndType(Class, content, type, significant) {
+  static fromContentAndType(Class, content, type, significant, ...remainingArguments) {
     const sanitisedContent = sanitiseContent(content),
           innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant);
+          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
 
     return token;
   }
 
-  static fromContent(Class, content, significant) {
+  static fromContent(Class, content, significant, ...remainingArguments) {
     const { type } = Class,
           sanitisedContent = sanitiseContent(content),
           innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant);
+          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
 
     return token;
   }
 
-  static fromWithinContent(Class, content, significant) {
+  static fromWithinContent(Class, content, significant, ...remainingArguments) {
     let token = null;
 
     const { regularExpression } = Class,
@@ -161,7 +161,7 @@ class Token {
             sanitisedContent = sanitiseContent(content),
             innerHTML = sanitisedContent; ///
 
-      token = new Class(type, content, innerHTML, significant);
+      token = new Class(type, content, innerHTML, significant, ...remainingArguments);
     }
 
     return token;

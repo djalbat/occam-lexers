@@ -17,47 +17,47 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
-  static fromContentAndType(Class, content, type) {
+  static fromContentAndType(Class, content, type, ...remainingArguments) {
     if (type === undefined) {
       type = content;
       content = Class;
       Class = SignificantToken;
     }
 
-    const significantToken = Token.fromContentAndType(Class, content, type, significant);
+    const significantToken = Token.fromContentAndType(Class, content, type, significant, ...remainingArguments);
 
     return significantToken;
   }
 
-  static fromContent(Class, content) {
+  static fromContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;
       Class = SignificantToken;
     }
 
-    const significantToken = Token.fromContent(Class, content, significant);
+    const significantToken = Token.fromContent(Class, content, significant, ...remainingArguments);
 
     return significantToken;
   }
 
-  static fromWithinContent(Class, content) {
+  static fromWithinContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;
       Class = SignificantToken;
     }
 
-    const significantToken = Token.fromWithinContent(Class, content, significant);
+    const significantToken = Token.fromWithinContent(Class, content, significant, ...remainingArguments);
 
     return significantToken;
   }
 
-  static positionWithinContent(Class, content) {
+  static positionWithinContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;
       Class = SignificantToken;
     }
 
-    const position = Token.positionWithinContent(Class, content) ;
+    const position = Token.positionWithinContent(Class, content, ...remainingArguments) ;
 
     return position;
   }
