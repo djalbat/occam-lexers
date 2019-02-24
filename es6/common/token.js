@@ -111,7 +111,7 @@ class Token {
     return html;
   }
 
-  clone(Class, startPosition, endPosition, significant) {
+  clone(Class, startPosition, endPosition, significant, ...remainingArguments) {
     let token = null;
 
     if (startPosition !== endPosition) {
@@ -123,7 +123,7 @@ class Token {
             sanitisedContent = sanitiseContent(content),
             innerHTML = sanitisedContent; ///
 
-      token = new Class(type, content, innerHTML, significant);
+      token = new Class(type, content, innerHTML, significant, ...remainingArguments);
     }
 
     return token;

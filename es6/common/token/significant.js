@@ -5,14 +5,14 @@ const Token = require('../token');
 const significant = true;
 
 class SignificantToken extends Token {
-  clone(Class, startPosition, endPosition) {
+  clone(Class, startPosition, endPosition, ...remainingArguments) {
     if (endPosition === undefined) {
       endPosition = startPosition;
       startPosition = Class;
       Class = SignificantToken;
     }
 
-    const significantToken = super.clone(Class, startPosition, endPosition, significant);
+    const significantToken = super.clone(Class, startPosition, endPosition, significant, ...remainingArguments);
 
     return significantToken;
   }
