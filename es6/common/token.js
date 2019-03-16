@@ -105,9 +105,9 @@ class Token {
   }
 
   isEqualTo(token) {
-    const equals = (this === token);
+    const equalToToken = (this === token);
 
-    return equals;
+    return equalToToken;
   }
 
   asHTML() {
