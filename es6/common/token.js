@@ -84,7 +84,7 @@ class Token {
     return singleLineCommentToken;
   }
 
-  equalsToken(token) {
+  equalToToken(token) {
     const equals = (this === token);
 
     return equals;
