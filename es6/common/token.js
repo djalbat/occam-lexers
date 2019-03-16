@@ -84,12 +84,6 @@ class Token {
     return singleLineCommentToken;
   }
 
-  equalToToken(token) {
-    const equals = (this === token);
-
-    return equals;
-  }
-
   matchToken(token) {
     let matches = false;
 
@@ -108,6 +102,12 @@ class Token {
     }
 
     return matches;
+  }
+
+  isEqualTo(token) {
+    const equals = (this === token);
+
+    return equals;
   }
 
   asHTML() {
