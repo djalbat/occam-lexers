@@ -1,6 +1,8 @@
 'use strict';
 
-const middleType = 'middle',
+const typeType = 'type',
+      nameType = 'name',
+      middleType = 'middle',
       commentType = 'comment',
       multiLineType = `multi-line`,
       singleLineType =`single-line`,
@@ -14,6 +16,8 @@ const middleType = 'middle',
       middleOfSingleLineCommentType = `${middleType} ${singleLineCommentType}`;
 
 module.exports = {
+  typeType,
+  nameType,
 	middleType,
 	commentType,
 	multiLineType,
