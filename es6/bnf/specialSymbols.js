@@ -10,6 +10,7 @@ const plus = '+',
 			openBracket = '(',
 			closeBracket = ')',
 			questionMark = '?',
+      exclamationMark = '!',
 			END_OF_LINE = '<END_OF_LINE>',
 			NO_WHITESPACE = '<NO_WHITESPACE>';
 
@@ -24,6 +25,7 @@ module.exports = {
 	openBracket,
 	closeBracket,
 	questionMark,
+  exclamationMark,
 	END_OF_LINE,
 	NO_WHITESPACE
 };
