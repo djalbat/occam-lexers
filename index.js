@@ -9,6 +9,7 @@ module.exports = {
   BasicLexer: require('./lib/basic/lexer'),
   CommonLexer: require('./lib/common/lexer'),
   FlorenceLexer: require('./lib/florence/lexer'),
+  specialSymbols: require('./lib/bnf/specialSymbols'),
   SignificantToken: require('./lib/common/token/significant'),
   NonSignificantToken: require('./lib/common/token/nonSignificant'),
   SignificantEndOfLineTokens: require('./lib/common/tokens/endOfLine/significant'),

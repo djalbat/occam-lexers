@@ -1,8 +1,7 @@
 'use strict';
 
 const entries = require('./entries'),
-      CommonLexer = require('../common/lexer'),
-      specialSymbols = require('./specialSymbols');
+      CommonLexer = require('../common/lexer');
 
 class BNFLexer extends CommonLexer {
   tokeniseComments(tokensOrContents, inComment) { return inComment; }
@@ -22,8 +21,7 @@ class BNFLexer extends CommonLexer {
 }
 
 Object.assign(BNFLexer, {
-  entries,
-  specialSymbols
+  entries
 });
 
 module.exports = BNFLexer;
