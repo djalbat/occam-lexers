@@ -1,13 +1,13 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "license": "MIT",
-  "homepage": "https://github.com/occam-proof-assistant/occam-lexers",
+  "homepage": "https://github.com/jecs-imperial/occam-lexers",
   "description": "Occam's lexers.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/occam-proof-assistant/occam-lexers"
+    "url": "https://github.com/jecs-imperial/occam-lexers"
   },
   "dependencies": {
     "necessary": "^3.1.2"
