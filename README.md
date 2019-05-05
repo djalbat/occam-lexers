@@ -17,7 +17,7 @@ Three lexers are documented:
 
 * A BNF lexer, actually [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 * A basic lexer, for illustrative purposes.
-* The Florence lexer, namely the lexer for the [lexical entries part](https://raw.githubusercontent.com/occam-proof-assistant/Lexers/master/es6/florence/entries.js) of Occam's vernacular.
+* The Florence lexer, namely the lexer for the [lexical entries part](https://raw.githubusercontent.com/jecs-imperial/occam-lexers/master/es6/florence/entries.js) of Occam's vernacular.
 
 All lexers share common functionality. Each takes six passes to match the following five types of tokens, although with caveats:
 
@@ -83,7 +83,7 @@ const content = ...,
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/occam-proof-assistant/Parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/jecs-imperial/parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
 
 Each of the examples has a textarea in which the corresponding lexer's entries are given in JSON format. The regular expression patterns themselves are supplied as strings with the usual escaping. You can change both the lexical entries and the content to be matched dynamically, and see the resulting tokens.
 
