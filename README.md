@@ -83,7 +83,7 @@ const content = ...,
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/jecs-imperial/parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [Parsers](https://github.com/jecs-imperial/occam-parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
 
 Each of the examples has a textarea in which the corresponding lexer's entries are given in JSON format. The regular expression patterns themselves are supplied as strings with the usual escaping. You can change both the lexical entries and the content to be matched dynamically, and see the resulting tokens.
 
