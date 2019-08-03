@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "9.0.4",
+  "version": "9.1.0",
   "license": "MIT",
   "homepage": "https://github.com/jecs-imperial/occam-lexers",
   "description": "Occam's lexers.",
