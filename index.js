@@ -7,6 +7,7 @@ module.exports = {
   specialSymbols: require('./lib/bnf/specialSymbols'),
   SignificantToken: require('./lib/common/token/significant'),
   NonSignificantToken: require('./lib/common/token/nonSignificant'),
+  defaultLexicalPattern: require('./lib/florence/defaultLexicalPattern'),
   BNFLexer: require('./lib/bnf/lexer'),
   PlainLexer: require('./lib/plain/lexer'),
   LaTeXLexer: require('./lib/latex/lexer'),

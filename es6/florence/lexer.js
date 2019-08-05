@@ -2,6 +2,7 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
+      defaultLexicalPattern = require('./defaultLexicalPattern'),
       SignificantEndOfLineTokens = require('../common/tokens/endOfLine/significant');
 
 class FlorenceLexer extends CommonLexer {
@@ -11,9 +12,17 @@ class FlorenceLexer extends CommonLexer {
 
   tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
 
-  static fromNothing() { return CommonLexer.fromNothing(FlorenceLexer); }
+  static fromEntries(entries) {
+    entries = [
 
-  static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }
+      { "custom" : defaultLexicalPattern }
+
+    ].concat(entries);  ///
+
+    return CommonLexer.fromEntries(FlorenceLexer, entries);
+  }
+
+  static fromNothing() { return FlorenceLexer.fromEntries(entries); }
 }
 
 Object.assign(FlorenceLexer, {
