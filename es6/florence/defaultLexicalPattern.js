@@ -1,5 +1,5 @@
 'use strict';
 
-const defaultLexicalPattern = "=|\\|-";
+const defaultLexicalPattern = "=|\\|-|\\[|\\]|\\.\\.\\.";
 
 module.exports = defaultLexicalPattern;
