@@ -1,6 +1,11 @@
 'use strict';
 
+const necessary = require('necessary');
+
 const Rules = require('./rules');
+
+const { arrayUtilities } = necessary,
+      { splice } = arrayUtilities;
 
 class CommonLexer {
   constructor(rules) {

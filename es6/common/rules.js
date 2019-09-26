@@ -12,9 +12,13 @@ class Rules {
     this.array = array;
   }
 
-  map(callback ) { return this.array.map(callback); }
+  map(callback) { return this.array.map(callback); }
+
+  some(callback) { return this.array.some(callback); }
 
   reduce(callback, initialValue) { return this.array.reduce(callback, initialValue); }
+
+  forEach(callback ) { this.array.forEach(callback); }
 
   getRule(depth) {
     const rule = (this.array[depth] || null); ///

@@ -20,6 +20,30 @@ class Rule {
   getRegularExpression() {
     return this.regularExpression;
   }
+
+  match(content) {
+    let significantToken = null;
+
+    const match = content.match(this.regularExpression);
+
+    if (match !== null) {
+      const { index } = match;
+
+      if (index === 0) {
+        content = match[0]; ///
+
+        const contentLength = content.length;
+
+        if (contentLength > 0) {
+          const type = this.significantTokenType; ///
+
+          significantToken = SignificantToken.fromContentAndType(content, type);
+        }
+      }
+    }
+
+    return significantToken;
+  }
   
   significantTokenPositionWithinContent(content) {
     let significantTokenPosition = -1;
