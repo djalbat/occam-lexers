@@ -14,6 +14,8 @@ class EndOfLineNonSignificantToken extends NonSignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(EndOfLineNonSignificantToken, startPosition, endPosition); }
 
+  static fromMatch(match) { return NonSignificantToken.fromMatch(EndOfLineNonSignificantToken, match); }
+
   static fromContent(content) { return NonSignificantToken.fromContent(EndOfLineNonSignificantToken, content); }
 
   static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(EndOfLineNonSignificantToken, content); }

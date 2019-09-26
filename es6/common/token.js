@@ -143,6 +143,16 @@ class Token {
     return token;
   }
 
+  static fromMatch(Class, match, significant, ...remainingArguments) {
+    const { type } = Class,
+          content = match[0], ///
+          sanitisedContent = sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
+          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
+
+    return token;
+  }
+
   static fromContent(Class, content, significant, ...remainingArguments) {
     const { type } = Class,
           sanitisedContent = sanitiseContent(content),

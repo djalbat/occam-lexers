@@ -1,13 +1,6 @@
 'use strict';
 
-const Rules = require('./rules'),
-      CommentTokens = require('./tokens/comment'),
-      WhitespaceTokens = require('./tokens/whitespace'),
-      SignificantTokens = require('./tokens/significant'),
-      RegularExpressionTokens = require('./tokens/regularExpression'),
-      NonSignificantEndOfLineTokens = require('../common/tokens/endOfLine/nonSignificant'),
-      SinglyQuotedStringLiteralTokens = require('./tokens/stringLiteral/singlyQuoted'),
-      DoublyQuotedStringLiteralTokens = require('./tokens/stringLiteral/doublyQuoted');
+const Rules = require('./rules');
 
 class CommonLexer {
   constructor(rules) {
@@ -19,40 +12,46 @@ class CommonLexer {
   }
 
   tokenise(content) {
-    const tokensOrContents = [content]; ///
+    const tokensOrContents = this.tokeniseEndOfLines(content);
 
-    this.tokeniseEndOfLines(tokensOrContents);
-
-    this.tokeniseDoublyQuotedStringLiterals(tokensOrContents);
-
-    this.tokeniseSinglyQuotedStringLiterals(tokensOrContents);
-
-    this.tokeniseComments(tokensOrContents);
-
-    this.tokeniseRegularExpressions(tokensOrContents);
-
-    this.tokeniseWhitespace(tokensOrContents);
-
-    this.tokeniseSignificantContent(tokensOrContents);
+    this.tokeniseContents(tokensOrContents);
 
     const tokens = tokensOrContents;  ///
 
     return tokens;
   }
 
-  tokeniseComments(tokensOrContents) { CommentTokens.tokenise(tokensOrContents); }
+  tokeniseContents(tokensOrContents) {
+    let inComment = false;
 
-  tokeniseWhitespace(tokensOrContents) { WhitespaceTokens.tokenise(tokensOrContents); }
+    let index = 0,
+        tokensOrContentsLength = tokensOrContents.length;
 
-  tokeniseEndOfLines(tokensOrContents) { NonSignificantEndOfLineTokens.tokenise(tokensOrContents); }
+    while (index < tokensOrContentsLength) {
+      const tokenOrContent = tokensOrContents[index],
+            tokenOrContentString = (typeof tokenOrContent === 'string'),
+            tokenOrContentContent = tokenOrContentString; ///
 
-  tokeniseSignificantContent(tokensOrContents) { SignificantTokens.tokenise(tokensOrContents, this.rules) }
+      if (tokenOrContentContent) {
+        const tokens = [],
+              content = tokenOrContent; ///
 
-  tokeniseRegularExpressions(tokensOrContents) { RegularExpressionTokens.tokenise(tokensOrContents); }
+        inComment = this.tokensFromContent(tokens, content, inComment);
 
-  tokeniseDoublyQuotedStringLiterals(tokensOrContents) { DoublyQuotedStringLiteralTokens.tokenise(tokensOrContents); }
+        const tokensLength = tokens.length,
+              start = index,  ///
+              deleteCount = 1;
 
-  tokeniseSinglyQuotedStringLiterals(tokensOrContents) { SinglyQuotedStringLiteralTokens.tokenise(tokensOrContents); }
+        splice(tokensOrContents, start, deleteCount, tokens);
+
+        tokensOrContentsLength += tokensLength - 1;
+
+        index += tokensLength - 1;
+      }
+
+      index++;
+    }
+  }
 
   static fromNothing(Class) {
     const { entries } = Class,

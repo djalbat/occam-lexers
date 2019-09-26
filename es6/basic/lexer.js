@@ -1,16 +1,18 @@
 'use strict';
 
 const entries = require('./entries'),
-      CommonLexer = require('../common/lexer');
+      CommonLexer = require('../common/lexer'),
+      tokenUtilities = require('../utilities/token'),
+      EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine');
+
+const { tokenise } = tokenUtilities;
 
 class BasicLexer extends CommonLexer {
-  tokeniseComments(tokensOrContents, inComment) { return inComment; }
+  tokensFromContent(tokens, content, inComment) {
+    return inComment;
+  }
 
-  tokeniseRegularExpressions(tokensOrContents) {}
-
-  tokeniseDoublyQuotedStringLiterals(tokensOrContents) {}
-
-  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineNonSignificantToken); }
 
   static fromNothing() { return CommonLexer.fromNothing(BasicLexer); }
 

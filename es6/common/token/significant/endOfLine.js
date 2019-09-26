@@ -14,6 +14,8 @@ class EndOfLineSignificantToken extends SignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition); }
 
+  static fromMatch(match) { return NonSignificantToken.fromMatch(EndOfLineSignificantToken, match); }
+
   static fromContent(content) { return SignificantToken.fromContent(EndOfLineSignificantToken, content); }
 
   static fromWithinContent(content) { return SignificantToken.fromWithinContent(EndOfLineSignificantToken, content); }

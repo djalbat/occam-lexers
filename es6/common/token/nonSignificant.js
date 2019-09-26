@@ -9,6 +9,8 @@ class NonSignificantToken extends Token {
 
   static fromContentAndType(Class, content, type) { return Token.fromContentAndType(Class, content, type, significant); }
 
+  static fromMatch(Class, match) { return Token.fromMatch(Class, match, significant); }
+
   static fromContent(Class, content) { return Token.fromContent(Class, content, significant); }
 
   static fromWithinContent(Class, content) { return Token.fromWithinContent(Class, content, significant); }
