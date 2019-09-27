@@ -29,6 +29,17 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
+  static match(Class, content, ...remainingArguments) {
+    if (content === undefined) {
+      content = Class;
+      Class = SignificantToken;
+    }
+
+    const significantToken = Token.match(Class, content, significant, ...remainingArguments);
+
+    return significantToken;
+  }
+
   static fromMatch(Class, match, ...remainingArguments) {
     if (match === undefined) {
       match = Class;

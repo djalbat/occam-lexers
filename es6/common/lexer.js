@@ -3,15 +3,20 @@
 const necessary = require('necessary');
 
 const Rules = require('./rules'),
+      tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
       EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
       EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
+      EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine'),
       StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
-      MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf');
+      MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf'),
+      SinglyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/singlyQuoted'),
+      DoublyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/doublyQuoted');
 
 const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities;
+      { splice } = arrayUtilities,
+      { tokenise } = tokenUtilities;
 
 class CommonLexer {
   constructor(rules) {
@@ -31,6 +36,8 @@ class CommonLexer {
 
     return tokens;
   }
+
+  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineNonSignificantToken); }
 
   tokeniseContents(tokensOrContents) {
     let inComment = false;
@@ -67,6 +74,8 @@ class CommonLexer {
   tokeniseContent(content, tokens, inComment) {
     while (content !== '') {
       const token = this.matchWhitespace(content)
+                 || this.matchSinglyQuotedStringLiteral(content)
+                 || this.matchDoublyQuotedStringLiteral(content)
                  || this.matchMultiLineComment(content, inComment)
                  || this.matchSingleLineComment(content, inComment)
                  || this.matchRules(content);
@@ -108,11 +117,7 @@ class CommonLexer {
     return significantToken;
   }
 
-  matchWhitespace(content) {
-    const whitespaceToken = WhitespaceToken.match(content);
-
-    return whitespaceToken;
-  }
+  matchWhitespace(content) { return WhitespaceToken.match(content); }
 
   matchMultiLineComment(content, inComment) {
     let multiLinCommentToken = null;
@@ -135,6 +140,10 @@ class CommonLexer {
 
     return singleLineCommentToken;
   }
+
+  matchSinglyQuotedStringLiteral(content) { return SinglyQuotedStringLiteralToken.match(content); }
+
+  matchDoublyQuotedStringLiteral(content) { return DoublyQuotedStringLiteralToken.match(content); }
 
   static fromRules(Class, rules) {
     const lexer = new Class(rules);

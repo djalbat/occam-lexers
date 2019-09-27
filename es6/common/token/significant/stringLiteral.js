@@ -15,6 +15,8 @@ class StringLiteralToken extends SignificantToken {
     return string;
   }
 
+  static match(Class, content) { return SignificantToken.match(Class, content); }
+
   static fromContent(Class, content) { return SignificantToken.fromContent(Class, content); }
 
   static fromWithinContent(Class, content) { return SignificantToken.fromWithinContent(Class, content); }

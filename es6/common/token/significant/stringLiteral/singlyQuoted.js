@@ -8,6 +8,10 @@ const { stringLiteralType } = types;
 class SinglyQuotedStringLiteralToken extends StringLiteralToken {
   clone(startPosition, endPosition) { return super.clone(SinglyQuotedStringLiteralToken, startPosition, endPosition); }
 
+  static match(content) { return StringLiteralToken.match(SinglyQuotedStringLiteralToken, content); }
+
+  static fromMatch(match) { return StringLiteralToken.fromMatch(SinglyQuotedStringLiteralToken, match); }
+
   static fromContent(content) { return StringLiteralToken.fromContent(SinglyQuotedStringLiteralToken, content); }
 
   static fromWithinContent(content) { return StringLiteralToken.fromWithinContent(SinglyQuotedStringLiteralToken, content); }
@@ -16,7 +20,7 @@ class SinglyQuotedStringLiteralToken extends StringLiteralToken {
 }
 
 const type = stringLiteralType, ///
-      regularExpression = /'(?:\\.|[^'])*'/;
+      regularExpression = /^'(?:\\.|[^'])*'/;
 
 Object.assign(SinglyQuotedStringLiteralToken, {
   type,
