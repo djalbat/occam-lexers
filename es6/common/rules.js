@@ -31,10 +31,12 @@ class Rules {
   }
   
   static fromEntries(entries) {
-    const significantTokenTypes = significantTokenTypesFromEntries(entries),
-          array = significantTokenTypes.map(function(significantTokenType) {
-            const regularExpressionPattern = findRegularExpressionPattern(significantTokenType, entries),
-                  rule = Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern);
+    const array = entries.map((entry) => {
+            const keys = Object.keys(entry),
+                  firstKey = first(keys),
+                  type = firstKey,  ///
+                  regularExpressionPattern = entry[type],
+                  rule = Rule.fromTypeAndRegularExpressionPattern(type, regularExpressionPattern);
       
             return rule;      
           }),
@@ -45,32 +47,3 @@ class Rules {
 }
 
 module.exports = Rules;
-
-function findRegularExpressionPattern(significantTokenType, entries) {
-  const entry = entries.find(function(entry) {
-          const entryKeys = Object.keys(entry),
-                firstEntryKey = first(entryKeys),
-                entrySignificantTokenType = firstEntryKey;  ///
-
-          if (entrySignificantTokenType === significantTokenType) {
-            return true;
-          }
-        }) || null, ///
-        regularExpressionPattern = (entry !== null) ?
-                                      entry[significantTokenType] : ///
-                                        null;
-
-  return regularExpressionPattern;
-}
-
-function significantTokenTypesFromEntries(entries) {
-  const significantTokenTypes = entries.map(function(entry) {
-    const entryKeys = Object.keys(entry),
-          firstEntryKey = first(entryKeys),
-          significantTokenType = firstEntryKey; ///
-
-    return significantTokenType;
-  });
-
-  return significantTokenTypes;
-}

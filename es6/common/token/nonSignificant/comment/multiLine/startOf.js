@@ -3,10 +3,18 @@
 const types = require('../../../../types'),
       MultiLineCommentToken = require('../../comment/multiLine');
 
-const { multiLineCommentType } = types;
+const { commentType } = types;
 
 class StartOfMultiLineCommentToken extends MultiLineCommentToken {
   clone(startPosition, endPosition) { return super.clone(StartOfMultiLineCommentToken, startPosition, endPosition); }
+
+  isInComment() {
+    const inComment = true;
+
+    return inComment;
+  }
+
+  static fromMatch(match) { return MultiLineCommentToken.fromMatch(StartOfMultiLineCommentToken, match); }
 
   static fromContent(content) { return MultiLineCommentToken.fromContent(StartOfMultiLineCommentToken, content); }
 
@@ -15,8 +23,8 @@ class StartOfMultiLineCommentToken extends MultiLineCommentToken {
   static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(StartOfMultiLineCommentToken, content); }
 }
 
-const type = multiLineCommentType,  ///
-      regularExpression = /\/\*/;
+const type = commentType,  ///
+      regularExpression = /^\/\*/;
 
 Object.assign(StartOfMultiLineCommentToken, {
   type,

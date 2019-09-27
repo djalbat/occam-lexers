@@ -1,15 +1,36 @@
 'use strict';
 
-const NonSignificantToken = require('../../../token/nonSignificant');
+const types = require('../../../types'),
+      NonSignificantToken = require('../../../token/nonSignificant');
+
+const { commentType } = types;
 
 class SingleLineCommentToken extends NonSignificantToken {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
 
-  static fromContent(Class, content) { return NonSignificantToken.fromContent(Class, content); }
+  isInComment() {
+    const inComment = false;
 
-  static fromWithinContent(Class, content) { return NonSignificantToken.fromWithinContent(Class, content); }
+    return inComment;
+  }
 
-  static positionWithinContent(Class, content) { return NonSignificantToken.positionWithinContent(Class, content); }
+  static match(content) { return NonSignificantToken.match(SingleLineCommentToken, content); }
+
+  static fromMatch(match) { return NonSignificantToken.fromMatch(SingleLineCommentToken, match); }
+
+  static fromContent(content) { return NonSignificantToken.fromContent(SingleLineCommentToken, content); }
+
+  static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(SingleLineCommentToken, content); }
+
+  static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(SingleLineCommentToken, content); }
 }
+
+const type = commentType,
+      regularExpression = /^\/\/.*/;
+
+Object.assign(SingleLineCommentToken, {
+  type,
+  regularExpression
+});
 
 module.exports = SingleLineCommentToken;

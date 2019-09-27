@@ -14,6 +14,8 @@ class WhitespaceToken extends NonSignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
 
+  static fromMatch(match) { return NonSignificantToken.fromMatch(WhitespaceToken, match); }
+
   static fromContent(content) { return NonSignificantToken.fromContent(WhitespaceToken, content); }
 
   static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(WhitespaceToken, content); }
@@ -22,7 +24,7 @@ class WhitespaceToken extends NonSignificantToken {
 }
 
 const type = whitespaceType,  ///
-      regularExpression = /[\t ]+/;
+      regularExpression = /^[\t ]+/;
 
 Object.assign(WhitespaceToken, {
   type,

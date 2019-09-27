@@ -8,13 +8,13 @@ const { arrayUtilities } = necessary,
       { first } = arrayUtilities;
 
 class Rule {
-  constructor(significantTokenType, regularExpression) {
-    this.significantTokenType = significantTokenType;
+  constructor(type, regularExpression) {
+    this.type = type;
     this.regularExpression = regularExpression;
   }
   
-  getSignificantTokenType() {
-    return this.significantTokenType;
+  getType() {
+    return this.type;
   }
   
   getRegularExpression() {
@@ -35,9 +35,7 @@ class Rule {
         const contentLength = content.length;
 
         if (contentLength > 0) {
-          const type = this.significantTokenType; ///
-
-          significantToken = SignificantToken.fromContentAndType(content, type);
+          significantToken = SignificantToken.fromContentAndType(content, this.type);
         }
       }
     }
@@ -45,60 +43,38 @@ class Rule {
     return significantToken;
   }
   
-  significantTokenPositionWithinContent(content) {
-    let significantTokenPosition = -1;
-
-    const matches = content.match(this.regularExpression);
-
-    if (matches !== null) {
-      const firstMatch = first(matches);
-
-      if (firstMatch !== '') {
-        significantTokenPosition = matches.index; ///
-      }
-    }
-
-    return significantTokenPosition;
-  }
-
-  significantTokenFromWithinContent(content) {
-    const matches = content.match(this.regularExpression),
-          firstMatch = first(matches);
-
-    content = firstMatch; ///
-
-    const type = this.significantTokenType, ///
-          significantToken = SignificantToken.fromContentAndType(content, type);
-
-    return significantToken;
-  }
-
   asEntry() {
     const entry = {},
-          significantTokenType = this.significantTokenType,
-          regularExpressionPattern = '' + this.regularExpression;
+          regularExpressionPattern = `${this.regularExpression}`;
 
-    entry[significantTokenType] = regularExpressionPattern;
+    entry[this.type] = regularExpressionPattern;
 
     return entry;
   }
-  
+
+  static fromToken(Token) {
+    const { type, regularExpression } = Token,
+          rule = new Rule(type, regularExpression);
+
+    return rule;
+  }
+
   static fromEntry(entry) {
     const entryKeys = Object.keys(entry),
           firstEntryKey = first(entryKeys),
-          significantTokenType = firstEntryKey, ///
-          regularExpressionPattern = entry[significantTokenType],
-          rule = Rule.fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern);
+          type = firstEntryKey, ///
+          regularExpressionPattern = entry[type],
+          rule = Rule.fromTypeAndRegularExpressionPattern(type, regularExpressionPattern);
         
     return rule; 
   }
 
-  static fromSignificantTokenTypeAndRegularExpressionPattern(significantTokenType, regularExpressionPattern) {
+  static fromTypeAndRegularExpressionPattern(type, regularExpressionPattern) {
     const unicode = isUnicode(regularExpressionPattern),
           flags = unicode ? 'u' : '',
           regExp = new RegExp(regularExpressionPattern, flags),
           regularExpression = regExp, ///
-          rule = new Rule(significantTokenType, regularExpression);
+          rule = new Rule(type, regularExpression);
 
     return rule;
   }

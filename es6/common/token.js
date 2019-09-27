@@ -6,7 +6,7 @@ const types = require('./types');
 
 const { arrayUtilities } = necessary,
       { first } = arrayUtilities,
-      { commentType, middleType, multiLineType, singleLineType, endOfLineType, whitespaceType } = types;
+      { commentType, endOfLineType, whitespaceType } = types;
 
 class Token {
   constructor(type, content, innerHTML, significant) {
@@ -39,8 +39,8 @@ class Token {
   }
   
   isCommentToken() {
-    const typeIncludesCommentType = this.type.includes(commentType),
-          commentToken = typeIncludesCommentType; ///
+    const typeCommentType = (this.type ===commentType),
+          commentToken = typeCommentType; ///
 
     return commentToken;
   }
@@ -57,31 +57,6 @@ class Token {
           whitespaceToken = typeWhitespaceType; ///
 
     return whitespaceToken;
-  }
-
-  isMiddleOfCommentToken() {
-    const typeIncludesMiddleType = this.type.includes(middleType),
-          typeIncludesCommentType = this.type.includes(commentType),
-          middleOfCommentToken = typeIncludesMiddleType && typeIncludesCommentType; ///
-
-    return middleOfCommentToken;
-
-  }
-
-  isMultiLineCommentToken() {
-    const typeIncludesCommentType = this.type.includes(commentType),
-          typeIncludesMultiLineType = this.type.includes(multiLineType),
-          multiLineCommentToken = typeIncludesMultiLineType && typeIncludesCommentType; ///
-
-    return multiLineCommentToken;
-  }
-
-  isSingleLineCommentToken() {
-    const typeIncludesCommentType = this.type.includes(commentType),
-          typeIncludesSingleLineType = this.type.includes(singleLineType),
-          singleLineCommentToken = typeIncludesSingleLineType && typeIncludesCommentType; ///
-
-    return singleLineCommentToken;
   }
 
   matchToken(token) {
@@ -139,6 +114,32 @@ class Token {
     const sanitisedContent = sanitiseContent(content),
           innerHTML = sanitisedContent, ///
           token = new Class(type, content, innerHTML, significant, ...remainingArguments);
+
+    return token;
+  }
+
+  static match(Class, content, significant, ...remainingArguments) {
+    let token = null;
+
+    const { type, regularExpression } = Class,
+          match = content.match(regularExpression);
+
+    if (match !== null) {
+      const { index } = match;
+
+      if (index === 0) {
+        content = match[0]; ///
+
+        const contentLength = content.length;
+
+        if (contentLength > 0) {
+          const sanitisedContent = sanitiseContent(content),
+                innerHTML = sanitisedContent; ///
+
+          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
+        }
+      }
+    }
 
     return token;
   }
