@@ -2,16 +2,16 @@
 
 const necessary = require('necessary');
 
-const Rule = require('./rule'),
-      Rules = require('./rules'),
+const Rules = require('./rules'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
-      EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire');
+      EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
+      EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
+      StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
+      MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf');
 
 const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities,
-      whiteSpaceRule = Rule.fromToken(WhitespaceToken),
-      entireMultiLineCommentRule = Rule.fromToken(EntireMultiLineCommentToken);
+      { splice } = arrayUtilities;
 
 class CommonLexer {
   constructor(rules) {
@@ -109,18 +109,18 @@ class CommonLexer {
   }
 
   matchWhitespace(content) {
-    const whiteSpaceToken = whiteSpaceRule.match(content);
+    const whitespaceToken = WhitespaceToken.match(content);
 
-    return whiteSpaceToken;
+    return whitespaceToken;
   }
 
   matchMultiLineComment(content, inComment) {
     let multiLinCommentToken = null;
 
     if (!inComment) {
-
+      multiLinCommentToken = EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
     } else {
-
+      multiLinCommentToken = EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content);
     }
 
     return multiLinCommentToken;

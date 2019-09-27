@@ -14,6 +14,8 @@ class WhitespaceToken extends NonSignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
 
+  static match(content) { return NonSignificantToken.match(WhitespaceToken, content); }
+
   static fromMatch(match) { return NonSignificantToken.fromMatch(WhitespaceToken, match); }
 
   static fromContent(content) { return NonSignificantToken.fromContent(WhitespaceToken, content); }

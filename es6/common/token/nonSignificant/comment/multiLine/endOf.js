@@ -14,6 +14,8 @@ class EndOfMultiLineCommentToken extends MultiLineCommentToken {
     return inComment;
   }
 
+  static match(content) { return MultiLineCommentToken.match(EndOfMultiLineCommentToken, content); }
+
   static fromMatch(match) { return MultiLineCommentToken.fromMatch(EndOfMultiLineCommentToken, match); }
 
   static fromContent(content) { return MultiLineCommentToken.fromContent(EndOfMultiLineCommentToken, content); }
@@ -24,7 +26,7 @@ class EndOfMultiLineCommentToken extends MultiLineCommentToken {
 }
 
 const type = commentType,  ///
-      regularExpression = /\*\//;
+      regularExpression = /^.*\*\//;
 
 Object.assign(EndOfMultiLineCommentToken, {
   type,

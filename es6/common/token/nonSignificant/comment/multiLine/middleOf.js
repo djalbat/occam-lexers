@@ -14,6 +14,8 @@ class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
     return inComment;
   }
 
+  static match(content) { return MultiLineCommentToken.match(MiddleOfMultiLineCommentToken, content); }
+
   static fromMatch(match) { return MultiLineCommentToken.fromMatch(MiddleOfMultiLineCommentToken, match); }
 
   static fromContent(content) { return MultiLineCommentToken.fromContent(MiddleOfMultiLineCommentToken, content); }
@@ -23,10 +25,12 @@ class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
   static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(MiddleOfMultiLineCommentToken, content); }
 }
 
-const type = commentType;  ///
+const type = commentType,  ///
+      regularExpression = /^.*/;
 
 Object.assign(MiddleOfMultiLineCommentToken, {
-  type
+  type,
+  regularExpression
 });
 
 module.exports = MiddleOfMultiLineCommentToken;

@@ -4,7 +4,7 @@ const entries = [
 
   { "terminal"    : "^(?:\\+|\\-|\\*|\\/|\\(|\\)|\\d+)" },
 
-  { "unassigned"  : "^.*" }
+  { "unassigned"  : "^.*\\b" }
 
 ];
 

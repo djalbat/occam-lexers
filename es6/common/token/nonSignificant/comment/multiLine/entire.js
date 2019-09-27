@@ -14,6 +14,8 @@ class EntireMultiLineCommentToken extends MultiLineCommentToken {
     return inComment;
   }
 
+  static match(content) { return MultiLineCommentToken.match(EntireMultiLineCommentToken, content); }
+
   static fromMatch(match) { return MultiLineCommentToken.fromMatch(EntireMultiLineCommentToken, match); }
 
   static fromContent(content) { return MultiLineCommentToken.fromContent(EntireMultiLineCommentToken, content); }
