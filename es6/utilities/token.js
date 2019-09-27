@@ -1,17 +1,15 @@
 'use strict';
 
 function tokenise(content, Token) {
-  const tokensOrContents = [],
-        { regularExpression } = Token;
+  const tokensOrContents = [];
 
-  let match = content.match(regularExpression);
+  let token = Token.match(content);
 
-  while (match !== null) {
-    const { index } = match,
-          token = Token.fromMatch(match),
-          tokenLength = token.getContentLength(),
+  while (token !== null) {
+    const index = token.getIndex(),
+          contentLength = token.getContentLength(),
           left = index, ///
-          right = index + tokenLength,
+          right = index + contentLength,
           leftContent = content.substring(0, left),
           rightContent = content.substring(right);
 
@@ -25,7 +23,7 @@ function tokenise(content, Token) {
 
     content = rightContent; ///
 
-    match = content.match(regularExpression);
+    token = Token.match(content);
   }
 
   if (content !== '') {

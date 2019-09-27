@@ -1,34 +1,57 @@
 'use strict';
 
 const types = require('../../types'),
-      NonSignificantToken = require('../../token/nonSignificant');
+      NonSignificantToken = require('../../token/nonSignificant'),
+      contentUtilities = require('../../../utilities/content');
 
-const { endOfLineType } = types;
+const { endOfLineType } = types,
+      { sanitiseContent } = contentUtilities;
+
+const type = endOfLineType, ///
+      regularExpression = /\r\n|\r|\n/;
 
 class EndOfLineNonSignificantToken extends NonSignificantToken {
+  constructor(type, content, innerHTML, significant, index) {
+    super(type, content, innerHTML, significant);
+
+    this.index = index;
+  }
+
+  getIndex() {
+    return this.index;
+  }
+
   asHTML() {
     const html = '\n';  ///
 
     return html;
   }
 
-  clone(startPosition, endPosition) { return super.clone(EndOfLineNonSignificantToken, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(EndOfLineNonSignificantToken, startPosition, endPosition, this.index); }
 
-  static fromMatch(match) { return NonSignificantToken.fromMatch(EndOfLineNonSignificantToken, match); }
+  static match(content) {
+    let endOfLineNonSignificantToken = null;
 
-  static fromContent(content) { return NonSignificantToken.fromContent(EndOfLineNonSignificantToken, content); }
+    const match = content.match(regularExpression);
 
-  static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(EndOfLineNonSignificantToken, content); }
+    if (match !== null) {
+      const { index } = match;
 
-  static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(EndOfLineNonSignificantToken, content); }
+      content = match[0]; ///
+
+      const contentLength = content.length;
+
+      if (contentLength > 0) {
+        const sanitisedContent = sanitiseContent(content),
+              innerHTML = sanitisedContent, ///
+              significant = true;
+
+        endOfLineNonSignificantToken = new EndOfLineNonSignificantToken(type, content, innerHTML, significant, index);
+      }
+    }
+
+    return endOfLineNonSignificantToken;
+  }
 }
-
-const type = endOfLineType,
-      regularExpression = /\r\n|\r|\n/;
-
-Object.assign(EndOfLineNonSignificantToken, {
-  type,
-  regularExpression
-});
 
 module.exports = EndOfLineNonSignificantToken;

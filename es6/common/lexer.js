@@ -3,21 +3,18 @@
 const necessary = require('necessary');
 
 const Rules = require('./rules'),
-      tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       RegularExpressionToken = require('../common/token/significant/regularExpression'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
       EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
       EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
-      EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine'),
       StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf'),
       SinglyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/singlyQuoted'),
       DoublyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/doublyQuoted');
 
 const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities,
-      { tokenise } = tokenUtilities;
+      { splice } = arrayUtilities;
 
 class CommonLexer {
   constructor(rules) {
@@ -37,8 +34,6 @@ class CommonLexer {
 
     return tokens;
   }
-
-  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineNonSignificantToken); }
 
   tokeniseContents(tokensOrContents) {
     let inComment = false;

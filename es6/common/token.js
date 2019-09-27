@@ -2,10 +2,12 @@
 
 const necessary = require('necessary');
 
-const types = require('./types');
+const types = require('./types'),
+      contentUtilities = require('../utilities/content');
 
 const { arrayUtilities } = necessary,
       { first } = arrayUtilities,
+      { sanitiseContent } = contentUtilities,
       { commentType, endOfLineType, whitespaceType } = types;
 
 class Token {
@@ -57,26 +59,6 @@ class Token {
           whitespaceToken = typeWhitespaceType; ///
 
     return whitespaceToken;
-  }
-
-  matchToken(token) {
-    let matches = false;
-
-    const tokenSignificant = token.isSignificant();
-
-    if (this.significant === tokenSignificant) {
-      const tokenContent = token.getContent();
-
-      if (this.content === tokenContent) {
-        const tokenType = token.getType();
-
-        if (this.type === tokenType) {
-          matches = true;
-        }
-      }
-    }
-
-    return matches;
   }
 
   isEqualTo(token) {
@@ -193,9 +175,3 @@ class Token {
 }
 
 module.exports = Token;
-
-function sanitiseContent(content) {
-  const sanitisedContent = content.replace(/&/,'&amp;').replace(/</, '&lt;').replace(/>/, '&gt;');
-
-  return sanitisedContent;
-}

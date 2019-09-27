@@ -1,36 +1,57 @@
 'use strict';
 
 const types = require('../../types'),
-      SignificantToken = require('../../token/significant');
+      SignificantToken = require('../../token/significant'),
+      contentUtilities = require('../../../utilities/content');
 
-const { endOfLineType } = types;
+const { endOfLineType } = types,
+      { sanitiseContent } = contentUtilities;
+
+const type = endOfLineType, ///
+      regularExpression = /\r\n|\r|\n/;
 
 class EndOfLineSignificantToken extends SignificantToken {
+  constructor(type, content, innerHTML, significant, index) {
+    super(type, content, innerHTML, significant);
+
+    this.index = index;
+  }
+
+  getIndex() {
+    return this.index;
+  }
+
   asHTML() {
     const html = '\n';  ///
     
     return html;
   }
 
-  clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition, this.index); }
 
-  static match(content) { return NonSignificantToken.match(EndOfLineSignificantToken, content); }
+  static match(content) {
+    let endOfLineSignificantToken = null;
 
-  static fromMatch(match) { return NonSignificantToken.fromMatch(EndOfLineSignificantToken, match); }
+    const match = content.match(regularExpression);
 
-  static fromContent(content) { return SignificantToken.fromContent(EndOfLineSignificantToken, content); }
+    if (match !== null) {
+      const { index } = match;
 
-  static fromWithinContent(content) { return SignificantToken.fromWithinContent(EndOfLineSignificantToken, content); }
+      content = match[0]; ///
 
-  static positionWithinContent(content) { return SignificantToken.positionWithinContent(EndOfLineSignificantToken, content); }
+      const contentLength = content.length;
+
+      if (contentLength > 0) {
+        const sanitisedContent = sanitiseContent(content),
+              innerHTML = sanitisedContent, ///
+              significant = true;
+
+        endOfLineSignificantToken = new EndOfLineSignificantToken(type, content, innerHTML, significant, index);
+      }
+    }
+
+    return endOfLineSignificantToken;
+  }
 }
-
-const type = endOfLineType, ///
-      regularExpression = /\r\n|\r|\n/;
-
-Object.assign(EndOfLineSignificantToken, {
-  type,
-  regularExpression
-});
 
 module.exports = EndOfLineSignificantToken;
