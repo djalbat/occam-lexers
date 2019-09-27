@@ -3,18 +3,21 @@
 const necessary = require('necessary');
 
 const Rules = require('./rules'),
+      tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       RegularExpressionToken = require('../common/token/significant/regularExpression'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
       EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
       EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
+      EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine'),
       StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf'),
       SinglyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/singlyQuoted'),
       DoublyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/doublyQuoted');
 
 const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities;
+      { splice } = arrayUtilities,
+      { tokenise } = tokenUtilities;
 
 class CommonLexer {
   constructor(rules) {
@@ -69,13 +72,26 @@ class CommonLexer {
 
   tokeniseContent(content, tokens, inComment) {
     while (content !== '') {
-      const token = this.matchWhitespace(content)
-                 || this.matchRegularExpression(content)
-                 || this.matchSinglyQuotedStringLiteral(content)
-                 || this.matchDoublyQuotedStringLiteral(content)
-                 || this.matchMultiLineComment(content, inComment)
-                 || this.matchSingleLineComment(content, inComment)
-                 || this.matchRules(content);
+      let token = this.matchWhitespace(content)
+               || this.matchRegularExpression(content)
+               || this.matchSinglyQuotedStringLiteral(content)
+               || this.matchDoublyQuotedStringLiteral(content)
+               || this.matchMultiLineComment(content, inComment)
+               || this.matchSingleLineComment(content, inComment);
+
+      if (token === null) {
+        let significantToken = null;
+
+        this.rules.some((rule) => {
+          significantToken = rule.match(content);
+
+          if (significantToken !== null) {
+            token = significantToken; ///
+
+            return true;
+          }
+        });
+      }
 
       if (token === null) {
         throw new Error(`The content '${content}' cannot be tokenised.`);
@@ -100,55 +116,31 @@ class CommonLexer {
     return inComment;
   }
 
-  matchRules(content) {
-    let significantToken = null;
-
-    this.rules.some((rule) => {
-      significantToken = rule.match(content);
-
-      if (significantToken !== null) {
-        return true;
-      }
-    });
-
-    return significantToken;
-  }
-
-  matchWhitespace(content) { return WhitespaceToken.match(content); }
-
   matchMultiLineComment(content, inComment) {
-    let multiLinCommentToken = null;
-
-    if (!inComment) {
-      multiLinCommentToken = EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
-    } else {
-      multiLinCommentToken = EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content);
-    }
+    const multiLinCommentToken = inComment ?
+                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
+                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
 
     return multiLinCommentToken;
   }
 
   matchSingleLineComment(content, inComment) {
-    let singleLineCommentToken = null;
-
-    if (!inComment) {
-      singleLineCommentToken = SingleLineCommentToken.match(content);
-    }
+    const singleLineCommentToken = inComment ?
+                                     null :
+                                       SingleLineCommentToken.match(content);
 
     return singleLineCommentToken;
   }
+
+  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineNonSignificantToken); }
+
+  matchWhitespace(content) { return WhitespaceToken.match(content); }
 
   matchRegularExpression(content) { return RegularExpressionToken.match(content); }
 
   matchSinglyQuotedStringLiteral(content) { return SinglyQuotedStringLiteralToken.match(content); }
 
   matchDoublyQuotedStringLiteral(content) { return DoublyQuotedStringLiteralToken.match(content); }
-
-  static fromRules(Class, rules) {
-    const lexer = new Class(rules);
-
-    return lexer;
-  }
 
   static fromNothing(Class) {
     const { entries } = Class,

@@ -2,11 +2,14 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
+      tokenUtilities = require('../utilities/token'),
       defaultLexicalPattern = require('./defaultLexicalPattern'),
-      SignificantEndOfLineTokens = require('../common/tokens/endOfLine/significant');
+      SignificantEndOfLineToken = require('../common/token/significant/endOfLine');
+
+const { tokenise } = tokenUtilities;
 
 class FlorenceLexer extends CommonLexer {
-  tokeniseEndOfLines(tokensOrContents) { SignificantEndOfLineTokens.tokenise(tokensOrContents); }
+  tokeniseEndOfLines(content) { return tokenise(content, SignificantEndOfLineToken); }
 
   tokeniseRegularExpressions(tokensOrContents) {}
 
