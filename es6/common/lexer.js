@@ -5,6 +5,7 @@ const necessary = require('necessary');
 const Rules = require('./rules'),
       tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
+      RegularExpressionToken = require('../common/token/significant/regularExpression'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
       EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
       EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
@@ -74,6 +75,7 @@ class CommonLexer {
   tokeniseContent(content, tokens, inComment) {
     while (content !== '') {
       const token = this.matchWhitespace(content)
+                 || this.matchRegularExpression(content)
                  || this.matchSinglyQuotedStringLiteral(content)
                  || this.matchDoublyQuotedStringLiteral(content)
                  || this.matchMultiLineComment(content, inComment)
@@ -140,6 +142,8 @@ class CommonLexer {
 
     return singleLineCommentToken;
   }
+
+  matchRegularExpression(content) { return RegularExpressionToken.match(content); }
 
   matchSinglyQuotedStringLiteral(content) { return SinglyQuotedStringLiteralToken.match(content); }
 

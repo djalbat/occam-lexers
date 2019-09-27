@@ -8,6 +8,10 @@ const { regularExpressionType } = types;
 class RegularExpressionToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(RegularExpressionToken, startPosition, endPosition); }
 
+  static match(content) { return SignificantToken.match(RegularExpressionToken, content); }
+
+  static fromMatch(match) { return SignificantToken.fromMatch(RegularExpressionToken, match); }
+
   static fromContent(content) { return SignificantToken.fromContent(RegularExpressionToken, content); }
 
   static fromWithinContent(content) { return SignificantToken.fromWithinContent(RegularExpressionToken, content); }
