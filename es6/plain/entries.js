@@ -1,9 +1,9 @@
 'use strict';
 
 const entries = [
-  {
-    'unassigned': '^.*$'
-  }
+
+  { "unassigned": "^[^\\s]+" }
+
 ];
 
 module.exports = entries;
