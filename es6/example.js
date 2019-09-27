@@ -6,7 +6,7 @@ const easy = require('easy');
 
 const BNFExampleView = require('./example/bnf/view'),
       BasicExampleView = require('./example/basic/view'),
-      PlainExampleView = require('./example/plain/view'),
+      LaTeXExampleView = require('./example/latex/view'),
       FlorenceExampleView = require('./example/florence/view');
 
 const { Body } = easy;
@@ -19,7 +19,7 @@ const body = new Body(),
 switch (example) {
   case 'bnf' : ExampleView = BNFExampleView; break;
   case 'basic' : ExampleView = BasicExampleView; break;
-  case 'plain' : ExampleView = PlainExampleView; break;
+  case 'latex' : ExampleView = LaTeXExampleView; break;
   case 'florence' : ExampleView = FlorenceExampleView; break;
 }
 

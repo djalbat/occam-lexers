@@ -23,17 +23,17 @@ class ExampleView extends Element {
   }
 
   keyUpHandler() {
-    // try {
+    try {
       const tokens = this.getTokens();
 
       this.hideError();
 
       this.setTokens(tokens);
-    // } catch (error) {
-    //   this.showError();
-    //
-    //   this.clearTokens();
-    // }
+    } catch (error) {
+      this.showError();
+
+      this.clearTokens();
+    }
   }
 
   childElements(properties) {

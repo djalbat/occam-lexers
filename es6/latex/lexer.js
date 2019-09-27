@@ -4,7 +4,15 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class LaTeXLexer extends CommonLexer {
-  tokeniseRegularExpressions(tokensOrContents) {}
+  matchMultiLineComment(content, inComment) { return null; }
+
+  matchSingleLineComment(content, inComment) { return null; }
+
+  matchRegularExpression(content) { return null; }
+
+  matchSinglyQuotedStringLiteral(content) { return null; }
+
+  matchDoublyQuotedStringLiteral(content) { return null; }
 
   static fromNothing() { return CommonLexer.fromNothing(LaTeXLexer); }
 
