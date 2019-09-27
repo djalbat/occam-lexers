@@ -4,11 +4,13 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class MetaJSONLexer extends CommonLexer {
-  tokeniseComments(tokensOrContents, inComment) { return inComment; }
+  matchMultiLineComment(content, inComment) { return null; }
 
-  tokeniseRegularExpressions(tokensOrContents) {}
+  matchSingleLineComment(content, inComment) { return null; }
 
-  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+  matchRegularExpression(content) { return null; }
+
+  matchSinglyQuotedStringLiteral(content) { return null; }
 
   static fromNothing() { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
 

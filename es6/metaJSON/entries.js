@@ -1,12 +1,11 @@
 'use strict';
 
 const entries = [
-  {
-    'special': ',|:|\\[|\\]|\\{|\\}'
-  },
-  {
-    'unassigned': '^.*$'
-  }
+
+  { "special"    : "^(?:,|:|\\[|\\]|\\{|\\})" },
+
+  { "unassigned" : "^[^\\s]+" }
+
 ];
 
 module.exports = entries;
