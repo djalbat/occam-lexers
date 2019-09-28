@@ -2,14 +2,11 @@
 
 module.exports = {
   Rule: require('./lib/common/rule'),
-  Rules: require('./lib/common/rules'),
   types: require('./lib/common/types'),
   specialSymbols: require('./lib/bnf/specialSymbols'),
   SignificantToken: require('./lib/common/token/significant'),
   NonSignificantToken: require('./lib/common/token/nonSignificant'),
   defaultLexicalPattern: require('./lib/florence/defaultLexicalPattern'),
-  SignificantEndOfLineTokens: require('./lib/common/tokens/endOfLine/significant'),
-  NonSignificantEndOfLineTokens: require('./lib/common/tokens/endOfLine/nonSignificant'),
   BNFLexer: require('./lib/bnf/lexer'),
   PlainLexer: require('./lib/plain/lexer'),
   LaTeXLexer: require('./lib/latex/lexer'),
