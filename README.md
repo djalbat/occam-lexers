@@ -19,34 +19,33 @@ Three lexers are documented:
 * A basic lexer, for illustrative purposes.
 * The Florence lexer, namely the lexer for the [lexical entries part](https://raw.githubusercontent.com/jecs-imperial/occam-lexers/master/es6/florence/entries.js) of Occam's vernacular.
 
-All lexers share common functionality. Each takes six passes to match the following five types of tokens, although with caveats:
+There are also other, otherwise undocumented lexers.
 
-1. Ends of lines
+All lexers share common functionality. Each tokenises the ends of lines first and then on on the whole tokenises the remaining content in the following order:
+
+1. Whitespace
 2. Comments
-3. Whitespace
+3. Regular expressions
 4. String literals
-5. Regular expressions
-6. Other significant tokens
+5. Other significant tokens
 
-If any content is left over that cannot be matched, an error is thrown.
+If any part of the content cannot be tokenised, an error is thrown.
 
-Only the sixth and last process will match significant tokens defined by the lexical entries, each of which map a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the tokens in the other passes are hard-coded.
+The other significant tokens are defined by the lexical entries, each of which maps a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the other tokens are hard-coded.
 
-Comment and whitespace tokens are considered to be non-significant whilst the others are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others treat them as non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that the extended BNF lexer ignores comments whilst the basic lexer ignores comments, string literals and regular expressions. Also, the Florence lexer ignores regular expressions.
-
-The sixth process uses a what could loosely be called a recursive descent algorithm. This should be fast and helps to keep the lexical regular expression patterns relatively simple. There is no need to exclude keywords and special characters from the regular expression for `unassigned` tokens, for example, because the content to which this regular expression will be applied is guaranteed not to have these keywords or special characters in the first place.
+Comment and whitespace tokens are considered to be non-significant whilst the others are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others treat them as non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that some lexers ignore comments, string literals, etc. Check the source code for details.
 
 The lexical entries for the BNF lexer are the following:
 
     [
     
-      { "special": "::=|\\||\\(|\\)|\\?|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>" },
-    
-      { "type": "\\[[^\\]]+\\]" },
-    
-      { "name": "[\\w|~]+" },
-    
-      { "error" : "^.*$" }
+      { "special"    : "^(?:::=|\\||\\(|\\)|\\?|\\!|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>)" },
+
+      { "type"       : "^\\[[^\\]]+\\]" },
+
+      { "name"       : "^[\\w|~]+" },
+
+      { "unassigned" : "^[^\\s]+" }
     
     ]
     
