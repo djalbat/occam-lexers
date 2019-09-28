@@ -21,7 +21,7 @@ Three lexers are documented:
 
 There are also other, otherwise undocumented lexers.
 
-All lexers share common functionality. Each tokenises the ends of lines first and then on on the whole tokenises the remaining content in the following order:
+All lexers share common functionality. Each tokenises the ends of lines first and then on the whole tokenises the remaining content in the following order:
 
 1. Whitespace
 2. Comments
@@ -31,7 +31,7 @@ All lexers share common functionality. Each tokenises the ends of lines first an
 
 If any part of the content cannot be tokenised, an error is thrown.
 
-The other significant tokens are defined by the lexical entries, each of which maps a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the other tokens are hard-coded.
+The other significant tokens are defined by the lexical entries, each of which maps a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the first four types of otokens are hard-coded.
 
 Comment and whitespace tokens are considered to be non-significant whilst the others are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others treat them as non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that some lexers ignore comments, string literals, etc. Check the source code for details.
 
