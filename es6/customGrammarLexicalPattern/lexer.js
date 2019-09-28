@@ -2,18 +2,20 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      SignificantEndOfLineTokens = require('../common/tokens/endOfLine/significant')
+      EndOfLineSignificantToken = require('../common/token/significant/endOfLine');
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
-  tokeniseComments(tokensOrContents, inComment) { return inComment; }
+  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineSignificantToken); }
 
-  tokeniseEndOfLines(tokensOrContents) { SignificantEndOfLineTokens.tokenise(tokensOrContents); }
+  matchMultiLineComment(content, inComment) { return null; }
 
-  tokeniseRegularExpressions(tokensOrContents) {}
+  matchSingleLineComment(content, inComment) { return null; }
 
-  tokeniseDoublyQuotedStringLiterals(tokensOrContents) {}
+  matchRegularExpression(content) { return null; }
 
-  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+  matchSinglyQuotedStringLiteral(content) { return null; }
+
+  matchDoublyQuotedStringLiteral(content) { return null; }
 
   static fromNothing() { return CommonLexer.fromEntries(CustomGrammarLexicalPatternLexer, entries); }
 
