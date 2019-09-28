@@ -2,14 +2,14 @@
 
 const entries = [
 
-  { "special"    : "^(?:::=|\\||\\(|\\)|\\?|\\!|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>)" },
+  { "broken-string" : "^\"" },
 
-  { "type"       : "^\\[[^\\]]+\\]" },
+  { "special"       : "^(?:::=|\\||\\(|\\)|\\?|\\!|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>)" },
 
-  { "name"       : "^[\\w|~]+" },
+  { "type"          : "^\\[[^\\]]+\\]" },
 
-  { "unassigned" : "^[^\\s]+" }
-    
+  { "name"          : "^[\\w~]+" },
+
 ];
 
 module.exports = entries;
