@@ -4,9 +4,11 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class BNFLexer extends CommonLexer {
-  tokeniseComments(tokensOrContents, inComment) { return inComment; }
+  matchMultiLineComment(content, inComment) { return null; }
 
-  tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
+  matchSingleLineComment(content, inComment) { return null; }
+
+  matchSinglyQuotedStringLiteral(content) { return null; }
 
   tokensFromBNF(bnf) {
     const content = bnf,  ///

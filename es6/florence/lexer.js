@@ -11,8 +11,6 @@ const { tokenise } = tokenUtilities;
 class FlorenceLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return tokenise(content, SignificantEndOfLineToken); }
 
-  tokeniseRegularExpressions(tokensOrContents) {}
-
   tokeniseSinglyQuotedStringLiterals(tokensOrContents) {}
 
   static fromEntries(entries) {
