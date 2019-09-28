@@ -44,7 +44,7 @@ class EndOfLineNonSignificantToken extends NonSignificantToken {
       if (contentLength > 0) {
         const sanitisedContent = sanitiseContent(content),
               innerHTML = sanitisedContent, ///
-              significant = true;
+              significant = false;
 
         endOfLineNonSignificantToken = new EndOfLineNonSignificantToken(type, content, innerHTML, significant, index);
       }
