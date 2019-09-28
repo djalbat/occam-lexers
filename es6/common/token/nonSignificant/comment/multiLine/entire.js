@@ -16,13 +16,7 @@ class EntireMultiLineCommentToken extends MultiLineCommentToken {
 
   static match(content) { return MultiLineCommentToken.match(EntireMultiLineCommentToken, content); }
 
-  static fromMatch(match) { return MultiLineCommentToken.fromMatch(EntireMultiLineCommentToken, match); }
-
   static fromContent(content) { return MultiLineCommentToken.fromContent(EntireMultiLineCommentToken, content); }
-
-  static fromWithinContent(content) { return MultiLineCommentToken.fromWithinContent(EntireMultiLineCommentToken, content); }
-
-  static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(EntireMultiLineCommentToken, content); }
 }
 
 const type = commentType,  ///

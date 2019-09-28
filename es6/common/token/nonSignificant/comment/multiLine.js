@@ -7,13 +7,7 @@ class MultiLineCommentToken extends NonSignificantToken {
 
   static match(Class, content) { return NonSignificantToken.match(Class, content); }
 
-  static fromMatch(Class, match) { return NonSignificantToken.fromMatch(Class, match); }
-
   static fromContent(Class, content) { return NonSignificantToken.fromContent(Class, content); }
-
-  static fromWithinContent(Class, content) { return NonSignificantToken.fromWithinContent(Class, content); }
-
-  static positionWithinContent(Class, content) { return NonSignificantToken.positionWithinContent(Class, content); }
 }
 
 module.exports = MultiLineCommentToken;

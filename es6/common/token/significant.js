@@ -17,18 +17,6 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
-  static fromContentAndType(Class, content, type, ...remainingArguments) {
-    if (type === undefined) {
-      type = content;
-      content = Class;
-      Class = SignificantToken;
-    }
-
-    const significantToken = Token.fromContentAndType(Class, content, type, significant, ...remainingArguments);
-
-    return significantToken;
-  }
-
   static match(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;
@@ -36,17 +24,6 @@ class SignificantToken extends Token {
     }
 
     const significantToken = Token.match(Class, content, significant, ...remainingArguments);
-
-    return significantToken;
-  }
-
-  static fromMatch(Class, match, ...remainingArguments) {
-    if (match === undefined) {
-      match = Class;
-      Class = SignificantToken;
-    }
-
-    const significantToken = Token.fromMatch(Class, match, significant, ...remainingArguments);
 
     return significantToken;
   }
@@ -62,26 +39,16 @@ class SignificantToken extends Token {
     return significantToken;
   }
 
-  static fromWithinContent(Class, content, ...remainingArguments) {
-    if (content === undefined) {
+  static fromContentAndType(Class, content, type, ...remainingArguments) {
+    if (type === undefined) {
+      type = content;
       content = Class;
       Class = SignificantToken;
     }
 
-    const significantToken = Token.fromWithinContent(Class, content, significant, ...remainingArguments);
+    const significantToken = Token.fromContentAndType(Class, content, type, significant, ...remainingArguments);
 
     return significantToken;
-  }
-
-  static positionWithinContent(Class, content, ...remainingArguments) {
-    if (content === undefined) {
-      content = Class;
-      Class = SignificantToken;
-    }
-
-    const position = Token.positionWithinContent(Class, content, ...remainingArguments) ;
-
-    return position;
   }
 }
 

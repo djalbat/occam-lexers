@@ -16,13 +16,7 @@ class WhitespaceToken extends NonSignificantToken {
 
   static match(content) { return NonSignificantToken.match(WhitespaceToken, content); }
 
-  static fromMatch(match) { return NonSignificantToken.fromMatch(WhitespaceToken, match); }
-
   static fromContent(content) { return NonSignificantToken.fromContent(WhitespaceToken, content); }
-
-  static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(WhitespaceToken, content); }
-
-  static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(WhitespaceToken, content); }
 }
 
 const type = whitespaceType,  ///

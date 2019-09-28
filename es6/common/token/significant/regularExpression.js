@@ -10,13 +10,7 @@ class RegularExpressionToken extends SignificantToken {
 
   static match(content) { return SignificantToken.match(RegularExpressionToken, content); }
 
-  static fromMatch(match) { return SignificantToken.fromMatch(RegularExpressionToken, match); }
-
   static fromContent(content) { return SignificantToken.fromContent(RegularExpressionToken, content); }
-
-  static fromWithinContent(content) { return SignificantToken.fromWithinContent(RegularExpressionToken, content); }
-
-  static positionWithinContent(content) { return SignificantToken.positionWithinContent(RegularExpressionToken, content); }
 }
 
 const type = regularExpressionType, ///

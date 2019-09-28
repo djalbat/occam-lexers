@@ -16,13 +16,7 @@ class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
 
   static match(content) { return MultiLineCommentToken.match(MiddleOfMultiLineCommentToken, content); }
 
-  static fromMatch(match) { return MultiLineCommentToken.fromMatch(MiddleOfMultiLineCommentToken, match); }
-
   static fromContent(content) { return MultiLineCommentToken.fromContent(MiddleOfMultiLineCommentToken, content); }
-
-  static fromWithinContent(content) { return MultiLineCommentToken.fromWithinContent(MiddleOfMultiLineCommentToken, content); }
-
-  static positionWithinContent(content) { return MultiLineCommentToken.positionWithinContent(MiddleOfMultiLineCommentToken, content); }
 }
 
 const type = commentType,  ///

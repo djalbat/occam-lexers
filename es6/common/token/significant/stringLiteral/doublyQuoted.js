@@ -10,13 +10,7 @@ class DoublyQuotedStringLiteralToken extends StringLiteralToken {
 
   static match(content) { return StringLiteralToken.match(DoublyQuotedStringLiteralToken, content); }
 
-  static fromMatch(match) { return StringLiteralToken.fromMatch(DoublyQuotedStringLiteralToken, match); }
-
   static fromContent(content) { return StringLiteralToken.fromContent(DoublyQuotedStringLiteralToken, content); }
-
-  static fromWithinContent(content) { return StringLiteralToken.fromWithinContent(DoublyQuotedStringLiteralToken, content); }
-
-  static positionWithinContent(content) { return StringLiteralToken.positionWithinContent(DoublyQuotedStringLiteralToken, content); }
 }
 
 const type = stringLiteralType, ///

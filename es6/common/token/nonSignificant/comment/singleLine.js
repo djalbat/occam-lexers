@@ -16,13 +16,7 @@ class SingleLineCommentToken extends NonSignificantToken {
 
   static match(content) { return NonSignificantToken.match(SingleLineCommentToken, content); }
 
-  static fromMatch(match) { return NonSignificantToken.fromMatch(SingleLineCommentToken, match); }
-
   static fromContent(content) { return NonSignificantToken.fromContent(SingleLineCommentToken, content); }
-
-  static fromWithinContent(content) { return NonSignificantToken.fromWithinContent(SingleLineCommentToken, content); }
-
-  static positionWithinContent(content) { return NonSignificantToken.positionWithinContent(SingleLineCommentToken, content); }
 }
 
 const type = commentType,

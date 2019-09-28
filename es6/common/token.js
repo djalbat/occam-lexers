@@ -92,14 +92,6 @@ class Token {
     return token;
   }
 
-  static fromContentAndType(Class, content, type, significant, ...remainingArguments) {
-    const sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
-
-    return token;
-  }
-
   static match(Class, content, significant, ...remainingArguments) {
     let token = null;
 
@@ -126,16 +118,6 @@ class Token {
     return token;
   }
 
-  static fromMatch(Class, match, significant, ...remainingArguments) {
-    const { type } = Class,
-          content = match[0], ///
-          sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
-
-    return token;
-  }
-
   static fromContent(Class, content, significant, ...remainingArguments) {
     const { type } = Class,
           sanitisedContent = sanitiseContent(content),
@@ -145,32 +127,12 @@ class Token {
     return token;
   }
 
-  static fromWithinContent(Class, content, significant, ...remainingArguments) {
-    let token = null;
-
-    const { regularExpression } = Class,
-          matches = content.match(regularExpression);
-
-    if (matches) {
-      const firstMatch = first(matches);
-
-      content = firstMatch; ///
-
-      const { type } = Class,
-            sanitisedContent = sanitiseContent(content),
-            innerHTML = sanitisedContent; ///
-
-      token = new Class(type, content, innerHTML, significant, ...remainingArguments);
-    }
+  static fromContentAndType(Class, content, type, significant, ...remainingArguments) {
+    const sanitisedContent = sanitiseContent(content),
+          innerHTML = sanitisedContent, ///
+          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
 
     return token;
-  }
-
-  static positionWithinContent(Class, content) {
-    const { regularExpression } = Class,
-          position = content.search(regularExpression);
-
-    return position;
   }
 }
 

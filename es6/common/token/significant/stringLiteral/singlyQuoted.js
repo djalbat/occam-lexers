@@ -10,13 +10,7 @@ class SinglyQuotedStringLiteralToken extends StringLiteralToken {
 
   static match(content) { return StringLiteralToken.match(SinglyQuotedStringLiteralToken, content); }
 
-  static fromMatch(match) { return StringLiteralToken.fromMatch(SinglyQuotedStringLiteralToken, match); }
-
   static fromContent(content) { return StringLiteralToken.fromContent(SinglyQuotedStringLiteralToken, content); }
-
-  static fromWithinContent(content) { return StringLiteralToken.fromWithinContent(SinglyQuotedStringLiteralToken, content); }
-
-  static positionWithinContent(content) { return StringLiteralToken.positionWithinContent(SinglyQuotedStringLiteralToken, content); }
 }
 
 const type = stringLiteralType, ///
