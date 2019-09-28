@@ -2,7 +2,7 @@
 
 const necessary = require('necessary');
 
-const Rules = require('./rules'),
+const Rule = require('./rule'),
       tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       RegularExpressionToken = require('../common/token/significant/regularExpression'),
@@ -73,11 +73,11 @@ class CommonLexer {
   tokeniseContent(content, tokens, inComment) {
     while (content !== '') {
       let token = this.matchWhitespace(content)
+               || this.matchMultiLineComment(content, inComment)
+               || this.matchSingleLineComment(content, inComment)
                || this.matchRegularExpression(content)
                || this.matchSinglyQuotedStringLiteral(content)
-               || this.matchDoublyQuotedStringLiteral(content)
-               || this.matchMultiLineComment(content, inComment)
-               || this.matchSingleLineComment(content, inComment);
+               || this.matchDoublyQuotedStringLiteral(content);
 
       if (token === null) {
         let significantToken = null;
@@ -144,14 +144,14 @@ class CommonLexer {
 
   static fromNothing(Class) {
     const { entries } = Class,
-          rules = Rules.fromEntries(entries),
+          rules = entries.map((entry) => Rule.fromEntry(entry)),
           lexer = new Class(rules);
 
     return lexer;
   }
 
   static fromEntries(Class, entries) {
-    const rules = Rules.fromEntries(entries),
+    const rules = entries.map((entry) => Rule.fromEntry(entry)),
           lexer = new Class(rules);
 
     return lexer;
