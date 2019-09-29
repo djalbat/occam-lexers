@@ -2,13 +2,13 @@
 
 const entries = [
 
-  { "broken-string" : "^\"" },
+  { "special"    : "^(?:::=|\\||\\(|\\)|\\?|\\!|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>)" },
 
-  { "special"       : "^(?:::=|::|:|\\||\\(|\\)|\\?|\\!|\\*|\\+|\\.|ε|;|<NO_WHITESPACE>|<END_OF_LINE>)" },
+  { "type"       : "^\\[[^\\]]+\\]" },
 
-  { "type"          : "^\\[[^\\]]+\\]" },
+  { "name"       : "^[\\w~]+" },
 
-  { "name"          : "^[\\w~]+" },
+  { "unassigned" : "^[^\\s]+" }
 
 ];
 
