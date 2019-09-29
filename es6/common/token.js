@@ -1,13 +1,9 @@
 'use strict';
 
-const necessary = require('necessary');
-
 const types = require('./types'),
       contentUtilities = require('../utilities/content');
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities,
-      { sanitiseContent } = contentUtilities,
+const { sanitiseContent } = contentUtilities,
       { commentType, endOfLineType, whitespaceType } = types;
 
 class Token {
