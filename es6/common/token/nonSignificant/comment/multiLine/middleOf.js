@@ -1,11 +1,11 @@
 'use strict';
 
 const types = require('../../../../types'),
-      MultiLineCommentToken = require('../../comment/multiLine');
+      NonSignificantToken = require('../../../../token/nonSignificant');
 
 const { commentType } = types;
 
-class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
+class MiddleOfMultiLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(MiddleOfMultiLineCommentToken, startPosition, endPosition); }
 
   isInComment() {
@@ -14,9 +14,9 @@ class MiddleOfMultiLineCommentToken extends MultiLineCommentToken {
     return inComment;
   }
 
-  static match(content) { return MultiLineCommentToken.match(MiddleOfMultiLineCommentToken, content); }
+  static match(content) { return NonSignificantToken.match(MiddleOfMultiLineCommentToken, content); }
 
-  static fromContent(content) { return MultiLineCommentToken.fromContent(MiddleOfMultiLineCommentToken, content); }
+  static fromContent(content) { return NonSignificantToken.fromContent(MiddleOfMultiLineCommentToken, content); }
 }
 
 const type = commentType,  ///
