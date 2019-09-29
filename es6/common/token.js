@@ -67,6 +67,15 @@ class Token {
     return equalToToken;
   }
 
+  match(token) {
+    const type = token.getType(),
+          content = token.getContent(),
+          significant = token.isSignificant(),
+          matches = ((this.type === type) && (this.content === content) && (this.significant === significant));
+
+    return matches;
+  }
+
   asHTML() {
     const className = this.type,  ///
           html = `<span class="${className}">${this.innerHTML}</span>`;
