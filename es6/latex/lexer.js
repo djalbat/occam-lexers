@@ -4,6 +4,8 @@ const entries = require('./entries'),
       CommonLexer = require('../common/lexer');
 
 class LaTeXLexer extends CommonLexer {
+  matchBrokenComment(content, inComment) { return null; }
+
   matchMultiLineComment(content, inComment) { return null; }
 
   matchSingleLineComment(content, inComment) { return null; }

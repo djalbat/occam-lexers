@@ -7,6 +7,8 @@ const entries = require('./entries'),
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return tokenise(content, EndOfLineSignificantToken); }
 
+  matchBrokenComment(content, inComment) { return null; }
+
   matchMultiLineComment(content, inComment) { return null; }
 
   matchSingleLineComment(content, inComment) { return null; }
