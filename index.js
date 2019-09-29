@@ -7,6 +7,8 @@ module.exports = {
   SignificantToken: require('./lib/common/token/significant'),
   NonSignificantToken: require('./lib/common/token/nonSignificant'),
   defaultLexicalPattern: require('./lib/florence/defaultLexicalPattern'),
+  EndOfLineSignificantToken: require('./lib/common/token/significant/endOfLine'),
+  EndOfLineNonSignificantToken: require('./lib/common/token/nonSignificant/endOfLine'),
   BNFLexer: require('./lib/bnf/lexer'),
   PlainLexer: require('./lib/plain/lexer'),
   LaTeXLexer: require('./lib/latex/lexer'),
