@@ -2,7 +2,6 @@
 
 const entries = require('./entries'),
       CommonLexer = require('../common/lexer'),
-      tokenUtilities = require('../utilities/token'),
       defaultLexicalPattern = require('./defaultLexicalPattern'),
       SingleLineCommentToken = require('./token/nonSignificant/comment/singleLine'),
       EndOfLineSignificantToken = require('../common/token/significant/endOfLine'),
@@ -11,10 +10,8 @@ const entries = require('./entries'),
       StartOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/middleOf');
 
-const { tokenise } = tokenUtilities;
-
 class FlorenceLexer extends CommonLexer {
-  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineSignificantToken); }
+  tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }
 
   matchBrokenComment(content, inComment) { return null; }
 

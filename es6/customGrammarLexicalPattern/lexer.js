@@ -5,7 +5,7 @@ const entries = require('./entries'),
       EndOfLineSignificantToken = require('../common/token/significant/endOfLine');
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
-  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineSignificantToken); }
+  tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }
 
   matchBrokenComment(content, inComment) { return null; }
 

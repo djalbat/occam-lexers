@@ -144,7 +144,7 @@ class CommonLexer {
     return singleLineCommentToken;
   }
 
-  tokeniseEndOfLines(content) { return tokenise(content, EndOfLineNonSignificantToken); }
+  tokeniseEndOfLines(content, EndOfLineToken = EndOfLineNonSignificantToken) { return tokenise(content, EndOfLineToken); }
 
   matchWhitespace(content) { return WhitespaceToken.match(content); }
 
