@@ -61,7 +61,7 @@ class CommonLexer {
 
       content = rightContent; ///
 
-      endOfLineToken = Token.match(content);
+      endOfLineToken = EndOfLineToken.match(content);
     }
 
     if (content !== '') {
