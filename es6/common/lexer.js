@@ -64,9 +64,7 @@ class CommonLexer {
       endOfLineToken = EndOfLineToken.match(content);
     }
 
-    if (content !== '') {
-      endOfLineTokensOrContents.push(content);
-    }
+    endOfLineTokensOrContents.push(content);
 
     return endOfLineTokensOrContents;
   }
