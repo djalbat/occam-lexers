@@ -3,7 +3,6 @@
 const necessary = require('necessary');
 
 const Rule = require('./rule'),
-      tokenUtilities = require('../utilities/token'),
       WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
       BrokenCommentToken = require('../common/token/nonSignificant/brokenComment'),
       RegularExpressionToken = require('../common/token/significant/regularExpression'),
@@ -19,8 +18,7 @@ const Rule = require('./rule'),
       DoublyQuotedBrokenStringLiteralToken = require('../common/token/significant/brokenStringLiteral/doublyQuoted');
 
 const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities,
-      { tokenise } = tokenUtilities;
+      { splice } = arrayUtilities;
 
 class CommonLexer {
   constructor(rules) {
@@ -32,13 +30,45 @@ class CommonLexer {
   }
 
   tokenise(content) {
-    const tokensOrContents = this.tokeniseEndOfLines(content);
+    const endOfLineTokensOrContents = this.tokeniseEndOfLines(content),
+          tokensOrContents = endOfLineTokensOrContents; ///
 
     this.tokeniseContents(tokensOrContents);
 
     const tokens = tokensOrContents;  ///
 
     return tokens;
+  }
+
+  tokeniseEndOfLines(content, EndOfLineToken = EndOfLineNonSignificantToken) {
+    const endOfLineTokensOrContents = [];
+
+    let endOfLineToken = EndOfLineToken.match(content);
+
+    while (endOfLineToken !== null) {
+      const endOfLineTokenIndex = endOfLineToken.getIndex(),
+            endOfLineTokenContentLength = endOfLineToken.getContentLength(),
+            left = endOfLineTokenIndex, ///
+            right = endOfLineTokenIndex + endOfLineTokenContentLength,
+            leftContent = content.substring(0, left),
+            rightContent = content.substring(right);
+
+      content = leftContent;  ///
+
+      endOfLineTokensOrContents.push(content);
+
+      endOfLineTokensOrContents.push(endOfLineToken);
+
+      content = rightContent; ///
+
+      endOfLineToken = Token.match(content);
+    }
+
+    if (content !== '') {
+      endOfLineTokensOrContents.push(content);
+    }
+
+    return endOfLineTokensOrContents;
   }
 
   tokeniseContents(tokensOrContents) {
@@ -143,8 +173,6 @@ class CommonLexer {
 
     return singleLineCommentToken;
   }
-
-  tokeniseEndOfLines(content, EndOfLineToken = EndOfLineNonSignificantToken) { return tokenise(content, EndOfLineToken); }
 
   matchWhitespace(content) { return WhitespaceToken.match(content); }
 
