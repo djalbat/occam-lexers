@@ -103,8 +103,9 @@ class CommonLexer {
 
   tokeniseContent(content, tokens, inComment) {
     while (content !== '') {
-      let token = this.matchWhitespace(content)
-               || this.matchMultiLineComment(content, inComment)
+      let token = this.matchMultiLineCommentInComment(content, inComment)
+               || this.matchWhitespace(content)
+               || this.matchMultiLineCommentNotInComment(content, inComment)
                || this.matchSingleLineComment(content, inComment)
                || this.matchBrokenComment(content, inComment)
                || this.matchRegularExpression(content)
@@ -156,20 +157,28 @@ class CommonLexer {
     return brokenCommentToken;
   }
 
-  matchMultiLineComment(content, inComment) {
-    const multiLinCommentToken = inComment ?
-                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
-                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
-
-    return multiLinCommentToken;
-  }
-
   matchSingleLineComment(content, inComment) {
     const singleLineCommentToken = inComment ?
                                      null :
                                        SingleLineCommentToken.match(content);
 
     return singleLineCommentToken;
+  }
+
+  matchMultiLineCommentInComment(content, inComment) {
+    const multiLinCommentToken = inComment ?
+                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
+                                     null;
+
+    return multiLinCommentToken;
+  }
+
+  matchMultiLineCommentNotInComment(content, inComment) {
+    const multiLinCommentToken = inComment ?
+                                   null :
+                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
+
+    return multiLinCommentToken;
   }
 
   matchWhitespace(content) { return WhitespaceToken.match(content); }

@@ -15,20 +15,28 @@ class FlorenceLexer extends CommonLexer {
 
   matchBrokenComment(content, inComment) { return null; }
 
-  matchMultiLineComment(content, inComment) {
-    const multiLinCommentToken = inComment ?
-                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
-                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
-
-    return multiLinCommentToken;
-  }
-
   matchSingleLineComment(content, inComment) {
     const singleLineCommentToken = inComment ?
                                      null :
                                        SingleLineCommentToken.match(content);
 
     return singleLineCommentToken;
+  }
+
+  matchMultiLineCommentInComment(content, inComment) {
+    const multiLinCommentToken = inComment ?
+                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
+                                     null;
+
+    return multiLinCommentToken;
+  }
+
+  matchMultiLineCommentNotInComment(content, inComment) {
+    const multiLinCommentToken = inComment ?
+                                   null :
+                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
+
+    return multiLinCommentToken;
   }
 
   matchRegularExpression(content) { return null; }
