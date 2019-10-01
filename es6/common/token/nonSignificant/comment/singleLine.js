@@ -6,7 +6,7 @@ const types = require('../../../types'),
 const { commentType } = types;
 
 class SingleLineCommentToken extends NonSignificantToken {
-  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
+  clone(startPosition, endPosition) { return super.clone(SingleLineCommentToken, startPosition, endPosition); }
 
   isInComment() {
     const inComment = false;
