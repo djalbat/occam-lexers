@@ -6,7 +6,6 @@ const entries = require('./entries'),
       SingleLineCommentToken = require('./token/nonSignificant/comment/singleLine'),
       EndOfLineSignificantToken = require('../common/token/significant/endOfLine'),
       EndOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/endOf'),
-      EntireMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/entire'),
       StartOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/middleOf');
 
@@ -34,7 +33,7 @@ class FlorenceLexer extends CommonLexer {
   matchMultiLineCommentNotInComment(content, inComment) {
     const multiLinCommentToken = inComment ?
                                    null :
-                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
+                                     StartOfMultiLineCommentToken.match(content);
 
     return multiLinCommentToken;
   }

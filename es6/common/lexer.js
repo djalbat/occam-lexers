@@ -8,7 +8,6 @@ const Rule = require('./rule'),
       RegularExpressionToken = require('../common/token/significant/regularExpression'),
       SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
       EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
-      EntireMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/entire'),
       EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine'),
       StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
       MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf'),
@@ -176,7 +175,7 @@ class CommonLexer {
   matchMultiLineCommentNotInComment(content, inComment) {
     const multiLinCommentToken = inComment ?
                                    null :
-                                     EntireMultiLineCommentToken.match(content) || StartOfMultiLineCommentToken.match(content);
+                                     StartOfMultiLineCommentToken.match(content);
 
     return multiLinCommentToken;
   }

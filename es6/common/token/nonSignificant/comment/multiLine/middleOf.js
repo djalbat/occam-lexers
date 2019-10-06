@@ -20,7 +20,7 @@ class MiddleOfMultiLineCommentToken extends NonSignificantToken {
 }
 
 const type = commentType,  ///
-      regularExpression = /^.*/;
+      regularExpression = /^(?:.+(?=\*\/)|.+$)/;
 
 Object.assign(MiddleOfMultiLineCommentToken, {
   type,

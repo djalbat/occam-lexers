@@ -20,7 +20,7 @@ class EndOfMultiLineCommentToken extends NonSignificantToken {
 }
 
 const type = commentType,  ///
-      regularExpression = /^.*\*\//;
+      regularExpression = /^\*\//;
 
 Object.assign(EndOfMultiLineCommentToken, {
   type,
