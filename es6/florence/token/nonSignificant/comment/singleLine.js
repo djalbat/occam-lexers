@@ -3,7 +3,7 @@
 const types = require('../../../../common/types'),
       NonSignificantToken = require('../../../../common/token/nonSignificant');
 
-const { commentType } = types;
+const { singleLineCommentType } = types;
 
 class SingleLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(SingleLineCommentToken, startPosition, endPosition); }
@@ -19,7 +19,7 @@ class SingleLineCommentToken extends NonSignificantToken {
   static fromContent(content) { return NonSignificantToken.fromContent(SingleLineCommentToken, content); }
 }
 
-const type = commentType,
+const type = singleLineCommentType,
       regularExpression = /^#.*/;
 
 Object.assign(SingleLineCommentToken, {

@@ -3,7 +3,7 @@
 const types = require('../../../../../common/types'),
       NonSignificantToken = require('../../../../../common/token/nonSignificant');
 
-const { commentType } = types;
+const { startOfMultioLineCommentType } = types;
 
 class StartOfMultiLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(StartOfMultiLineCommentToken, startPosition, endPosition); }
@@ -19,7 +19,7 @@ class StartOfMultiLineCommentToken extends NonSignificantToken {
   static fromContent(content) { return NonSignificantToken.fromContent(StartOfMultiLineCommentToken, content); }
 }
 
-const type = commentType,  ///
+const type = startOfMultioLineCommentType,  ///
       regularExpression = /^###/;
 
 Object.assign(StartOfMultiLineCommentToken, {

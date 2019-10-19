@@ -37,8 +37,8 @@ class Token {
   }
   
   isCommentToken() {
-    const typeCommentType = (this.type ===commentType),
-          commentToken = typeCommentType; ///
+    const typeIncludesCommentType = this.type.includes(commentType),
+          commentToken = typeIncludesCommentType; ///
 
     return commentToken;
   }

@@ -6,9 +6,13 @@ const typeType = 'type',
       endOfLineType = 'end-of-line',
       whitespaceType = 'whitespace',
       stringLiteralType = 'string-literal',
-      brokenCommentType = 'broken-comment',
+      brokenCommentType = 'broken-c0mment', ///
       regularExpressionType = 'regular-expression',
-      brokenStringLiteralType = 'broken-string-literal';
+      brokenStringLiteralType = 'broken-string-literal',
+      singleLineCommentType = `single-line ${commentType}`,
+      endOfMultiLineCommentType = `end-of-multi-line ${commentType}`,
+      startOfMultiLineCommentType = `start-of-multi-line ${commentType}`,
+      middleOfMultiLineCommentType = `middle-of-multi-line ${commentType}`;
 
 module.exports = {
   typeType,
@@ -19,5 +23,9 @@ module.exports = {
 	stringLiteralType,
   brokenCommentType,
 	regularExpressionType,
-  brokenStringLiteralType
+  brokenStringLiteralType,
+  singleLineCommentType,
+  endOfMultiLineCommentType,
+  startOfMultiLineCommentType,
+  middleOfMultiLineCommentType
 };
