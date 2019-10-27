@@ -12,7 +12,8 @@ const plus = '+',
 			questionMark = '?',
       exclamationMark = '!',
 			END_OF_LINE = '<END_OF_LINE>',
-			NO_WHITESPACE = '<NO_WHITESPACE>';
+			NO_WHITESPACE = '<NO_WHITESPACE>',
+      NON_WHITESPACE = '<NON_WHITESPACE>';
 
 module.exports = {
 	plus,
@@ -27,5 +28,6 @@ module.exports = {
 	questionMark,
   exclamationMark,
 	END_OF_LINE,
-	NO_WHITESPACE
+	NO_WHITESPACE,
+  NON_WHITESPACE
 };
