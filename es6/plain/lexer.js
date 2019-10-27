@@ -6,9 +6,11 @@ const entries = require('./entries'),
 class PlainLexer extends CommonLexer {
   matchBrokenComment(content, inComment) { return null; }
 
-  matchMultiLineComment(content, inComment) { return null; }
-
   matchSingleLineComment(content, inComment) { return null; }
+
+  matchMultiLineCommentInComment(content, inComment) { return null; }
+
+  matchMultiLineCommentNotInComment(content, inComment) { return null; }
 
   matchRegularExpression(content) { return null; }
 
