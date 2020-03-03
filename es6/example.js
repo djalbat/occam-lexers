@@ -21,6 +21,10 @@ switch (example) {
   case 'florence' : ExampleView = FlorenceExampleView; break;
 }
 
-const exampleView = <ExampleView />;
+const exampleView =
+
+  <ExampleView />
+
+;
 
 exampleView.appendTo(body);
