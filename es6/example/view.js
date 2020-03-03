@@ -45,14 +45,20 @@ class ExampleView extends Element {
       <h1>{title}</h1>,
       <div className="columns">
         <SizeableElement>
-          <h2>Entries</h2>
+          <h2>
+            Entries
+          </h2>
           <EntriesTextarea onKeyUp={keyUpHandler} />
-          <h2>Content</h2>
+          <h2>
+            Content
+          </h2>
           <ContentTextarea onKeyUp={keyUpHandler} />
         </SizeableElement>
         <MainVerticalSplitter />
         <div className="column">
-          <h2>Tokens</h2>
+          <h2>
+            Tokens
+          </h2>
           <TokensTextarea />
         </div>
       </div>
