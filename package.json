@@ -20,7 +20,7 @@
     "@babel/plugin-transform-react-jsx": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
     "browserify": "^16.5.0",
-    "watchful-cli": "^1.0.10"
+    "watchful-cli": "^1.4.1"
   },
   "scripts": {
     "clean": "rm -rf ./lib",
@@ -29,8 +29,8 @@
     "batch-debug": "npm run watchful batch -- --debug",
     "incremental": "npm run watchful incremental --",
     "incremental-debug": "npm run watchful incremental -- --debug",
-    "build": "npm run clean && npm run batch && npm run clean",
-    "build-debug": "npm run clean && npm run batch-debug && npm run clean",
+    "build": "npm run clean && npm run batch",
+    "build-debug": "npm run clean && npm run batch-debug",
     "watch": "npm run clean && npm run batch && npm run incremental",
     "watch-debug": "npm run clean && npm run batch-debug && npm run incremental-debug"
   }

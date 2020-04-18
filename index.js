@@ -11,7 +11,7 @@ module.exports = {
   EndOfLineNonSignificantToken: require('./lib/common/token/nonSignificant/endOfLine'),
   BNFLexer: require('./lib/bnf/lexer'),
   PlainLexer: require('./lib/plain/lexer'),
-  LaTeXLexer: require('./lib/latex/lexer'),
+  LaTeXLexer: require('./lib/laTeX/lexer'),
   BasicLexer: require('./lib/basic/lexer'),
   CommonLexer: require('./lib/common/lexer'),
   MetaJSONLexer: require('./lib/metaJSON/lexer'),
