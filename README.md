@@ -67,14 +67,16 @@ You will need to do this if you want to look at the examples.
 
 ## Usage
 
-```js
-const lexers = require('occam-lexers');
-
-const { FlorenceLexer } = lexers;
+```
+import { FlorenceLexer } from "occam-lexers";
 
 const florenceLexer = FlorenceLexer.fromNothing();
 
-const content = ...,
+const content = `
+
+        ...
+
+      `,
       tokens = florenceLexer.tokenise(content);
 
 ...
