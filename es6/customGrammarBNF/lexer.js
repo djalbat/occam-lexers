@@ -1,6 +1,6 @@
 "use strict";
 
-const BNFLexer = require("../bnf/lexer");
+import BNFLexer from "../bnf/lexer";
 
 class CustomGrammarBNFLexer extends BNFLexer {
   static fromNothing() {

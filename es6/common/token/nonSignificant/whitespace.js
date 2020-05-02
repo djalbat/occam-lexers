@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../types"),
-      NonSignificantToken = require("../../token/nonSignificant");
+import NonSignificantToken from "../../token/nonSignificant";
 
-const { whitespaceType } = types;
+import { whitespaceType } from "../../types";
 
 class WhitespaceToken extends NonSignificantToken {
   asHTML() {

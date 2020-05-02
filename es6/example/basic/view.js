@@ -1,7 +1,7 @@
 "use strict";
 
-const BasicLexer = require("../../basic/lexer"),
-      ExampleView = require("../../example/view");
+import BasicLexer from "../../basic/lexer";
+import ExampleView from "../../example/view";
 
 class BasicExampleView extends ExampleView {
   getLexer() {

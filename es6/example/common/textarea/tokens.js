@@ -1,8 +1,6 @@
 "use strict";
 
-const easy = require("easy");
-
-const { Textarea } = easy;
+import { Textarea } from "easy";
 
 class TokensTextarea extends Textarea {
   setTokens(tokens) {

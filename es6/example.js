@@ -1,14 +1,12 @@
 "use strict";
 
-require("juxtapose");
+import "juxtapose";
 
-const easy = require("easy");
+import { Body } from "easy";
 
-const BNFExampleView = require("./example/bnf/view"),
-      BasicExampleView = require("./example/basic/view"),
-      FlorenceExampleView = require("./example/florence/view");
-
-const { Body } = easy;
+import BNFExampleView from "./example/bnf/view";
+import BasicExampleView from "./example/basic/view";
+import FlorenceExampleView from "./example/florence/view";
 
 let ExampleView;
 

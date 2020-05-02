@@ -1,11 +1,10 @@
 "use strict";
 
-const necessary = require("necessary");
+import { arrayUtilities } from "necessary";
 
-const SignificantToken = require("../common/token/significant");
+import SignificantToken from "../common/token/significant";
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities;
+const { first } = arrayUtilities;
 
 class Rule {
   constructor(type, regularExpression) {

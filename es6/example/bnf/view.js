@@ -1,7 +1,7 @@
 "use strict";
 
-const BNFLexer = require("../../bnf/lexer"),
-      ExampleView = require("../../example/view");
+import BNFLexer from "../../bnf/lexer";
+import ExampleView from "../../example/view";
 
 class BNFExampleView extends ExampleView {
   getLexer() {

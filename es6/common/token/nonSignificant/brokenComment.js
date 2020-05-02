@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../types"),
-      NonSignificantToken = require("../../token/nonSignificant");
+import NonSignificantToken from "../../token/nonSignificant";
 
-const { brokenCommentType } = types;
+import { brokenCommentType } from "../../types";
 
 class BrokenCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(BrokenCommentToken, startPosition, endPosition); }

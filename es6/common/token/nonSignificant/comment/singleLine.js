@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../../types"),
-      NonSignificantToken = require("../../../token/nonSignificant");
+import NonSignificantToken from "../../../token/nonSignificant";
 
-const { singleLineCommentType } = types;
+import { singleLineCommentType } from "../../../types";
 
 class SingleLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(SingleLineCommentToken, startPosition, endPosition); }

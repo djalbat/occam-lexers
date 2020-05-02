@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../../types"),
-      SignificantToken = require("../../significant");
+import SignificantToken from "../../significant";
 
-const { brokenStringLiteralType } = types;
+import { brokenStringLiteralType } from "../../../types";
 
 class SinglyQuotedBrokenStringLiteralToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(SinglyQuotedBrokenStringLiteralToken, startPosition, endPosition); }

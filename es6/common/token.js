@@ -1,10 +1,7 @@
 "use strict";
 
-const types = require("./types"),
-      contentUtilities = require("../utilities/content");
-
-const { sanitiseContent } = contentUtilities,
-      { commentType, endOfLineType, whitespaceType } = types;
+import { sanitiseContent } from "../utilities/content";
+import { commentType, endOfLineType, whitespaceType } from "./types";
 
 class Token {
   constructor(type, content, innerHTML, significant) {

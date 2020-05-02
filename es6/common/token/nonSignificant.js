@@ -1,6 +1,6 @@
 "use strict";
 
-const Token = require("../token");
+import Token from "../token";
 
 const significant = false;
 

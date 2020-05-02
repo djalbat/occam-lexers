@@ -1,8 +1,8 @@
 "use strict";
 
-const ExampleView = require("../../example/view"),
-      FlorenceLexer = require("../../florence/lexer"),
-      defaultLexicalPattern = require("../../florence/defaultLexicalPattern");
+import ExampleView from "../../example/view";
+import FlorenceLexer from "../../florence/lexer";
+import defaultLexicalPattern from "../../florence/defaultLexicalPattern";
 
 class FlorenceExampleView extends ExampleView {
   getTokens() {

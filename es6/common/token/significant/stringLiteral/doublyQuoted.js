@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../../types"),
-      StringLiteralToken = require("../../significant/stringLiteral");
+import StringLiteralToken from "../../significant/stringLiteral";
 
-const { stringLiteralType } = types;
+import { stringLiteralType } from"../../../types";
 
 class DoublyQuotedStringLiteralToken extends StringLiteralToken {
   clone(startPosition, endPosition) { return super.clone(DoublyQuotedStringLiteralToken, startPosition, endPosition); }

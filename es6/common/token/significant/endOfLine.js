@@ -1,11 +1,9 @@
 "use strict";
 
-const types = require("../../types"),
-      SignificantToken = require("../../token/significant"),
-      contentUtilities = require("../../../utilities/content");
+import SignificantToken from "../../token/significant";
 
-const { endOfLineType } = types,
-      { sanitiseContent } = contentUtilities;
+import { endOfLineType } from "../../types";
+import { sanitiseContent } from "../../../utilities/content";
 
 const type = endOfLineType, ///
       regularExpression = /\r\n|\r|\n/;

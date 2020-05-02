@@ -1,23 +1,22 @@
 "use strict";
 
-const necessary = require("necessary");
+import { arrayUtilities } from "necessary";
 
-const Rule = require("./rule"),
-      WhitespaceToken = require("../common/token/nonSignificant/whitespace"),
-      BrokenCommentToken = require("../common/token/nonSignificant/brokenComment"),
-      RegularExpressionToken = require("../common/token/significant/regularExpression"),
-      SingleLineCommentToken = require("../common/token/nonSignificant/comment/singleLine"),
-      EndOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/endOf"),
-      EndOfLineNonSignificantToken = require("../common/token/nonSignificant/endOfLine"),
-      StartOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/startOf"),
-      MiddleOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/middleOf"),
-      SinglyQuotedStringLiteralToken = require("../common/token/significant/stringLiteral/singlyQuoted"),
-      DoublyQuotedStringLiteralToken = require("../common/token/significant/stringLiteral/doublyQuoted"),
-      SinglyQuotedBrokenStringLiteralToken = require("../common/token/significant/brokenStringLiteral/singlyQuoted"),
-      DoublyQuotedBrokenStringLiteralToken = require("../common/token/significant/brokenStringLiteral/doublyQuoted");
+import Rule from "./rule";
+import WhitespaceToken from "../common/token/nonSignificant/whitespace";
+import BrokenCommentToken from "../common/token/nonSignificant/brokenComment";
+import RegularExpressionToken from "../common/token/significant/regularExpression";
+import SingleLineCommentToken from "../common/token/nonSignificant/comment/singleLine";
+import EndOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/endOf";
+import EndOfLineNonSignificantToken from "../common/token/nonSignificant/endOfLine";
+import StartOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/startOf";
+import MiddleOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/middleOf";
+import SinglyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/singlyQuoted";
+import DoublyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/doublyQuoted";
+import SinglyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/singlyQuoted";
+import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/doublyQuoted";
 
-const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities;
+const { splice } = arrayUtilities;
 
 class CommonLexer {
   constructor(rules) {

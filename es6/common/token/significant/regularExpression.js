@@ -1,9 +1,8 @@
 "use strict";
 
-const types = require("../../types"),
-      SignificantToken = require("../../token/significant");
+import SignificantToken from "../../token/significant";
 
-const { regularExpressionType } = types;
+import { regularExpressionType } from "../../types";
 
 class RegularExpressionToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(RegularExpressionToken, startPosition, endPosition); }

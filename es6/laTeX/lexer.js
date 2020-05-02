@@ -1,7 +1,7 @@
 "use strict";
 
-const entries = require("./entries"),
-      CommonLexer = require("../common/lexer");
+import entries from "./entries";
+import CommonLexer from "../common/lexer";
 
 class LaTeXLexer extends CommonLexer {
   matchBrokenComment(content, inComment) { return null; }

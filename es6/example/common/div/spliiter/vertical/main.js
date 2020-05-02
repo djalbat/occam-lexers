@@ -1,8 +1,6 @@
 "use strict";
 
-const easylayout = require("easy-layout");
-
-const { VerticalSplitterDiv } = easylayout;
+import { VerticalSplitterDiv } from "easy-layout";
 
 class MainVerticalSplitterDiv extends VerticalSplitterDiv {}
 
