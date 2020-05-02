@@ -13,15 +13,11 @@ export default class MiddleOfMultiLineCommentToken extends NonSignificantToken {
     return inComment;
   }
 
+  static type = middleOfMultiLineCommentType;
+
+  static regularExpression = /^(?:.+?(?=\*\/)|.+$)/;
+
   static match(content) { return NonSignificantToken.match(MiddleOfMultiLineCommentToken, content); }
 
   static fromContent(content) { return NonSignificantToken.fromContent(MiddleOfMultiLineCommentToken, content); }
 }
-
-const type = middleOfMultiLineCommentType,  ///
-      regularExpression = /^(?:.+?(?=\*\/)|.+$)/;
-
-Object.assign(MiddleOfMultiLineCommentToken, {
-  type,
-  regularExpression
-});

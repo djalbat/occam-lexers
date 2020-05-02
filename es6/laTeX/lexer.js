@@ -18,11 +18,9 @@ export default class LaTeXLexer extends CommonLexer {
 
   matchDoublyQuotedStringLiteral(content) { return null; }
 
+  static entries = entries;
+
   static fromNothing() { return CommonLexer.fromNothing(LaTeXLexer); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(LaTeXLexer, entries); }
 }
-
-Object.assign(LaTeXLexer, {
-  entries
-});

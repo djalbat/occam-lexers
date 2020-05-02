@@ -16,11 +16,9 @@ export default class MetaJSONLexer extends CommonLexer {
 
   matchSinglyQuotedStringLiteral(content) { return null; }
 
+  static entries = entries;
+
   static fromNothing() { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(MetaJSONLexer, entries); }
 }
-
-Object.assign(MetaJSONLexer, {
-  entries
-});

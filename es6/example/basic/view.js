@@ -21,10 +21,8 @@ export default class BasicExampleView extends ExampleView {
 
     return initialContent;
   }
-}
 
-Object.assign(BasicExampleView, {
-  defaultProperties: {
+  static defaultProperties = {
     className: "basic"
-  }
-});
+  };
+}

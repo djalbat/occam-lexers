@@ -21,11 +21,9 @@ export default class BNFLexer extends CommonLexer {
     return tokens;
   }
 
+  static entries = entries;
+
   static fromNothing() { return CommonLexer.fromNothing(BNFLexer); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(BNFLexer, entries); }
 }
-
-Object.assign(BNFLexer, {
-  entries
-});

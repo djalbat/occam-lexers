@@ -33,10 +33,8 @@ export default class BNFExampleView extends ExampleView {
 
     return initialContent;
   }
-}
 
-Object.assign(BNFExampleView, {
-  defaultProperties: {
+  static defaultProperties ={
     className: "bnf"
-  }
-});
+  };
+}

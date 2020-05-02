@@ -13,15 +13,11 @@ export default class WhitespaceToken extends NonSignificantToken {
 
   clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
 
+  static type = whitespaceType;
+
+  static regularExpression = /^[\t ]+/;
+
   static match(content) { return NonSignificantToken.match(WhitespaceToken, content); }
 
   static fromContent(content) { return NonSignificantToken.fromContent(WhitespaceToken, content); }
 }
-
-const type = whitespaceType,  ///
-      regularExpression = /^[\t ]+/;
-
-Object.assign(WhitespaceToken, {
-  type,
-  regularExpression
-});

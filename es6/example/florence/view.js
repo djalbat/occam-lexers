@@ -37,10 +37,8 @@ export default class FlorenceExampleView extends ExampleView {
 
     return initialContent;
   }
-}
 
-Object.assign(FlorenceExampleView, {
-  defaultProperties: {
+  static defaultProperties = {
     className: "florence"
-  }
-});
+  };
+}

@@ -25,12 +25,11 @@ export default class ContentTextarea extends Textarea {
       setContent
     });
   }
-}
 
-Object.assign(ContentTextarea, {
-  tagName: "textarea",
-  defaultProperties: {
+  static tagName = "textarea";
+
+  static defaultProperties = {
     className: "content",
     spellCheck: "false"
-  }
-});
+  };
+}

@@ -25,12 +25,11 @@ export default class EntriesTextarea extends Textarea {
       setEntries
     });
   }
-}
 
-Object.assign(EntriesTextarea, {
-  tagName: "textarea",
-  defaultProperties: {
+  static tagName = "textarea";
+
+  static defaultProperties = {
     className: "entries",
     spellCheck: "false"
-  }
-});
+  };
+}

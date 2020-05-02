@@ -5,9 +5,6 @@ import SignificantToken from "../../token/significant";
 import { endOfLineType } from "../../types";
 import { sanitiseContent } from "../../../utilities/content";
 
-const type = endOfLineType, ///
-      regularExpression = /\r\n|\r|\n/;
-
 export default class EndOfLineSignificantToken extends SignificantToken {
   constructor(type, content, innerHTML, significant, index) {
     super(type, content, innerHTML, significant);
@@ -30,7 +27,8 @@ export default class EndOfLineSignificantToken extends SignificantToken {
   static match(content) {
     let endOfLineSignificantToken = null;
 
-    const match = content.match(regularExpression);
+    const regularExpression = /\r\n|\r|\n/,
+          match = content.match(regularExpression);
 
     if (match !== null) {
       const { index } = match;
@@ -40,7 +38,8 @@ export default class EndOfLineSignificantToken extends SignificantToken {
       const contentLength = content.length;
 
       if (contentLength > 0) {
-        const sanitisedContent = sanitiseContent(content),
+        const type = endOfLineType, ///
+              sanitisedContent = sanitiseContent(content),
               innerHTML = sanitisedContent, ///
               significant = true;
 

@@ -13,15 +13,11 @@ export default class SingleLineCommentToken extends NonSignificantToken {
     return inComment;
   }
 
+  static type = singleLineCommentType;
+
+  static regularExpression = /^#.*/;
+
   static match(content) { return NonSignificantToken.match(SingleLineCommentToken, content); }
 
   static fromContent(content) { return NonSignificantToken.fromContent(SingleLineCommentToken, content); }
 }
-
-const type = singleLineCommentType,
-      regularExpression = /^#.*/;
-
-Object.assign(SingleLineCommentToken, {
-  type,
-  regularExpression
-});

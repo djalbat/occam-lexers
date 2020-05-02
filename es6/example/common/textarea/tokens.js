@@ -45,14 +45,13 @@ export default class TokensTextarea extends Textarea {
       clearTokens
     });
   }
-}
 
-Object.assign(TokensTextarea, {
-  tagName: "textarea",
-  defaultProperties: {
+  static tagName = "textarea";
+
+  static defaultProperties = {
     className: "tokens",
     spellCheck: "false",
     readOnly: true,
     rows: "30"
-  }
-});
+  };
+}

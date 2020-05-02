@@ -18,11 +18,9 @@ export default class PlainLexer extends CommonLexer {
 
   matchDoublyQuotedStringLiteral(content) { return null; }
 
+  static entries = entries;
+
   static fromNothing() { return CommonLexer.fromEntries(PlainLexer, entries); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(PlainLexer, entries); }
 }
-
-Object.assign(PlainLexer, {
-  entries
-});

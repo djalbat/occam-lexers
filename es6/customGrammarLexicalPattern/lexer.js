@@ -21,11 +21,9 @@ export default class CustomGrammarLexicalPatternLexer extends CommonLexer {
 
   matchDoublyQuotedStringLiteral(content) { return null; }
 
+  static entries = entries;
+
   static fromNothing() { return CommonLexer.fromEntries(CustomGrammarLexicalPatternLexer, entries); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(CustomGrammarLexicalPatternLexer, entries); }
 }
-
-Object.assign(CustomGrammarLexicalPatternLexer, {
-  entries
-});

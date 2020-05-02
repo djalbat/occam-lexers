@@ -41,11 +41,9 @@ export default class FlorenceLexer extends CommonLexer {
 
   matchSinglyQuotedStringLiteral(content) { return null; }
 
+  static entries = entries;
+
   static fromNothing() { return FlorenceLexer.fromEntries(entries); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(FlorenceLexer, entries); }
 }
-
-Object.assign(FlorenceLexer, {
-  entries
-});

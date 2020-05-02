@@ -80,7 +80,7 @@ export default class Rule {
 }
 
 function isUnicode(regularExpressionPattern) {
-  const unicodeRegularExpression = /u\{/, ///
+  const unicodeRegularExpression = /u{/, ///
         index = regularExpressionPattern.search(unicodeRegularExpression),
         unicode = (index !== -1);
 
