@@ -4,7 +4,7 @@ import SignificantToken from "../../token/significant";
 
 import { regularExpressionType } from "../../types";
 
-class RegularExpressionToken extends SignificantToken {
+export default class RegularExpressionToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(RegularExpressionToken, startPosition, endPosition); }
 
   static match(content) { return SignificantToken.match(RegularExpressionToken, content); }
@@ -19,5 +19,3 @@ Object.assign(RegularExpressionToken, {
   type,
   regularExpression
 });
-
-module.exports = RegularExpressionToken;

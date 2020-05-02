@@ -4,7 +4,7 @@ import Token from "../token";
 
 const significant = false;
 
-class NonSignificantToken extends Token {
+export default class NonSignificantToken extends Token {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition, significant); }
 
   static match(Class, content) { return Token.match(Class, content, significant); }
@@ -13,5 +13,3 @@ class NonSignificantToken extends Token {
 
   static fromContentAndType(Class, content, type) { return Token.fromContentAndType(Class, content, type, significant); }
 }
-
-module.exports = NonSignificantToken;

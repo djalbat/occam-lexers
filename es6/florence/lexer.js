@@ -8,7 +8,7 @@ import EndOfMultiLineCommentToken from "./token/nonSignificant/comment/multiLine
 import StartOfMultiLineCommentToken from "./token/nonSignificant/comment/multiLine/startOf";
 import MiddleOfMultiLineCommentToken from "./token/nonSignificant/comment/multiLine/middleOf";
 
-class FlorenceLexer extends CommonLexer {
+export default class FlorenceLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }
 
   matchBrokenComment(content, inComment) { return null; }
@@ -49,5 +49,3 @@ class FlorenceLexer extends CommonLexer {
 Object.assign(FlorenceLexer, {
   entries
 });
-
-module.exports = FlorenceLexer;

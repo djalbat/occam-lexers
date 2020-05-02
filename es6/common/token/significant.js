@@ -4,7 +4,7 @@ import Token from "../token";
 
 const significant = true;
 
-class SignificantToken extends Token {
+export default class SignificantToken extends Token {
   clone(Class, startPosition, endPosition, ...remainingArguments) {
     if (endPosition === undefined) {
       endPosition = startPosition;
@@ -51,5 +51,3 @@ class SignificantToken extends Token {
     return significantToken;
   }
 }
-
-module.exports = SignificantToken;

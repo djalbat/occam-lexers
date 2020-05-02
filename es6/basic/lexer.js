@@ -3,7 +3,7 @@
 import entries from "./entries";
 import CommonLexer from "../common/lexer";
 
-class BasicLexer extends CommonLexer {
+export default class BasicLexer extends CommonLexer {
   matchBrokenComment(content, inComment) { return null; }
 
   matchSingleLineComment(content, inComment) { return null; }
@@ -26,5 +26,3 @@ class BasicLexer extends CommonLexer {
 Object.assign(BasicLexer, {
   entries
 });
-
-module.exports = BasicLexer;

@@ -1,31 +1,15 @@
 "use strict";
 
-const plus = "+",
-			epsilon = "ε",
-			wildcard = ".",
-			asterisk = "*",
-			separator = "::=",
-			terminator = ";",
-			verticalBar = "|",
-			openBracket = "(",
-			closeBracket = ")",
-			questionMark = "?",
-      exclamationMark = "!",
-			END_OF_LINE = ""<END_OF_LINE>"",
-			NO_WHITESPACE = ""<NO_WHITESPACE>"";
-
-module.exports = {
-	plus,
-	epsilon,
-	wildcard,
-	asterisk,
-	separator,
-	terminator,
-	verticalBar,
-	openBracket,
-	closeBracket,
-	questionMark,
-  exclamationMark,
-	END_OF_LINE,
-	NO_WHITESPACE
-};
+export const plus = "+";
+export const epsilon = "ε";
+export const wildcard = ".";
+export const asterisk = "*";
+export const separator = "::=";
+export const terminator = ";";
+export const verticalBar = "|";
+export const openBracket = "(";
+export const closeBracket = ")";
+export const questionMark = "?";
+export const exclamationMark = "!";
+export const NO_WHITESPACE = ""<NO_WHITESPACE>"";
+export const END_OF_LINE = ""<END_OF_LINE>"";

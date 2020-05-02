@@ -1,21 +1,19 @@
 "use strict";
 
-module.exports = {
-  Rule: require("./lib/common/rule"),
-  types: require("./lib/common/types"),
-  specialSymbols: require("./lib/bnf/specialSymbols"),
-  SignificantToken: require("./lib/common/token/significant"),
-  NonSignificantToken: require("./lib/common/token/nonSignificant"),
-  defaultLexicalPattern: require("./lib/florence/defaultLexicalPattern"),
-  EndOfLineSignificantToken: require("./lib/common/token/significant/endOfLine"),
-  EndOfLineNonSignificantToken: require("./lib/common/token/nonSignificant/endOfLine"),
-  BNFLexer: require("./lib/bnf/lexer"),
-  PlainLexer: require("./lib/plain/lexer"),
-  LaTeXLexer: require("./lib/laTeX/lexer"),
-  BasicLexer: require("./lib/basic/lexer"),
-  CommonLexer: require("./lib/common/lexer"),
-  MetaJSONLexer: require("./lib/metaJSON/lexer"),
-  FlorenceLexer: require("./lib/florence/lexer"),
-  CustomGrammarBNFLexer: require("./lib/customGrammarBNF/lexer"),
-  CustomGrammarLexicalPatternLexer: require("./lib/customGrammarLexicalPattern/lexer")
-};
+export { default as Rule } from "./common/rule";
+export { default as types } from "./common/types";
+export { default as specialSymbols } from "./bnf/specialSymbols";
+export { default as SignificantToken } from "./common/token/significant";
+export { default as NonSignificantToken } from "./common/token/nonSignificant";
+export { default as defaultLexicalPattern } from "./florence/defaultLexicalPattern";
+export { default as EndOfLineSignificantToken } from "./common/token/significant/endOfLine";
+export { default as EndOfLineNonSignificantToken } from "./common/token/nonSignificant/endOfLine";
+export { default as BNFLexer } from "./bnf/lexer";
+export { default as PlainLexer } from "./plain/lexer";
+export { default as LaTeXLexer } from "./laTeX/lexer";
+export { default as BasicLexer } from "./basic/lexer";
+export { default as CommonLexer } from "./common/lexer";
+export { default as MetaJSONLexer } from "./metaJSON/lexer";
+export { default as FlorenceLexer } from "./florence/lexer";
+export { default as CustomGrammarBNFLexer } from "./customGrammarBNF/lexer";
+export { default as CustomGrammarLexicalPatternLexer } from "./customGrammarLexicalPattern/lexer";

@@ -2,4 +2,4 @@
 
 const defaultLexicalPattern = "";
 
-module.exports = defaultLexicalPattern;
+export default defaultLexicalPattern;

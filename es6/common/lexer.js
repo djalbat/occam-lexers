@@ -18,7 +18,7 @@ import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/br
 
 const { splice } = arrayUtilities;
 
-class CommonLexer {
+export default class CommonLexer {
   constructor(rules) {
     this.rules = rules;
   }
@@ -202,5 +202,3 @@ class CommonLexer {
     return lexer;
   }
 }
-
-module.exports = CommonLexer;

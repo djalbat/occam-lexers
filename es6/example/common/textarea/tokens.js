@@ -2,7 +2,7 @@
 
 import { Textarea } from "easy";
 
-class TokensTextarea extends Textarea {
+export default class TokensTextarea extends Textarea {
   setTokens(tokens) {
     let lineNumber = 1,
         previousToken = null;
@@ -56,5 +56,3 @@ Object.assign(TokensTextarea, {
     rows: "30"
   }
 });
-
-module.exports = TokensTextarea;

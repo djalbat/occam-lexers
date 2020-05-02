@@ -3,7 +3,7 @@
 import { sanitiseContent } from "../utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
-class Token {
+export default class Token {
   constructor(type, content, innerHTML, significant) {
     this.type = type;
     this.content = content;
@@ -137,5 +137,3 @@ class Token {
     return token;
   }
 }
-
-module.exports = Token;

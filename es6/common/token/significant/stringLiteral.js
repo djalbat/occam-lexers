@@ -2,7 +2,7 @@
 
 import SignificantToken from "../../token/significant";
 
-class StringLiteralToken extends SignificantToken {
+export default class StringLiteralToken extends SignificantToken {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
 
   getString() {
@@ -19,5 +19,3 @@ class StringLiteralToken extends SignificantToken {
 
   static fromContent(Class, content) { return SignificantToken.fromContent(Class, content); }
 }
-
-module.exports = StringLiteralToken;

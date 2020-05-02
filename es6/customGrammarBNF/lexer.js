@@ -2,7 +2,7 @@
 
 import BNFLexer from "../bnf/lexer";
 
-class CustomGrammarBNFLexer extends BNFLexer {
+export default class CustomGrammarBNFLexer extends BNFLexer {
   static fromNothing() {
     const bnfLexer = BNFLexer.fromNothing(),
           rules = bnfLexer.getRules(),
@@ -11,5 +11,3 @@ class CustomGrammarBNFLexer extends BNFLexer {
     return customGrammarBNFLexer;
   }
 }
-
-module.exports = CustomGrammarBNFLexer;

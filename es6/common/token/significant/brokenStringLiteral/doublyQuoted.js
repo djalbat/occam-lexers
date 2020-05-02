@@ -4,7 +4,7 @@ import SignificantToken from "../../significant";
 
 import { brokenStringLiteralType } from "../../../types";
 
-class DoublyQuotedBrokenStringLiteralToken extends SignificantToken {
+export default class DoublyQuotedBrokenStringLiteralToken extends SignificantToken {
   clone(startPosition, endPosition) { return super.clone(DoublyQuotedBrokenStringLiteralToken, startPosition, endPosition); }
 
   static match(content) { return SignificantToken.match(DoublyQuotedBrokenStringLiteralToken, content); }
@@ -19,5 +19,3 @@ Object.assign(DoublyQuotedBrokenStringLiteralToken, {
   type,
   regularExpression
 });
-
-module.exports = DoublyQuotedBrokenStringLiteralToken;

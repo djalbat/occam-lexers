@@ -2,7 +2,7 @@
 
 import { Textarea } from "easy";
 
-class ContentTextarea extends Textarea {
+export default class ContentTextarea extends Textarea {
   getContent() {
     const value = this.getValue(),
           content = value; ///
@@ -34,5 +34,3 @@ Object.assign(ContentTextarea, {
     spellCheck: "false"
   }
 });
-
-module.exports = ContentTextarea;

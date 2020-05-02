@@ -1,31 +1,15 @@
 "use strict";
 
-const typeType = "type",
-      nameType = "name",
-      commentType = "comment",
-      endOfLineType = "end-of-line",
-      whitespaceType = "whitespace",
-      stringLiteralType = "string-literal",
-      brokenCommentType = "broken-c0mment", ///
-      regularExpressionType = "regular-expression",
-      brokenStringLiteralType = "broken-string-literal",
-      singleLineCommentType = `single-line ${commentType}`,
-      endOfMultiLineCommentType = `end-of-multi-line ${commentType}`,
-      startOfMultiLineCommentType = `start-of-multi-line ${commentType}`,
-      middleOfMultiLineCommentType = `middle-of-multi-line ${commentType}`;
-
-module.exports = {
-  typeType,
-  nameType,
-	commentType,
-  endOfLineType,
-	whitespaceType,
-	stringLiteralType,
-  brokenCommentType,
-	regularExpressionType,
-  brokenStringLiteralType,
-  singleLineCommentType,
-  endOfMultiLineCommentType,
-  startOfMultiLineCommentType,
-  middleOfMultiLineCommentType
-};
+export const typeType = "type";
+export const nameType = "name";
+export const commentType = "comment";
+export const endOfLineType = "end-of-line";
+export const whitespaceType = "whitespace";
+export const stringLiteralType = "string-literal";
+export const brokenCommentType = "broken-c0mment";  ///
+export const regularExpressionType = "regular-expression";
+export const brokenStringLiteralType = "broken-string-literal";
+export const singleLineCommentType = `single-line ${commentType}`;
+export const endOfMultiLineCommentType = `end-of-multi-line ${commentType}`;
+export const startOfMultiLineCommentType = `start-of-multi-line ${commentType}`;
+export const middleOfMultiLineCommentType = `middle-of-multi-line ${commentType}`;

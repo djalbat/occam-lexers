@@ -8,7 +8,7 @@ import { sanitiseContent } from "../../../utilities/content";
 const type = endOfLineType, ///
       regularExpression = /\r\n|\r|\n/;
 
-class EndOfLineSignificantToken extends SignificantToken {
+export default class EndOfLineSignificantToken extends SignificantToken {
   constructor(type, content, innerHTML, significant, index) {
     super(type, content, innerHTML, significant);
 
@@ -51,5 +51,3 @@ class EndOfLineSignificantToken extends SignificantToken {
     return endOfLineSignificantToken;
   }
 }
-
-module.exports = EndOfLineSignificantToken;

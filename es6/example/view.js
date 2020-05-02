@@ -8,7 +8,7 @@ import EntriesTextarea from "./common/textarea/entries";
 import ContentTextarea from "./common/textarea/content";
 import MainVerticalSplitterDiv from "./common/div/spliiter/vertical/main";
 
-class ExampleView extends Element {
+export default class ExampleView extends Element {
   getTokens() {
     const Lexer = this.getLexer(),
           entries = this.getEntries(),
@@ -90,5 +90,3 @@ Object.assign(ExampleView, {
     className: "example"
   }
 });
-
-module.exports = ExampleView;

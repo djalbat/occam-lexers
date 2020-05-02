@@ -6,7 +6,7 @@ import SignificantToken from "../common/token/significant";
 
 const { first } = arrayUtilities;
 
-class Rule {
+export default class Rule {
   constructor(type, regularExpression) {
     this.type = type;
     this.regularExpression = regularExpression;
@@ -78,8 +78,6 @@ class Rule {
     return rule;
   }
 }
-
-module.exports = Rule;
 
 function isUnicode(regularExpressionPattern) {
   const unicodeRegularExpression = /u\{/, ///

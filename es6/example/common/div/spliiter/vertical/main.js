@@ -2,12 +2,10 @@
 
 import { VerticalSplitterDiv } from "easy-layout";
 
-class MainVerticalSplitterDiv extends VerticalSplitterDiv {}
+export default class MainVerticalSplitterDiv extends VerticalSplitterDiv {}
 
 Object.assign(MainVerticalSplitterDiv, {
   defaultProperties: {
     className: "main"
   }
 });
-
-module.exports = MainVerticalSplitterDiv;

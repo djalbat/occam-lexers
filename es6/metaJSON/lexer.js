@@ -3,7 +3,7 @@
 import entries from "./entries";
 import CommonLexer from "../common/lexer";
 
-class MetaJSONLexer extends CommonLexer {
+export default class MetaJSONLexer extends CommonLexer {
   matchBrokenComment(content, inComment) { return null; }
 
   matchSingleLineComment(content, inComment) { return null; }
@@ -24,5 +24,3 @@ class MetaJSONLexer extends CommonLexer {
 Object.assign(MetaJSONLexer, {
   entries
 });
-
-module.exports = MetaJSONLexer;

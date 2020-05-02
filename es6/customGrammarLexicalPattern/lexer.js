@@ -4,7 +4,7 @@ import entries from "./entries";
 import CommonLexer from "../common/lexer";
 import EndOfLineSignificantToken from "../common/token/significant/endOfLine";
 
-class CustomGrammarLexicalPatternLexer extends CommonLexer {
+export default class CustomGrammarLexicalPatternLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }
 
   matchBrokenComment(content, inComment) { return null; }
@@ -29,5 +29,3 @@ class CustomGrammarLexicalPatternLexer extends CommonLexer {
 Object.assign(CustomGrammarLexicalPatternLexer, {
   entries
 });
-
-module.exports = CustomGrammarLexicalPatternLexer;

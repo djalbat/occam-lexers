@@ -4,7 +4,7 @@ import NonSignificantToken from "../../token/nonSignificant";
 
 import { whitespaceType } from "../../types";
 
-class WhitespaceToken extends NonSignificantToken {
+export default class WhitespaceToken extends NonSignificantToken {
   asHTML() {
     const html = this.innerHTML;  ///
 
@@ -25,5 +25,3 @@ Object.assign(WhitespaceToken, {
   type,
   regularExpression
 });
-
-module.exports = WhitespaceToken;

@@ -4,7 +4,7 @@ import StringLiteralToken from "../../significant/stringLiteral";
 
 import { stringLiteralType } from "../../../types";
 
-class SinglyQuotedStringLiteralToken extends StringLiteralToken {
+export default class SinglyQuotedStringLiteralToken extends StringLiteralToken {
   clone(startPosition, endPosition) { return super.clone(SinglyQuotedStringLiteralToken, startPosition, endPosition); }
 
   static match(content) { return StringLiteralToken.match(SinglyQuotedStringLiteralToken, content); }
@@ -19,5 +19,3 @@ Object.assign(SinglyQuotedStringLiteralToken, {
   type,
   regularExpression
 });
-
-module.exports = SinglyQuotedStringLiteralToken;

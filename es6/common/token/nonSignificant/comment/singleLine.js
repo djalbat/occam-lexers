@@ -4,7 +4,7 @@ import NonSignificantToken from "../../../token/nonSignificant";
 
 import { singleLineCommentType } from "../../../types";
 
-class SingleLineCommentToken extends NonSignificantToken {
+export default class SingleLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(SingleLineCommentToken, startPosition, endPosition); }
 
   isInComment() {
@@ -25,5 +25,3 @@ Object.assign(SingleLineCommentToken, {
   type,
   regularExpression
 });
-
-module.exports = SingleLineCommentToken;

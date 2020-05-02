@@ -4,7 +4,7 @@ import NonSignificantToken from "../../../../token/nonSignificant";
 
 import { endOfMultiLineCommentType } from "../../../../types";
 
-class EndOfMultiLineCommentToken extends NonSignificantToken {
+export default class EndOfMultiLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(EndOfMultiLineCommentToken, startPosition, endPosition); }
 
   isInComment() {
@@ -25,5 +25,3 @@ Object.assign(EndOfMultiLineCommentToken, {
   type,
   regularExpression
 });
-
-module.exports = EndOfMultiLineCommentToken;

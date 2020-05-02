@@ -4,7 +4,7 @@ import NonSignificantToken from "../../token/nonSignificant";
 
 import { brokenCommentType } from "../../types";
 
-class BrokenCommentToken extends NonSignificantToken {
+export default class BrokenCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(BrokenCommentToken, startPosition, endPosition); }
 
   static match(content) { return NonSignificantToken.match(BrokenCommentToken, content); }
@@ -19,5 +19,3 @@ Object.assign(BrokenCommentToken, {
   type,
   regularExpression
 });
-
-module.exports = BrokenCommentToken;

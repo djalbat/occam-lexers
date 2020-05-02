@@ -10,4 +10,4 @@ const entries = [
 
 ];
 
-module.exports = entries;
+export default entries;
