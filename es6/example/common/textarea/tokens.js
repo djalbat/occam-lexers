@@ -7,7 +7,7 @@ export default class TokensTextarea extends Textarea {
     let lineNumber = 1,
         previousToken = null;
 
-    const html = tokens.reduce(function(html, token) {
+    const html = tokens.reduce((html, token) => {
       const tokenHTML = token.asHTML();
 
       if (previousToken === null) {
