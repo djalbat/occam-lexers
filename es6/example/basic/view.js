@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const BasicLexer = require('../../basic/lexer'),
-      ExampleView = require('../../example/view');
+const BasicLexer = require("../../basic/lexer"),
+      ExampleView = require("../../example/view");
 
 class BasicExampleView extends ExampleView {
   getLexer() {
@@ -11,13 +11,13 @@ class BasicExampleView extends ExampleView {
   }
 
   getTitle() {
-    const title = 'Basic lexer example';
+    const title = "Basic lexer example";
 
     return title;
   }
 
   getInitialContent() {
-    const initialContent = '1+2/3';
+    const initialContent = "1+2/3";
 
     return initialContent;
   }
@@ -25,7 +25,7 @@ class BasicExampleView extends ExampleView {
 
 Object.assign(BasicExampleView, {
   defaultProperties: {
-    className: 'basic'
+    className: "basic"
   }
 });
 

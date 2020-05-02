@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const easy = require('easy');
+const easy = require("easy");
 
 const { Textarea } = easy;
 
@@ -13,7 +13,7 @@ class EntriesTextarea extends Textarea {
   }
 
   setEntries(entries) {
-    const value = JSON.stringify(entries, null, '  ');
+    const value = JSON.stringify(entries, null, "  ");
 
     this.setValue(value);
   }
@@ -30,10 +30,10 @@ class EntriesTextarea extends Textarea {
 }
 
 Object.assign(EntriesTextarea, {
-  tagName: 'textarea',
+  tagName: "textarea",
   defaultProperties: {
-    className: 'entries',
-    spellCheck: 'false'
+    className: "entries",
+    spellCheck: "false"
   }
 });
 

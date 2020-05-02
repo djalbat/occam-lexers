@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const SignificantToken = require('../../token/significant');
+const SignificantToken = require("../../token/significant");
 
 class StringLiteralToken extends SignificantToken {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }

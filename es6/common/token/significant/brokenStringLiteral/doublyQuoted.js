@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const types = require('../../../types'),
-      SignificantToken = require('../../significant');
+const types = require("../../../types"),
+      SignificantToken = require("../../significant");
 
 const { brokenStringLiteralType } = types;
 

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const ExampleView = require('../../example/view'),
-      FlorenceLexer = require('../../florence/lexer'),
-      defaultLexicalPattern = require('../../florence/defaultLexicalPattern');
+const ExampleView = require("../../example/view"),
+      FlorenceLexer = require("../../florence/lexer"),
+      defaultLexicalPattern = require("../../florence/defaultLexicalPattern");
 
 class FlorenceExampleView extends ExampleView {
   getTokens() {
@@ -27,13 +27,13 @@ class FlorenceExampleView extends ExampleView {
   }
 
   getTitle() {
-    const title = 'Florence lexer example';
+    const title = "Florence lexer example";
 
     return title;
   }
 
   getInitialContent() {
-    const initialContent = '';
+    const initialContent = "";
 
     return initialContent;
   }
@@ -41,7 +41,7 @@ class FlorenceExampleView extends ExampleView {
 
 Object.assign(FlorenceExampleView, {
   defaultProperties: {
-    className: 'florence'
+    className: "florence"
   }
 });
 

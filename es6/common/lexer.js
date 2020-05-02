@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
-const necessary = require('necessary');
+const necessary = require("necessary");
 
-const Rule = require('./rule'),
-      WhitespaceToken = require('../common/token/nonSignificant/whitespace'),
-      BrokenCommentToken = require('../common/token/nonSignificant/brokenComment'),
-      RegularExpressionToken = require('../common/token/significant/regularExpression'),
-      SingleLineCommentToken = require('../common/token/nonSignificant/comment/singleLine'),
-      EndOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/endOf'),
-      EndOfLineNonSignificantToken = require('../common/token/nonSignificant/endOfLine'),
-      StartOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/startOf'),
-      MiddleOfMultiLineCommentToken = require('../common/token/nonSignificant/comment/multiLine/middleOf'),
-      SinglyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/singlyQuoted'),
-      DoublyQuotedStringLiteralToken = require('../common/token/significant/stringLiteral/doublyQuoted'),
-      SinglyQuotedBrokenStringLiteralToken = require('../common/token/significant/brokenStringLiteral/singlyQuoted'),
-      DoublyQuotedBrokenStringLiteralToken = require('../common/token/significant/brokenStringLiteral/doublyQuoted');
+const Rule = require("./rule"),
+      WhitespaceToken = require("../common/token/nonSignificant/whitespace"),
+      BrokenCommentToken = require("../common/token/nonSignificant/brokenComment"),
+      RegularExpressionToken = require("../common/token/significant/regularExpression"),
+      SingleLineCommentToken = require("../common/token/nonSignificant/comment/singleLine"),
+      EndOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/endOf"),
+      EndOfLineNonSignificantToken = require("../common/token/nonSignificant/endOfLine"),
+      StartOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/startOf"),
+      MiddleOfMultiLineCommentToken = require("../common/token/nonSignificant/comment/multiLine/middleOf"),
+      SinglyQuotedStringLiteralToken = require("../common/token/significant/stringLiteral/singlyQuoted"),
+      DoublyQuotedStringLiteralToken = require("../common/token/significant/stringLiteral/doublyQuoted"),
+      SinglyQuotedBrokenStringLiteralToken = require("../common/token/significant/brokenStringLiteral/singlyQuoted"),
+      DoublyQuotedBrokenStringLiteralToken = require("../common/token/significant/brokenStringLiteral/doublyQuoted");
 
 const { arrayUtilities } = necessary,
       { splice } = arrayUtilities;
@@ -76,7 +76,7 @@ class CommonLexer {
 
     while (index < tokensOrContentsLength) {
       const tokenOrContent = tokensOrContents[index],
-            tokenOrContentString = (typeof tokenOrContent === 'string'),
+            tokenOrContentString = (typeof tokenOrContent === "string"),
             tokenOrContentContent = tokenOrContentString; ///
 
       if (tokenOrContentContent) {
@@ -101,7 +101,7 @@ class CommonLexer {
   }
 
   tokeniseContent(content, tokens, inComment) {
-    while (content !== '') {
+    while (content !== "") {
       let token = this.matchMultiLineCommentInComment(content, inComment)
                || this.matchWhitespace(content)
                || this.matchMultiLineCommentNotInComment(content, inComment)

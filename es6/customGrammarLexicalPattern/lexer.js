@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const entries = require('./entries'),
-      CommonLexer = require('../common/lexer'),
-      EndOfLineSignificantToken = require('../common/token/significant/endOfLine');
+const entries = require("./entries"),
+      CommonLexer = require("../common/lexer"),
+      EndOfLineSignificantToken = require("../common/token/significant/endOfLine");
 
 class CustomGrammarLexicalPatternLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }

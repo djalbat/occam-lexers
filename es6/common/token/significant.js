@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Token = require('../token');
+const Token = require("../token");
 
 const significant = true;
 

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const BNFLexer = require('../../bnf/lexer'),
-      ExampleView = require('../../example/view');
+const BNFLexer = require("../../bnf/lexer"),
+      ExampleView = require("../../example/view");
 
 class BNFExampleView extends ExampleView {
   getLexer() {
@@ -11,7 +11,7 @@ class BNFExampleView extends ExampleView {
   }
 
   getTitle() {
-    const title = 'BNF lexer example';
+    const title = "BNF lexer example";
 
     return title;
   }
@@ -37,7 +37,7 @@ class BNFExampleView extends ExampleView {
 
 Object.assign(BNFExampleView, {
   defaultProperties: {
-    className: 'bnf'
+    className: "bnf"
   }
 });
 

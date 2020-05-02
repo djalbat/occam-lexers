@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const types = require('../../types'),
-      SignificantToken = require('../../token/significant'),
-      contentUtilities = require('../../../utilities/content');
+const types = require("../../types"),
+      SignificantToken = require("../../token/significant"),
+      contentUtilities = require("../../../utilities/content");
 
 const { endOfLineType } = types,
       { sanitiseContent } = contentUtilities;
@@ -22,7 +22,7 @@ class EndOfLineSignificantToken extends SignificantToken {
   }
 
   asHTML() {
-    const html = '\n';  ///
+    const html = "\n";  ///
     
     return html;
   }

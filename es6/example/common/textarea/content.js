@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const easy = require('easy');
+const easy = require("easy");
 
 const { Textarea } = easy;
 
@@ -30,10 +30,10 @@ class ContentTextarea extends Textarea {
 }
 
 Object.assign(ContentTextarea, {
-  tagName: 'textarea',
+  tagName: "textarea",
   defaultProperties: {
-    className: 'content',
-    spellCheck: 'false'
+    className: "content",
+    spellCheck: "false"
   }
 });
 

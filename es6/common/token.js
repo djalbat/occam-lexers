@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const types = require('./types'),
-      contentUtilities = require('../utilities/content');
+const types = require("./types"),
+      contentUtilities = require("../utilities/content");
 
 const { sanitiseContent } = contentUtilities,
       { commentType, endOfLineType, whitespaceType } = types;

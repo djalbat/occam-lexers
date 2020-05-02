@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-const entries = require('./entries'),
-      CommonLexer = require('../common/lexer'),
-      SingleLineCommentToken = require('./token/nonSignificant/comment/singleLine'),
-      EndOfLineSignificantToken = require('../common/token/significant/endOfLine'),
-      EndOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/endOf'),
-      StartOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/startOf'),
-      MiddleOfMultiLineCommentToken = require('./token/nonSignificant/comment/multiLine/middleOf');
+const entries = require("./entries"),
+      CommonLexer = require("../common/lexer"),
+      SingleLineCommentToken = require("./token/nonSignificant/comment/singleLine"),
+      EndOfLineSignificantToken = require("../common/token/significant/endOfLine"),
+      EndOfMultiLineCommentToken = require("./token/nonSignificant/comment/multiLine/endOf"),
+      StartOfMultiLineCommentToken = require("./token/nonSignificant/comment/multiLine/startOf"),
+      MiddleOfMultiLineCommentToken = require("./token/nonSignificant/comment/multiLine/middleOf");
 
 class FlorenceLexer extends CommonLexer {
   tokeniseEndOfLines(content) { return super.tokeniseEndOfLines(content, EndOfLineSignificantToken); }

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const types = require('../../../../../common/types'),
-      NonSignificantToken = require('../../../../../common/token/nonSignificant');
+const types = require("../../../../../common/types"),
+      NonSignificantToken = require("../../../../../common/token/nonSignificant");
 
 const { startOfMultiLineCommentType } = types;
 

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const necessary = require('necessary');
+const necessary = require("necessary");
 
-const SignificantToken = require('../common/token/significant');
+const SignificantToken = require("../common/token/significant");
 
 const { arrayUtilities } = necessary,
       { first } = arrayUtilities;
@@ -71,7 +71,7 @@ class Rule {
 
   static fromTypeAndRegularExpressionPattern(type, regularExpressionPattern) {
     const unicode = isUnicode(regularExpressionPattern),
-          flags = unicode ? 'u' : '',
+          flags = unicode ? "u" : "",
           regExp = new RegExp(regularExpressionPattern, flags),
           regularExpression = regExp, ///
           rule = new Rule(type, regularExpression);

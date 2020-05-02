@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-const easy = require('easy');
+const easy = require("easy");
 
 const { Textarea } = easy;
 
 class TokensTextarea extends Textarea {
   showError() {
-    this.addClass('error');
+    this.addClass("error");
   }
 
   hideError() {
-    this.removeClass('error');
+    this.removeClass("error");
   }
 
   setTokens(tokens) {
@@ -35,13 +35,13 @@ class TokensTextarea extends Textarea {
       previousToken = token;
 
       return html;
-    }, '');
+    }, "");
 
     this.html(html);
   }
 
   clearTokens() {
-    const html = '';
+    const html = "";
 
     this.html(html);
   }
@@ -62,12 +62,12 @@ class TokensTextarea extends Textarea {
 }
 
 Object.assign(TokensTextarea, {
-  tagName: 'textarea',
+  tagName: "textarea",
   defaultProperties: {
-    className: 'tokens',
-    spellCheck: 'false',
+    className: "tokens",
+    spellCheck: "false",
     readOnly: true,
-    rows: '30'
+    rows: "30"
   }
 });
 

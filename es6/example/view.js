@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-const easy = require('easy'),
-      easyLayout = require('easy-layout');
+const easy = require("easy"),
+      easyLayout = require("easy-layout");
 
 const { Element } = easy,
       { SizeableDiv } = easyLayout;
 
-const TokensTextarea = require('./common/textarea/tokens'),
-      EntriesTextarea = require('./common/textarea/entries'),
-      ContentTextarea = require('./common/textarea/content'),
-      MainVerticalSplitterDiv = require('./common/div/spliiter/vertical/main');
+const TokensTextarea = require("./common/textarea/tokens"),
+      EntriesTextarea = require("./common/textarea/entries"),
+      ContentTextarea = require("./common/textarea/content"),
+      MainVerticalSplitterDiv = require("./common/div/spliiter/vertical/main");
 
 class ExampleView extends Element {
   getTokens() {
@@ -90,9 +90,9 @@ class ExampleView extends Element {
 }
 
 Object.assign(ExampleView, {
-  tagName: 'div',
+  tagName: "div",
   defaultProperties: {
-    className: 'example'
+    className: "example"
   }
 });
 
