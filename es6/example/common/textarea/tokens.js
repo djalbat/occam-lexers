@@ -5,14 +5,6 @@ const easy = require("easy");
 const { Textarea } = easy;
 
 class TokensTextarea extends Textarea {
-  showError() {
-    this.addClass("error");
-  }
-
-  hideError() {
-    this.removeClass("error");
-  }
-
   setTokens(tokens) {
     let lineNumber = 1,
         previousToken = null;
@@ -47,14 +39,10 @@ class TokensTextarea extends Textarea {
   }
 
   parentContext() {
-    const showError = this.showError.bind(this),
-          hideError = this.hideError.bind(this),
-          setTokens = this.setTokens.bind(this),
+    const setTokens = this.setTokens.bind(this),
           clearTokens = this.clearTokens.bind(this);
 
     return ({
-      showError,
-      hideError,
       setTokens,
       clearTokens
     });

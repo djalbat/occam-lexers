@@ -26,11 +26,9 @@ class ExampleView extends Element {
     try {
       const tokens = this.getTokens();
 
-      this.hideError();
-
       this.setTokens(tokens);
     } catch (error) {
-      this.showError();
+      console.log(error);
 
       this.clearTokens();
     }
