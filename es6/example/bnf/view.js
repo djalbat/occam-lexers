@@ -3,7 +3,7 @@
 import BNFLexer from "../../bnf/lexer";
 import ExampleView from "../../example/view";
 
-export default class BNFExampleView extends ExampleView {
+export default class BNFView extends ExampleView {
   getLexer() {
     const Lexer = BNFLexer;  ///
 

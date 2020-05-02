@@ -1,14 +1,19 @@
 "use strict";
 
 import { Element } from "easy";
-import { SizeableDiv } from "easy-layout";
+import { ColumnsDiv } from "easy-layout";
 
-import TokensTextarea from "./common/textarea/tokens";
-import EntriesTextarea from "./common/textarea/entries";
-import ContentTextarea from "./common/textarea/content";
-import MainVerticalSplitterDiv from "./common/div/spliiter/vertical/main";
+import Heading from "./heading";
+import Paragraph from "./paragraph";
+import ColumnDiv from "./div/column";
+import SubHeading from "./subHeading";
+import SizeableDiv from "./div/sizeable";
+import TokensTextarea from "./textarea/tokens";
+import EntriesTextarea from "./textarea/entries";
+import ContentTextarea from "./textarea/content";
+import VerticalSplitterDiv from "./div/splitter/vertical";
 
-export default class ExampleView extends Element {
+export default class View extends Element {
   getTokens() {
     const Lexer = this.getLexer(),
           entries = this.getEntries(),
@@ -37,26 +42,31 @@ export default class ExampleView extends Element {
 
     return ([
 
-      <h1>{title}</h1>,
-      <div className="columns">
+      <Heading>
+        {title}
+      </Heading>,
+      <ColumnsDiv>
         <SizeableDiv>
-          <h2>
+          <SubHeading>
             Entries
-          </h2>
+          </SubHeading>
           <EntriesTextarea onKeyUp={keyUpHandler} />
-          <h2>
+          <SubHeading>
             Content
-          </h2>
+          </SubHeading>
           <ContentTextarea onKeyUp={keyUpHandler} />
         </SizeableDiv>
-        <MainVerticalSplitterDiv />
-        <div className="column">
-          <h2>
+        <VerticalSplitterDiv />
+        <ColumnDiv>
+          <SubHeading>
             Tokens
-          </h2>
+          </SubHeading>
           <TokensTextarea />
-        </div>
-      </div>
+        </ColumnDiv>
+      </ColumnsDiv>,
+      <Paragraph>
+        <a href="index.html">...back</a>
+      </Paragraph>
 
     ]);
   }
@@ -76,10 +86,6 @@ export default class ExampleView extends Element {
   }
 
   static tagName = "div";
-
-  static defaultProperties = {
-    className: "example"
-  };
 
   static fromClass(Class, properties) {
     const exampleView = Element.fromClass(Class, properties);

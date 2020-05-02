@@ -1,8 +1,10 @@
 "use strict";
 
-import { Textarea } from "easy";
+import withStyle from "easy-with-style";  ///
 
-export default class ContentTextarea extends Textarea {
+import Textarea from "../textarea";
+
+class ContentTextarea extends Textarea {
   getContent() {
     const value = this.getValue(),
           content = value; ///
@@ -33,3 +35,9 @@ export default class ContentTextarea extends Textarea {
     spellCheck: "false"
   };
 }
+
+export default withStyle(ContentTextarea)`
+
+  margin-bottom: 0;
+  
+`;

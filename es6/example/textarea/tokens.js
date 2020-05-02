@@ -1,6 +1,6 @@
 "use strict";
 
-import { Textarea } from "easy";
+import Textarea from "../textarea";
 
 export default class TokensTextarea extends Textarea {
   setTokens(tokens) {

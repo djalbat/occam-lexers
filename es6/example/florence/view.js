@@ -4,7 +4,7 @@ import ExampleView from "../../example/view";
 import FlorenceLexer from "../../florence/lexer";
 import defaultLexicalPattern from "../../florence/defaultLexicalPattern";
 
-export default class FlorenceExampleView extends ExampleView {
+export default class FlorenceView extends ExampleView {
   getTokens() {
     let entries = this.getEntries();
 

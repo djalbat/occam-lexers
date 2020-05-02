@@ -3,7 +3,7 @@
 import BasicLexer from "../../basic/lexer";
 import ExampleView from "../../example/view";
 
-export default class BasicExampleView extends ExampleView {
+export default class BasicView extends ExampleView {
   getLexer() {
     const Lexer = BasicLexer; ///
 

@@ -9,12 +9,6 @@
   padding: 0;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-ul {
-  text-align: center;
+html {
+  font-size: 10px;
 }

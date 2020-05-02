@@ -2,26 +2,32 @@
 
 import "juxtapose";
 
+import withStyle from "easy-with-style";  ///
+
 import { Body } from "easy";
 
-import BNFExampleView from "./example/bnf/view";
-import BasicExampleView from "./example/basic/view";
-import FlorenceExampleView from "./example/florence/view";
+import BNFView from "./example/bnf/view";
+import BasicView from "./example/basic/view";
+import FlorenceView from "./example/florence/view";
 
-let ExampleView;
+const { renderStyles } = withStyle;
+
+let View;
 
 const body = new Body(),
-      example = window.location.search.substring(1);
+      example = window.location.search.substring(1);  ///
 
 switch (example) {
-  case "bnf" : ExampleView = BNFExampleView; break;
-  case "basic" : ExampleView = BasicExampleView; break;
-  case "florence" : ExampleView = FlorenceExampleView; break;
+  case "bnf" : View = BNFView; break;
+  case "basic" : View = BasicView; break;
+  case "florence" : View = FlorenceView; break;
 }
+
+renderStyles();
 
 const exampleView =
 
-  <ExampleView />
+  <View />
 
 ;
 
