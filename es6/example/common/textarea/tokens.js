@@ -2,9 +2,9 @@
 
 const easy = require('easy');
 
-const { InputElement } = easy;
+const { Textarea } = easy;
 
-class TokensTextarea extends InputElement {
+class TokensTextarea extends Textarea {
   showError() {
     this.addClass('error');
   }
@@ -59,8 +59,6 @@ class TokensTextarea extends InputElement {
       clearTokens
     });
   }
-
-  static fromProperties(properties) { return InputElement.fromProperties(TokensTextarea, properties); }
 }
 
 Object.assign(TokensTextarea, {

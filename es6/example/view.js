@@ -4,12 +4,12 @@ const easy = require('easy'),
       easyLayout = require('easy-layout');
 
 const { Element } = easy,
-      { SizeableElement } = easyLayout;
+      { SizeableDiv } = easyLayout;
 
 const TokensTextarea = require('./common/textarea/tokens'),
       EntriesTextarea = require('./common/textarea/entries'),
       ContentTextarea = require('./common/textarea/content'),
-      MainVerticalSplitter = require('./common/verticalSplitter/main');
+      MainVerticalSplitterDiv = require('./common/div/spliiter/vertical/main');
 
 class ExampleView extends Element {
   getTokens() {
@@ -44,7 +44,7 @@ class ExampleView extends Element {
 
       <h1>{title}</h1>,
       <div className="columns">
-        <SizeableElement>
+        <SizeableDiv>
           <h2>
             Entries
           </h2>
@@ -53,8 +53,8 @@ class ExampleView extends Element {
             Content
           </h2>
           <ContentTextarea onKeyUp={keyUpHandler} />
-        </SizeableElement>
-        <MainVerticalSplitter />
+        </SizeableDiv>
+        <MainVerticalSplitterDiv />
         <div className="column">
           <h2>
             Tokens
@@ -66,7 +66,7 @@ class ExampleView extends Element {
     ]);
   }
 
-  initialise() {
+  initialise(properties) {
     this.assignContext();
 
     const Lexer = this.getLexer(),
@@ -80,10 +80,10 @@ class ExampleView extends Element {
     this.keyUpHandler();
   }
 
-  static fromProperties(Class, properties) {
-    const exampleView = Element.fromProperties(Class, properties);
+  static fromClass(Class, properties) {
+    const exampleView = Element.fromClass(Class, properties);
 
-    exampleView.initialise();
+    exampleView.initialise(properties);
 
     return exampleView
   }

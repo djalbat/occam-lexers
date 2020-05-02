@@ -20,22 +20,19 @@ class BNFExampleView extends ExampleView {
     const initialContent = `  ruleName             ::=  [name] ;
 
   regularExpression    ::=  [regularExpression] ;
-  
+
   significantTokenType ::=  [type] ;
 
   terminalSymbol       ::=  [stringLiteral] ;
-  
+
   endOfLine            ::=  "<END_OF_LINE>" ;
-  
+
   epsilon              ::=  "ε" ;
 
   wildcard             ::=  "." ;`
 
     return initialContent;
   }
-
-
-  static fromProperties(properties) { return ExampleView.fromProperties(BNFExampleView, properties);}
 }
 
 Object.assign(BNFExampleView, {

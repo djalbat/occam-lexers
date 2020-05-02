@@ -1,4 +1,4 @@
-# Lexers
+# Occam Lexers
 
 [Occam](https://github.com/jecs-imperial/occam)'s lexers.
 

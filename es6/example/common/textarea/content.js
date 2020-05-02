@@ -2,9 +2,9 @@
 
 const easy = require('easy');
 
-const { InputElement } = easy;
+const { Textarea } = easy;
 
-class ContentTextarea extends InputElement {
+class ContentTextarea extends Textarea {
   getContent() {
     const value = this.getValue(),
           content = value; ///
@@ -27,8 +27,6 @@ class ContentTextarea extends InputElement {
       setContent
     });
   }
-
-  static fromProperties(properties) { return InputElement.fromProperties(ContentTextarea, properties); }
 }
 
 Object.assign(ContentTextarea, {

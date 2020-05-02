@@ -37,8 +37,6 @@ class FlorenceExampleView extends ExampleView {
 
     return initialContent;
   }
-
-  static fromProperties(properties) { return ExampleView.fromProperties(FlorenceExampleView, properties);}
 }
 
 Object.assign(FlorenceExampleView, {

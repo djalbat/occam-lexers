@@ -21,8 +21,6 @@ class BasicExampleView extends ExampleView {
 
     return initialContent;
   }
-
-  static fromProperties(properties) { return ExampleView.fromProperties(BasicExampleView, properties);}
 }
 
 Object.assign(BasicExampleView, {
