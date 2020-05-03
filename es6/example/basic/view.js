@@ -4,23 +4,11 @@ import BasicLexer from "../../basic/lexer";
 import ExampleView from "../../example/view";
 
 export default class BasicView extends ExampleView {
-  getLexer() {
-    const Lexer = BasicLexer; ///
+  Lexer = BasicLexer;
 
-    return Lexer;
-  }
+  heading = "Basic lexer example";
 
-  getTitle() {
-    const title = "Basic lexer example";
-
-    return title;
-  }
-
-  getInitialContent() {
-    const initialContent = "1+2/3";
-
-    return initialContent;
-  }
+  initialContent = "1+2/3";
 
   static defaultProperties = {
     className: "basic"

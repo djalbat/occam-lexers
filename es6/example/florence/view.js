@@ -5,6 +5,12 @@ import FlorenceLexer from "../../florence/lexer";
 import defaultLexicalPattern from "../../florence/defaultLexicalPattern";
 
 export default class FlorenceView extends ExampleView {
+  Lexer = FlorenceLexer;
+
+  heading = "Florence lexer example";
+
+  initialContent = "";
+
   getTokens() {
     let entries = this.getEntries();
 
@@ -18,24 +24,6 @@ export default class FlorenceView extends ExampleView {
           tokens = lexer.tokenise(content);
 
     return tokens;
-  }
-
-  getLexer() {
-    const Lexer = FlorenceLexer;  ///
-
-    return Lexer;
-  }
-
-  getTitle() {
-    const title = "Florence lexer example";
-
-    return title;
-  }
-
-  getInitialContent() {
-    const initialContent = "";
-
-    return initialContent;
   }
 
   static defaultProperties = {

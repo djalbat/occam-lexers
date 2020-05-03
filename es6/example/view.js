@@ -4,6 +4,7 @@ import { Element } from "easy";
 import { ColumnsDiv } from "easy-layout";
 
 import Heading from "./heading";
+import BackLink from "./link/back";
 import Paragraph from "./paragraph";
 import ColumnDiv from "./div/column";
 import SubHeading from "./subHeading";
@@ -15,10 +16,9 @@ import VerticalSplitterDiv from "./div/splitter/vertical";
 
 export default class View extends Element {
   getTokens() {
-    const Lexer = this.getLexer(),
-          entries = this.getEntries(),
+    const entries = this.getEntries(),
           content = this.getContent(),
-          lexer = Lexer.fromEntries(entries),
+          lexer = this.Lexer.fromEntries(entries),
           tokens = lexer.tokenise(content);
 
     return tokens;
@@ -37,13 +37,12 @@ export default class View extends Element {
   }
 
   childElements(properties) {
-    const title = this.getTitle(),
-          keyUpHandler = this.keyUpHandler.bind(this);
+    const keyUpHandler = this.keyUpHandler.bind(this);
 
     return ([
 
       <Heading>
-        {title}
+        {this.heading}
       </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
@@ -65,7 +64,7 @@ export default class View extends Element {
         </ColumnDiv>
       </ColumnsDiv>,
       <Paragraph>
-        <a href="index.html">...back</a>
+        <BackLink />
       </Paragraph>
 
     ]);
@@ -74,10 +73,8 @@ export default class View extends Element {
   initialise(properties) {
     this.assignContext();
 
-    const Lexer = this.getLexer(),
-          initialContent = this.getInitialContent(),
-          content = initialContent, ///
-          { entries } = Lexer;
+    const content = this.initialContent, ///
+          { entries } = this.Lexer;
 
     this.setContent(content);
     this.setEntries(entries);
