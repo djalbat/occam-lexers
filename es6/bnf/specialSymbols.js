@@ -11,8 +11,8 @@ export const openBracket = "(";
 export const closeBracket = ")";
 export const questionMark = "?";
 export const exclamationMark = "!";
-export const NO_WHITESPACE = ""<NO_WHITESPACE>"";
-export const END_OF_LINE = ""<END_OF_LINE>"";
+export const NO_WHITESPACE = "<NO_WHITESPACE>";
+export const END_OF_LINE = "<END_OF_LINE>";
 
 export default {
   plus,
