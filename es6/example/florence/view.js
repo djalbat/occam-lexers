@@ -9,7 +9,13 @@ export default class FlorenceView extends View {
 
   heading = "Florence lexer example";
 
-  initialContent = "";
+  initialContent = `
+  
+Rule (Explosion)
+  Conclusion
+    A
+    
+  `;
 
   getTokens() {
     let entries = this.getEntries();
@@ -18,9 +24,8 @@ export default class FlorenceView extends View {
 
     entries = [ { "custom" : custom }, ...entries ];
 
-    const Lexer = this.getLexer(),
-          content = this.getContent(),
-          lexer = Lexer.fromEntries(entries),
+    const content = this.getContent(),
+          lexer = this.Lexer.fromEntries(entries),
           tokens = lexer.tokenise(content);
 
     return tokens;
