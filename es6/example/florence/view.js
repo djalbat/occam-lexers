@@ -1,10 +1,10 @@
 "use strict";
 
-import ExampleView from "../../example/view";
+import View from "../view";
 import FlorenceLexer from "../../florence/lexer";
 import defaultLexicalPattern from "../../florence/defaultLexicalPattern";
 
-export default class FlorenceView extends ExampleView {
+export default class FlorenceView extends View {
   Lexer = FlorenceLexer;
 
   heading = "Florence lexer example";

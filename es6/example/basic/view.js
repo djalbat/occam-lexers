@@ -1,9 +1,9 @@
 "use strict";
 
+import View from "../view";
 import BasicLexer from "../../basic/lexer";
-import ExampleView from "../../example/view";
 
-export default class BasicView extends ExampleView {
+export default class BasicView extends View {
   Lexer = BasicLexer;
 
   heading = "Basic lexer example";
