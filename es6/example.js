@@ -6,9 +6,9 @@ import withStyle from "easy-with-style";  ///
 
 import { Body } from "easy";
 
-import BNFView from "./example/bnf/view";
-import BasicView from "./example/basic/view";
-import FlorenceView from "./example/florence/view";
+import BNFView from "./example/view/bnf";
+import BasicView from "./example/view/basic";
+import FlorenceView from "./example/view/florence";
 
 const { renderStyles } = withStyle;
 
