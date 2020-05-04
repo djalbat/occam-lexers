@@ -50,13 +50,13 @@ export default class View extends Element {
             Entries
           </SubHeading>
           <EntriesTextarea onKeyUp={keyUpHandler} />
+        </SizeableDiv>
+        <VerticalSplitterDiv />
+        <ColumnDiv>
           <SubHeading>
             Content
           </SubHeading>
           <ContentTextarea onKeyUp={keyUpHandler} />
-        </SizeableDiv>
-        <VerticalSplitterDiv />
-        <ColumnDiv>
           <SubHeading>
             Tokens
           </SubHeading>
