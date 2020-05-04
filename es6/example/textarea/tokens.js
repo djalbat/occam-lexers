@@ -46,12 +46,9 @@ export default class TokensTextarea extends Textarea {
     });
   }
 
-  static tagName = "textarea";
-
   static defaultProperties = {
     className: "tokens",
     spellCheck: "false",
-    readOnly: true,
-    rows: "30"
+    readOnly: true
   };
 }

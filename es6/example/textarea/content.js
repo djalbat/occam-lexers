@@ -26,8 +26,6 @@ export default class ContentTextarea extends Textarea {
     });
   }
 
-  static tagName = "textarea";
-
   static defaultProperties = {
     className: "content",
     spellCheck: "false"

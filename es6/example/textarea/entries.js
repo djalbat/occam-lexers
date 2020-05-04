@@ -26,8 +26,6 @@ export default class EntriesTextarea extends Textarea {
     });
   }
 
-  static tagName = "textarea";
-
   static defaultProperties = {
     className: "entries",
     spellCheck: "false"
