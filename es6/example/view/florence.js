@@ -2,7 +2,8 @@
 
 import View from "../view";
 import FlorenceLexer from "../../florence/lexer";
-import defaultCustomGrammarLexicalPattern from "../../florence/defaultCustomGrammarLexicalPattern";
+
+import { lexicalPattern } from "../../florence/defaultCustomGrammar";
 
 export default class FlorenceView extends View {
   Lexer = FlorenceLexer;
@@ -20,7 +21,7 @@ Rule (Explosion)
   getTokens() {
     let entries = this.getEntries();
 
-    const custom = `^(?:${defaultCustomGrammarLexicalPattern})`;
+    const custom = `^(?:${lexicalPattern})`;
 
     entries = [ { "custom" : custom }, ...entries ];
 
