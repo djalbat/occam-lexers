@@ -18,9 +18,9 @@ const body = new Body(),
       example = window.location.search.substring(1);  ///
 
 switch (example) {
-  case "bnf" : View = BNFView; break;
-  case "basic" : View = BasicView; break;
-  case "florence" : View = FlorenceView; break;
+  case "bnf": View = BNFView; break;
+  case "basic": View = BasicView; break;
+  case "florence": View = FlorenceView; break;
 }
 
 renderStyles();

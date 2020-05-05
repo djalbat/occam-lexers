@@ -23,7 +23,7 @@ Rule (Explosion)
 
     const custom = `^(?:${lexicalPattern})`;
 
-    entries = [ { "custom" : custom }, ...entries ];
+    entries = [ { "custom": custom }, ...entries ];
 
     const content = this.getContent(),
           lexer = this.Lexer.fromEntries(entries),
