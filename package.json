@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "11.0.27",
+  "version": "11.0.28",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/jecs-imperial/occam-lexers",
   "description": "Occam's lexers.",
@@ -19,8 +19,8 @@
     "@babel/preset-env": "^7.8.6",
     "browserify": "^16.5.0",
     "easy": "^10.2.0",
-    "easy-layout": "^4.1.9",
-    "easy-with-style": "^2.0.3",
+    "easy-layout": "^4.1.10",
+    "easy-with-style": "^2.0.5",
     "juxtapose": "^2.0.2",
     "watchful-cli": "^1.4.6"
   },
