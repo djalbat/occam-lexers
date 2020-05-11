@@ -1,7 +1,7 @@
 "use strict";
 
 import { Element } from "easy";
-import { ColumnsDiv } from "easy-layout";
+import { RowsDiv, ColumnsDiv } from "easy-layout";
 
 import Heading from "./heading";
 import BackLink from "./link/back";
@@ -53,14 +53,16 @@ export default class View extends Element {
         </SizeableDiv>
         <VerticalSplitterDiv />
         <ColumnDiv>
-          <SubHeading>
-            Content
-          </SubHeading>
-          <ContentTextarea onKeyUp={keyUpHandler} />
-          <SubHeading>
-            Tokens
-          </SubHeading>
-          <TokensTextarea />
+          <RowsDiv>
+            <SubHeading>
+              Content
+            </SubHeading>
+            <ContentTextarea onKeyUp={keyUpHandler} />
+            <SubHeading>
+              Tokens
+            </SubHeading>
+            <TokensTextarea />
+          </RowsDiv>
         </ColumnDiv>
       </ColumnsDiv>,
       <Paragraph>
