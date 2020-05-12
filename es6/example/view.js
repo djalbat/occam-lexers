@@ -46,10 +46,12 @@ export default class View extends Element {
       </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
-          <SubHeading>
-            Entries
-          </SubHeading>
-          <EntriesTextarea onKeyUp={keyUpHandler} />
+          <RowsDiv>
+            <SubHeading>
+              Entries
+            </SubHeading>
+            <EntriesTextarea onKeyUp={keyUpHandler} />
+          </RowsDiv>
         </SizeableDiv>
         <VerticalSplitterDiv />
         <ColumnDiv>
