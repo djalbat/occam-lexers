@@ -67,6 +67,8 @@ You will need to do this if you want to look at the examples.
 
 ## Usage
 
+Import the required lexer's class and then call it's `fromNothing()` factory method.
+
 ```
 import { FlorenceLexer } from "occam-lexers";
 
@@ -81,6 +83,7 @@ const content = `
 
 ...
 ```
+The tokens are created with the `tokenise(...)` method.
 
 ## Examples
 
