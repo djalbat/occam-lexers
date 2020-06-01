@@ -62,6 +62,8 @@ export default class Token {
 
   ofIndex(tokens) {
     const index = tokens.indexOf(this);
+
+    return index;
   }
 
   match(token) {
