@@ -60,12 +60,6 @@ export default class Token {
     return equalToToken;
   }
 
-  ofIndex(tokens) {
-    const index = tokens.indexOf(this);
-
-    return index;
-  }
-
   match(token) {
     const type = token.getType(),
           content = token.getContent(),
