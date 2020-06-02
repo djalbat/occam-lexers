@@ -1,7 +1,8 @@
 "use strict";
 
+import { BNFLexer } from "../../index"; ///
+
 import View from "../view";
-import BNFLexer from "../../bnf/lexer";
 
 export default class BNFView extends View {
   Lexer = BNFLexer;

@@ -1,7 +1,8 @@
 "use strict";
 
+import { FlorenceLexer } from "../../index";  ///
+
 import View from "../view";
-import FlorenceLexer from "../../florence/lexer";
 
 import { lexicalPattern } from "../../florence/defaultCustomGrammar";
 
