@@ -9,7 +9,7 @@ export default class DoublyQuotedStringLiteralToken extends StringLiteralToken {
 
   static type = stringLiteralType;
 
-  static regularExpression = /^"(?:\\.|[^"])*"/;
+  static regularExpression = /^"(?:\\.|[^"\\])*"/;
 
   static match(content) { return StringLiteralToken.match(DoublyQuotedStringLiteralToken, content); }
 

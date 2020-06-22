@@ -13,11 +13,11 @@ export default class BNFView extends View {
   
     ruleName             ::=  [name] ;
   
-    regularExpression    ::=  [regularExpression] ;
+    regularExpression    ::=  [regular-expression] ;
   
     significantTokenType ::=  [type] ;
   
-    terminalSymbol       ::=  [stringLiteral] ;
+    terminalSymbol       ::=  [string-literal] ;
   
     endOfLine            ::=  "<END_OF_LINE>" ;
   
