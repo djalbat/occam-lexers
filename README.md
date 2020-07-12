@@ -17,9 +17,7 @@ Three lexers are documented:
 
 * A BNF lexer, actually [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 * A basic lexer, for illustrative purposes.
-* The Florence lexer, namely the lexer for the [lexical entries part](https://raw.githubusercontent.com/jecs-imperial/occam-lexers/master/es6/florence/entries.js) of Occam's vernacular.
-
-There are also other, otherwise undocumented lexers.
+* A common lexer, which can be extended.
 
 All lexers share common functionality. Each tokenises the ends of lines first and then on the whole tokenises the remaining content in the following order:
 
@@ -33,7 +31,7 @@ If any part of the content cannot be tokenised, an error is thrown.
 
 The other significant tokens are defined by the lexical entries, each of which maps a significant token type to a regular expression. On the other hand, the regular expressions and related functionality to match the first four types of otokens are hard-coded.
 
-Comment and whitespace tokens are considered to be non-significant whilst the others are considered to be significant. The exception to this rule is end of line tokens. The Florence lexer treats them as significant, all the others treat them as non-significant. Non-significant tokens are ignored by parsers although they separate significant tokens. Note that some lexers ignore comments, string literals, etc. Check the source for details.
+Comment and whitespace tokens are considered to be non-significant whilst the others are considered to be significant. The exception to this rule is end of line tokens, which can be either. Non-significant tokens are ignored by parsers although they separate significant tokens.
 
 The lexical entries for the BNF lexer are the following:
 
@@ -70,16 +68,16 @@ You will need to do this if you want to look at the examples.
 Import the required lexer's class and then call it's `fromNothing()` factory method.
 
 ```
-import { FlorenceLexer } from "occam-lexers";
+import { BasicLexer } from "occam-lexers";
 
-const florenceLexer = FlorenceLexer.fromNothing();
+const basicLexer = BasicLexer.fromNothing();
 
 const content = `
 
         ...
 
       `,
-      tokens = florenceLexer.tokenise(content);
+      tokens = basicLexer.tokenise(content);
 
 ...
 ```
