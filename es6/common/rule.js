@@ -23,13 +23,15 @@ export default class Rule {
   match(content) {
     let significantToken = null;
 
-    const match = content.match(this.regularExpression);
+    const matches = content.match(this.regularExpression);
 
-    if (match !== null) {
-      const { index } = match;
+    if (matches !== null) {
+      const { index } = matches;
 
       if (index === 0) {
-        content = match[0]; ///
+        const firstMatch = first(matches);
+
+        content = firstMatch; ///
 
         const contentLength = content.length;
 

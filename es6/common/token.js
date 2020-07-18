@@ -1,7 +1,11 @@
 "use strict";
 
+import { arrayUtilities } from "necessary";
+
 import { sanitiseContent } from "../utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
+
+const { first } = arrayUtilities;
 
 export default class Token {
   constructor(type, content, innerHTML, significant) {
@@ -98,13 +102,15 @@ export default class Token {
     let token = null;
 
     const { type, regularExpression } = Class,
-          match = content.match(regularExpression);
+          matches = content.match(regularExpression);
 
-    if (match !== null) {
-      const { index } = match;
+    if (matches !== null) {
+      const { index } = matches;
 
       if (index === 0) {
-        content = match[0]; ///
+        const firstMatch = first(matches);
+
+        content = firstMatch; ///
 
         const contentLength = content.length;
 

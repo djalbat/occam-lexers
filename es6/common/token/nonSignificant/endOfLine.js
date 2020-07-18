@@ -1,9 +1,13 @@
 "use strict";
 
+import { arrayUtilities } from "necessary";
+
 import NonSignificantToken from "../../token/nonSignificant";
 
 import { endOfLineType } from "../../types";
 import { sanitiseContent } from "../../../utilities/content";
+
+const { first } = arrayUtilities;
 
 export default class EndOfLineNonSignificantToken extends NonSignificantToken {
   constructor(type, content, innerHTML, significant, index) {
@@ -28,12 +32,12 @@ export default class EndOfLineNonSignificantToken extends NonSignificantToken {
     let endOfLineNonSignificantToken = null;
 
     const regularExpression = /\r\n|\r|\n/,
-          match = content.match(regularExpression);
+          matches = content.match(regularExpression);
 
-    if (match !== null) {
-      const { index } = match;
+    if (matches !== null) {
+      const firstMatch = first(matches);
 
-      content = match[0]; ///
+      content = firstMatch; ///
 
       const contentLength = content.length;
 
@@ -41,7 +45,8 @@ export default class EndOfLineNonSignificantToken extends NonSignificantToken {
         const type = endOfLineType, ///
               sanitisedContent = sanitiseContent(content),
               innerHTML = sanitisedContent, ///
-              significant = false;
+              significant = false,
+              { index } = matches;
 
         endOfLineNonSignificantToken = new EndOfLineNonSignificantToken(type, content, innerHTML, significant, index);
       }
