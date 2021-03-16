@@ -1,6 +1,6 @@
 # Occam Lexers
 
-[Occam](https://github.com/jecs-imperial/occam)'s lexers.
+[Occam](https://github.com/djalbat/occam)'s lexers.
 
 ### Contents
 
@@ -55,7 +55,7 @@ With [npm](https://www.npmjs.com/):
 
 You can also clone the repository with [Git](https://git-scm.com/)...
 
-    git clone https://github.com/jecs-imperial/occam-lexers.git
+    git clone https://github.com/djalbat/occam-lexers.git
 
 ...and then install the dependencies with npm from within the project's root directory:
 
@@ -85,7 +85,7 @@ The tokens are created with the `tokenise(...)` method.
 
 ## Examples
 
-These are not very edifying, you are encouraged to have a look at Occam's [parsers](https://github.com/jecs-imperial/occam-parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
+These are not very edifying, you are encouraged to have a look at Occam's [parsers](https://github.com/djalbat/occam-parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
 
 Each of the examples has a textarea in which the corresponding lexer's entries are given in JSON format. The regular expression patterns themselves are supplied as strings with the usual escaping. You can change both the lexical entries and the content to be matched dynamically, and see the resulting tokens.
 
