@@ -22,7 +22,7 @@ export default class View extends Element {
     return tokens;
   }
 
-  keyUpHandler() {
+  keyUpHandler(event, element) {
     try {
       const tokens = this.getTokens();
 
