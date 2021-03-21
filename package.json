@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "14.0.19",
+  "version": "14.0.20",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/occam-lexers",
   "description": "Occam's lexers.",
@@ -14,9 +14,9 @@
   },
   "devDependencies": {
     "@swc/core": "^1.2.50",
-    "easy": "^11.1.19",
-    "easy-layout": "^5.0.19",
-    "easy-with-style": "^3.0.28",
+    "easy": "^11.1.22",
+    "easy-layout": "^5.0.23",
+    "easy-with-style": "^3.0.30",
     "esbuild": "^0.9.6",
     "express": "^4.17.1",
     "juxtapose": "^3.0.20",
