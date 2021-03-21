@@ -19,7 +19,7 @@
     "easy-with-style": "^3.0.30",
     "esbuild": "^0.9.6",
     "express": "^4.17.1",
-    "juxtapose": "^3.0.20",
+    "juxtapose": "^3.0.22",
     "lively-cli": "^2.0.7",
     "watchful-cli": "^1.6.14"
   },
