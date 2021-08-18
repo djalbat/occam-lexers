@@ -16,6 +16,8 @@ import DoublyQuotedStringLiteralToken from "../common/token/significant/stringLi
 import SinglyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/singlyQuoted";
 import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/doublyQuoted";
 
+import { STRING } from "../constants";
+
 const { splice } = arrayUtilities;
 
 export default class CommonLexer {
@@ -75,7 +77,7 @@ export default class CommonLexer {
 
     while (index < tokensOrContentsLength) {
       const tokenOrContent = tokensOrContents[index],
-            tokenOrContentString = (typeof tokenOrContent === "string"),
+            tokenOrContentString = (typeof tokenOrContent === STRING),
             tokenOrContentContent = tokenOrContentString; ///
 
       if (tokenOrContentContent) {

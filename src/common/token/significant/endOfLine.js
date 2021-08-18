@@ -4,6 +4,7 @@ import { arrayUtilities } from "necessary";
 
 import SignificantToken from "../../token/significant";
 
+import { NEW_LINE } from "../../../constants";
 import { endOfLineType } from "../../types";
 import { sanitiseContent } from "../../../utilities/content";
 
@@ -21,7 +22,7 @@ export default class EndOfLineSignificantToken extends SignificantToken {
   }
 
   asHTML() {
-    const html = "\n";  ///
+    const html = NEW_LINE;
     
     return html;
   }
