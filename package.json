@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "14.0.58",
+  "version": "14.0.59",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/occam-lexers",
   "description": "Occam's lexers.",
@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "juxtapose": "^4.0.30",
     "lively-cli": "^2.0.19",
-    "watchful-cli": "^1.7.10"
+    "watchful-cli": "^1.7.13"
   },
   "scripts": {
     "start": "node ./bin/main.js",
