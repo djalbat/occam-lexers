@@ -1,5 +1,6 @@
 "use strict";
 
+export const U = "u";
 export const STRING = "string";
 export const NEW_LINE = "\n";
 export const LESS_THAN = "&lt;";

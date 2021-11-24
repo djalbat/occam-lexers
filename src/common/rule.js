@@ -4,6 +4,8 @@ import { arrayUtilities } from "necessary";
 
 import SignificantToken from "../common/token/significant";
 
+import { U, EMPTY_STRING } from "../constants";
+
 const { first } = arrayUtilities;
 
 export default class Rule {
@@ -72,7 +74,9 @@ export default class Rule {
 
   static fromTypeAndRegularExpressionPattern(type, regularExpressionPattern) {
     const unicode = isUnicode(regularExpressionPattern),
-          flags = unicode ? "u" : "",
+          flags = unicode ?
+                    U :
+                      EMPTY_STRING,
           regExp = new RegExp(regularExpressionPattern, flags),
           regularExpression = regExp, ///
           rule = new Rule(type, regularExpression);

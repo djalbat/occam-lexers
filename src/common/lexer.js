@@ -16,7 +16,7 @@ import DoublyQuotedStringLiteralToken from "../common/token/significant/stringLi
 import SinglyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/singlyQuoted";
 import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/doublyQuoted";
 
-import { STRING } from "../constants";
+import { STRING, EMPTY_STRING } from "../constants";
 
 const { splice } = arrayUtilities;
 
@@ -102,7 +102,7 @@ export default class CommonLexer {
   }
 
   tokeniseContent(content, tokens, inComment) {
-    while (content !== "") {
+    while (content !== EMPTY_STRING) {
       let token = this.matchMultiLineCommentInComment(content, inComment)
                || this.matchWhitespace(content)
                || this.matchMultiLineCommentNotInComment(content, inComment)
