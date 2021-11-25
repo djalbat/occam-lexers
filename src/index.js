@@ -18,6 +18,10 @@ export { default as SingleLineCommentToken } from "./common/token/nonSignificant
 export { default as EndOfMultiLineCommentToken } from "./common/token/nonSignificant/comment/multiLine/endOf";  ///
 export { default as StartOfMultiLineCommentToken } from "./common/token/nonSignificant/comment/multiLine/startOf";  ///
 export { default as MiddleOfMultiLineCommentToken } from "./common/token/nonSignificant/comment/multiLine/middleOf";  ///
+
+export { default as StringLiteralToken } from "./common/token/significant/stringLiteral";  ///
+export { default as RegularExpressionToken } from "./common/token/significant/regularExpression";  ///
 export { default as SinglyQuotedStringLiteralToken } from "./common/token/significant/stringLiteral/singlyQuoted";  ///
 export { default as DoublyQuotedStringLiteralToken } from "./common/token/significant/stringLiteral/doublyQuoted";  ///
-
+export { default as SinglyQuotedBrokenStringLiteralToken } from "./common/token/significant/brokenStringLiteral/singlyQuoted";  ///
+export { default as DoublyQuotedBrokenStringLiteralToken } from "./common/token/significant/brokenStringLiteral/doublyQuoted";  ///
