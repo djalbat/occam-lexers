@@ -7,10 +7,10 @@ import { middleOfMultiLineCommentType } from "../../../../types";
 export default class MiddleOfMultiLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(MiddleOfMultiLineCommentToken, startPosition, endPosition); }
 
-  isInComment() {
-    const inComment = true;
+  isCommentPreserving() {
+    const commentPreserving = true;
 
-    return inComment;
+    return commentPreserving;
   }
 
   static type = middleOfMultiLineCommentType;

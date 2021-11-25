@@ -140,9 +140,10 @@ export default class CommonLexer {
       const tokenCommentToken = token.isCommentToken();
 
       if (tokenCommentToken) {
-        const commentToken = token; ///
+        const commentToken = token, ///
+              commentTokenCommentPreserving = commentToken.isCommentPreserving();
 
-        inComment = commentToken.isInComment();
+        inComment = commentTokenCommentPreserving;  ///
       }
     }
 

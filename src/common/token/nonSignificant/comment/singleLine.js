@@ -7,10 +7,10 @@ import { singleLineCommentType } from "../../../types";
 export default class SingleLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(SingleLineCommentToken, startPosition, endPosition); }
 
-  isInComment() {
-    const inComment = false;
+  isCommentPreserving() {
+    const commentPreserving = false;
 
-    return inComment;
+    return commentPreserving;
   }
 
   static type = singleLineCommentType;
