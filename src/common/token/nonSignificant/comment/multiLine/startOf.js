@@ -7,10 +7,10 @@ import { startOfMultiLineCommentType } from "../../../../types";
 export default class StartOfMultiLineCommentToken extends NonSignificantToken {
   clone(startPosition, endPosition) { return super.clone(StartOfMultiLineCommentToken, startPosition, endPosition); }
 
-  isCommentPreserving() {
-    const commentPreserving = true;
+  isInCommentPreserving() {
+    const inCommentPreserving = true;
 
-    return commentPreserving;
+    return inCommentPreserving;
   }
 
   static type = startOfMultiLineCommentType;
