@@ -102,7 +102,7 @@ export default class CommonLexer {
   }
 
   tokeniseContent(content, tokens, inComment) {
-    let inCommentPreserving = false;
+    let inCommentPreserving = true;
 
     while (content !== EMPTY_STRING) {
       let token = this.matchMultiLineCommentInComment(content, inComment)
