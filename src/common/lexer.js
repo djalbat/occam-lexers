@@ -93,7 +93,7 @@ export default class CommonLexer {
 
         tokensOrContentsLength += tokensLength - 1;
 
-        inComment = inComment && inCommentPreserving;  ///
+        inComment = inCommentPreserving;  ///
 
         index += tokensLength - 1;
       }
@@ -143,7 +143,7 @@ export default class CommonLexer {
 
       content = content.substring(start);
 
-      inComment = inComment && inCommentPreserving; ///
+      inComment = inCommentPreserving; ///
     }
 
     return inCommentPreserving;
