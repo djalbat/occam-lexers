@@ -17,6 +17,7 @@ import SinglyQuotedBrokenStringLiteralToken from "../common/token/significant/br
 import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/doublyQuoted";
 
 import { STRING, EMPTY_STRING } from "../constants";
+import { isTokenInCommentPreservingToken } from "../utilities/token";
 
 const { splice } = arrayUtilities;
 
@@ -92,7 +93,7 @@ export default class CommonLexer {
 
         tokensOrContentsLength += tokensLength - 1;
 
-        inComment = inCommentPreserving;  ///
+        inComment = inComment && inCommentPreserving;  ///
 
         index += tokensLength - 1;
       }
@@ -134,19 +135,15 @@ export default class CommonLexer {
 
       tokens.push(token);
 
-      const tokenContentLength = token.getContentLength(),
+      const commentTokenInCommentPreserving = isTokenInCommentPreservingToken(token),
+            tokenContentLength = token.getContentLength(),
             start = tokenContentLength; ///
 
-      content = content = content.substring(start);
+      inCommentPreserving = commentTokenInCommentPreserving;  ///
 
-      const tokenCommentToken = token.isCommentToken();
+      content = content.substring(start);
 
-      if (tokenCommentToken) {
-        const commentToken = token, ///
-              commentTokenInCommentPreserving = commentToken.isInCommentPreserving();
-
-        inCommentPreserving = commentTokenInCommentPreserving;  ///
-      }
+      inComment = inComment && inCommentPreserving; ///
     }
 
     return inCommentPreserving;
