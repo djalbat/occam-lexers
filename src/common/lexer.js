@@ -82,17 +82,17 @@ export default class CommonLexer {
 
       if (tokenOrContentContent) {
         const tokens = [],
-              content = tokenOrContent; ///
-
-        inComment = this.tokeniseContent(content, tokens, inComment);
-
-        const tokensLength = tokens.length,
+              content = tokenOrContent, ///
+              inCommentPreserving = this.tokeniseContent(content, tokens, inComment),
+              tokensLength = tokens.length,
               start = index,  ///
               deleteCount = 1;
 
         splice(tokensOrContents, start, deleteCount, tokens);
 
         tokensOrContentsLength += tokensLength - 1;
+
+        inComment = inCommentPreserving;  ///
 
         index += tokensLength - 1;
       }
@@ -102,6 +102,8 @@ export default class CommonLexer {
   }
 
   tokeniseContent(content, tokens, inComment) {
+    let inCommentPreserving = false;
+
     while (content !== EMPTY_STRING) {
       let token = this.matchMultiLineCommentInComment(content, inComment)
                || this.matchWhitespace(content)
@@ -143,11 +145,11 @@ export default class CommonLexer {
         const commentToken = token, ///
               commentTokenInCommentPreserving = commentToken.isInCommentPreserving();
 
-        inComment = commentTokenInCommentPreserving;  ///
+        inCommentPreserving = commentTokenInCommentPreserving;  ///
       }
     }
 
-    return inComment;
+    return inCommentPreserving;
   }
 
   matchBrokenComment(content, inComment) {
