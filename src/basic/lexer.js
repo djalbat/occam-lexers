@@ -4,11 +4,11 @@ import entries from "./entries";
 import CommonLexer from "../common/lexer";
 
 export default class BasicLexer extends CommonLexer {
-  matchRegularExpression(content) { return null; }
+  static RegularExpressionToken = null;
 
-  matchSinglyQuotedStringLiteral(content) { return null; }
+  static SinglyQuotedStringLiteralToken = null;
 
-  matchDoublyQuotedStringLiteral(content) { return null; }
+  static DoublyQuotedStringLiteralToken = null;
 
   static entries = entries;
 

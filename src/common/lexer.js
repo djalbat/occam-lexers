@@ -4,7 +4,6 @@ import { arrayUtilities } from "necessary";
 
 import Rule from "./rule";
 import WhitespaceToken from "../common/token/nonSignificant/whitespace";
-import BrokenCommentToken from "../common/token/nonSignificant/brokenComment";
 import RegularExpressionToken from "../common/token/significant/regularExpression";
 import SingleLineCommentToken from "../common/token/nonSignificant/comment/singleLine";
 import EndOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/endOf";
@@ -13,8 +12,6 @@ import StartOfMultiLineCommentToken from "../common/token/nonSignificant/comment
 import MiddleOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/middleOf";
 import SinglyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/singlyQuoted";
 import DoublyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/doublyQuoted";
-import SinglyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/singlyQuoted";
-import DoublyQuotedBrokenStringLiteralToken from "../common/token/significant/brokenStringLiteral/doublyQuoted";
 
 import { STRING, EMPTY_STRING } from "../constants";
 import { isTokenInCommentPreservingToken } from "../utilities/token";
@@ -22,12 +19,22 @@ import { isTokenInCommentPreservingToken } from "../utilities/token";
 const { splice } = arrayUtilities;
 
 export default class CommonLexer {
-  constructor(rules) {
+  constructor(rules, InCommentTokens, NotInCommentTokens) {
     this.rules = rules;
+    this.InCommentTokens = InCommentTokens;
+    this.NotInCommentTokens = NotInCommentTokens;
   }
   
   getRules() {
     return this.rules;
+  }
+
+  getInCommentTokens() {
+    return this.InCommentTokens;
+  }
+
+  getNotInCommentTokens() {
+    return this.NotInCommentTokens;
   }
 
   tokenise(content) {
@@ -41,8 +48,9 @@ export default class CommonLexer {
     return tokens;
   }
 
-  tokeniseEndOfLines(content, EndOfLineToken = EndOfLineNonSignificantToken) {
-    const endOfLineTokensOrContents = [];
+  tokeniseEndOfLines(content) {
+    const { EndOfLineToken } = this.constructor,
+          endOfLineTokensOrContents = [];
 
     let endOfLineToken = EndOfLineToken.match(content);
 
@@ -104,14 +112,21 @@ export default class CommonLexer {
 
   tokeniseContent(content, tokens, inComment) {
     while (content !== EMPTY_STRING) {
-      let token = this.matchMultiLineCommentInComment(content, inComment)
-               || this.matchWhitespace(content)
-               || this.matchMultiLineCommentNotInComment(content, inComment)
-               || this.matchSingleLineComment(content, inComment)
-               || this.matchBrokenComment(content, inComment)
-               || this.matchRegularExpression(content)
-               || this.matchSinglyQuotedStringLiteral(content)
-               || this.matchDoublyQuotedStringLiteral(content);
+      let token = null;
+
+      const Tokens = inComment ?
+                       this.InCommentTokens :
+                         this.NotInCommentTokens;
+
+      Tokens.some((Token) => {
+        if (Token !== null) {
+          token = Token.match(content);
+
+          if (token !== null) {
+            return true;
+          }
+        }
+      });
 
       if (token === null) {
         let significantToken = null;
@@ -145,58 +160,69 @@ export default class CommonLexer {
     return inComment;
   }
 
-  matchBrokenComment(content, inComment) {
-    const brokenCommentToken = inComment ?
-                                 null :
-                                   BrokenCommentToken.match(content);
+  static EndOfLineToken = EndOfLineNonSignificantToken; ///
 
-    return brokenCommentToken;
-  }
+  static WhitespaceToken = WhitespaceToken;
 
-  matchSingleLineComment(content, inComment) {
-    const singleLineCommentToken = inComment ?
-                                     null :
-                                       SingleLineCommentToken.match(content);
+  static SingleLineCommentToken = SingleLineCommentToken;
 
-    return singleLineCommentToken;
-  }
+  static RegularExpressionToken = RegularExpressionToken;
 
-  matchMultiLineCommentInComment(content, inComment) {
-    const multiLinCommentToken = inComment ?
-                                   EndOfMultiLineCommentToken.match(content) || MiddleOfMultiLineCommentToken.match(content) :
-                                     null;
+  static EndOfMultiLineCommentToken = EndOfMultiLineCommentToken;
 
-    return multiLinCommentToken;
-  }
+  static StartOfMultiLineCommentToken = StartOfMultiLineCommentToken;
 
-  matchMultiLineCommentNotInComment(content, inComment) {
-    const multiLinCommentToken = inComment ?
-                                   null :
-                                     StartOfMultiLineCommentToken.match(content);
+  static MiddleOfMultiLineCommentToken = MiddleOfMultiLineCommentToken;
 
-    return multiLinCommentToken;
-  }
+  static SinglyQuotedStringLiteralToken = SinglyQuotedStringLiteralToken;
 
-  matchWhitespace(content) { return WhitespaceToken.match(content); }
-
-  matchRegularExpression(content) { return RegularExpressionToken.match(content); }
-
-  matchSinglyQuotedStringLiteral(content) { return SinglyQuotedStringLiteralToken.match(content) || SinglyQuotedBrokenStringLiteralToken.match(content); }
-
-  matchDoublyQuotedStringLiteral(content) { return DoublyQuotedStringLiteralToken.match(content) || DoublyQuotedBrokenStringLiteralToken.match(content); }
+  static DoublyQuotedStringLiteralToken = DoublyQuotedStringLiteralToken;
 
   static fromNothing(Class) {
     const { entries } = Class,
+          InCommentTokens = InCommentTokensFromClass(Class),
+          NotInCommentTokens = NotInCommentTokensFromClass(Class),
           rules = entries.map((entry) => Rule.fromEntry(entry)),
-          lexer = new Class(rules);
+          lexer = new Class(rules, InCommentTokens, NotInCommentTokens);
 
     return lexer;
   }
 
   static fromEntries(Class, entries) {
     const rules = entries.map((entry) => Rule.fromEntry(entry)),
-          lexer = new Class(rules);
+          InCommentTokens = InCommentTokensFromClass(Class),
+          NotInCommentTokens = NotInCommentTokensFromClass(Class),
+          lexer = new Class(rules, InCommentTokens, NotInCommentTokens);
 
     return lexer;
   }
+}
+
+function InCommentTokensFromClass(Class) {
+  const { EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken } = Class,
+        InCommentTokens = [
+          EndOfMultiLineCommentToken,
+          MiddleOfMultiLineCommentToken
+        ];
+
+  return InCommentTokens;
+}
+
+function NotInCommentTokensFromClass(Class) {
+  const { WhitespaceToken,
+          SingleLineCommentToken,
+          RegularExpressionToken,
+          StartOfMultiLineCommentToken,
+          SinglyQuotedStringLiteralToken,
+          DoublyQuotedStringLiteralToken } = Class,
+      NotInCommentTokens = [
+        WhitespaceToken,
+        StartOfMultiLineCommentToken,
+        SingleLineCommentToken,
+        RegularExpressionToken,
+        SinglyQuotedStringLiteralToken,
+        DoublyQuotedStringLiteralToken
+      ];
+
+  return NotInCommentTokens;
 }

@@ -23,5 +23,3 @@ export { default as StringLiteralToken } from "./common/token/significant/string
 export { default as RegularExpressionToken } from "./common/token/significant/regularExpression";  ///
 export { default as SinglyQuotedStringLiteralToken } from "./common/token/significant/stringLiteral/singlyQuoted";  ///
 export { default as DoublyQuotedStringLiteralToken } from "./common/token/significant/stringLiteral/doublyQuoted";  ///
-export { default as SinglyQuotedBrokenStringLiteralToken } from "./common/token/significant/brokenStringLiteral/singlyQuoted";  ///
-export { default as DoublyQuotedBrokenStringLiteralToken } from "./common/token/significant/brokenStringLiteral/doublyQuoted";  ///
