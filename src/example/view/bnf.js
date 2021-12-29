@@ -7,8 +7,6 @@ import View from "../view";
 export default class BNFView extends View {
   Lexer = BNFLexer;
 
-  heading = "BNF lexer example";
-
   initialContent = `  
   
     ruleName             ::=  [name] ;

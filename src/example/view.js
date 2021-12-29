@@ -1,10 +1,9 @@
 "use strict";
 
 import { Element } from "easy";
-import { RowsDiv, ColumnsDiv } from "easy-layout";
+import { RowsDiv, ColumnDiv } from "easy-layout";
 
-import Heading from "./heading";
-import ColumnDiv from "./div/column";
+import ColumnsDiv from "./div/columns";
 import SubHeading from "./subHeading";
 import SizeableDiv from "./div/sizeable";
 import TokensTextarea from "./textarea/tokens";
@@ -39,9 +38,6 @@ export default class View extends Element {
 
     return ([
 
-      <Heading>
-        {this.heading}
-      </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
           <RowsDiv>
