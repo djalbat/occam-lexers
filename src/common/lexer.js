@@ -178,6 +178,14 @@ export default class CommonLexer {
 
   static DoublyQuotedStringLiteralToken = DoublyQuotedStringLiteralToken;
 
+  static fromRules(Class, rules) {
+    const InCommentTokens = InCommentTokensFromClass(Class),
+          NotInCommentTokens = NotInCommentTokensFromClass(Class),
+          lexer = new Class(rules, InCommentTokens, NotInCommentTokens);
+
+    return lexer;
+  }
+
   static fromNothing(Class) {
     const { entries } = Class,
           InCommentTokens = InCommentTokensFromClass(Class),
