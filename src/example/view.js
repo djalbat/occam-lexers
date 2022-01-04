@@ -1,17 +1,17 @@
 "use strict";
 
-import { Element } from "easy";
-import { RowsDiv, ColumnDiv } from "easy-layout";
+import withStyle from "easy-with-style";  ///
 
-import ColumnsDiv from "./div/columns";
+import { Element } from "easy";
+import { RowsDiv, ColumnDiv, ColumnsDiv, VerticalSplitterDiv } from "easy-layout";
+
 import SubHeading from "./subHeading";
 import SizeableDiv from "./div/sizeable";
 import TokensTextarea from "./textarea/tokens";
 import EntriesTextarea from "./textarea/entries";
 import ContentTextarea from "./textarea/content";
-import VerticalSplitterDiv from "./div/splitter/vertical";
 
-export default class View extends Element {
+class View extends Element {
   getTokens() {
     const entries = this.getEntries(),
           content = this.getContent(),
@@ -78,4 +78,14 @@ export default class View extends Element {
   }
 
   static tagName = "div";
+
+  static defaultProperties = {
+    className: "view"
+  };
 }
+
+export default withStyle(View)`
+
+  padding: 1rem;
+  
+`;
