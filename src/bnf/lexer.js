@@ -23,9 +23,9 @@ export default class BNFLexer extends CommonLexer {
 
   static SinglyQuotedStringLiteralToken = null;
 
-  static fromRules(rules) { return CommonLexer.fromRules(BNFLexer, rules); }
-
   static fromNothing() { return CommonLexer.fromNothing(BNFLexer); }
+
+  static fromRules(rules) { return CommonLexer.fromRules(BNFLexer, rules); }
 
   static fromEntries(entries) { return CommonLexer.fromEntries(BNFLexer, entries); }
 }
