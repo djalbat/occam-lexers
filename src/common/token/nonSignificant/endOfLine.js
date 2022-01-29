@@ -1,14 +1,14 @@
 "use strict";
 
-import { arrayUtilities } from "necessary";
+import { characters, arrayUtilities } from "necessary";
 
 import NonSignificantToken from "../../token/nonSignificant";
 
-import { NEW_LINE } from "../../../constants";
 import { endOfLineType } from "../../types";
 import { sanitiseContent } from "../../../utilities/content";
 
-const { first } = arrayUtilities;
+const { first } = arrayUtilities,
+      { NEW_LINE_CHARACTER } = characters;
 
 export default class EndOfLineNonSignificantToken extends NonSignificantToken {
   constructor(type, content, innerHTML, significant, index) {
@@ -22,7 +22,7 @@ export default class EndOfLineNonSignificantToken extends NonSignificantToken {
   }
 
   asHTML() {
-    const html = NEW_LINE;
+    const html = NEW_LINE_CHARACTER;
 
     return html;
   }
