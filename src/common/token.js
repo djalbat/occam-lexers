@@ -101,7 +101,7 @@ export default class Token {
   static match(Class, content, significant, ...remainingArguments) {
     let token = null;
 
-    const { type, regularExpression } = Class,
+    const { regularExpression } = Class,
           matches = content.match(regularExpression);
 
     if (matches !== null) {
@@ -115,7 +115,8 @@ export default class Token {
         const contentLength = content.length;
 
         if (contentLength > 0) {
-          const sanitisedContent = sanitiseContent(content),
+          const { type } = Class,
+                sanitisedContent = sanitiseContent(content),
                 innerHTML = sanitisedContent; ///
 
           token = new Class(type, content, innerHTML, significant, ...remainingArguments);

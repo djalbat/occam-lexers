@@ -1,16 +1,14 @@
 "use strict";
 
-export function isTokenInCommentPreservingToken(token) {
-  let tokenCommentPreservingToken = false;
-
+export function inCommentFromTokenAndInComment(token, inComment) {
   const tokenCommentToken = token.isCommentToken();
 
   if (tokenCommentToken) {
     const commentToken = token, ///
           commentTokenInCommentPreserving = commentToken.isInCommentPreserving();
 
-    tokenCommentPreservingToken = commentTokenInCommentPreserving;  ///
+    inComment = commentTokenInCommentPreserving;  ///
   }
 
-  return tokenCommentPreservingToken;
+  return inComment;
 }

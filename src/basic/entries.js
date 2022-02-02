@@ -9,6 +9,9 @@ const entries = [
   },
   {
     "operator": "^(?:\\+|\\-|\\*|\\/)"
+  },
+  {
+    "unassigned": "^[^\\s]+"
   }
 
 ];

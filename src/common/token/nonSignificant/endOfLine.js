@@ -32,7 +32,7 @@ export default class EndOfLineNonSignificantToken extends NonSignificantToken {
   static match(content) {
     let endOfLineNonSignificantToken = null;
 
-    const regularExpression = /\r\n|\r|\n/,
+    const regularExpression = /^(?:\r\n|\r|\n)/,
           matches = content.match(regularExpression);
 
     if (matches !== null) {

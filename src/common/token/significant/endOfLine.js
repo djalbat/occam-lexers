@@ -32,7 +32,7 @@ export default class EndOfLineSignificantToken extends SignificantToken {
   static match(content) {
     let endOfLineSignificantToken = null;
 
-    const regularExpression = /\r\n|\r|\n/,
+    const regularExpression = /^(?:\r\n|\r|\n)/,
           matches = content.match(regularExpression);
 
     if (matches !== null) {

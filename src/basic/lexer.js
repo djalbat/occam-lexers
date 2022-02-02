@@ -2,13 +2,19 @@
 
 import entries from "./entries";
 import CommonLexer from "../common/lexer";
+import PythonStyleSingleLineCommentToken from "../common/token/nonSignificant/comment/singleLine/pythonStyle";
+import PythonStyleEndOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/endOf/pythonStyle";
+import PythonStyleStartOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/startOf/pythonStyle";
+import PythonStyleMiddleOfMultiLineCommentToken from "../common/token/nonSignificant/comment/multiLine/middleOf/pythonStyle";
 
 export default class BasicLexer extends CommonLexer {
-  static RegularExpressionToken = null;
+  static SingleLineCommentToken = PythonStyleSingleLineCommentToken; ///
 
-  static SinglyQuotedStringLiteralToken = null;
+  static EndOfMultiLineCommentToken = PythonStyleEndOfMultiLineCommentToken; ///
 
-  static DoublyQuotedStringLiteralToken = null;
+  static StartOfMultiLineCommentToken = PythonStyleStartOfMultiLineCommentToken; ///
+
+  static MiddleOfMultiLineCommentToken = PythonStyleMiddleOfMultiLineCommentToken; ///
 
   static entries = entries;
 

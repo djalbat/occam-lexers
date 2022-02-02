@@ -13,14 +13,6 @@ export default class BNFLexer extends CommonLexer {
 
   static entries = entries;
 
-  static SingleLineCommentToken = null;
-
-  static EndOfMultiLineCommentToken = null;
-
-  static StartOfMultiLineCommentToken = null;
-
-  static MiddleOfMultiLineCommentToken = null;
-
   static SinglyQuotedStringLiteralToken = null;
 
   static fromNothing() { return CommonLexer.fromNothing(BNFLexer); }
