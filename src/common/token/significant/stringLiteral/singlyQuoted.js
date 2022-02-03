@@ -2,14 +2,10 @@
 
 import StringLiteralToken from "../../significant/stringLiteral";
 
-import { stringLiteralType } from "../../../types";
-
 export default class SinglyQuotedStringLiteralToken extends StringLiteralToken {
   clone(startPosition, endPosition) { return super.clone(SinglyQuotedStringLiteralToken, startPosition, endPosition); }
 
-  static type = stringLiteralType;
-
-  static regularExpression = /^'(?:\\.|[^'])*'/;
+  static regularExpression = /^'(?:\\[^\s]|[^'\\\r\n])*'/;
 
   static match(content) { return StringLiteralToken.match(SinglyQuotedStringLiteralToken, content); }
 

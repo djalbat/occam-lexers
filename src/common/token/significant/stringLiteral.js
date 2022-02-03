@@ -2,6 +2,8 @@
 
 import SignificantToken from "../../token/significant";
 
+import { stringLiteralType } from "../../types";
+
 export default class StringLiteralToken extends SignificantToken {
   clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
 
@@ -14,6 +16,8 @@ export default class StringLiteralToken extends SignificantToken {
 
     return string;
   }
+
+  static type = stringLiteralType;
 
   static match(Class, content) { return SignificantToken.match(Class, content); }
 
