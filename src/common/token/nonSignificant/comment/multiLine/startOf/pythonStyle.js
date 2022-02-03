@@ -1,23 +1,13 @@
 "use strict";
 
-import NonSignificantToken from "../../../../../token/nonSignificant";
+import StartOfMultiLineCommentToken from "../../../../../token/nonSignificant/comment/multiLine/startOf";
 
-import { startOfMultiLineCommentType } from "../../../../../types";
-
-export default class PythonStyleStartOfMultiLineCommentToken extends NonSignificantToken {
+export default class PythonStyleStartOfMultiLineCommentToken extends StartOfMultiLineCommentToken {
   clone(startPosition, endPosition) { return super.clone(PythonStyleStartOfMultiLineCommentToken, startPosition, endPosition); }
-
-  isInCommentPreserving() {
-    const inCommentPreserving = true;
-
-    return inCommentPreserving;
-  }
-
-  static type = startOfMultiLineCommentType;
 
   static regularExpression = /^###/;
 
-  static match(content) { return NonSignificantToken.match(PythonStyleStartOfMultiLineCommentToken, content); }
+  static match(content) { return StartOfMultiLineCommentToken.match(PythonStyleStartOfMultiLineCommentToken, content); }
 
-  static fromContent(content) { return NonSignificantToken.fromContent(PythonStyleStartOfMultiLineCommentToken, content); }
+  static fromContent(content) { return StartOfMultiLineCommentToken.fromContent(PythonStyleStartOfMultiLineCommentToken, content); }
 }

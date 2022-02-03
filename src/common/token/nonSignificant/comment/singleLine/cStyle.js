@@ -1,23 +1,13 @@
 "use strict";
 
-import NonSignificantToken from "../../../../token/nonSignificant";
+import SingleLineCommentToken from "../../../../token/nonSignificant/comment/singleLine";
 
-import { singleLineCommentType } from "../../../../types";
-
-export default class CStyleSingleLineCommentToken extends NonSignificantToken {
+export default class CStyleSingleLineCommentToken extends SingleLineCommentToken {
   clone(startPosition, endPosition) { return super.clone(CStyleSingleLineCommentToken, startPosition, endPosition); }
 
-  isInCommentPreserving() {
-    const inCommentPreserving = false;
+  static regularExpression = /^\/\*[^\r\n]*/;
 
-    return inCommentPreserving;
-  }
+  static match(content) { return SingleLineCommentToken.match(CStyleSingleLineCommentToken, content); }
 
-  static type = singleLineCommentType;
-
-  static regularExpression = /^\/\/(?:.*?(?=\r\n|\r|\n)|.*)/;
-
-  static match(content) { return NonSignificantToken.match(CStyleSingleLineCommentToken, content); }
-
-  static fromContent(content) { return NonSignificantToken.fromContent(CStyleSingleLineCommentToken, content); }
+  static fromContent(content) { return SingleLineCommentToken.fromContent(CStyleSingleLineCommentToken, content); }
 }

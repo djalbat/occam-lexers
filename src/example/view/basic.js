@@ -7,8 +7,9 @@ import View from "../view";
 export default class BasicView extends View {
   Lexer = BasicLexer;
 
-  initialContent = `"asdf
-  xcv"
+  initialContent = `#asdfs
+  
+  adf"
 
 1+2
   /3`;

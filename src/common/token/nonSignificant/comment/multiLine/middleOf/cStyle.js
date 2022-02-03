@@ -1,23 +1,13 @@
 "use strict";
 
-import NonSignificantToken from "../../../../../token/nonSignificant";
+import MiddleOfMultiLineCommentToken from "../../../../../token/nonSignificant/comment/multiLine/middleOf";
 
-import { middleOfMultiLineCommentType } from "../../../../../types";
-
-export default class CStyleMiddleOfMultiLineCommentToken extends NonSignificantToken {
+export default class CStyleMiddleOfMultiLineCommentToken extends MiddleOfMultiLineCommentToken {
   clone(startPosition, endPosition) { return super.clone(CStyleMiddleOfMultiLineCommentToken, startPosition, endPosition); }
 
-  isInCommentPreserving() {
-    const inCommentPreserving = true;
+  static regularExpression = /^(?:[^\r\n]+?(?=\*\/)|[^\r\n]+)/;
 
-    return inCommentPreserving;
-  }
+  static match(content) { return MiddleOfMultiLineCommentToken.match(CStyleMiddleOfMultiLineCommentToken, content); }
 
-  static type = middleOfMultiLineCommentType;
-
-  static regularExpression = /^(?:.+?(?=\*\/|\r\n|\r|\n)|.+$)/;
-
-  static match(content) { return NonSignificantToken.match(CStyleMiddleOfMultiLineCommentToken, content); }
-
-  static fromContent(content) { return NonSignificantToken.fromContent(CStyleMiddleOfMultiLineCommentToken, content); }
+  static fromContent(content) { return MiddleOfMultiLineCommentToken.fromContent(CStyleMiddleOfMultiLineCommentToken, content); }
 }
