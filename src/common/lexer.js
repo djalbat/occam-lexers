@@ -1,11 +1,6 @@
 "use strict";
 
-import Rule from "./rule";
-import WhitespaceToken from "../common/token/nonSignificant/whitespace";
-import RegularExpressionToken from "../common/token/significant/regularExpression";
-import EndOfLineNonSignificantToken from "../common/token/nonSignificant/endOfLine";
-import SinglyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/singlyQuoted";
-import DoublyQuotedStringLiteralToken from "../common/token/significant/stringLiteral/doublyQuoted";
+import Rule from "../rule";
 
 import { EMPTY_STRING } from "../constants";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
@@ -81,24 +76,6 @@ export default class CommonLexer {
 
     return tokens;
   }
-
-  static EndOfLineToken = EndOfLineNonSignificantToken; ///
-
-  static WhitespaceToken = WhitespaceToken;
-
-  static RegularExpressionToken = RegularExpressionToken;
-
-  static SingleLineCommentToken = null;
-
-  static EndOfMultiLineCommentToken = null;
-
-  static StartOfMultiLineCommentToken = null;
-
-  static MiddleOfMultiLineCommentToken = null;
-
-  static SinglyQuotedStringLiteralToken = SinglyQuotedStringLiteralToken;
-
-  static DoublyQuotedStringLiteralToken = DoublyQuotedStringLiteralToken;
 
   static fromNothing(Class) {
     const { entries } = Class,
