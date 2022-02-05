@@ -24,10 +24,8 @@ export default class CommonLexer {
     return this.NotInCommentClasses;
   }
 
-  tokenise(content) {
+  tokenise(content, inComment = false) {
     const tokens = [];
-
-    let inComment = false;
 
     while (content !== EMPTY_STRING) {
       let token = null;
