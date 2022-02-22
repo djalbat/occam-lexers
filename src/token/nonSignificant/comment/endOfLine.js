@@ -4,8 +4,8 @@ import NonSignificantToken from "../../../token/nonSignificant";
 
 import { endOfLineCommentType } from "../../../types";
 
-export default class EndOfLineNonCommentSignificantToken extends NonSignificantToken {
-  clone(startPosition, endPosition) { return super.clone(EndOfLineNonCommentSignificantToken, startPosition, endPosition); }
+export default class EndOfLineCommentNonSignificantToken extends NonSignificantToken {
+  clone(startPosition, endPosition) { return super.clone(EndOfLineCommentNonSignificantToken, startPosition, endPosition); }
 
   asHTML() {
     const html = this.innerHTML;  ///
@@ -23,7 +23,7 @@ export default class EndOfLineNonCommentSignificantToken extends NonSignificantT
 
   static regularExpression = /^(?:\r\n|\r|\n)/;
 
-  static match(content) { return NonSignificantToken.match(EndOfLineNonCommentSignificantToken, content); }
+  static match(content) { return NonSignificantToken.match(EndOfLineCommentNonSignificantToken, content); }
 
-  static fromContent(content) { return NonSignificantToken.fromContent(EndOfLineNonCommentSignificantToken, content); }
+  static fromContent(content) { return NonSignificantToken.fromContent(EndOfLineCommentNonSignificantToken, content); }
 }

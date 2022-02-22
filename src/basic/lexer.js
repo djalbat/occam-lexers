@@ -8,6 +8,7 @@ import EndOfLineNonSignificantToken from "../token/nonSignificant/endOfLine";
 import SinglyQuotedStringLiteralToken from "../token/significant/stringLiteral/singlyQuoted";
 import DoublyQuotedStringLiteralToken from "../token/significant/stringLiteral/doublyQuoted";
 import PythonStyleSingleLineCommentToken from "../token/nonSignificant/comment/singleLine/pythonStyle";
+import EndOfLineCommentNonSignificantToken from "../token/nonSignificant/comment/endOfLine";
 import PythonStyleEndOfMultiLineCommentToken from "../token/nonSignificant/comment/multiLine/endOf/pythonStyle";
 import PythonStyleStartOfMultiLineCommentToken from "../token/nonSignificant/comment/multiLine/startOf/pythonStyle";
 import PythonStyleMiddleOfMultiLineCommentToken from "../token/nonSignificant/comment/multiLine/middleOf/pythonStyle";
@@ -18,6 +19,8 @@ export default class BasicLexer extends CommonLexer {
   static EndOfLineToken = EndOfLineNonSignificantToken; ///
 
   static WhitespaceToken = WhitespaceToken;
+
+  static EndOfLineCommentToken = EndOfLineCommentNonSignificantToken; ///
 
   static RegularExpressionToken = RegularExpressionToken;
 

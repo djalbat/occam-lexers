@@ -6,6 +6,7 @@ import WhitespaceToken from "../token/nonSignificant/whitespace";
 import RegularExpressionToken from "../token/significant/regularExpression";
 import EndOfLineNonSignificantToken from "../token/nonSignificant/endOfLine";
 import DoublyQuotedStringLiteralToken from "../token/significant/stringLiteral/doublyQuoted";
+import EndOfLineCommentNonSignificantToken from "../token/nonSignificant/comment/endOfLine";
 
 export default class BNFLexer extends CommonLexer {
   tokensFromBNF(bnf) {
@@ -20,6 +21,8 @@ export default class BNFLexer extends CommonLexer {
   static EndOfLineToken = EndOfLineNonSignificantToken; ///
 
   static WhitespaceToken = WhitespaceToken;
+
+  static EndOfLineCommentToken = EndOfLineCommentNonSignificantToken; ///
 
   static RegularExpressionToken = RegularExpressionToken;
 

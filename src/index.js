@@ -12,6 +12,8 @@ export { default as SignificantToken } from "./token/significant";
 export { default as NonSignificantToken } from "./token/nonSignificant";
 export { default as EndOfLineSignificantToken } from "./token/significant/endOfLine";
 export { default as EndOfLineNonSignificantToken } from "./token/nonSignificant/endOfLine";
+export { default as EndOfLineCommentSignificantToken } from "./token/significant/comment/endOfLine";
+export { default as EndOfLineCommentNonSignificantToken } from "./token/nonSignificant/comment/endOfLine";
 
 export { default as WhitespaceToken } from "./token/nonSignificant/whitespace";
 
