@@ -22,15 +22,15 @@ class View extends Element {
   }
 
   keyUpHandler(event, element) {
-    // try {
+    try {
       const tokens = this.getTokens();
 
       this.setTokens(tokens);
-    // } catch (error) {
-    //   console.log(error);
-    //
-    //   this.clearTokens();
-    // }
+    } catch (error) {
+      console.log(error);
+
+      this.clearTokens();
+    }
   }
 
   childElements() {
