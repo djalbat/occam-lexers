@@ -5,13 +5,13 @@ import SignificantToken from "../../token/significant";
 import { endOfLineType } from "../../types";
 
 export default class EndOfLineSignificantToken extends SignificantToken {
+  clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition); }
+
   asHTML() {
-    const html = this.innerHTML;
+    const html = this.innerHTML;  ///
 
     return html;
   }
-
-  clone(startPosition, endPosition) { return super.clone(EndOfLineSignificantToken, startPosition, endPosition); }
 
   static type = endOfLineType;
 

@@ -5,13 +5,13 @@ import NonSignificantToken from "../../token/nonSignificant";
 import { endOfLineType } from "../../types";
 
 export default class EndOfLineNonSignificantToken extends NonSignificantToken {
+  clone(startPosition, endPosition) { return super.clone(EndOfLineNonSignificantToken, startPosition, endPosition); }
+
   asHTML() {
-    const html = this.innerHTML;
+    const html = this.innerHTML;  ///
 
     return html;
   }
-
-  clone(startPosition, endPosition) { return super.clone(EndOfLineNonSignificantToken, startPosition, endPosition); }
 
   static type = endOfLineType;
 
