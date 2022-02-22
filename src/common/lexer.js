@@ -104,9 +104,9 @@ export default class CommonLexer {
 }
 
 function InCommentClassesFromClass(Class) {
-  const { EndOfLineToken, EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken } = Class,
+  const { EndOfLineCommentToken, EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken } = Class,
         InCommentClasses = [
-          EndOfLineToken,
+          EndOfLineCommentToken,
           EndOfMultiLineCommentToken,
           MiddleOfMultiLineCommentToken
         ];

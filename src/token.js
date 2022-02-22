@@ -45,7 +45,7 @@ export default class Token {
   }
 
   isEndOfLineToken() {
-    const typeEndOfLineType = (this.type === endOfLineType),
+    const typeEndOfLineType = (this.type.includes(endOfLineType)),
           endOfLineToken = typeEndOfLineType; ///
 
     return endOfLineToken;
