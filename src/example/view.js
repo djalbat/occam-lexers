@@ -13,9 +13,10 @@ import ContentTextarea from "./textarea/content";
 
 class View extends Element {
   getTokens() {
-    const entries = this.getEntries(),
+    const { Lexer } = this.constructor,
+          entries = this.getEntries(),
           content = this.getContent(),
-          lexer = this.Lexer.fromEntries(entries),
+          lexer = Lexer.fromEntries(entries),
           tokens = lexer.tokenise(content);
 
     return tokens;
@@ -68,8 +69,9 @@ class View extends Element {
   initialise() {
     this.assignContext();
 
-    const content = this.initialContent, ///
-          { entries } = this.Lexer;
+    const { initialContent, Lexer } = this.constructor,
+          { entries } = Lexer,
+          content = initialContent; ///
 
     this.setContent(content);
     this.setEntries(entries);

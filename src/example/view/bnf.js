@@ -5,9 +5,9 @@ import { BNFLexer } from "../../index"; ///
 import View from "../view";
 
 export default class BNFView extends View {
-  Lexer = BNFLexer;
+  static Lexer = BNFLexer;
 
-  initialContent = `
+  static initialContent = `
 
   document              ::=  ( rule | error )+ ;
 
