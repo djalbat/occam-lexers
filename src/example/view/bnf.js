@@ -11,7 +11,7 @@ export default class BNFView extends View {
 
       document                 ::=  ( rule | error )+ ;
 
-      rule ambiguousModifier?  ::=  name "::=" definitions ";" ;
+      rule                     ::=  name ambiguousModifier? "::=" definitions ";" ;
 
       name                     ::=  [name] ;
 
