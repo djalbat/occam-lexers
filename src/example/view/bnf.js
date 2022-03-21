@@ -9,81 +9,81 @@ export default class BNFView extends View {
 
   static initialContent = `
 
-  document                ::=  ( rule | error )+ ;
+      document                ::=  ( rule | error )+ ;
 
-  rule ambiguousModifier  ::=  name "::=" definitions ";" ;
+      rule ambiguousModifier  ::=  name "::=" definitions ";" ;
 
-  name                    ::=  [name] ;
+      name                    ::=  [name] ;
 
-  definitions             ::=  definition ( "|" definition )* ;
+      definitions             ::=  definition ( "|" definition )* ;
 
-  definition              ::=  part+ ;
+      definition              ::=  part+ ;
 
-  part                    ::=  nonTerminalPart quantifier*
+      part                    ::=  nonTerminalPart quantifier*
 
-                            |  terminalPart quantifier*
+                                |  terminalPart quantifier*
+                              
+                                |  noWhitespacePart
 
-                            |  noWhitespacePart
+                                ;
 
-                            ;
+      nonTerminalPart         ::=  choiceOfParts
 
-  nonTerminalPart         ::=  choiceOfParts
+                                |  sequenceOfParts
 
-                            |  sequenceOfParts
+                                |  ruleName lookAheadModifier?
 
-                            |  ruleName lookAheadModifier?
+                                ;
 
-                            ;
+      terminalPart            ::=  significantTokenType
+ 
+                                |  regularExpression
 
-  terminalPart            ::=  significantTokenType
+                                |  terminalSymbol
+ 
+                                |  endOfLine
+ 
+                                |  wildcard
+ 
+                                ;
+                              
+      noWhitespacePart        ::=  "<NO_WHITESPACE>" ;                              
 
-                            |  regularExpression
+      choiceOfParts           ::=  "(" part ( "|" part )+ ")" ;
 
-                            |  terminalSymbol
+      sequenceOfParts         ::=  "(" part part+ ")" ;
 
-                            |  endOfLine
+      ruleName                ::=  [name] ;
 
-                            |  wildcard
+      significantTokenType    ::=  [type] ;
 
-                            ;
+      regularExpression       ::=  [regular-expression] ;
 
-  noWhitespacePart        ::=  "<NO_WHITESPACE>" ;
+      terminalSymbol          ::=  [string-literal] ;
 
-  sequenceOfParts         ::=  "(" part part+ ")" ;
+      endOfLine               ::=  "<END_OF_LINE>" ;
 
-  choiceOfParts           ::=  "(" part ( "  |" part )+ ")" ;
+      wildcard                ::=  "." ;
 
-  ruleName                ::=  [name] ;
+      quantifier              ::=  optionalQuantifier
 
-  significantTokenType    ::=  [type] ;
+                                |  oneOrMoreQuantifier
+ 
+                                |  zeroOrMoreQuantifier
+ 
+                                ;
 
-  regularExpression       ::=  [regular-expression] ;
+      ambiguousModifier       ::=  <NO_WHITESPACE>"!" ;
 
-  terminalSymbol          ::=  [string-literal] ;
+      lookAheadModifier       ::=  <NO_WHITESPACE>"..." ;
 
-  endOfLine               ::=  "<END_OF_LINE>" ;
+      optionalQuantifier      ::=  <NO_WHITESPACE>"?" ;
 
-  wildcard                ::=  "." ;
+      oneOrMoreQuantifier     ::=  <NO_WHITESPACE>"+" ;
 
-  quantifier              ::=  optionalQuantifier
+      zeroOrMoreQuantifier    ::=  <NO_WHITESPACE>"*" ;
 
-                            |  oneOrMoreQuantifier
-
-                            |  zeroOrMoreQuantifier
-
-                            ;
-
-  ambiguousModifier       ::=  <NO_WHITESPACE>"!" ;
-
-  lookAheadModifier       ::=  <NO_WHITESPACE>"..." ;
-
-  optionalQuantifier      ::=  <NO_WHITESPACE>"?" ;
-
-  oneOrMoreQuantifier     ::=  <NO_WHITESPACE>"+" ;
-
-  zeroOrMoreQuantifier    ::=  <NO_WHITESPACE>"*" ;
-
-  error                   ::=  . ;
+      error                   ::=  . ;
 
 `;
 
