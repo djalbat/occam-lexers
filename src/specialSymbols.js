@@ -1,9 +1,9 @@
 "use strict";
 
 export const plus = "+";
-export const epsilon = "ε";
 export const wildcard = ".";
 export const asterisk = "*";
+export const ellipsis = "...";
 export const separator = "::=";
 export const terminator = ";";
 export const verticalBar = "|";
@@ -16,9 +16,9 @@ export const END_OF_LINE = "<END_OF_LINE>";
 
 export default {
   plus,
-  epsilon,
   wildcard,
   asterisk,
+  ellipsis,
   separator,
   terminator,
   verticalBar,
