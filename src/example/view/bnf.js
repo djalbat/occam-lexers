@@ -9,81 +9,81 @@ export default class BNFView extends View {
 
   static initialContent = `
 
-      document                ::=  ( rule | error )+ ;
+      document                 ::=  ( rule | error )+ ;
 
-      rule ambiguousModifier  ::=  name "::=" definitions ";" ;
+      rule ambiguousModifier?  ::=  name "::=" definitions ";" ;
 
-      name                    ::=  [name] ;
+      name                     ::=  [name] ;
 
-      definitions             ::=  definition ( "|" definition )* ;
+      definitions              ::=  definition ( "|" definition )* ;
 
-      definition              ::=  part+ ;
+      definition               ::=  part+ ;
+ 
+      part                     ::=  nonTerminalPart quantifier*
 
-      part                    ::=  nonTerminalPart quantifier*
-
-                                |  terminalPart quantifier*
+                                 |  terminalPart quantifier*
                               
-                                |  noWhitespacePart
+                                 |  noWhitespacePart
 
-                                ;
+                                 ;
 
-      nonTerminalPart         ::=  choiceOfParts
+      nonTerminalPart          ::=  choiceOfParts
 
-                                |  sequenceOfParts
+                                 |  sequenceOfParts
 
-                                |  ruleName lookAheadModifier?
+                                 |  ruleName lookAheadModifier?
 
-                                ;
+                                 ;
 
-      terminalPart            ::=  significantTokenType
+      terminalPart             ::=  significantTokenType
+  
+                                 |  regularExpression
  
-                                |  regularExpression
-
-                                |  terminalSymbol
- 
-                                |  endOfLine
- 
-                                |  wildcard
- 
-                                ;
+                                 |  terminalSymbol
+  
+                                 |  endOfLine
+  
+                                 |  wildcard
+  
+                                 ;
                               
-      noWhitespacePart        ::=  "<NO_WHITESPACE>" ;                              
+      noWhitespacePart         ::=  "<NO_WHITESPACE>" ;                              
 
-      choiceOfParts           ::=  "(" part ( "|" part )+ ")" ;
+      choiceOfParts            ::=  "(" part ( "|" part )+ ")" ;
 
-      sequenceOfParts         ::=  "(" part part+ ")" ;
+      sequenceOfParts          ::=  "(" part part+ ")" ;
 
-      ruleName                ::=  [name] ;
+      ruleName                 ::=  [name] ;
 
-      significantTokenType    ::=  [type] ;
+      significantTokenType     ::=  [type] ;
 
-      regularExpression       ::=  [regular-expression] ;
+      regularExpression        ::=  [regular-expression] ;
 
-      terminalSymbol          ::=  [string-literal] ;
+      terminalSymbol           ::=  [string-literal] ;
 
-      endOfLine               ::=  "<END_OF_LINE>" ;
+      endOfLine                ::=  "<END_OF_LINE>" ;
 
-      wildcard                ::=  "." ;
+      wildcard                 ::=  "." ;
 
-      quantifier              ::=  optionalQuantifier
-
-                                |  oneOrMoreQuantifier
+      quantifier               ::=  optionalQuantifier
  
-                                |  zeroOrMoreQuantifier
- 
-                                ;
+                                 |  oneOrMoreQuantifier
+  
+                                 |  zeroOrMoreQuantifier
+  
+                                 ;
 
-      ambiguousModifier       ::=  <NO_WHITESPACE>"!" ;
+      ambiguousModifier        ::=  <NO_WHITESPACE>"!" ;
 
-      lookAheadModifier       ::=  <NO_WHITESPACE>"..." ;
+      lookAheadModifier        ::=  <NO_WHITESPACE>"..." ;
 
-      optionalQuantifier      ::=  <NO_WHITESPACE>"?" ;
+      optionalQuantifier       ::=  <NO_WHITESPACE>"?" ;
 
-      oneOrMoreQuantifier     ::=  <NO_WHITESPACE>"+" ;
+      oneOrMoreQuantifier      ::=  <NO_WHITESPACE>"+" ;
 
-      zeroOrMoreQuantifier    ::=  <NO_WHITESPACE>"*" ;
+      zeroOrMoreQuantifier     ::=  <NO_WHITESPACE>"*" ;
 
-      error                   ::=  . ;
+      error                    ::=  . ;
 
 `;
 
