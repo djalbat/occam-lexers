@@ -12,17 +12,7 @@ import EntriesTextarea from "./textarea/entries";
 import ContentTextarea from "./textarea/content";
 
 class View extends Element {
-  getTokens() {
-    const { Lexer } = this.constructor,
-          entries = this.getEntries(),
-          content = this.getContent(),
-          lexer = Lexer.fromEntries(entries),
-          tokens = lexer.tokenise(content);
-
-    return tokens;
-  }
-
-  keyUpHandler(event, element) {
+  keyUpHandler = (event, element) => {
     try {
       const tokens = this.getTokens();
 
@@ -34,9 +24,17 @@ class View extends Element {
     }
   }
 
-  childElements() {
-    const keyUpHandler = this.keyUpHandler.bind(this);
+  getTokens() {
+    const { Lexer } = this.constructor,
+          entries = this.getEntries(),
+          content = this.getContent(),
+          lexer = Lexer.fromEntries(entries),
+          tokens = lexer.tokenise(content);
 
+    return tokens;
+  }
+
+  childElements() {
     return ([
 
       <ColumnsDiv>
@@ -45,7 +43,7 @@ class View extends Element {
             <SubHeading>
               Entries
             </SubHeading>
-            <EntriesTextarea onKeyUp={keyUpHandler} />
+            <EntriesTextarea onKeyUp={this.keyUpHandler} />
           </RowsDiv>
         </SizeableDiv>
         <VerticalSplitterDiv />
@@ -54,7 +52,7 @@ class View extends Element {
             <SubHeading>
               Content
             </SubHeading>
-            <ContentTextarea onKeyUp={keyUpHandler} />
+            <ContentTextarea onKeyUp={this.keyUpHandler} />
             <SubHeading>
               Tokens
             </SubHeading>
