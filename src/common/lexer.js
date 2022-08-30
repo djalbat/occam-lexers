@@ -1,8 +1,7 @@
 "use strict";
 
-import Rule from "../rule";
-
 import { EMPTY_STRING } from "../constants";
+import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
 
 export default class CommonLexer {
@@ -77,60 +76,22 @@ export default class CommonLexer {
 
   static fromNothing(Class) {
     const { entries } = Class,
-          InCommentClasses = InCommentClassesFromClass(Class),
-          NotInCommentClasses = NotInCommentClassesFromClass(Class),
-          rules = entries.map((entry) => Rule.fromEntry(entry)),
-          lexer = new Class(rules, InCommentClasses, NotInCommentClasses);
+          rules = rulesFromEntries(entries),
+          lexer = lexerFromRules(Class, rules);
 
     return lexer;
   }
 
   static fromRules(Class, rules) {
-    const InCommentClasses = InCommentClassesFromClass(Class),
-          NotInCommentClasses = NotInCommentClassesFromClass(Class),
-          lexer = new Class(rules, InCommentClasses, NotInCommentClasses);
+    const lexer = lexerFromRules(Class, rules);
 
     return lexer;
   }
 
   static fromEntries(Class, entries) {
-    const rules = entries.map((entry) => Rule.fromEntry(entry)),
-          InCommentClasses = InCommentClassesFromClass(Class),
-          NotInCommentClasses = NotInCommentClassesFromClass(Class),
-          lexer = new Class(rules, InCommentClasses, NotInCommentClasses);
+    const rules = rulesFromEntries(entries),
+          lexer = lexerFromRules(Class, rules);
 
     return lexer;
   }
-}
-
-function InCommentClassesFromClass(Class) {
-  const { EndOfLineCommentToken, EndOfMultiLineCommentToken, MiddleOfMultiLineCommentToken } = Class,
-        InCommentClasses = [
-          EndOfLineCommentToken,
-          EndOfMultiLineCommentToken,
-          MiddleOfMultiLineCommentToken
-        ];
-
-  return InCommentClasses;
-}
-
-function NotInCommentClassesFromClass(Class) {
-  const { EndOfLineToken,
-          WhitespaceToken,
-          SingleLineCommentToken,
-          RegularExpressionToken,
-          StartOfMultiLineCommentToken,
-          SinglyQuotedStringLiteralToken,
-          DoublyQuotedStringLiteralToken } = Class,
-      NotInCommentClasses = [
-        EndOfLineToken,
-        WhitespaceToken,
-        StartOfMultiLineCommentToken,
-        SingleLineCommentToken,
-        RegularExpressionToken,
-        SinglyQuotedStringLiteralToken,
-        DoublyQuotedStringLiteralToken
-      ];
-
-  return NotInCommentClasses;
 }
