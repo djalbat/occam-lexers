@@ -1,8 +1,8 @@
 "use strict";
 
 import { EMPTY_STRING } from "../constants";
-import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
+import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
 
 export default class CommonLexer {
   constructor(rules, InCommentClasses, NotInCommentClasses) {
