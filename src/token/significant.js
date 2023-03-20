@@ -5,18 +5,6 @@ import Token from "../token";
 const significant = true;
 
 export default class SignificantToken extends Token {
-  clone(Class, startPosition, endPosition, ...remainingArguments) {
-    if (endPosition === undefined) {
-      endPosition = startPosition;  ///
-      startPosition = Class;  ///
-      Class = SignificantToken; ///
-    }
-
-    const significantToken = super.clone(Class, startPosition, endPosition, significant, ...remainingArguments);
-
-    return significantToken;
-  }
-
   static match(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;  ///

@@ -5,8 +5,6 @@ import NonSignificantToken from "../../../token/nonSignificant";
 import { singleLineCommentType } from "../../../types";
 
 export default class SingleLineCommentToken extends NonSignificantToken {
-  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
-
   isInCommentPreserving() {
     const inCommentPreserving = false;
 

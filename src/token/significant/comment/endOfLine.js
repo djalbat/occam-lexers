@@ -5,8 +5,6 @@ import SignificantToken from "../../../token/significant";
 import { endOfLineCommentType } from "../../../types";
 
 export default class EndOfLineCommentSignificantToken extends SignificantToken {
-  clone(startPosition, endPosition) { return super.clone(EndOfLineCommentSignificantToken, startPosition, endPosition); }
-
   asHTML() {
     const html = this.innerHTML;  ///
 

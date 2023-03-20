@@ -5,8 +5,6 @@ import NonSignificantToken from "../../../token/nonSignificant";
 import { endOfLineCommentType } from "../../../types";
 
 export default class EndOfLineCommentNonSignificantToken extends NonSignificantToken {
-  clone(startPosition, endPosition) { return super.clone(EndOfLineCommentNonSignificantToken, startPosition, endPosition); }
-
   asHTML() {
     const html = this.innerHTML;  ///
 

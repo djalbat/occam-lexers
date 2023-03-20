@@ -5,8 +5,6 @@ import SignificantToken from "../../token/significant";
 import { stringLiteralType } from "../../types";
 
 export default class StringLiteralToken extends SignificantToken {
-  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
-
   getString() {
     const content = this.getContent(),
           contentLength = content.length,

@@ -11,8 +11,6 @@ export default class WhitespaceToken extends NonSignificantToken {
     return html;
   }
 
-  clone(startPosition, endPosition) { return super.clone(WhitespaceToken, startPosition, endPosition); }
-
   static type = whitespaceType;
 
   static regularExpression = /^[\t ]+/;

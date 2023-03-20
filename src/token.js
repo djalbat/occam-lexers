@@ -80,24 +80,6 @@ export default class Token {
     return html;
   }
 
-  clone(Class, startPosition, endPosition, significant, ...remainingArguments) {
-    let token = null;
-
-    if (startPosition !== endPosition) {
-      let content = this.getContent();
-
-      content = content.substring(startPosition, endPosition);  ///
-
-      const type = this.getType(),
-            sanitisedContent = sanitiseContent(content),
-            innerHTML = sanitisedContent; ///
-
-      token = new Class(type, content, innerHTML, significant, ...remainingArguments);
-    }
-
-    return token;
-  }
-
   static match(Class, content, significant, ...remainingArguments) {
     let token = null;
 

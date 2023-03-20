@@ -5,8 +5,6 @@ import NonSignificantToken from "../../../../token/nonSignificant";
 import { middleOfMultiLineCommentType } from "../../../../types";
 
 export default class MiddleOfMultiLineCommentToken extends NonSignificantToken {
-  clone(Class, startPosition, endPosition) { return super.clone(Class, startPosition, endPosition); }
-
   isInCommentPreserving() {
     const inCommentPreserving = true;
 

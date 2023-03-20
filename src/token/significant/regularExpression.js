@@ -5,8 +5,6 @@ import SignificantToken from "../../token/significant";
 import { regularExpressionType } from "../../types";
 
 export default class RegularExpressionToken extends SignificantToken {
-  clone(startPosition, endPosition) { return super.clone(RegularExpressionToken, startPosition, endPosition); }
-
   static type = regularExpressionType;
 
   static regularExpression = /^\/(?:\\[^\s]|[^\/\r\n])*\//;
