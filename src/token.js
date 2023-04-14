@@ -58,12 +58,6 @@ export default class Token {
     return whitespaceToken;
   }
 
-  isEqualTo(token) {
-    const equalToToken = (this === token);
-
-    return equalToToken;
-  }
-
   match(token) {
     const type = token.getType(),
           content = token.getContent(),
