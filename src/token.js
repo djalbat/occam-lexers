@@ -2,16 +2,14 @@
 
 import { arrayUtilities } from "necessary";
 
-import { sanitiseContent } from "./utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
 const { first } = arrayUtilities;
 
 export default class Token {
-  constructor(type, content, innerHTML, significant) {
+  constructor(type, content, significant) {
     this.type = type;
     this.content = content;
-    this.innerHTML = innerHTML;
     this.significant = significant;
   }
 
@@ -23,10 +21,6 @@ export default class Token {
     return this.content;
   }
   
-  getInnerHTML() {
-    return this.innerHTML;
-  }
-
   getContentLength() {
     const contentLength = this.content.length;
 
@@ -67,13 +61,6 @@ export default class Token {
     return matches;
   }
 
-  asHTML() {
-    const className = this.type,  ///
-          html = `<span class="${className}">${this.innerHTML}</span>`;
-
-    return html;
-  }
-
   static match(Class, content, significant, ...remainingArguments) {
     let token = null;
 
@@ -91,11 +78,9 @@ export default class Token {
         const contentLength = content.length;
 
         if (contentLength > 0) {
-          const { type } = Class,
-                sanitisedContent = sanitiseContent(content),
-                innerHTML = sanitisedContent; ///
+          const { type } = Class;
 
-          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
+          token = new Class(type, content, significant, ...remainingArguments);
         }
       }
     }
@@ -105,18 +90,10 @@ export default class Token {
 
   static fromContent(Class, content, significant, ...remainingArguments) {
     const { type } = Class,
-          sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
+          token = new Class(type, content, significant, ...remainingArguments);
 
     return token;
   }
 
-  static fromContentAndType(Class, content, type, significant, ...remainingArguments) {
-    const sanitisedContent = sanitiseContent(content),
-          innerHTML = sanitisedContent, ///
-          token = new Class(type, content, innerHTML, significant, ...remainingArguments);
-
-    return token;
-  }
+  static fromContentAndType(Class, content, type, significant, ...remainingArguments) { return new Class(type, content, significant, ...remainingArguments); }
 }

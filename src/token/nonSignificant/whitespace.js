@@ -5,12 +5,6 @@ import NonSignificantToken from "../../token/nonSignificant";
 import { whitespaceType } from "../../types";
 
 export default class WhitespaceToken extends NonSignificantToken {
-  asHTML() {
-    const html = this.innerHTML;  ///
-
-    return html;
-  }
-
   static type = whitespaceType;
 
   static regularExpression = /^[\t ]+/;

@@ -5,12 +5,6 @@ import NonSignificantToken from "../../token/nonSignificant";
 import { endOfLineType } from "../../types";
 
 export default class EndOfLineNonSignificantToken extends NonSignificantToken {
-  asHTML() {
-    const html = this.innerHTML;  ///
-
-    return html;
-  }
-
   static type = endOfLineType;
 
   static regularExpression = /^(?:\r\n|\r|\n)/;

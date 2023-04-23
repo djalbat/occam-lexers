@@ -5,12 +5,6 @@ import SignificantToken from "../../../token/significant";
 import { endOfLineCommentType } from "../../../types";
 
 export default class EndOfLineCommentSignificantToken extends SignificantToken {
-  asHTML() {
-    const html = this.innerHTML;  ///
-
-    return html;
-  }
-
   isInCommentPreserving() {
     const inCommentPreserving = true;
 
