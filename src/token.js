@@ -2,7 +2,7 @@
 
 import { arrayUtilities } from "necessary";
 
-import { tokenAsHTML } from "./utilities/token";
+import { sanitiseContent } from "./utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
 const { first } = arrayUtilities;
@@ -63,8 +63,9 @@ export default class Token {
   }
 
   asHTML() {
-    const token = this, ///
-          html = tokenAsHTML(token);
+    const className = this.type, ///
+          sanitisedContent = sanitiseContent(this.content),
+          html = `<span class="${className}">${sanitisedContent}</span>`;
 
     return html;
   }
