@@ -2,6 +2,7 @@
 
 import { arrayUtilities } from "necessary";
 
+import { tokenAsHTML } from "./utilities/token";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
 const { first } = arrayUtilities;
@@ -59,6 +60,13 @@ export default class Token {
           matches = ((this.type === type) && (this.content === content) && (this.significant === significant));
 
     return matches;
+  }
+
+  asHTML() {
+    const token = this, ///
+          html = tokenAsHTML(token);
+
+    return html;
   }
 
   static match(Class, content, significant, ...remainingArguments) {
