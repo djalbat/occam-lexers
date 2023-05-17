@@ -5,11 +5,11 @@ import withStyle from "easy-with-style";  ///
 import { Element } from "easy";
 import { RowsDiv, ColumnDiv, ColumnsDiv, VerticalSplitterDiv } from "easy-layout";
 
-import SubHeading from "./subHeading";
-import SizeableDiv from "./div/sizeable";
-import TokensTextarea from "./textarea/tokens";
-import EntriesTextarea from "./textarea/entries";
-import ContentTextarea from "./textarea/content";
+import SubHeading from "./view/subHeading";
+import SizeableDiv from "./view/div/sizeable";
+import TokensTextarea from "./view/textarea/tokens";
+import EntriesTextarea from "./view/textarea/entries";
+import ContentTextarea from "./view/textarea/content";
 
 class View extends Element {
   keyUpHandler = (event, element) => {
