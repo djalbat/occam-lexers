@@ -2,6 +2,7 @@
 
 export const typeType = "type";
 export const nameType = "name";
+export const numberType = "number";
 export const commentType = "comment";
 export const endOfLineType = "end-of-line";
 export const whitespaceType = "whitespace";
@@ -16,6 +17,7 @@ export const middleOfMultiLineCommentType = `middle-of-multi-line ${commentType}
 export default {
   typeType,
   nameType,
+  numberType,
   commentType,
   endOfLineType,
   whitespaceType,
