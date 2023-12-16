@@ -6,8 +6,8 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Examples](#examples)
+- [Usage](#usage)
 - [Building](#building)
 - [Contact](#contact)
 
@@ -63,6 +63,24 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 You can also run a development server, see the section on building later on.
 
+## Examples
+
+There is a small development server that can be run from within the project's directory with the following command:
+
+    npm start
+
+The examples will then be available at the following URL:
+
+http://localhost:8888
+
+The source for the examples can be found in the `src/example.js` file and corresponding `src/example` folder. You are encouraged to try the examples whilst reading what follows. You can rebuild them on the fly with the following command:
+
+    npm run watch-debug
+
+The development server will reload the page whenever you make changes.
+
+One last thing to bear in mind is that this package is included by way of a relative rather than a package import. If you are importing it into your own application, however, you should use the standard package import.
+
 ## Usage
 
 Import the required lexer's class and then call it's `fromNothing()` factory method.
@@ -83,24 +101,12 @@ const content = `
 ```
 The tokens are created with the `tokenise(...)` method.
 
-## Examples
-
-These are not very edifying, you are encouraged to have a look at Occam's [parsers](https://github.com/djalbat/occam-parsers) examples instead. However if you must, see the `index.html` file in the root of the repository and read on.
-
-Each of the examples has a textarea in which the corresponding lexer's entries are given in JSON format. The regular expression patterns themselves are supplied as strings with the usual escaping. You can change both the lexical entries and the content to be matched dynamically, and see the resulting tokens.
-
 ## Building
 
 Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
 
     npm run build-debug
     npm run watch-debug
-
-You can also start a small development server:
-
-    npm start
-
-The example will then be available at http://localhost:8888 and will reload automatically when changes are made.
 
 ## Contact
 
