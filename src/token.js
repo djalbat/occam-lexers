@@ -2,6 +2,7 @@
 
 import { arrayUtilities } from "necessary";
 
+import { strlen } from "./utilities/string";
 import { sanitiseContent } from "./utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
@@ -23,7 +24,7 @@ export default class Token {
   }
   
   getContentLength() {
-    const contentLength = [...this.content].length; ///
+    const contentLength = strlen(this.content); ///
 
     return contentLength;
   }
