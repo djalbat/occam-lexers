@@ -23,7 +23,7 @@ export default class Token {
   }
   
   getContentLength() {
-    const contentLength = this.content.length;
+    const contentLength = [...this.content].length; ///
 
     return contentLength;
   }
@@ -84,7 +84,7 @@ export default class Token {
 
         content = firstMatch; ///
 
-        const contentLength = content.length;
+        const contentLength = content.length; ///
 
         if (contentLength > 0) {
           const { type } = Class;

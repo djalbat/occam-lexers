@@ -35,7 +35,7 @@ export default class Rule {
 
         content = firstMatch; ///
 
-        const contentLength = content.length;
+        const contentLength = content.length; ///
 
         if (contentLength > 0) {
           significantToken = SignificantToken.fromContentAndType(content, this.type);

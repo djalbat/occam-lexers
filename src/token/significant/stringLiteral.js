@@ -7,7 +7,7 @@ import { stringLiteralType } from "../../types";
 export default class StringLiteralToken extends SignificantToken {
   getString() {
     const content = this.getContent(),
-          contentLength = content.length,
+          contentLength = this.getContentLength(),
           start = 1,
           end = contentLength - 1,
           string = content.substring(start, end);
