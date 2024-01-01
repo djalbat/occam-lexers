@@ -1,5 +1,6 @@
 "use strict";
 
+import { substring } from "../utilities/string";
 import { EMPTY_STRING } from "../constants";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
 import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
@@ -68,7 +69,7 @@ export default class CommonLexer {
       const tokenContentLength = token.getContentLength(),
             start = tokenContentLength; ///
 
-      content = content.substring(start);
+      content = substring(content, start);
     }
 
     return tokens;

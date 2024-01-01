@@ -2,6 +2,7 @@
 
 import SignificantToken from "../../token/significant";
 
+import { substring } from "../../utilities/string";
 import { stringLiteralType } from "../../types";
 
 export default class StringLiteralToken extends SignificantToken {
@@ -10,7 +11,7 @@ export default class StringLiteralToken extends SignificantToken {
           contentLength = this.getContentLength(),
           start = 1,
           end = contentLength - 1,
-          string = content.substring(start, end);
+          string = substring(content, start, end);
 
     return string;
   }
