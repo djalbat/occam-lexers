@@ -4,7 +4,7 @@ import { arrayUtilities } from "necessary";
 
 import SignificantToken from "./token/significant";
 
-import { U, EMPTY_STRING } from "./constants";
+import { U } from "./constants";
 
 const { first } = arrayUtilities;
 
@@ -67,28 +67,24 @@ export default class Rule {
           firstEntryKey = first(entryKeys),
           type = firstEntryKey, ///
           regularExpressionPattern = entry[type],
-          rule = Rule.fromTypeAndRegularExpressionPattern(type, regularExpressionPattern);
+          regularExpression = regularExpressionFromRegularExpressionPattern(regularExpressionPattern),
+          rule = new Rule(type, regularExpression);
         
     return rule; 
   }
 
   static fromTypeAndRegularExpressionPattern(type, regularExpressionPattern) {
-    const unicode = isUnicode(regularExpressionPattern),
-          flags = unicode ?
-                    U :
-                      EMPTY_STRING,
-          regExp = new RegExp(regularExpressionPattern, flags),
-          regularExpression = regExp, ///
+    const regularExpression = regularExpressionFromRegularExpressionPattern(regularExpressionPattern),
           rule = new Rule(type, regularExpression);
 
     return rule;
   }
 }
 
-function isUnicode(regularExpressionPattern) {
-  const unicodeRegularExpression = /u{/, ///
-        index = regularExpressionPattern.search(unicodeRegularExpression),
-        unicode = (index !== -1);
+function regularExpressionFromRegularExpressionPattern(regularExpressionPattern) {
+  const flags = U,  ///
+        regExp = new RegExp(regularExpressionPattern, flags),
+        regularExpression = regExp; ///
 
-  return unicode;
+  return regularExpression;
 }

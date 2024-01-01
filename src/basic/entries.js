@@ -8,7 +8,7 @@ const entries = [
     "bracket": "^(?:\\(|\\))"
   },
   {
-    "operator": "^(?:\\+|\\-|\\*|\\/)"
+    "operator": "^(?:\\+|-|\\*|\\/)"
   },
   {
     "unassigned": "^[^\\s]+"
