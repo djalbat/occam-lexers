@@ -1,12 +1,12 @@
 "use strict";
 
-import { arrayUtilities } from "necessary";
+import { stringUtilities, arrayUtilities } from "necessary";
 
-import { strlen } from "./utilities/string";
 import { sanitiseContent } from "./utilities/content";
 import { commentType, endOfLineType, whitespaceType } from "./types";
 
-const { first } = arrayUtilities;
+const { first } = arrayUtilities,
+      { strlen } = stringUtilities;
 
 export default class Token {
   constructor(type, content, significant) {

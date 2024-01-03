@@ -1,9 +1,12 @@
 "use strict";
 
+import { stringUtilities } from "necessary";
+
 import SignificantToken from "../../token/significant";
 
-import { substring } from "../../utilities/string";
 import { stringLiteralType } from "../../types";
+
+const { substring } = stringUtilities;
 
 export default class StringLiteralToken extends SignificantToken {
   getString() {

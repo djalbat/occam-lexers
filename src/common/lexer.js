@@ -1,9 +1,12 @@
 "use strict";
 
-import { substring } from "../utilities/string";
+import { stringUtilities } from "necessary";
+
 import { EMPTY_STRING } from "../constants";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
 import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
+
+const { substring } = stringUtilities;
 
 export default class CommonLexer {
   constructor(rules, InCommentClasses, NotInCommentClasses) {
