@@ -1,20 +1,17 @@
 "use strict";
 
-import { stringUtilities } from "necessary";
-
 import SignificantToken from "../../token/significant";
 
 import { stringLiteralType } from "../../types";
 
-const { substring } = stringUtilities;
-
 export default class StringLiteralToken extends SignificantToken {
   getString() {
-    const content = this.getContent(),
-          contentLength = this.getContentLength(),
+    const naive = true,
+          content = this.getContent(),
+          contentLength = this.getContentLength(naive),
           start = 1,
           end = contentLength - 1,
-          string = substring(content, start, end);
+          string = content.substring(start, end);
 
     return string;
   }

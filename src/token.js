@@ -23,8 +23,10 @@ export default class Token {
     return this.content;
   }
   
-  getContentLength() {
-    const contentLength = strlen(this.content); ///
+  getContentLength(naive = false) {
+    const contentLength = naive ?
+                            this.content.length :
+                              strlen(this.content); ///
 
     return contentLength;
   }

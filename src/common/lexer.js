@@ -1,12 +1,8 @@
 "use strict";
 
-import { stringUtilities } from "necessary";
-
 import { EMPTY_STRING } from "../constants";
 import { inCommentFromTokenAndInComment } from "../utilities/token";
 import { rulesFromEntries, lexerFromRules } from "../utilities/lexer";
-
-const { substring } = stringUtilities;
 
 export default class CommonLexer {
   constructor(rules, InCommentClasses, NotInCommentClasses) {
@@ -69,10 +65,11 @@ export default class CommonLexer {
 
       inComment = inCommentFromTokenAndInComment(token, inComment);
 
-      const tokenContentLength = token.getContentLength(),
+      const naive = true,
+            tokenContentLength = token.getContentLength(naive),
             start = tokenContentLength; ///
 
-      content = substring(content, start);
+      content = content.substring(start);
     }
 
     return tokens;
