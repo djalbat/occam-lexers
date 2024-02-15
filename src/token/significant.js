@@ -8,6 +8,7 @@ export default class SignificantToken extends Token {
   static match(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;  ///
+
       Class = SignificantToken; ///
     }
 
@@ -19,6 +20,7 @@ export default class SignificantToken extends Token {
   static fromContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;  ///
+
       Class = SignificantToken; ///
     }
 
@@ -30,7 +32,9 @@ export default class SignificantToken extends Token {
   static fromContentAndType(Class, content, type, ...remainingArguments) {
     if (type === undefined) {
       type = content; ///
+
       content = Class;  ///
+
       Class = SignificantToken; ///
     }
 
