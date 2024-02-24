@@ -83,7 +83,7 @@ export default class BNFView extends View {
 
       zeroOrMoreQuantifier     ::=  <NO_WHITESPACE>"*" ;
 
-      error                    ::=  . ;
+      error!                    ::=  . ;
 
 `;
 
