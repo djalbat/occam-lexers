@@ -2,10 +2,25 @@
 
 import Token from "../token";
 
-const significant = false;
-
 export default class NonSignificantToken extends Token {
-  static fromContent(Class, content) { return Token.fromContent(Class, content, significant); }
+  static match(Class, content) {
+    const significant = false,
+          nonSignificantToken = Token.match(Class, content, significant);
 
-  static fromContentAndType(Class, content, type) { return Token.fromContentAndType(Class, content, type, significant); }
+    return nonSignificantToken;
+  }
+
+  static fromContent(Class, content) {
+    const significant = false,
+          nonSignificantToken = Token.fromContent(Class, content, significant);
+
+    return nonSignificantToken;
+  }
+
+  static fromContentAndType(Class, content, type) {
+    const significant = false,
+          nonSignificantToken = Token.fromContentAndType(Class, content, type, significant);
+
+    return nonSignificantToken;
+  }
 }

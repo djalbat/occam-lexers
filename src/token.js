@@ -77,6 +77,33 @@ export default class Token {
     return html;
   }
 
+  static match(Class, content, significant, ...remainingArguments) {
+    let token = null;
+
+    const { regularExpression } = Class,
+          matches = content.match(regularExpression);
+
+    if (matches !== null) {
+      const { index } = matches;
+
+      if (index === 0) {
+        const firstMatch = first(matches);
+
+        content = firstMatch; ///
+
+        const contentLength = content.length; ///
+
+        if (contentLength > 0) {
+          const { type } = Class;
+
+          token = new Class(type, content, significant, ...remainingArguments);
+        }
+      }
+    }
+
+    return token;
+  }
+
   static fromContent(Class, content, significant, ...remainingArguments) {
     const { type } = Class,
           token = new Class(type, content, significant, ...remainingArguments);

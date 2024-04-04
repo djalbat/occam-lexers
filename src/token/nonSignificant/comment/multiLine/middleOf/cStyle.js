@@ -5,5 +5,7 @@ import MiddleOfMultiLineCommentToken from "../../../../../token/nonSignificant/c
 export default class CStyleMiddleOfMultiLineCommentToken extends MiddleOfMultiLineCommentToken {
   static regularExpression = /^(?:[^\r\n]+?(?=\*\/)|[^\r\n]+)/;
 
+  static match(content) { return MiddleOfMultiLineCommentToken.match(CStyleMiddleOfMultiLineCommentToken, content); }
+
   static fromContent(content) { return MiddleOfMultiLineCommentToken.fromContent(CStyleMiddleOfMultiLineCommentToken, content); }
 }

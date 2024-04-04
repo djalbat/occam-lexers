@@ -5,5 +5,7 @@ import StartOfMultiLineCommentToken from "../../../../../token/nonSignificant/co
 export default class PythonStyleStartOfMultiLineCommentToken extends StartOfMultiLineCommentToken {
   static regularExpression = /^###/;
 
+  static match(content) { return StartOfMultiLineCommentToken.match(PythonStyleStartOfMultiLineCommentToken, content); }
+
   static fromContent(content) { return StartOfMultiLineCommentToken.fromContent(PythonStyleStartOfMultiLineCommentToken, content); }
 }

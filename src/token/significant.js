@@ -2,9 +2,20 @@
 
 import Token from "../token";
 
-const significant = true;
-
 export default class SignificantToken extends Token {
+  static match(Class, content, ...remainingArguments) {
+    if (content === undefined) {
+      content = Class;  ///
+
+      Class = SignificantToken; ///
+    }
+
+    const significant = true,
+          significantToken = Token.match(Class, content, significant, ...remainingArguments);
+
+    return significantToken;
+  }
+
   static fromContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;  ///
@@ -12,7 +23,8 @@ export default class SignificantToken extends Token {
       Class = SignificantToken; ///
     }
 
-    const significantToken = Token.fromContent(Class, content, significant, ...remainingArguments);
+    const significant = true,
+          significantToken = Token.fromContent(Class, content, significant, ...remainingArguments);
 
     return significantToken;
   }
@@ -26,7 +38,8 @@ export default class SignificantToken extends Token {
       Class = SignificantToken; ///
     }
 
-    const significantToken = Token.fromContentAndType(Class, content, type, significant, ...remainingArguments);
+    const significant = true,
+          significantToken = Token.fromContentAndType(Class, content, type, significant, ...remainingArguments);
 
     return significantToken;
   }

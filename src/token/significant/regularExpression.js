@@ -9,5 +9,7 @@ export default class RegularExpressionToken extends SignificantToken {
 
   static regularExpression = /^\/(?:\\[^\s]|[^\/\r\n])*\//;
 
+  static match(content) { return SignificantToken.match(RegularExpressionToken, content); }
+
   static fromContent(content) { return SignificantToken.fromContent(RegularExpressionToken, content); }
 }

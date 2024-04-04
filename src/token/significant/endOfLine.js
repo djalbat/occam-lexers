@@ -16,5 +16,7 @@ export default class EndOfLineSignificantToken extends SignificantToken {
 
   static regularExpression = /^(?:\r\n|\r|\n)/;
 
+  static match(content) { return SignificantToken.match(EndOfLineSignificantToken, content); }
+
   static fromContent(content) { return SignificantToken.fromContent(EndOfLineSignificantToken, content); }
 }
