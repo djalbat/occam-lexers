@@ -21,7 +21,5 @@ export default class StringLiteralToken extends SignificantToken {
 
   static type = stringLiteralType;
 
-  static match(Class, content) { return SignificantToken.match(Class, content); }
-
   static fromContent(Class, content) { return SignificantToken.fromContent(Class, content); }
 }

@@ -5,18 +5,6 @@ import Token from "../token";
 const significant = true;
 
 export default class SignificantToken extends Token {
-  static match(Class, content, ...remainingArguments) {
-    if (content === undefined) {
-      content = Class;  ///
-
-      Class = SignificantToken; ///
-    }
-
-    const significantToken = Token.match(Class, content, significant, ...remainingArguments);
-
-    return significantToken;
-  }
-
   static fromContent(Class, content, ...remainingArguments) {
     if (content === undefined) {
       content = Class;  ///

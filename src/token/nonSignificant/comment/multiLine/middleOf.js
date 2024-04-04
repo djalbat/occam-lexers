@@ -13,7 +13,5 @@ export default class MiddleOfMultiLineCommentToken extends NonSignificantToken {
 
   static type = middleOfMultiLineCommentType;
 
-  static match(Class, content) { return NonSignificantToken.match(Class, content); }
-
   static fromContent(Class, content) { return NonSignificantToken.fromContent(Class, content); }
 }

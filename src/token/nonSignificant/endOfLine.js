@@ -16,7 +16,5 @@ export default class EndOfLineNonSignificantToken extends NonSignificantToken {
 
   static regularExpression = /^(?:\r\n|\r|\n)/;
 
-  static match(content) { return NonSignificantToken.match(EndOfLineNonSignificantToken, content); }
-
   static fromContent(content) { return NonSignificantToken.fromContent(EndOfLineNonSignificantToken, content); }
 }
