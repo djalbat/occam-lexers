@@ -78,6 +78,16 @@ export default class Token {
     return html;
   }
 
+  clone() {
+    const Class = this.constructor,
+          type = this.type,
+          content = this.content,
+          significant = this.significant,
+          token = new Class(type, content, significant);
+
+    return token;
+  }
+
   static match(Class, content, significant, ...remainingArguments) {
     let token = null;
 
