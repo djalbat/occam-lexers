@@ -78,12 +78,12 @@ export default class Token {
     return html;
   }
 
-  clone() {
+  clone(...remainingArguments) {
     const Class = this.constructor,
           type = this.type,
           content = this.content,
           significant = this.significant,
-          token = new Class(type, content, significant);
+          token = new Class(type, content, significant, ...remainingArguments);
 
     return token;
   }
