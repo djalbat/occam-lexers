@@ -13,7 +13,7 @@
     "necessary": "^13.6.1"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.50",
+    "@swc/core": "1.2.52",
     "easy": "^16.0.19",
     "easy-layout": "^6.0.143",
     "easy-with-style": "^3.0.343",
