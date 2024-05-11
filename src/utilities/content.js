@@ -1,14 +1,12 @@
 "use strict";
 
-import { characters } from "necessary";
-
-const { LESS_THAN_CHARACTER, AMPERSAND_CHARACTER, GREATER_THAN_CHARACTER } = characters;
+import { ESCAPED_AMPERSAND, ESCAPED_LESS_THAN, ESCAPED_GREATER_THAN } from "../constants";
 
 export function sanitiseContent(content) {
   const sanitisedContent = content
-                            .replace(/&/g, AMPERSAND_CHARACTER)
-                            .replace(/</g, LESS_THAN_CHARACTER)
-                            .replace(/>/g, GREATER_THAN_CHARACTER);
+                             .replace(/&/g, ESCAPED_AMPERSAND)
+                             .replace(/</g, ESCAPED_LESS_THAN)
+                             .replace(/>/g, ESCAPED_GREATER_THAN);
 
   return sanitisedContent;
 }
