@@ -7,7 +7,7 @@ import { regularExpressionType } from "../../types";
 export default class RegularExpressionToken extends SignificantToken {
   static type = regularExpressionType;
 
-  static regularExpression = /^\/(?:\\[^\s]|[^\/\r\n])*\//;
+  static regularExpression = /^\/(?:\\[^\s]|[^\/\r\n\f])*\//;
 
   static match(content) { return SignificantToken.match(RegularExpressionToken, content); }
 

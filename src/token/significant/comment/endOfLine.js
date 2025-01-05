@@ -13,7 +13,7 @@ export default class EndOfLineCommentSignificantToken extends SignificantToken {
 
   static type = endOfLineCommentType;
 
-  static regularExpression = /^(?:\r\n|\r|\n)/;
+  static regularExpression = /^(?:\r\n|\r|\n|\f)/;
 
   static match(content) { return SignificantToken.match(EndOfLineCommentSignificantToken, content); }
 

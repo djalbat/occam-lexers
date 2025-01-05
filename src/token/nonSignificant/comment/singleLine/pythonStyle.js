@@ -3,7 +3,7 @@
 import SingleLineCommentToken from "../../../../token/nonSignificant/comment/singleLine";
 
 export default class PythonStyleSingleLineCommentToken extends SingleLineCommentToken {
-  static regularExpression = /^#[^\r\n]*/;
+  static regularExpression = /^#[^\r\n\f]*/;
 
   static match(content) { return SingleLineCommentToken.match(PythonStyleSingleLineCommentToken, content); }
 

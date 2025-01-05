@@ -13,7 +13,7 @@ export default class EndOfLineCommentNonSignificantToken extends NonSignificantT
 
   static type = endOfLineCommentType;
 
-  static regularExpression = /^(?:\r\n|\r|\n)/;
+  static regularExpression = /^(?:\r\n|\r|\n|\f)/;
 
   static match(content) { return NonSignificantToken.match(EndOfLineCommentNonSignificantToken, content); }
 

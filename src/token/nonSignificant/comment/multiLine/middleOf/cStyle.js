@@ -3,7 +3,7 @@
 import MiddleOfMultiLineCommentToken from "../../../../../token/nonSignificant/comment/multiLine/middleOf";
 
 export default class CStyleMiddleOfMultiLineCommentToken extends MiddleOfMultiLineCommentToken {
-  static regularExpression = /^(?:[^\r\n]+?(?=\*\/)|[^\r\n]+)/;
+  static regularExpression = /^(?:[^\r\n\f]+?(?=\*\/)|[^\r\n\f]+)/;
 
   static match(content) { return MiddleOfMultiLineCommentToken.match(CStyleMiddleOfMultiLineCommentToken, content); }
 
