@@ -14,7 +14,7 @@ export default class EndOfLineSignificantToken extends SignificantToken {
 
   static type = endOfLineType;
 
-  static regularExpression = /^(?:\r\n|\r|\n)/;
+  static regularExpression = /^(?:\r\n|\r|\n|\f)/;
 
   static match(content) { return SignificantToken.match(EndOfLineSignificantToken, content); }
 
