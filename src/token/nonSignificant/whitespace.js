@@ -7,7 +7,7 @@ import { whitespaceType } from "../../types";
 export default class WhitespaceToken extends NonSignificantToken {
   static type = whitespaceType;
 
-  static regularExpression = /^[\t \u000b]+/;
+  static regularExpression = /^[\t\v ]+/;
 
   static match(content) { return NonSignificantToken.match(WhitespaceToken, content); }
 
