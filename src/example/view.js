@@ -72,6 +72,7 @@ class View extends Element {
           content = initialContent; ///
 
     this.setContent(content);
+
     this.setEntries(entries);
 
     this.keyUpHandler();

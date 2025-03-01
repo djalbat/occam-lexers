@@ -46,15 +46,6 @@ export default class Rule {
     return significantToken;
   }
   
-  asEntry() {
-    const entry = {},
-          regularExpressionPattern = `${this.regularExpression}`;
-
-    entry[this.type] = regularExpressionPattern;
-
-    return entry;
-  }
-
   static fromToken(Token) {
     const { type, regularExpression } = Token,
           rule = new Rule(type, regularExpression);

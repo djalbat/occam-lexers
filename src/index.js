@@ -4,6 +4,7 @@ export { default as Rule } from "./rule";
 export { default as types } from "./types";
 export { default as specialSymbols } from "./specialSymbols";
 
+export { default as rulesUtilities } from "./utilities/rules";
 export { default as lexerUtilities } from "./utilities/lexer";
 
 export { default as BNFLexer } from "./bnf/lexer";
