@@ -4,7 +4,7 @@ import { arrayUtilities } from "necessary";
 
 import SignificantToken from "./token/significant";
 
-import { U } from "./constants";
+import { V } from "./constants";
 
 const { first } = arrayUtilities;
 
@@ -73,7 +73,7 @@ export default class Rule {
 }
 
 function regularExpressionFromRegularExpressionPattern(regularExpressionPattern) {
-  const flags = U,  ///
+  const flags = V,  ///
         regExp = new RegExp(regularExpressionPattern, flags),
         regularExpression = regExp; ///
 
