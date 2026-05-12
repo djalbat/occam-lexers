@@ -11,7 +11,7 @@ export default class EntriesTextarea extends Textarea {
   }
 
   setEntries(entries) {
-    const value = JSON.stringify(entries, null, "  ");
+    const value = JSON.stringify(entries, null, 2);
 
     this.setValue(value);
   }
