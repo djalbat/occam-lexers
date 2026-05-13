@@ -5,13 +5,17 @@ import Textarea from "../textarea";
 export default class EntriesTextarea extends Textarea {
   getEntries() {
     const value = this.getValue(),
-          entries = JSON.parse(value);
+          jsonString = value, ///
+          json = JSON.parse(jsonString),
+          entries = json; ///
 
     return entries;
   }
 
   setEntries(entries) {
-    const value = JSON.stringify(entries, null, 2);
+    const json = entries, ///
+          jsonString = JSON.stringify(json, null, 2),
+          value = jsonString; ///
 
     this.setValue(value);
   }
