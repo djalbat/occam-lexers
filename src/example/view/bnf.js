@@ -23,8 +23,6 @@ export default class BNFView extends View {
 
                                  |  terminalPart quantifier*
                               
-                                 |  startOfContentPart
-
                                  |  noWhitespacePart
 
                                  ;
@@ -49,8 +47,6 @@ export default class BNFView extends View {
   
                                  ;
                               
-      startOfContentPart       ::=  "<START_OF_CONTENT>" ;                              
-
       noWhitespacePart         ::=  "<NO_WHITESPACE>" ;                              
 
       choiceOfParts            ::=  "(" part ( "|" part )+ ")" ;

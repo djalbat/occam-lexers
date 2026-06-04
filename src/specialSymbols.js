@@ -15,7 +15,6 @@ export const closeBracket = ")";
 export const questionMark = "?";
 export const endOfLine = "<END_OF_LINE>";
 export const noWhitespace = "<NO_WHITESPACE>";
-export const startOfContent = "<START_OF_CONTENT>";
 
 export default {
   plus,
@@ -32,6 +31,5 @@ export default {
   closeBracket,
   questionMark,
   endOfLine,
-  noWhitespace,
-  startOfContent
+  noWhitespace
 };
