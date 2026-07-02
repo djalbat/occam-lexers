@@ -39,25 +39,27 @@ Non-significant tokens are ignored by parsers although they separate significant
 
 The lexical entries for the BNF lexer are the following:
 
-    [
+```
+[
 
-        {
-            "special": "^(?:\\||\\(|\\)|\\?|\\*|\\+|\\.\\.\\.|\\.\\.|\\.|::=|;|`|ε|<START_OF_CONTENT>|<NO_WHITESPACE>|<END_OF_LINE>)"
-        },
-        {
-            "number": "^(?:0|[1-9][0-9]*)"
-        },
-        {
-            "name": "^[\\w~]+"
-        },
-        {
-            "type": "^\\[[^\\]]+\\]"
-        },
-        {
-            "unassigned": "^[^\\s]+"
-        }
-    
-    ]
+    {
+        "special": "^(?:\\||\\(|\\)|\\?|\\*|\\+|\\.\\.\\.|\\.\\.|\\.|::=|;|`|ε|<START_OF_CONTENT>|<NO_WHITESPACE>|<END_OF_LINE>)"
+    },
+    {
+        "number": "^(?:0|[1-9][0-9]*)"
+    },
+    {
+        "name": "^[\\w~]+"
+    },
+    {
+        "type": "^\\[[^\\]]+\\]"
+    },
+    {
+        "unassigned": "^[^\\s]+"
+    }
+
+]
+```
     
 ## Installation
 
@@ -114,6 +116,7 @@ const content = `
 
 ...
 ```
+
 The tokens are created with the `tokenise(...)` method.
 
 ## Building
