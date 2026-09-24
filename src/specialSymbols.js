@@ -2,7 +2,7 @@
 
 export const plus = "+";
 export const opaque = ".";
-export const epsilon = 'ε';
+export const epsilon = "ε";
 export const backtick = "`";
 export const wildcard = ".";
 export const asterisk = "*";
