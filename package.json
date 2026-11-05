@@ -1,7 +1,7 @@
 {
   "name": "occam-lexers",
   "author": "James Smith",
-  "version": "23.3.20",
+  "version": "24.0.0",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/occam-lexers",
   "description": "Occam's lexers.",
